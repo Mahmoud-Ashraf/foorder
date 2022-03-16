@@ -1,0 +1,223 @@
+
+@import "./functions";
+@import "./variables";
+@import "./mixins";
+@import "./root";
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "./buttons";
+@import "./fonts";
+@import "./inputs";
+@import "./tables";
+@import "./helpers";
+
+/* ==================== Generate btns texts bgs alerts coloring classes ==================== */
+@include coloring($colors);
+
+// loader
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $light-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+// Sign in & register
+
+.double-form {
+  min-height: 100vh;
+  .left-form,
+  .right-form {
+    min-height: 100vh;
+    height: 100%;
+  }
+}
+
+.left-form {
+  background: $main-color;
+  background: linear-gradient(180deg, darken($main-color, 10) 0%, darken($main-color, 7) 50%, $main-color 100%);
+}
+
+.right-form {
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  .logo {
+    background-color: #c4c4c4;
+    padding: 0.5rem 2rem;
+    font-size: $main-font-size * 1.625;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: $dark-color;
+    margin-bottom: 100px;
+  }
+  .welcome {
+    // font-family: DM Sans;
+    font-size: $main-font-size;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #98989e;
+  }
+  .join {
+    color: #212429;
+    font-style: normal;
+    font-weight: bold;
+    font-size: $main-font-size * 1.625;
+    line-height: 32px;
+    margin-bottom: 24px;
+  }
+}
+
+// Loader
+.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $light-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+// Header
+
+.header {
+  display: flex;
+  justify-content: center;
+  background-color: $main-color;
+  padding: 1rem 2rem;
+  align-items: center;
+  color: $light-color;
+  .header-container {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    .user {
+      &-welcome {
+        font-size: 2rem;
+        line-height: 2.5rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        &--icon {
+          margin-inline-end: 1rem;
+          background-color: $light-color;
+          border-radius: 50%;
+          color: $main-color;
+          width: 65px;
+          height: 65px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+    .links {
+      display: flex;
+      align-items: center;
+      &-list {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        margin: 0;
+        li {
+          margin-inline-end: 1rem;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+// Poll
+.poll {
+  &-vote {
+    font-size: 2.57rem;
+    line-height: 3.35rem;
+    font-weight: 700;
+  }
+  &-timer {
+    background-color: rgba(242, 242, 242, 0.8);
+    border-radius: 8px;
+    padding: 0.5rem;
+    color: $main-color;
+    font-size: 2.57rem;
+    line-height: 3.35rem;
+    margin-inline-end: 1rem;
+    width: 100px;
+    display: inline-block;
+    border:  1px solid var(--main-500);
+    font-weight: 500;
+    &:last-child {
+      margin-inline-end: 0;
+    }
+  }
+  &-list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    li {
+      padding: 1.3rem 7.85rem;
+      font-size: 2rem;
+      line-height: 3rem;
+      background-color: $light-gray;
+      border-radius: 0.5rem;
+      border: 1px solid darken($light-gray, 4);
+      margin-bottom: 0.7rem;
+      cursor: pointer;
+      color: $dark-color;
+      transition: all 0.3s ease-in-out;
+      display: flex;
+      justify-content: space-between;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      &:hover {
+        background-color: lighten($light-gray, 1.5);
+        border-color: $main-color;
+      }
+      &.poll-selected {
+        background-color: $main-secondary-color;
+        // color: $light-color;
+      }
+    }
+  }
+  &-submit {
+    height: 80px;
+    font-size: 2rem;
+    line-height: 3rem;
+  }
+}
+
+// Cart
+.cart {
+  &-count {
+    background-color: rgba(242, 242, 242, 0.8);
+    border-radius: 8px;
+    padding: 0.3rem;
+    color: $main-color;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    // margin-inline-end: 1rem;
+    width: 50px;
+    display: inline-block;
+    border:  1px solid var(--main-500);
+    font-weight: 400;
+    margin: 0 .5rem;
+  }
+}

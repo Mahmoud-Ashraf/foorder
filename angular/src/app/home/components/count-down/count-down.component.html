@@ -1,0 +1,5 @@
+<p class="text-center" *ngIf="(timeLeft$ | async) as t">
+  <span class="poll-timer">{{t.hoursToDday}}</span>
+  <span class="poll-timer">{{t.minutesToDday}}</span>
+  <span class="poll-timer">{{t.secondsToDday}}</span>
+</p>

@@ -1,0 +1,67 @@
+<div class="double-form">
+  <div class="row row-cols-2 gx-5">
+    <div class="col">
+      <div class="left-form">
+
+      </div>
+    </div>
+    <div class="col">
+      <div class="right-form">
+        <div class="row">
+          <div class="col-12">
+            <div class="logo">
+              <h1>Food Order</h1>
+            </div>
+            <div class="welcome">
+              <span>Welcome back !</span>
+            </div>
+            <div class="join">
+              <span>Login</span>
+            </div>
+          </div>
+          <div class="col-12">
+            <form #signInForm="ngForm" class="row row-cols-1" (ngSubmit)="signIn()">
+              <div class="col">
+                <div class="custom-form-group">
+                  <label class="custom-input-label" for="email">E-Mail</label>
+                  <div class="custom-form-input-group">
+                    <div class="custom-form-addon">
+                      <i class="fas fa-envelope"></i>
+                    </div>
+                    <input type="email" name="email" class="custom-form-input" [(ngModel)]="email" required
+                      autocomplete="email">
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="custom-form-group">
+                  <label class="custom-input-label" for="password">Passowrd</label>
+                  <div class="custom-form-input-group">
+                    <div class="custom-form-addon">
+                      <i class="fas fa-lock"></i>
+                    </div>
+                    <input type="password" name="password" class="custom-form-input" [(ngModel)]="password" required
+                      autocomplete="current-password">
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+              </div>
+              <div class="col">
+                <div class="custom-form-group">
+                  <button type="submit" class="btn btn-main w-100">Sign in</button>
+                </div>
+              </div>
+              <div class="col">
+                <p class="text-right"><span class="text-muted">Dont have account yet ? </span><a
+                    class="text-dark text-decoration-none" href="#" routerLink="/register">Register here →</a>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

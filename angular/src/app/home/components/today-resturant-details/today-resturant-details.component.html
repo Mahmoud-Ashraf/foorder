@@ -1,0 +1,30 @@
+<p class="today-resturant row">
+  <span class="col-auto resturant-welcome">Restaurant of the Day</span>
+  <span class="col text-center resturant-brand">Anas Al Demashky</span>
+</p>
+<p class="poll-vote">Add your order to cart before</p>
+<app-count-down [endTime]="[20, 0, 0]"></app-count-down>
+
+<!-- <div class="menu">
+  <ul class="nav nav-pills mb-3 nav-justified" id="menu-tab" role="tablist">
+    <li class="nav-item" role="presentation" *ngFor="let section of menuSections; let first = first">
+      <button class="nav-link" [attr.id]="'section' + section.id + '-tab'" data-bs-toggle="pill"
+        [attr.data-bs-target]="'#section' + section?.id" type="button" role="tab" [ngClass]="{'active': first}"
+        [attr.aria-controls]="'section' + section?.id"
+        [attr.aria-selected]="first? true : false">{{section?.sectionName}}</button>
+    </li>
+  </ul>
+
+  <div class="tab-content" id="pills-tabContent">
+    <div app-resturant-menu *ngFor="let section of menuSections; let first = first" [section]="section"
+      class="tab-pane fade" [attr.id]="'section' + section?.id" role="tabpanel"
+      [attr.aria-labelledby]="'#section' + section?.id + '-tab'" [ngClass]="{'active show': first}">
+    </div>
+  </div>
+</div> -->
+
+<div class="row justify-content-end">
+  <div class="col-md-4">
+    <button class="btn btn-main w-100" routerLink="/cart">Checkout</button>
+  </div>
+</div>

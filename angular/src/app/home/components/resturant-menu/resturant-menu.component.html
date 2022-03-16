@@ -1,0 +1,25 @@
+<table class="menu-table">
+  <tr class="menu-table-head">
+    <th class="item-name-width">اسم المنتج</th>
+    <th class="item-price-width item-price-width--big">السعر</th>
+    <th class="item-add-to-cart-width">اضف للعربة</th>
+  </tr>
+  <ng-container>
+    <tr class="menu-table-items">
+      <td class="item-name-width">منقوشة تركي مدخن</td>
+      <td class="item-price-width item-price-width--big menu-table-items-price">
+        25
+        <span class="menu-table-items-price-unit">EGP</span>
+      </td>
+      <td class="item-add-to-cart-width">
+        <button class="btn btn-action btn-sm" (click)="addItemToCart()"><i class="fas fa-shopping-cart"></i> Add to
+          cart</button>
+        <!-- <ng-template #itemCount>
+          <button class="btn btn-action btn-sm" (click)="decreseCount(item)">-</button>
+          <span class="cart-count">{{item.count}}</span>
+          <button class="btn btn-action btn-sm" (click)="increaseCount(item)">+</button>
+        </ng-template> -->
+      </td>
+    </tr>
+  </ng-container>
+</table>

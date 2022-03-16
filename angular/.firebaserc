@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "food-order-mahmoud": {
+      "hosting": {
+        "food-order": [
+          "food-order-mahmoud"
+        ]
+      }
+    }
+  }
+}

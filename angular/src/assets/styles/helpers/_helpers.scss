@@ -1,0 +1,21 @@
+.pointer-events-none {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+
+
+.flash-message-success {
+  padding: 1rem 2rem;
+  display: block;
+  background-color: $main-200;
+  border: 1px solid $main-color;
+  color: $main-color;
+}
+.flash-message-danger {
+  padding: 1rem 2rem;
+  display: block;
+  background-color: $main-danger-200;
+  border: 1px solid $main-danger;
+  color: $main-danger;
+}

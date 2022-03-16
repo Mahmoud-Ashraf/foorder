@@ -1,0 +1,113 @@
+<div class="double-form">
+  <div class="row row-cols-2 gx-5">
+    <div class="col">
+      <div class="left-form">
+
+      </div>
+    </div>
+    <div class="col">
+      <div class="right-form">
+        <div class="row">
+          <div class="col-12">
+            <div class="logo">
+              <h1>Food Order</h1>
+            </div>
+            <div class="welcome">
+              <span>Welcome !</span>
+            </div>
+            <div class="join">
+              <span>Join The Community</span>
+            </div>
+          </div>
+          <div class="col-12">
+            <form #signUpForm="ngForm" class="row row-cols-1">
+              <div class="col">
+                <div class="custom-form-group">
+                  <label class="custom-input-label" for="firstName">First Name</label>
+                  <div class="custom-form-input-group">
+                    <span class="custom-form-addon"><i class="fas fa-user"></i></span>
+                    <input type="text" name="firstName" class="custom-form-input" [(ngModel)]="user.firstName" required
+                      autocomplete="given-name">
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="custom-form-group">
+                  <label class="custom-input-label" for="lastName">last Name</label>
+                  <div class="custom-form-input-group">
+                    <div class="custom-form-addon">
+                      <i class="fas fa-user-alt"></i>
+                    </div>
+                    <input type="text" name="lastName" class="custom-form-input" [(ngModel)]="user.lastName" required
+                      autocomplete="family-name">
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="custom-form-group">
+                  <label class="custom-input-label" for="email">E-Mail</label>
+                  <div class="custom-form-input-group">
+                    <div class="custom-form-addon">
+                      <i class="fas fa-envelope"></i>
+                    </div>
+                    <input type="email" name="email" class="custom-form-input" [(ngModel)]="user.email" required
+                      autocomplete="email">
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="custom-form-group">
+                  <label class="custom-input-label" for="companyNeckname">Company Nechname</label>
+                  <div class="custom-form-input-group">
+                    <div class="custom-form-addon">
+                      <i class="fas fa-house-user"></i>
+                    </div>
+                    <input type="text" name="companyNeckname" class="custom-form-input"
+                      [(ngModel)]="user.companyNeckname" required>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="custom-form-group">
+                  <label class="custom-input-label" for="phone">phone</label>
+                  <div class="custom-form-input-group">
+                    <div class="custom-form-addon">
+                      <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <input type="text" name="phone" class="custom-form-input" [(ngModel)]="user.phone" required
+                      autocomplete="tel">
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="custom-form-group">
+                  <label class="custom-input-label" for="password">Passowrd</label>
+                  <div class="custom-form-input-group">
+                    <div class="custom-form-addon">
+                      <i class="fas fa-lock"></i>
+                    </div>
+                    <input type="password" name="password" class="custom-form-input" [(ngModel)]="password" required
+                      autocomplete="new-password">
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+              </div>
+              <div class="col">
+                <div class="custom-form-group">
+                  <button type="submit" class="sign-in-btn w-100">Register</button>
+                </div>
+              </div>
+              <div class="col">
+                <p class="text-right"><span class="text-muted">Already a member? </span><a
+                    class="text-dark text-decoration-none" href="#" routerLink="/login">Login here →</a>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

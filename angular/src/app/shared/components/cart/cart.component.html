@@ -1,0 +1,46 @@
+<div class="flash-message-main">
+  <p class="m-0">Thanks, Your order has submitted successfully</p>
+</div>
+<table class="menu-table">
+  <tr class="menu-table-head">
+    <th>اسم المنتج</th>
+    <th>السعر</th>
+    <th>اضف للعربة</th>
+  </tr>
+  <ng-container>
+    <tr class="menu-table-items">
+      <td>منقوشة تركي مدخن</td>
+      <td class="menu-table-items-price">
+        30
+        <span class="menu-table-items-price-unit">EGP</span>
+      </td>
+      <td>
+        <!-- <button class="btn btn-action btn-sm" (click)="addItemToCart(item)" *ngIf="!item?.count else itemCount"><i
+            class="fas fa-shopping-cart"></i> Add to
+          cart</button> -->
+        <!-- <ng-template #itemCount> -->
+        <button class="btn btn-action btn-sm">-</button>
+        <span class="cart-count">1</span>
+        <button class="btn btn-action btn-sm">+</button>
+        <!-- </ng-template> -->
+      </td>
+      <td class="menu-table-items-price">
+        25
+        <span class="menu-table-items-price-unit">EGP</span>
+      </td>
+    </tr>
+  </ng-container>
+  <tr class="menu-table-items">
+    <th colspan="3">إجمالي السعر غير شامل التوصيل ولا الخدمة</th>
+    <td class="menu-table-items-price">
+      25
+      <span class="menu-table-items-price-unit">EGP</span>
+    </td>
+  </tr>
+</table>
+
+<div class="row justify-content-end">
+  <div class="col-md-4">
+    <button class="btn btn-main w-100">Confirm Order</button>
+  </div>
+</div>

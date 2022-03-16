@@ -1,0 +1,47 @@
+.custom-form-group {
+  margin-bottom: 16px;
+  .custom-input-label {
+    font-size: $input-font-size;
+    font-weight: 500;
+    line-height: 16px;
+    color: #212429;
+    letter-spacing: 0em;
+    text-align: left;
+    font-style: normal;
+    margin-bottom: 8px;
+  }
+  .custom-form-input {
+    width: 100%;
+    height: 40px;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    color: #111 !important;
+    font-size: $input-font-size;
+    line-height: 16px;
+    font-weight: 500;
+    padding: 0 15px;
+    background-color: $light-color !important;
+    // for autocomplete fields
+    -webkit-box-shadow: 0 0 0px 1000px $light-color inset;
+    &:focus,
+    &:hover,
+    &:active,
+    &:focus-visible {
+      border-color: $main-color;
+      outline: none;
+    }
+  }
+  .custom-form-input-group {
+    position: relative;
+    .custom-form-addon {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      font-size: $input-addon-font-size;
+    }
+    .custom-form-input {
+      padding: 0 15px 0 40px;
+    }
+  }
+}

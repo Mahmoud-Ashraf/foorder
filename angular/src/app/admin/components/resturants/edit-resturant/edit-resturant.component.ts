@@ -21,7 +21,7 @@ export class EditResturantComponent implements OnInit {
   ) {
     this.activatedRoute.params.subscribe((params: Params) => {
       // console.log(params);
-      return this.resturantsService.getEditResturant(params.resturantId).subscribe(res => {
+      return this.resturantsService.getResturant(params.resturantId).subscribe(res => {
         this.resturant = res;
         console.log('mahmoud', res, this.resturant)
       })
@@ -40,11 +40,10 @@ export class EditResturantComponent implements OnInit {
         this.errors = undefined;
         console.log('success response from component', res);
         // this.error = undefined;
-        this.resturant = {
-          name: '',
-          content: ''
-        };
-        this.helperService.goBack();
+        this.resturantsService.getResturant(this.resturant._id).subscribe( res => {
+          this.resturant = res;
+        });
+        // this.helperService.goBack();
       },
       err => {
         this.errors = err.error.errors;

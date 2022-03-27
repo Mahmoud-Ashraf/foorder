@@ -1,0 +1,17 @@
+<form #editResturantForm=ngForm (ngSubmit)="updateResturant(editResturantForm)">
+    <div class="form-group">
+        <input type="text" class="form-control" name="name" placeholder="Resturant Name" #resturantName
+            [(ngModel)]="resturant.name" required minlength="5">
+        <div class="has-error" *ngIf="errors && errors[getIndex(errors, resturantName)]">
+            {{errors[getIndex(errors, resturantName)]?.msg}}
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="content" placeholder="Resturant Content" #resturantContent
+            [(ngModel)]="resturant.content" required minlength="5">
+        <div class="has-error" *ngIf="errors && errors[getIndex(errors, resturantContent)]">
+            {{errors[getIndex(errors, resturantContent)]?.msg}}
+        </div>
+    </div>
+    <button type="submit" [disabled]="editResturantForm.invalid">Update Resturant</button>
+</form>

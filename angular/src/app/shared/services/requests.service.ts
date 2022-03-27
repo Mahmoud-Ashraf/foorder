@@ -27,4 +27,7 @@ export class RequestsService {
     //   }
     // });
   }
+  putApi(apiUrl: string, data?: any) {
+    return this.http.put(`${this.baseUrl}/${apiUrl}`, data);
+  }
 }

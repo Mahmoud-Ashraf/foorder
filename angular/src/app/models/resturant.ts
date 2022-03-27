@@ -3,12 +3,13 @@
 export interface Resturant {
   id?: string;
   name: string;
-  phone: string;
-  scannedMenu: [];
+  content: string;
+  phone?: string;
+  scannedMenu?: [];
   // menu: MenuSections[];
   elmenusLink?: string;
-  logo: string;
+  logo?: string;
   todaySelection?: boolean;
-  registeredPhone: string;
-  vote: number;
+  registeredPhone?: string;
+  vote?: number;
 }

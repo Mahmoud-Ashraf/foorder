@@ -1,7 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require('mongoose');
 
 const resturantsRoutes = require("./routes/resturants");
+// const mongoConnect = require('./utils/database').mongoConnect;
 
 const app = express();
 
@@ -21,4 +23,14 @@ app.use((req, res, next) => {
 
 app.use(resturantsRoutes);
 
-app.listen(8080);
+// mongoConnect(() => {
+//   app.listen(8080);
+// })
+
+mongoose.connect('mongodb+srv://admin:root@cluster0.opqot.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+.then(result => {
+  app.listen(8080);
+})
+.catch(err => {
+  console.log(err);
+})

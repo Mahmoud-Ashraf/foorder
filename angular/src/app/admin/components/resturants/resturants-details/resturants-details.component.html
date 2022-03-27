@@ -1,0 +1,13 @@
+<div class="border p-2" *ngFor="let res of resturants">
+  <h6 class="d-flex justify-content-between" [routerLink]="res._id">
+    {{res?.name}}
+    <span>
+      <i class="fa-solid fa-bell text-danger ms-2"></i>
+      <i class="fa-solid fa-hand-pointer text-main"></i>
+    </span>
+    <span class="text-muted"></span>
+  </h6>
+  <p class="m-0">{{res?.content}}</p>
+  <button class="btn btn-warning" [routerLink]="'edit-resturant/'+res._id">Edit</button>
+  <button class="btn btn-danger" (click)="deleteResturant(res)">Delete</button>
+</div>

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
-
+// Object with timestamp: true is for ad createdAt & updatedAt to my document
 const resturantSchema = new Schema({
     name: {
         type: String,
@@ -11,7 +11,9 @@ const resturantSchema = new Schema({
         type: String,
         required: true
     }
-});
+},
+    { timestamps: true }
+);
 
 module.exports = mongoose.model('Resturant', resturantSchema);
 // const mongoDb = require('mongodb');

@@ -22,16 +22,16 @@ export class TodayResturantDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getResturants();
+    // this.getResturants();
   }
 
   getMenuSections(id: string | undefined) {
   }
-  getResturants() {
-    this.resturantsService.getResturants().subscribe(res => {
-      this.resturants = res;
-      console.log(this.resturants);
-    })
-  }
+  // getResturants() {
+  //   this.resturantsService.getResturants().subscribe(res => {
+  //     this.resturants = res;
+  //     console.log(this.resturants);
+  //   })
+  // }
 
 }

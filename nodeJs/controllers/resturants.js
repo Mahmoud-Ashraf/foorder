@@ -1,13 +1,29 @@
 const Resturant = require('../models/resturant');
 const { validationResult } = require("express-validator");
+
 exports.getResturants = (req, res, next) => {
-  Resturant.find()
+  const currentPage = req.query.page || 1;
+  const perPage = req.query.perPage || 2;
+  let totalItems;
+  Resturant.find().countDocuments()
+    .then(count => {
+      totalItems = count;
+      return Resturant.find()
+        .skip((currentPage - 1) * perPage)
+        .limit(perPage);
+    })
     .then(resturants => {
-      // console.log('mahmoud', resturants)
       res
         .status(200)
-        .json(resturants);
+        .json({ message: 'resturant fetched', resturants: resturants, totalItems: totalItems, perPage: perPage, currentPage: currentPage });
     })
+    .catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    })
+
 };
 
 exports.getResturant = (req, res, next) => {
@@ -15,24 +31,35 @@ exports.getResturant = (req, res, next) => {
   const resturantId = req.params.resturantId;
   Resturant.findById(resturantId)
     .then(resturant => {
+      if (!resturant) {
+        const error = new Error('Could not find a resturant');
+        error.statusCode = 404;
+        throw error;
+      }
       console.log('mahmoud', resturant)
       res
         .status(200)
         .json(resturant);
+    }).catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
     })
 };
 
 exports.addResturant = (req, res, next) => {
-
-  // const errors = validationResult(req);
-  // // console.log(validationResult(req));
-  // if (!errors.isEmpty()) {
-  //   res.status(422).json({
-  //     message: "Validation Faild, Enter data in correct format",
-  //     errors: errors.array(),
-  //   });
-  //   console.log('hello', res);
-  // }
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const error = new Error('Validation Faild, Enter data in correct format');
+    error.statusCode = 422;
+    throw error;
+    // res.status(422).json({
+    //   message: "Validation Faild, Enter data in correct format",
+    //   errors: errors.array(),
+    // });
+    // console.log('hello', res);
+  }
 
   const name = req.body.name;
   const content = req.body.content;
@@ -41,64 +68,79 @@ exports.addResturant = (req, res, next) => {
     content: content
   });
   resturant.save()
-    .then(result => {
-      // console.log('resturant added')
+    .then(resturant => {
+      // let resturant = req.body;
+      // resturant.id = new Date().toISOString();
+      // Create Resturant in db
+      // 201 status code means created in db
+      // 200 status code means just success
+      res.status(201).json({
+        message: "Resturant added successfully",
+        resturant: resturant,
+      });
     }).catch(err => {
-      console.log(err);
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
     })
-  // let resturant = req.body;
-  // resturant.id = new Date().toISOString();
-  // console.log(req.body);
-  // console.log(res);
-  // Create Resturant in db
-  // 201 status code means created in db
-  // 200 status code means just success
-  res.status(201).json({
-    message: "Resturant added successfully",
-    resturant: { name: name, content: content },
-  });
 };
 
-exports.getEditResturant = (req, res, next) => {
+exports.updateResturant = (req, res, next) => {
+  const resturantId = req.params.resturantId;
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const error = new Error('Validation Faild, Enter data in correct format');
+    error.statusCode = 422;
+    throw error;
+    // res.status(422).json({
+    //   message: "Validation Faild, Enter data in correct format",
+    //   errors: errors.array(),
+    // });
+    // console.log('hello', res);
+  }
+  const name = req.body.name;
+  const content = req.body.content;
+  Resturant.findById(resturantId)
+    .then(resturant => {
+      if (!resturant) {
+        const error = new Error('Could not find a resturant');
+        error.statusCode = 404;
+        throw error;
+      }
+      resturant.name = name;
+      resturant.content = content;
+      return resturant.save();
+    })
+    .then(result => {
+      return res.status(200).json({ message: 'resturant updat success', resturant: result });
+    })
+    .catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    })
+}
+
+exports.deleteResturant = (req, res, next) => {
   const resturantId = req.params.resturantId;
   Resturant.findById(resturantId)
     .then(resturant => {
-      console.log('mahmoud', resturant)
-      res
-        .status(200)
-        .json(resturant);
+      if (!resturant) {
+        const error = new Error('Could not find a resturant');
+        error.statusCode = 404;
+        throw error;
+      }
+      return Resturant.findByIdAndRemove(resturantId);
     })
-}
-
-exports.postEditResturant = (req, res, next) => {
-  console.log('hokaaaa', req.body);
-  const resturantId = req.body._id;
-  const updatedName = req.body.name;
-  const updatedContent = req.body.content;
-  Resturant.findById(resturantId).then(resturant => {
-    resturant.name = updatedName;
-    resturant.content = updatedContent;
-    return resturant.save()
-  }).then(result => {
-    console.log('updated successfully');
-    // res.redirect('/resturants');
-  }).catch(err => {
-    console.log(err);
-  })
-  res.status(201).json({
-    message: "Resturant updated successfully",
-    resturant: { name: updatedName, content: updatedContent },
-  });
-}
-
-exports.postDeleteResturant = (req, res, next) => {
-  console.log('zombieeeee', req.body);
-  const resturantId = req.body._id;
-  Resturant.findByIdAndRemove(resturantId)
-  .then(() => {
-    console.log('Resturant Deleted!');
-    res.redirect('/resturants')
-  }).catch( err => {
-    console.log(err);
-  })
+    .then(result => {
+      return res.status(200).json({ message: 'resturant deleted', resturant: result });
+    })
+    .catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    })
 }

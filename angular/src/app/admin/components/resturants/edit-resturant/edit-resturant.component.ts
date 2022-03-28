@@ -14,18 +14,18 @@ export class EditResturantComponent implements OnInit {
     content: ''
   };
   errors: any;
+  resturantId: any;
   constructor(
     private resturantsService: ResturantsService,
     private activatedRoute: ActivatedRoute,
     private helperService: HelperService
   ) {
     this.activatedRoute.params.subscribe((params: Params) => {
-      // console.log(params);
-      return this.resturantsService.getResturant(params.resturantId).subscribe(res => {
+      this.resturantId = params.resturantId;
+      return this.resturantsService.getResturant(this.resturantId).subscribe(res => {
+        console.log('getted res', res);
         this.resturant = res;
-        console.log('mahmoud', res, this.resturant)
       })
-      // console.log('params', params);
     });
   }
 
@@ -33,22 +33,17 @@ export class EditResturantComponent implements OnInit {
 
   }
 
-  updateResturant(form: any) {
-    console.log(form, this.resturant);
-    this.resturantsService.postEditResturant(this.resturant).subscribe(
+  updateResturant() {
+    this.resturantsService.updateResturant(this.resturantId, this.resturant).subscribe(
       res => {
         this.errors = undefined;
         console.log('success response from component', res);
-        // this.error = undefined;
-        this.resturantsService.getResturant(this.resturant._id).subscribe( res => {
-          this.resturant = res;
-        });
-        // this.helperService.goBack();
+        this.helperService.goBack();
       },
       err => {
         this.errors = err.error.errors;
         console.log('faild response from component', this.errors);
-      },
+      }
     );
   }
 

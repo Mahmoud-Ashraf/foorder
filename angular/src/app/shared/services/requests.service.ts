@@ -30,4 +30,8 @@ export class RequestsService {
   putApi(apiUrl: string, data?: any) {
     return this.http.put(`${this.baseUrl}/${apiUrl}`, data);
   }
+
+  deleteApi(apiUrl: any) {
+    return this.http.delete(`${this.baseUrl}/${apiUrl}`);
+  }
 }

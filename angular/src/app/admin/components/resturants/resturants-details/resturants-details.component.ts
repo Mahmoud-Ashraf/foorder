@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ResturantsService } from 'src/app/shared/services/resturants.service';
 import { HelperService } from 'src/app/shared/services/helper.service';
+// import { Interface } from 'readline';
 
 @Component({
   selector: 'app-resturants-details',
@@ -10,36 +11,50 @@ import { HelperService } from 'src/app/shared/services/helper.service';
 })
 export class ResturantsDetailsComponent implements OnInit {
   resturants: any;
+  currentPage: number = 1;
+  totalItems: number;
+  perPage: number = 4;
 
   constructor(
     private resturantsService: ResturantsService,
-    private router: Router,
-    private helperService: HelperService
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.getResturants()
   }
   getResturants() {
-    this.resturantsService.getResturants().subscribe(res => {
-      this.resturants = res;
-      console.log(this.resturants);
+    this.resturantsService.getResturants(this.currentPage, this.perPage).subscribe((res: any) => {
+      this.resturants = res.resturants;
+      this.currentPage = res.currentPage;
+      this.perPage = res.perPage;
+      this.totalItems = res.totalItems;
+      console.log('test pagination', this.resturants);
     })
   }
   navigate(id: any) {
     this.router.navigate([`resturant/:${id}`]);
   }
-  deleteResturant(resturant: any) {
-    // console.log(form);
-    this.resturantsService.postDeleteResturant(resturant).subscribe(
+  deleteResturant(id: any) {
+    this.resturantsService.deleteResturant(id).subscribe(
       res => {
         console.log(res);
-        this.helperService.goBack();
+        this.getResturants();
       },
       err => {
         console.log(err);
       },
     );
+  }
+
+  // Paginator
+  nextPage() {
+    this.currentPage ++;
+    this.getResturants();
+  }
+  prevPage() {
+    this.currentPage --;
+    this.getResturants();
   }
 
 }

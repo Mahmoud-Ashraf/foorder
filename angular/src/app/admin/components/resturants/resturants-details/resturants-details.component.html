@@ -9,5 +9,9 @@
   </h6>
   <p class="m-0">{{res?.content}}</p>
   <button class="btn btn-warning" [routerLink]="'edit-resturant/'+res._id">Edit</button>
-  <button class="btn btn-danger" (click)="deleteResturant(res)">Delete</button>
+  <button class="btn btn-danger" (click)="deleteResturant(res._id)">Delete</button>
 </div>
+
+<!-- Paginator -->
+<button *ngIf="currentPage <= (totalItems/perPage)" (click)="nextPage()">Next</button>
+<button *ngIf="currentPage > 1" (click)="prevPage()">Prev</button>

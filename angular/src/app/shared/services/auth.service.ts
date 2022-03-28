@@ -1,3 +1,4 @@
+import { RequestsService } from './requests.service';
 import { Injectable } from '@angular/core';
 
 
@@ -7,13 +8,14 @@ import { Injectable } from '@angular/core';
 export class AuthService {
 
   constructor(
+    private requests: RequestsService
   ) { }
 
   login() {
   }
 
-  register() {
-
+  register(user: any) {
+    return this.requests.putApi('auth/signup', user);
   }
 
   getAuth() {

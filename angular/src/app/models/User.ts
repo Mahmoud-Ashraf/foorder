@@ -1,12 +1,13 @@
 // import { Order } from ''
 export interface User {
   id?: string;
-  firstName: string;
-  lastName: string;
+  name: string;
+  // lastName: string;
   email: string;
-  companyNeckname: string;
-  phone: string;
+  // companyNeckname: string;
+  // phone: string;
   orders?: [];
+  password: string;
   // wallet?: [];
   voted?: boolean;
 }

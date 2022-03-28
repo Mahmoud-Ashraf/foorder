@@ -28,6 +28,7 @@ export class RequestsService {
     // });
   }
   putApi(apiUrl: string, data?: any) {
+    console.log('request service', apiUrl, data);
     return this.http.put(`${this.baseUrl}/${apiUrl}`, data);
   }
 

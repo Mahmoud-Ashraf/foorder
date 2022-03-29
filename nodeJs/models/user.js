@@ -23,6 +23,4 @@ const userSchema = new Schema({
     ]
 }
 );
-console.log('welcome Schema');
-
 module.exports = mongoose.model('User', userSchema);

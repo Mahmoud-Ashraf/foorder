@@ -8,13 +8,19 @@ import { environment } from '../../../environments/environment';
 export class RequestsService {
 
   baseUrl = environment.apiUrl;
+  token: any;
   constructor(private http: HttpClient) { }
 
   // getApi(apiUrl: string) {
   //   return fetch(`${this.baseUrl}/${apiUrl}`);
   // }
   getApi(apiUrl: string) {
-    return this.http.get(`${this.baseUrl}/${apiUrl}`);
+    this.getToken();
+    return this.http.get(`${this.baseUrl}/${apiUrl}`, {
+      headers: {
+        Authorization: 'Bearer ' + this.token
+      }
+    });
   }
 
   postApi(apiUrl: string, data?: any) {
@@ -34,5 +40,9 @@ export class RequestsService {
 
   deleteApi(apiUrl: any) {
     return this.http.delete(`${this.baseUrl}/${apiUrl}`);
+  }
+
+  getToken() {
+    this.token = localStorage.getItem('token');
   }
 }

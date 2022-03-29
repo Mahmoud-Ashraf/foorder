@@ -20,7 +20,7 @@
             </div>
           </div>
           <div class="col-12">
-            <form #signInForm="ngForm" class="row row-cols-1" (ngSubmit)="signIn()">
+            <form #signInForm="ngForm" class="row row-cols-1" (ngSubmit)="login()">
               <div class="col">
                 <div class="custom-form-group">
                   <label class="custom-input-label" for="email">E-Mail</label>
@@ -28,7 +28,7 @@
                     <div class="custom-form-addon">
                       <i class="fas fa-envelope"></i>
                     </div>
-                    <input type="email" name="email" class="custom-form-input" [(ngModel)]="email" required
+                    <input type="email" name="email" class="custom-form-input" [(ngModel)]="loginUser.email" required
                       autocomplete="email">
                   </div>
                 </div>
@@ -40,7 +40,7 @@
                     <div class="custom-form-addon">
                       <i class="fas fa-lock"></i>
                     </div>
-                    <input type="password" name="password" class="custom-form-input" [(ngModel)]="password" required
+                    <input type="password" name="password" class="custom-form-input" [(ngModel)]="loginUser.password" required
                       autocomplete="current-password">
                   </div>
                 </div>

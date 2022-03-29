@@ -4,8 +4,10 @@ const { body } = require("express-validator");
 const router = express.Router();
 
 const resturantsController = require("../controllers/resturants");
+
+const isAuth = require('../middleware/is-auth');
 // GET /resturants
-router.get("/resturants", resturantsController.getResturants);
+router.get("/resturants",isAuth, resturantsController.getResturants);
 router.get("/resturant/:resturantId", resturantsController.getResturant);
 
 // POST /resturant

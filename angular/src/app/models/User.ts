@@ -1,7 +1,7 @@
 // import { Order } from ''
 export interface User {
   id?: string;
-  name: string;
+  name?: string;
   // lastName: string;
   email: string;
   // companyNeckname: string;

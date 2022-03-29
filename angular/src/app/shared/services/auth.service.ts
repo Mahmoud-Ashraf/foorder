@@ -11,11 +11,12 @@ export class AuthService {
     private requests: RequestsService
   ) { }
 
-  login() {
-  }
-
   register(user: any) {
     return this.requests.putApi('auth/signup', user);
+  }
+
+  login(user: any) {
+    return this.requests.postApi('auth/login', user);
   }
 
   getAuth() {

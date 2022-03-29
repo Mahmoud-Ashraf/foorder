@@ -3,10 +3,15 @@ const { validationResult } = require("express-validator");
 
 exports.getResturants = (req, res, next) => {
   const currentPage = req.query.page || 1;
-  const perPage = req.query.perPage || 2;
+  let perPage = req.query.perPage || 2;
   let totalItems;
   Resturant.find().countDocuments()
     .then(count => {
+      if (perPage == 0) {
+        console.log('not per page');
+        perPage = count;
+      }
+      console.log('perPage =', perPage);
       totalItems = count;
       return Resturant.find()
         .skip((currentPage - 1) * perPage)

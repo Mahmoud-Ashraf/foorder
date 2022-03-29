@@ -13,7 +13,7 @@ export class ResturantsService {
 
 
 
-  getResturants(page: number, perPage: number) {
+  getResturants(page: number = 1, perPage: number = 0) {
     return this.requests.getApi(`resturants?page=${page}&perPage=${perPage}`);
     // .then(res => {
     //   if (res.status !== 200) {

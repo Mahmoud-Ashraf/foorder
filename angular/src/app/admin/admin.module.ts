@@ -24,6 +24,10 @@ import { WalletsComponent } from './components/wallets/wallets.component';
 import { CollectedOrderComponent } from './components/collected-order/collected-order.component';
 import { TodayOrderComponent } from './components/today-order/today-order.component';
 import { OrdersComponent } from './components/orders/orders.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { AddMenuItemComponent } from './components/menu/add-menu-item/add-menu-item.component';
+import { MenuDetailsComponent } from './components/menu/menu-details/menu-details.component';
+import { EditMeuItemComponent } from './components/menu/edit-meu-item/edit-meu-item.component';
 
 
 @NgModule({
@@ -49,6 +53,10 @@ import { OrdersComponent } from './components/orders/orders.component';
     TodayOrderComponent,
     WalletsComponent,
     OrdersComponent,
+    MenuComponent,
+    AddMenuItemComponent,
+    MenuDetailsComponent,
+    EditMeuItemComponent,
   ],
   imports: [
     CommonModule,

@@ -10,7 +10,13 @@ const resturantSchema = new Schema({
     content: {
         type: String,
         required: true
-    }
+    },
+    menu: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Menu'
+        }
+    ]
 },
     { timestamps: true }
 );

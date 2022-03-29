@@ -10,6 +10,7 @@ module.exports = (req, res, next) => {
     const token = authHeader.split(' ')[1];
     let decodedToken;
     try {
+        // 'somesupersecretjwtsecretjwt' have to be the same as set in auth controller login
         decodedToken = jwt.verify(token, 'somesupersecretjwtsecretjwt');
     } catch (err) {
         err.statusCode = 500;

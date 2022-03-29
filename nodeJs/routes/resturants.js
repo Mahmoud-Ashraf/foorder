@@ -7,12 +7,13 @@ const resturantsController = require("../controllers/resturants");
 
 const isAuth = require('../middleware/is-auth');
 // GET /resturants
-router.get("/resturants",isAuth, resturantsController.getResturants);
-router.get("/resturant/:resturantId", resturantsController.getResturant);
+router.get("/resturants", isAuth, resturantsController.getResturants);
+router.get("/resturant/:resturantId", isAuth, resturantsController.getResturant);
 
 // POST /resturant
 router.post(
   "/resturant",
+  isAuth,
   [
     body("name", "name is too small min length 5 char.")
       .trim()
@@ -25,6 +26,7 @@ router.post(
 );
 
 router.put("/resturant/:resturantId",
+  isAuth,
   [
     body("name", "name is too small min length 5 char.")
       .trim()
@@ -36,6 +38,6 @@ router.put("/resturant/:resturantId",
   resturantsController.updateResturant
 );
 
-router.delete("/resturant/:resturantId", resturantsController.deleteResturant);
+router.delete("/resturant/:resturantId", isAuth, resturantsController.deleteResturant);
 
 module.exports = router;

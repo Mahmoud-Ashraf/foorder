@@ -24,7 +24,12 @@ export class RequestsService {
   }
 
   postApi(apiUrl: string, data?: any) {
-    return this.http.post(`${this.baseUrl}/${apiUrl}`, data);
+    this.getToken();
+    return this.http.post(`${this.baseUrl}/${apiUrl}`, data, {
+      headers: {
+        Authorization: 'Bearer ' + this.token
+      }
+    });
     // return fetch(`${this.baseUrl}/${apiUrl}`, {
     //   method: 'POST',
     //   body: JSON.stringify(data),
@@ -34,12 +39,22 @@ export class RequestsService {
     // });
   }
   putApi(apiUrl: string, data?: any) {
+    this.getToken();
     console.log('request service', apiUrl, data);
-    return this.http.put(`${this.baseUrl}/${apiUrl}`, data);
+    return this.http.put(`${this.baseUrl}/${apiUrl}`, data, {
+      headers: {
+        Authorization: 'Bearer ' + this.token
+      }
+    });
   }
 
   deleteApi(apiUrl: any) {
-    return this.http.delete(`${this.baseUrl}/${apiUrl}`);
+    this.getToken();
+    return this.http.delete(`${this.baseUrl}/${apiUrl}`, {
+      headers: {
+        Authorization: 'Bearer ' + this.token
+      }
+    });
   }
 
   getToken() {

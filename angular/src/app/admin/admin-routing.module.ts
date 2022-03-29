@@ -1,3 +1,7 @@
+import { EditMeuItemComponent } from './components/menu/edit-meu-item/edit-meu-item.component';
+import { AddMenuItemComponent } from './components/menu/add-menu-item/add-menu-item.component';
+import { MenuDetailsComponent } from './components/menu/menu-details/menu-details.component';
+import { MenuComponent } from './components/menu/menu.component';
 import { WalletsComponent } from './components/wallets/wallets.component';
 import { CollectedOrderComponent } from './components/collected-order/collected-order.component';
 import { UserOrdersComponent } from './components/users/user-orders/user-orders.component';
@@ -37,6 +41,14 @@ const routes: Routes = [
           { path: 'edit-user/:userId', component: EditUserComponent },
           { path: 'user-orders/:userId', component: UserOrdersComponent },
           { path: ':userId', component: UserDetailsComponent },
+        ]
+      },
+      {
+        path: 'menu', component: MenuComponent,
+        children: [
+          {path: '', component: MenuDetailsComponent},
+          {path: 'add-menu-item', component: AddMenuItemComponent},
+          {path: 'edit-menu-item', component: EditMeuItemComponent}
         ]
       },
       { path: 'orders', component: OrdersComponent },

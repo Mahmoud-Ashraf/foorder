@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 
 const resturantsRoutes = require("./routes/resturants");
 const authRoutes = require("./routes/auth");
+const menuRoutes = require('./routes/menus');
+const ordersRoutes = require('./routes/orders');
 // const mongoConnect = require('./utils/database').mongoConnect;
 
 const app = express();
@@ -24,6 +26,8 @@ app.use((req, res, next) => {
 
 app.use(resturantsRoutes);
 app.use('/auth', authRoutes);
+app.use(menuRoutes);
+app.use(ordersRoutes);
 
 // mongoConnect(() => {
 //   app.listen(8080);

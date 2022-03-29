@@ -1,0 +1,26 @@
+<form #addMenuItemForm=ngForm (ngSubmit)="addMenuItem(addMenuItemForm)">
+    <div class="form-group">
+      <input type="text" class="form-control" name="name" placeholder="Menu Item Name" #menuItemName
+        [(ngModel)]="menuItem.name" required minlength="3">
+      <div class="has-error" *ngIf="errors && errors[getIndex(errors, menuItemName)]">
+        {{errors[getIndex(errors, menuItemName)]?.msg}}
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="number" class="form-control" name="price" placeholder="Menu Item Price" #menuItemPrice
+        [(ngModel)]="menuItem.price" required minlength="1">
+      <div class="has-error" *ngIf="errors && errors[getIndex(errors, menuItemPrice)]">
+        {{errors[getIndex(errors, menuItemPrice)]?.msg}}
+      </div>
+    </div>
+    <div class="form-group">
+        <select class="form-select" name="resturant" aria-label="Default select example" #resturant [(ngModel)]="menuItem.resturantId" required>
+            <option selected>Select Resturant</option>
+            <option *ngFor="let resturant of resturants" [value]="resturant._id">{{resturant.name}}</option>
+          </select>
+      <div class="has-error" *ngIf="errors && errors[getIndex(errors, resturant)]">
+        {{errors[getIndex(errors, resturant)]?.msg}}
+      </div>
+    </div>
+    <button type="submit" [disabled]="addMenuItemForm.invalid">Add Menu Item</button>
+  </form>

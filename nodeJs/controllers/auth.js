@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs')
 
 // for Json Web Token ( Authentication)
 const jwt = require('jsonwebtoken');
+// const User = require('../models/user');
 
 exports.signup = (req, res, next) => {
     const errors = validationResult(req);
@@ -59,14 +60,24 @@ exports.login = (req, res, next) => {
                 error.statusCode = 401;
                 throw error;
             }
+            loadedUser._id = loadedUser._id.toString();
             const token = jwt.sign({
+                // the data which will be sent back to user throw the token
+                // exp: Math.floor(Date.now() / 1000) + (60 * 60),
                 email: loadedUser.email,
-                userId: loadedUser._id.toString()
+                userId: loadedUser._id,
+                // email: loadedUser.email,
+                // userId: loadedUser._id.toString()
             },
                 'somesupersecretjwtsecretjwt',
                 { expiresIn: '1h' }
             );
-            res.status(200).json({ token: token, userId: loadedUser._id.toString() })
+            res.status(200).json({ 
+                token: token, 
+                expiresIn: 3600 // duration in seconds when it will expire
+                // user: loadedUser, 
+                // expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) 
+            })
         })
         .catch(err => {
             if (!err.statusCode) {

@@ -1,5 +1,6 @@
+import { AuthService } from './../shared/services/auth.service';
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -11,9 +12,17 @@ export class AuthGuard implements CanActivate {
   user: Subscription;
   constructor(
     private router: Router,
+    private authService: AuthService
   ) { }
 
-  canActivate() {
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean | Observable<boolean> | Promise<boolean> {
+    const isAuth = this.authService.getIsAuth();
+    if (!isAuth) {
+      this.router.navigate(['/login']);
+    }
     // return this.afAuth.authState.pipe(map(auth => {
     //   if (!auth) {
     //     this.router.navigate(['/login']);
@@ -22,6 +31,6 @@ export class AuthGuard implements CanActivate {
     //     return true;
     //   }
     // }));
-    return true;
+    return isAuth;
   }
 }

@@ -20,7 +20,7 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Methods",
     "OPTIONS, GET, POST, PUT, PATCH, DELETE"
   );
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Accept, Content-Type, Authorization");
   next();
 });
 
@@ -46,7 +46,9 @@ app.use((error, req, res, next) => {
 mongoose.connect('mongodb+srv://admin:root@cluster0.opqot.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
   .then(result => {
     app.listen(8080);
+    console.log('database connected');
   })
   .catch(err => {
     console.log(err);
+    console.log('database connection faild');
   })

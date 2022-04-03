@@ -1,3 +1,4 @@
+import { NgForm } from '@angular/forms';
 import { AuthService } from './../../../shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -17,16 +18,9 @@ export class SignInComponent implements OnInit {
   // password: string;
   errorMessage: string;
   disableSignIn = false;
-  loginUser: User = {
-    // firstName: '',
-    // name: '',
-    email: '',
-    // companyNeckname: '',
-    // phone: '',
-    password: ''
-  };
+  loginUser: User;
   constructor(
-    // private router: Router,
+    private router: Router,
     // private loader: LoaderService,
     // private flashMessage: FlashMessagesService,
     // private resturantsService: ResturantsService
@@ -37,11 +31,8 @@ export class SignInComponent implements OnInit {
     // this.resturantsService.getResturants();
   }
 
-  login(): void {
-    this.authService.login(this.loginUser).subscribe((user: any) => {
-      console.log(user);
-      localStorage.setItem('token', user.token);
-    })
+  login(loginForm: NgForm): void {
+    this.authService.login(loginForm.value);
   }
 
 }

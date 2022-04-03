@@ -1,3 +1,5 @@
+import { MenuService } from './shared/services/menu.service';
+import { AuthService } from './shared/services/auth.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FlashMessagesModule } from 'flash-messages-angular';
@@ -27,13 +29,7 @@ import { ResturantsService } from './shared/services/resturants.service';
     HttpClientModule
 
   ],
-  providers: [LoaderService, RequestsService, ResturantsService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: NetworkInterceptor,
-      multi: true,
-    }
-  ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: []
 })
 export class AppModule { }

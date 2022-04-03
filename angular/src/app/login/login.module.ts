@@ -19,6 +19,6 @@ import { AuthService } from '../shared/services/auth.service';
     LoginRoutingModule,
     SharedModule
   ],
-  providers: [AuthService]
+  providers: []
 })
 export class LoginModule { }

@@ -1,6 +1,7 @@
 const Menu = require('../models/menu');
 const Resturant = require('../models/resturant');
 const { validationResult } = require("express-validator");
+const user = require('../models/user');
 
 exports.getMenu = (req, res, next) => {
     const currentPage = req.query.page || 1;
@@ -141,6 +142,7 @@ exports.updateMenuItem = (req, res, next) => {
 
 exports.deleteMenuItem = (req, res, next) => {
     const menuItemId = req.params.menuItemId;
+    let resturantId;
     Menu.findById(menuItemId)
         .then(menuItem => {
             if (!menuItem) {
@@ -148,10 +150,18 @@ exports.deleteMenuItem = (req, res, next) => {
                 error.statusCode = 404;
                 throw error;
             }
+            resturantId = menuItem.resturantId;
             return Menu.findByIdAndRemove(menuItemId);
         })
         .then(result => {
-            return res.status(200).json({ message: 'order deleted', menuItem: result });
+            return Resturant.findById(resturantId);
+        })
+        .then(resturant => {
+            resturant.menu.pull(menuItemId);
+            return resturant.save();
+        })
+        .then(result => {
+            return res.status(200).json({ message: 'Menu Item deleted'});
         })
         .catch(err => {
             if (!err.statusCode) {

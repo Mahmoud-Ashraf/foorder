@@ -20,13 +20,13 @@
             </div>
           </div>
           <div class="col-12">
-            <form #signUpForm="ngForm" class="row row-cols-1" (ngSubmit)="register()">
+            <form #signUpForm="ngForm" class="row row-cols-1" (ngSubmit)="register(signUpForm)">
               <div class="col">
                 <div class="custom-form-group">
                   <label class="custom-input-label" for="name">Name</label>
                   <div class="custom-form-input-group">
                     <span class="custom-form-addon"><i class="fas fa-user"></i></span>
-                    <input type="text" name="name" class="custom-form-input" [(ngModel)]="user.name" required
+                    <input type="text" name="name" class="custom-form-input" ngModel required
                       autocomplete="given-name">
                   </div>
                 </div>
@@ -50,8 +50,8 @@
                     <div class="custom-form-addon">
                       <i class="fas fa-envelope"></i>
                     </div>
-                    <input type="email" name="email" class="custom-form-input" [(ngModel)]="user.email" required
-                      autocomplete="email">
+                    <input type="email" name="email" class="custom-form-input" ngModel required
+                      autocomplete="email" email>
                   </div>
                 </div>
               </div>
@@ -86,8 +86,8 @@
                     <div class="custom-form-addon">
                       <i class="fas fa-lock"></i>
                     </div>
-                    <input type="password" name="password" class="custom-form-input" [(ngModel)]="user.password" required
-                      autocomplete="new-password">
+                    <input type="password" name="password" class="custom-form-input" ngModel required
+                      autocomplete="new-password" minlength="8">
                   </div>
                 </div>
               </div>
@@ -96,7 +96,7 @@
               </div>
               <div class="col">
                 <div class="custom-form-group">
-                  <button type="submit" class="sign-in-btn w-100">Register</button>
+                  <button type="submit" class="sign-in-btn w-100" [disabled]="!signUpForm.valid">Register</button>
                 </div>
               </div>
               <div class="col">

@@ -29,6 +29,9 @@ export class SignInComponent implements OnInit {
 
   ngOnInit(): void {
     // this.resturantsService.getResturants();
+    if (this.authService.getIsAuth()) {
+      this.router.navigate(['/home']);
+    }
   }
 
   login(loginForm: NgForm): void {

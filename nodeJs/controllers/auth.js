@@ -72,10 +72,10 @@ exports.login = (req, res, next) => {
                 'somesupersecretjwtsecretjwt',
                 { expiresIn: '1h' }
             );
-            res.status(200).json({ 
-                token: token, 
-                expiresIn: 3600 // duration in seconds when it will expire
-                // user: loadedUser, 
+            res.status(200).json({
+                token: token,
+                expiresIn: 3600, // duration in seconds when it will expire
+                user: loadedUser,
                 // expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) 
             })
         })
@@ -86,3 +86,25 @@ exports.login = (req, res, next) => {
             next(err);
         })
 }
+
+exports.getUser = (req, res, next) => {
+    console.log(req.params.userId);
+    const userId = req.params.userId;
+    User.findById(userId)
+        .then(user => {
+            console.log('mahmoud', user);
+            if (!user) {
+                const error = new Error('Could not find a user');
+                error.statusCode = 404;
+                throw error;
+            }
+            res
+                .status(200)
+                .json(user);
+        }).catch(err => {
+            if (!err.statusCode) {
+                err.statusCode = 500;
+            }
+            next(err);
+        })
+};

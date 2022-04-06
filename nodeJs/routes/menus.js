@@ -7,7 +7,7 @@ const menuController = require("../controllers/menus");
 
 const isAuth = require('../middleware/is-auth');
 // GET /menu
-router.get("/menu", isAuth, menuController.getMenu);
+router.get("/menu/:resturantId", isAuth, menuController.getMenu);
 router.get("/menu/:menuItemId", isAuth, menuController.getMenuItem);
 
 // POST /menuItem

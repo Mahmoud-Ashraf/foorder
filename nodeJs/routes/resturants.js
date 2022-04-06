@@ -9,6 +9,7 @@ const isAuth = require('../middleware/is-auth');
 // GET /resturants
 router.get("/resturants", isAuth, resturantsController.getResturants);
 router.get("/resturant/:resturantId", isAuth, resturantsController.getResturant);
+router.get("/toDayResturant", isAuth, resturantsController.getToDayResturant);
 
 // POST /resturant
 router.post(

@@ -1,4 +1,5 @@
 const Order = require('../models/order');
+const User = require('../models/user');
 const { validationResult } = require("express-validator");
 
 exports.getOrders = (req, res, next) => {
@@ -49,23 +50,18 @@ exports.getOrder = (req, res, next) => {
 };
 
 exports.addOrder = (req, res, next) => {
+  console.log('order req', req);
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const error = new Error('Validation Faild, Enter data in correct format');
     error.statusCode = 422;
     throw error;
-    // res.status(422).json({
-    //   message: "Validation Faild, Enter data in correct format",
-    //   errors: errors.array(),
-    // });
-    // console.log('hello', res);
   }
-
-  const name = req.body.name;
-  const content = req.body.content;
   const order = new Order({
-    name: name,
-    content: content
+    userId: req.body.userId,
+    resturantId: req.body.resturantId,
+    items: req.body.items,
+    totalOrderPrice: req.body.totalOrderPrice
   });
   order.save()
     .then(order => {
@@ -74,11 +70,19 @@ exports.addOrder = (req, res, next) => {
       // Create order in db
       // 201 status code means created in db
       // 200 status code means just success
+      return User.findById(req.body.userId);
+    })
+    .then(user => {
+      user.orders.push(order);
+      return user.save();
+    })
+    .then(result => {
       res.status(201).json({
         message: "order added successfully",
         order: order,
       });
-    }).catch(err => {
+    })
+    .catch(err => {
       if (!err.statusCode) {
         err.statusCode = 500;
       }
@@ -143,4 +147,15 @@ exports.deleteOrder = (req, res, next) => {
       }
       next(err);
     })
+}
+
+exports.getAllOrder = (req, res, next) => {
+  const orderId = req.params.orderId;
+  Order.
+  findById(orderId).
+  populate('items').
+  exec(function (err, order) {
+    if (err) return handleError(err);
+    console.log('The order is', order);
+  });
 }

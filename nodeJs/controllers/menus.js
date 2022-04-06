@@ -5,19 +5,14 @@ const user = require('../models/user');
 
 exports.getMenu = (req, res, next) => {
     const currentPage = req.query.page || 1;
-    const perPage = req.query.perPage || 2;
+    let perPage = req.query.perPage || 2;
+    const resturantId = req.params.resturantId;
     let totalItems;
-    Menu.find().countDocuments()
-        .then(count => {
-            totalItems = count;
-            return Menu.find()
-                .skip((currentPage - 1) * perPage)
-                .limit(perPage);
-        })
+    Menu.find({ resturantId: resturantId })
         .then(menu => {
             res
                 .status(200)
-                .json({ message: 'menu fetched', menu: menu, totalItems: totalItems, perPage: perPage, currentPage: currentPage });
+                .json({ message: 'menu fetched', menu: menu, });
         })
         .catch(err => {
             if (!err.statusCode) {
@@ -64,6 +59,7 @@ exports.addMenuItem = (req, res, next) => {
     }
     const name = req.body.name;
     const price = req.body.price;
+    const count = req.body.count;
     // const resturant = req.body.resturantId;
     console.log(req);
     let joinResturant;
@@ -161,7 +157,7 @@ exports.deleteMenuItem = (req, res, next) => {
             return resturant.save();
         })
         .then(result => {
-            return res.status(200).json({ message: 'Menu Item deleted'});
+            return res.status(200).json({ message: 'Menu Item deleted' });
         })
         .catch(err => {
             if (!err.statusCode) {

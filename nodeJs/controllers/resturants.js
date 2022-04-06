@@ -31,6 +31,36 @@ exports.getResturants = (req, res, next) => {
 
 };
 
+exports.getToDayResturant = (req, res, next) => {
+  // console.log(req.params.resturantId);
+  // const resturantId = req.params.resturantId;
+  Resturant.findOne()
+    .sort('-vote')
+    .exec((err, doc) => {
+      // let max = doc.vote;
+      console.log('max', doc);
+      // if (!doc) {
+      //   const error = new Error('Could not find a resturant');
+      //   error.statusCode = 404;
+      //   throw error;
+      // }
+      res
+        .status(200)
+        .json(doc);
+    })
+  // Resturant.findById(resturantId)
+  //   .then(resturant => {
+  //     if (!resturant) {
+  //       const error = new Error('Could not find a resturant');
+  //       error.statusCode = 404;
+  //       throw error;
+  //     }
+  //     console.log('mahmoud', resturant)
+  //     res
+  //       .status(200)
+  //       .json(resturant);
+  //   })
+};
 exports.getResturant = (req, res, next) => {
   console.log(req.params.resturantId);
   const resturantId = req.params.resturantId;
@@ -70,7 +100,8 @@ exports.addResturant = (req, res, next) => {
   const content = req.body.content;
   const resturant = new Resturant({
     name: name,
-    content: content
+    content: content,
+    vote: 0
   });
   resturant.save()
     .then(resturant => {
@@ -106,6 +137,7 @@ exports.updateResturant = (req, res, next) => {
   }
   const name = req.body.name;
   const content = req.body.content;
+  const vote = req.body.vote;
   Resturant.findById(resturantId)
     .then(resturant => {
       if (!resturant) {
@@ -115,6 +147,7 @@ exports.updateResturant = (req, res, next) => {
       }
       resturant.name = name;
       resturant.content = content;
+      resturant.vote = vote;
       return resturant.save();
     })
     .then(result => {

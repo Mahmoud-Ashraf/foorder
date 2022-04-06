@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { RequestsService } from './requests.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResturantsService {
+  private todayResturant = new Subject();
 
   constructor(
     private requests: RequestsService
@@ -39,6 +41,15 @@ export class ResturantsService {
     return this.requests.deleteApi(`resturant/${id}`);
   }
 
+  setTodayResturant() {
+    this.requests.getApi('toDayResturant').subscribe((todayResturant: any) => {
+      this.todayResturant.next(todayResturant);
+      localStorage.setItem('toDayResturantId', todayResturant._id);
+    })
+  }
+  getToDayResturantListner() {
+    return this.todayResturant.asObservable();
+  }
   // async getResturantsAsync() {
   //   const response = await this.requests.getApi('resturants').toPromise();
   //   console.log(response);

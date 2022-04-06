@@ -11,7 +11,8 @@ export class AddMenuItemComponent implements OnInit {
   menuItem = {
     name: undefined,
     price: undefined,
-    resturantId: undefined
+    resturantId: undefined,
+    count: 0
   };
   errors: any;
   resturants: any;
@@ -34,7 +35,8 @@ export class AddMenuItemComponent implements OnInit {
         this.menuItem = {
           name: undefined,
           price: undefined,
-          resturantId: undefined
+          resturantId: undefined,
+          count: 0
         };
       },
       err => {

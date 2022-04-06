@@ -30,5 +30,6 @@ router.put("/signup",
 
 router.post('/login', authController.login);
 router.get('/user/:userId', authController.getUser);
+router.put('/user/:userId', authController.updateUser);
 
 module.exports = router;

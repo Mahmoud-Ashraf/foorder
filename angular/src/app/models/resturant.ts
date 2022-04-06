@@ -1,7 +1,7 @@
 // import { MenuSections } from "./menu";
 
 export interface Resturant {
-  id?: string;
+  _id?: string;
   name: string;
   content: string;
   phone?: string;

@@ -11,6 +11,10 @@ const resturantSchema = new Schema({
         type: String,
         required: true
     },
+    vote: {
+        type: Number,
+        required: true
+    },
     menu: [
         {
             type: Schema.Types.ObjectId,

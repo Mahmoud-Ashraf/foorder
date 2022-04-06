@@ -3,12 +3,12 @@
   <div class="col-9">
     <p class="poll-vote">Thanks for your vote, wait the result in</p>
     <p class="poll-vote">Vote for one of this restaurants in</p>
-    <app-count-down [endTime]="[00, 02, 0]"></app-count-down>
+    <app-count-down [endTime]="timerEndTime"></app-count-down>
     <ul class="poll-list">
-      <li>
-        <span>Anas Al Demashky</span><span>5</span>
+      <li *ngFor="let resturant of resturants" [ngClass]="{'selected': (selectedResturant?._id === resturant?._id) && !currentUser?.voted}" (click)="selectResturant(resturant)">
+        <span>{{resturant?.name}}</span><span>{{resturant?.vote}}</span>
       </li>
     </ul>
-    <button class="btn btn-main w-100 poll-submit" (click)="vote()">Submit Vote</button>
+    <button class="btn btn-main w-100 poll-submit" (click)="vote()" [disabled]="!selectedResturant || currentUser?.voted">Submit Vote</button>
   </div>
 </div>

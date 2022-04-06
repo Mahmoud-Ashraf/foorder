@@ -8,10 +8,10 @@
     <th>اضف للعربة</th>
   </tr>
   <ng-container>
-    <tr class="menu-table-items">
-      <td>منقوشة تركي مدخن</td>
+    <tr class="menu-table-items" *ngFor="let item of order?.items">
+      <td>{{item?.name}}</td>
       <td class="menu-table-items-price">
-        30
+        {{item?.price}}
         <span class="menu-table-items-price-unit">EGP</span>
       </td>
       <td>
@@ -19,13 +19,15 @@
             class="fas fa-shopping-cart"></i> Add to
           cart</button> -->
         <!-- <ng-template #itemCount> -->
-        <button class="btn btn-action btn-sm">-</button>
-        <span class="cart-count">1</span>
-        <button class="btn btn-action btn-sm">+</button>
+        <button *ngIf="item?.count > 1" class="btn btn-action btn-sm" (click)="decreseOrderCount(item)">-</button>
+        <i *ngIf="item.count == 0" class="fas text-main fa-shopping-cart" (click)="increaseOrderCount(item)"></i>
+        <i *ngIf="item.count == 1" class="fas text-main-danger fa-trash" (click)="decreseOrderCount(item)"></i>
+        <span *ngIf="item?.count > 0" class="cart-count">{{item?.count}}</span>
+        <button *ngIf="item?.count > 0 && item?.count < 4" class="btn btn-action btn-sm" (click)="increaseOrderCount(item)">+</button>
         <!-- </ng-template> -->
       </td>
       <td class="menu-table-items-price">
-        25
+        {{item.price * item.count}}
         <span class="menu-table-items-price-unit">EGP</span>
       </td>
     </tr>
@@ -33,7 +35,7 @@
   <tr class="menu-table-items">
     <th colspan="3">إجمالي السعر غير شامل التوصيل ولا الخدمة</th>
     <td class="menu-table-items-price">
-      25
+      {{order?.totalOrderPrice}}
       <span class="menu-table-items-price-unit">EGP</span>
     </td>
   </tr>
@@ -41,6 +43,6 @@
 
 <div class="row justify-content-end">
   <div class="col-md-4">
-    <button class="btn btn-main w-100">Confirm Order</button>
+    <button class="btn btn-main w-100" (click)="addOrder()">Confirm Order</button>
   </div>
 </div>

@@ -1,4 +1,3 @@
-import { AuthInterceptor } from './../login/interceptors/auth.interceptor';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuicklinkModule } from 'ngx-quicklink';
@@ -17,6 +16,7 @@ import { AuthService } from './services/auth.service';
 import { MenuService } from './services/menu.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NetworkInterceptor } from './interceptors/network.interceptor';
+import { AuthInterceptor } from '../login/interceptors/auth.interceptor';
 
 
 

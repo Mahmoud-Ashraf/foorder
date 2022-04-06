@@ -31,9 +31,7 @@ export class RegisterComponent implements OnInit {
 
   register(registerForm: NgForm) {
     console.log(registerForm.value);
-    this.authService.register(registerForm.value).subscribe(user => {
-      console.log(user);
-    })
+    this.authService.register(registerForm.value);
   }
 
 }

@@ -11,6 +11,9 @@ const menuSchema = new Schema({
         type: Number,
         required: true
     },
+    count: {
+        type: Number,
+    },
     resturantId: {
         type: Schema.Types.ObjectId,
         ref: 'Resturant',

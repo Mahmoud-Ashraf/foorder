@@ -23,13 +23,27 @@ exports.signup = (req, res, next) => {
             const user = new User({
                 email: email,
                 password: hashedPassword,
-                name: name
+                name: name,
+                voted: false
             });
             return user.save();
         }).then(result => {
+            const token = jwt.sign({
+                // the data which will be sent back to user throw the token
+                // exp: Math.floor(Date.now() / 1000) + (60 * 60),
+                email: result.email,
+                userId: result._id,
+                // email: loadedUser.email,
+                // userId: loadedUser._id.toString()
+            },
+                'somesupersecretjwtsecretjwt',
+                { expiresIn: '1h' }
+            );
             res.status(201).json({
                 message: 'user created',
-                userId: result._id
+                user: result,
+                token: token,
+                expiresIn: 3600
             })
         })
         .catch(err => {
@@ -108,3 +122,36 @@ exports.getUser = (req, res, next) => {
             next(err);
         })
 };
+exports.updateUser = (req, res, next) => {
+    const userId = req.params.userId;
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) {
+    //   const error = new Error('Validation Faild, Enter data in correct format');
+    //   error.statusCode = 422;
+    //   throw error;
+    // }
+    // const name = req.body.name;
+    // const content = req.body.content;
+    const voted = req.body.voted;
+    User.findById(userId)
+        .then(user => {
+            if (!user) {
+                const error = new Error('Could not find a user');
+                error.statusCode = 404;
+                throw error;
+            }
+            // user.name = name;
+            // user.content = content;
+            user.voted = voted;
+            return user.save();
+        })
+        .then(result => {
+            return res.status(200).json({ message: 'user updated success', user: result });
+        })
+        .catch(err => {
+            if (!err.statusCode) {
+                err.statusCode = 500;
+            }
+            next(err);
+        })
+}

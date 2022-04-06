@@ -1,8 +1,9 @@
+import { HomeService } from './../../services/home.service';
 import { AuthService } from './../../../shared/services/auth.service';
 import { OrderService } from './../../../shared/services/order.service';
 import { MenuService } from './../../../shared/services/menu.service';
 import { ResturantsService } from 'src/app/shared/services/resturants.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MenuSection } from 'src/app/models/menu-section';
 import { Resturant } from 'src/app/models/resturant';
@@ -13,29 +14,27 @@ import { Resturant } from 'src/app/models/resturant';
   templateUrl: './today-resturant-details.component.html',
   styleUrls: ['./today-resturant-details.component.scss']
 })
-export class TodayResturantDetailsComponent implements OnInit {
+export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
   todayResturant: any;
   todayResturantMenu: any;
-  timerEndTime: number[] = [16, 0, 0];
+  orderEndTime: number[] = [23, 50, 0];
   order: any;
-  // resturantId: string | undefined;
-  // menuSections: MenuSection[];
-  // resturants: any;
+  showResturantDetails: boolean = false;
+  countDownTimer: any;
 
   constructor(
     private resturantsService: ResturantsService,
     private menuService: MenuService,
     private orderService: OrderService,
-    private authService: AuthService
+    private authService: AuthService,
+    private homeService: HomeService
   ) {
   }
 
   ngOnInit(): void {
     this.resturantsService.setTodayResturant();
-    // this.getCurrentOrder();
     this.getTodayResturant();
-    // console.log('my local order', this.order);
-    // this.setUserAndResturantToOrder();
+    this.showHideDependOnCountDown();
   }
   getMenu() {
     this.menuService.getMenu(this.todayResturant._id).subscribe((menu: any) => {
@@ -69,6 +68,16 @@ export class TodayResturantDetailsComponent implements OnInit {
     // this.getTotalOrderPrice();
   }
 
+  private showHideDependOnCountDown() {
+    const timeTillOrderEnd = this.homeService.calcDateDiffInMs(this.orderEndTime);
+    if (timeTillOrderEnd > 0) {
+      this.showResturantDetails = true;
+      this.countDownTimer = setTimeout(() => {
+        this.showResturantDetails = false;
+      }, timeTillOrderEnd);
+    }
+  }
+
   increaseOrderCount(menuItem: any) {
     menuItem.count +=1
     this.editCartItems();
@@ -85,6 +94,13 @@ export class TodayResturantDetailsComponent implements OnInit {
     // this.orderService.addOrder(this.order).subscribe(addedOrder => {
     //   console.log(addedOrder);
     // });
+  }
+
+  ngOnDestroy(): void {
+    if(this.countDownTimer) {
+      clearTimeout(this.countDownTimer);
+    }
+    // this.countDownTimer
   }
 
   

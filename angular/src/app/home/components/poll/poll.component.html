@@ -1,9 +1,9 @@
-<div class="row justify-content-center poll">
+<div class="row justify-content-center poll" *ngIf="showPoll">
   <!-- <div class="row justify-content-center"> -->
   <div class="col-9">
     <p class="poll-vote">Thanks for your vote, wait the result in</p>
     <p class="poll-vote">Vote for one of this restaurants in</p>
-    <app-count-down [endTime]="timerEndTime"></app-count-down>
+    <app-count-down [endTime]="pollEndTime"></app-count-down>
     <ul class="poll-list">
       <li *ngFor="let resturant of resturants" [ngClass]="{'selected': (selectedResturant?._id === resturant?._id) && !currentUser?.voted}" (click)="selectResturant(resturant)">
         <span>{{resturant?.name}}</span><span>{{resturant?.vote}}</span>

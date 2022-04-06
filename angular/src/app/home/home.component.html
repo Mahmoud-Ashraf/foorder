@@ -1,14 +1,7 @@
 <div class="home mt-3">
-  <app-poll></app-poll>
-  <app-today-resturant-details></app-today-resturant-details>
-  <p class="poll-vote">Thanks for your order, please review your wallet after eating</p>
+  <app-poll *ngIf="showPoll"></app-poll>
+  <app-today-resturant-details *ngIf="showOrder"></app-today-resturant-details>
+  <!-- <p class="poll-vote">Thanks for your order, please review your wallet after eating</p> -->
 
   <button [routerLink]="'/admin/resturants'">Click Meeeeee</button>
-  <!-- <ul>
-    <li *ngFor="let user of users$ | async">{{user.firstName}}</li>
-  </ul>
-  <ul>
-    <li *ngFor="let order of orders$ | async">
-      {{order.userId}}</li>
-  </ul> -->
 </div>

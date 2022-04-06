@@ -1,11 +1,12 @@
-<p class="today-resturant row">
-  <span class="col-auto resturant-welcome">Restaurant of the Day</span>
-  <span class="col text-center resturant-brand">{{todayResturant?.name}}</span>
-</p>
-<p class="poll-vote">Add your order to cart before</p>
-<app-count-down [endTime]="timerEndTime"></app-count-down>
+<div *ngIf="showResturantDetails">
+  <p class="today-resturant row">
+    <span class="col-auto resturant-welcome">Restaurant of the Day</span>
+    <span class="col text-center resturant-brand">{{todayResturant?.name}}</span>
+  </p>
+  <p class="poll-vote">Add your order to cart before</p>
+  <app-count-down [endTime]="orderEndTime"></app-count-down>
 
-<!-- <div class="menu">
+  <!-- <div class="menu">
   <ul class="nav nav-pills mb-3 nav-justified" id="menu-tab" role="tablist">
     <li class="nav-item" role="presentation" *ngFor="let menuItem of menuSections; let first = first">
       <button class="nav-link" [attr.id]="'section' + section.id + '-tab'" data-bs-toggle="pill"
@@ -23,53 +24,57 @@
   </div>
 </div> -->
 
-<table class="menu-table">
-  <tr class="menu-table-head">
-    <th>اسم المنتج</th>
-    <th>السعر</th>
-    <th>اضف للعربة</th>
-  </tr>
-  <ng-container>
-    <tr class="menu-table-items" *ngFor="let menuItem of todayResturantMenu">
-      <td>{{menuItem?.name}}</td>
-      <td class="menu-table-items-price">
-        {{menuItem?.price}}
-        <span class="menu-table-items-price-unit">EGP</span>
-      </td>
-      <td>
-        <!-- <button class="btn btn-action btn-sm" (click)="addItemToCart(item)" *ngIf="!item?.count else itemCount"><i
+  <table class="menu-table">
+    <tr class="menu-table-head">
+      <th>اسم المنتج</th>
+      <th>السعر</th>
+      <th>اضف للعربة</th>
+    </tr>
+    <ng-container>
+      <tr class="menu-table-items" *ngFor="let menuItem of todayResturantMenu">
+        <td>{{menuItem?.name}}</td>
+        <td class="menu-table-items-price">
+          {{menuItem?.price}}
+          <span class="menu-table-items-price-unit">EGP</span>
+        </td>
+        <td>
+          <!-- <button class="btn btn-action btn-sm" (click)="addItemToCart(item)" *ngIf="!item?.count else itemCount"><i
             class="fas fa-shopping-cart"></i> Add to
           cart</button> -->
-        <!-- <ng-template #itemCount> -->
-        <button *ngIf="menuItem?.count > 1" class="btn btn-action btn-sm" (click)="decreseOrderCount(menuItem)">-</button>
-        <i *ngIf="menuItem.count == 0" class="fas text-main fa-shopping-cart" (click)="increaseOrderCount(menuItem)"></i>
-        <i *ngIf="menuItem.count == 1" class="fas text-main-danger fa-trash" (click)="decreseOrderCount(menuItem)"></i>
-        <span *ngIf="menuItem?.count > 0" class="cart-count">{{menuItem?.count}}</span>
-        <button *ngIf="menuItem?.count > 0 && menuItem?.count < 4" class="btn btn-action btn-sm" (click)="increaseOrderCount(menuItem)">+</button>
-        <!-- </ng-template> -->
-      </td>
-      <td class="menu-table-items-price">
-        {{menuItem.price * menuItem.count}}
-        <span class="menu-table-items-price-unit">EGP</span>
-      </td>
-    </tr>
-  </ng-container>
-  <!-- <tr class="menu-table-items">
+          <!-- <ng-template #itemCount> -->
+          <button *ngIf="menuItem?.count > 1" class="btn btn-action btn-sm"
+            (click)="decreseOrderCount(menuItem)">-</button>
+          <i *ngIf="menuItem.count == 0" class="fas text-main fa-shopping-cart"
+            (click)="increaseOrderCount(menuItem)"></i>
+          <i *ngIf="menuItem.count == 1" class="fas text-main-danger fa-trash"
+            (click)="decreseOrderCount(menuItem)"></i>
+          <span *ngIf="menuItem?.count > 0" class="cart-count">{{menuItem?.count}}</span>
+          <button *ngIf="menuItem?.count > 0 && menuItem?.count < 4" class="btn btn-action btn-sm"
+            (click)="increaseOrderCount(menuItem)">+</button>
+          <!-- </ng-template> -->
+        </td>
+        <td class="menu-table-items-price">
+          {{menuItem.price * menuItem.count}}
+          <span class="menu-table-items-price-unit">EGP</span>
+        </td>
+      </tr>
+    </ng-container>
+    <!-- <tr class="menu-table-items">
     <th colspan="3">إجمالي السعر غير شامل التوصيل ولا الخدمة</th>
     <td class="menu-table-items-price">
       25
       <span class="menu-table-items-price-unit">EGP</span>
     </td>
   </tr> -->
-</table>
+  </table>
 
-<div class="row justify-content-end">
-  <div class="col-md-4">
-    <button class="btn btn-main w-100" [routerLink]="'/cart'">Checkout</button>
+  <div class="row justify-content-end">
+    <div class="col-md-4">
+      <button class="btn btn-main w-100" [routerLink]="'/cart'">Checkout</button>
+    </div>
   </div>
-</div>
 
-<!-- <div class="border p-2" *ngFor="let res of resturants">
+  <!-- <div class="border p-2" *ngFor="let res of resturants">
   <h6 class="d-flex justify-content-between">
     {{res?.name}}
       <span>
@@ -80,3 +85,4 @@
   </h6>
   <p class="m-0">{{res?.content}}</p>
 </div> -->
+</div>

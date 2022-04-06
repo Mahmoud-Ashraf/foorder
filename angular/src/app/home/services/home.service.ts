@@ -16,17 +16,11 @@ export class HomeService {
   }
 
   calcDateDiff(endTime = [0, 0, 0]): any {
-    const endDate = new Date(this.date.getFullYear(), this.date.getMonth(), this.date.getDate(), endTime[0], endTime[1], endTime[2]);
-    const dDay = endDate.valueOf();
-
     const milliSecondsInASecond = 1000;
     const hoursInADay = 24;
     const minutesInAnHour = 60;
     const secondsInAMinute = 60;
-
-    // console.log('end date:', dDay, 'from date:', this.calcTime(2).getTime());
-    const timeDifference = dDay - this.calcTime(2).getTime();
-    // console.log('time diff', timeDifference);
+    const timeDifference = this.calcDateDiffInMs(endTime);
     if (timeDifference > 0) {
       // const daysToDday = Math.floor(
       //   timeDifference /
@@ -49,7 +43,6 @@ export class HomeService {
       if (secondsToDday < 10) {
         secondsToDday = '0' + secondsToDday;
       }
-      // console.log('days ref', daysToDday);
       return {
         secondsToDday,
         minutesToDday,
@@ -57,7 +50,7 @@ export class HomeService {
         // daysToDday
       };
     } else {
-      this.showPollSubject.next(false);
+      // this.showPollSubject.next(false);
       return {
         secondsToDday: '00',
         minutesToDday: '00',
@@ -65,6 +58,13 @@ export class HomeService {
         // daysToDday: '00'
       };
     }
+  }
+
+  calcDateDiffInMs(endTime = [0, 0, 0]) {
+    const endDate = new Date(this.date.getFullYear(), this.date.getMonth(), this.date.getDate(), endTime[0], endTime[1], endTime[2]);
+    const dDay = endDate.valueOf();
+    const timeDifference = dDay - this.calcTime(2).getTime();
+    return timeDifference;
   }
 
   calcTime(offset: any): Date {

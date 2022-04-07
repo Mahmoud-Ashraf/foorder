@@ -24,6 +24,17 @@ export class OrderService {
     // .then(resData => console.log('get response', resData))
     // .catch(err => console.log(err));
   }
+  getOrdersPerUser(userId: string) {
+    return this.requests.getApi(`userOrders/${userId}`);
+    // .then(res => {
+    //   if (res.status !== 200) {
+    //     throw new Error('Faild To Fetch Resturants');
+    //   }
+    //   return res.json();
+    // })
+    // .then(resData => console.log('get response', resData))
+    // .catch(err => console.log(err));
+  }
   getOrder(id: any) {
     return this.requests.getApi(`resturant/${id}`);
   }

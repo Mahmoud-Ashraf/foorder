@@ -24,5 +24,7 @@ router.put("/order/:orderId",
 );
 
 router.delete("/order/:orderId", isAuth, ordersController.deleteOrder);
+router.get('/userOrders/:userId', isAuth, ordersController.getUserOrders)
+
 
 module.exports = router;

@@ -3,9 +3,10 @@ $primary: #2BB58B;
 $nav-link-font-size: 2.4rem;
 $nav-link-font-weight: 500;
 $red: #c0392b;
-$theme-colors: (
+$custom-colors: (
   "action": #FFC233
 );
+$theme-colors: map-merge($theme-colors, $custom-colors);
 
 // My Variables
 

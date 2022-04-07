@@ -1,1 +1,11 @@
-<p>profile works!</p>
+<div class="row">
+    <div class="col-4" *ngFor="let order of orders">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{order?.resturantId?.name}}</h5>
+                <p class="card-text">{{order?.createdAt | date: 'dd/MM/yyyy | hh:mm'}}</p>
+                <a href="#" class="btn btn-primary">Order Total: {{order?.totalOrderPrice}}</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,3 +1,4 @@
+import { ProfileComponent } from './shared/components/profile/profile.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { QuicklinkStrategy } from 'ngx-quicklink';
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard] },
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
   { path: 'wallet', component: WalletComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: '**', component: NotFoundComponent }
 ];
 

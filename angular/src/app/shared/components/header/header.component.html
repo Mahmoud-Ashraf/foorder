@@ -1,7 +1,7 @@
 <header class="header" *ngIf="userIsAuthenticated">
   <div class="header-container">
     <div class="user">
-      <span class="user-welcome"><i class="fas fa-user user-welcome--icon"></i> welcome,
+      <span class="user-welcome" (click)="navigate('/profile')"><i class="fas fa-user user-welcome--icon"></i> welcome,
         {{loggedUser?.name}}</span>
     </div>
     <div class="links">

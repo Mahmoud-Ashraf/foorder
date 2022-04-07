@@ -151,11 +151,41 @@ exports.deleteOrder = (req, res, next) => {
 
 exports.getAllOrder = (req, res, next) => {
   const orderId = req.params.orderId;
-  Order.
-  findById(orderId).
-  populate('items').
-  exec(function (err, order) {
-    if (err) return handleError(err);
-    console.log('The order is', order);
-  });
+  Order
+    .findById(orderId)
+    .populate('items')
+    .exec(function (err, order) {
+      if (err) return handleError(err);
+      console.log('The order is', order);
+    });
+}
+
+exports.getUserOrders = (req, res, next) => {
+  const userId = req.params.userId;
+  Order.find({ userId: userId })
+    .populate('resturantId', 'name')
+    // .populate(['resturantId', 'items'])
+    // .populate('orders')
+    // // .exec(function (err, user) {
+    // //     if (err) return handleError(err);
+    // //     console.log('The user orders is', user.orders);
+    // //     res.status(200).json(user.orders)
+    // // })
+    .populate('items', 'name')
+    .then(orders => {
+      // if (!user) {
+      //     const error = new Error('Could not find a user');
+      //     error.statusCode = 404;
+      //     throw error;
+      // }
+      res
+        .status(200)
+        .json(orders);
+    })
+    .catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    })
 }

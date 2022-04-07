@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
 
   getuserOrders() {
     const loggedUserId = localStorage.getItem('loggedUserId');
-    if(loggedUserId) {
+    if (loggedUserId) {
       this.orderService.getOrdersPerUser(loggedUserId).subscribe(userOrders => {
         this.orders = userOrders;
       });

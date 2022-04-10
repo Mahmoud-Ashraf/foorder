@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { HomeService } from './../../services/home.service';
 import { AuthService } from './../../../shared/services/auth.service';
 import { OrderService } from './../../../shared/services/order.service';
@@ -18,16 +19,22 @@ export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
   todayResturant: any;
   todayResturantMenu: any;
   orderEndTime: number[] = [23, 50, 0];
-  order: any;
+  order = {
+    userId: '',
+    resturantId: '',
+    items: [],
+    totalOrderPrice: 0,
+  };
   showResturantDetails: boolean = false;
   countDownTimer: any;
-
+  disableTodayResturant: boolean;
   constructor(
     private resturantsService: ResturantsService,
     private menuService: MenuService,
     private orderService: OrderService,
     private authService: AuthService,
-    private homeService: HomeService
+    private homeService: HomeService,
+    private router: Router
   ) {
   }
 
@@ -35,11 +42,18 @@ export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
     this.resturantsService.setTodayResturant();
     this.getTodayResturant();
     this.showHideDependOnCountDown();
+    this.homeService.getDisableResturantDetails().subscribe(disableOrdering => {
+      console.log(disableOrdering);
+      this.disableTodayResturant = disableOrdering;
+    })
   }
   getMenu() {
     this.menuService.getMenu(this.todayResturant._id).subscribe((menu: any) => {
       // console.log('menu before', menu);
-      this.todayResturantMenu = menu.menu.map((menuItem: any) => ({ ...menuItem, count: 0 }));
+      menu.menu.forEach((menuItem: any) => {
+        menuItem.count = 0;
+      });
+      this.todayResturantMenu = menu.menu;
       // console.log('menu after', this.todayResturantMenu);
     })
   }
@@ -47,53 +61,71 @@ export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
   private getTodayResturant() {
     this.resturantsService.getToDayResturantListner().subscribe(todayResturant => {
       this.todayResturant = todayResturant;
-      let jsonOrder = localStorage.getItem('order');
-      // console.log('today resturant', this.todayResturant);
-      if (jsonOrder) {
-        this.getCurrentOrder();
-      } else {
+      // let jsonOrder = localStorage.getItem('order');
+      // // console.log('today resturant', this.todayResturant);
+      // if (jsonOrder) {
+      //   this.getCurrentOrder();
+      // } else {
         this.getMenu();
-      }
+      // }
     })
   }
 
-  private getCurrentOrder() {
-    let jsonOrder = localStorage.getItem('order');
-    let order;
-    if (jsonOrder) {
-      order = JSON.parse(jsonOrder);
-      this.todayResturantMenu = order.items;
-    }
-    // this.order.items = this.order.items.filter((menuItem: any) => menuItem.count > 0);
-    // this.getTotalOrderPrice();
-  }
+  // private getCurrentOrder() {
+  //   let jsonOrder = localStorage.getItem('order');
+  //   let order;
+  //   if (jsonOrder) {
+  //     order = JSON.parse(jsonOrder);
+  //     this.todayResturantMenu = order.items;
+  //   }
+  //   // this.order.items = this.order.items.filter((menuItem: any) => menuItem.count > 0);
+  //   // this.getTotalOrderPrice();
+  // }
 
   private showHideDependOnCountDown() {
     const timeTillOrderEnd = this.homeService.calcDateDiffInMs(this.orderEndTime);
     if (timeTillOrderEnd > 0) {
       this.showResturantDetails = true;
       this.countDownTimer = setTimeout(() => {
-        this.showResturantDetails = false;
+        this.resetTodayResturant();
       }, timeTillOrderEnd);
+    } else {
+      this.resetTodayResturant();
     }
   }
 
-  increaseOrderCount(menuItem: any) {
-    menuItem.count +=1
-    this.editCartItems();
+  addItemToCart(menuItem: any) {
+    menuItem.count = 1;
+    // this.editCartItems();
   }
   
-  decreseOrderCount(menuItem: any) {
-    menuItem.count -=1
-    this.editCartItems();
+  removeItemFromCart(menuItem: any) {
+    menuItem.count = 0;
+    // this.editCartItems();
   }
 
-  editCartItems() {
-    // this.order.items = this.todayResturantMenu.filter((menuItem: any) => menuItem.count > 0);
-    localStorage.setItem('order', JSON.stringify({items: this.todayResturantMenu}));
-    // this.orderService.addOrder(this.order).subscribe(addedOrder => {
-    //   console.log(addedOrder);
-    // });
+  addOrderToCart() {
+    this.getTodayOrder();
+    localStorage.setItem('order', JSON.stringify(this.order));
+    this.router.navigate(['/cart']);
+  }
+
+  // editCartItems() {
+  //   // this.order.items = this.todayResturantMenu.filter((menuItem: any) => menuItem.count > 0);
+  //   localStorage.setItem('order', JSON.stringify({items: this.todayResturantMenu}));
+  //   // this.orderService.addOrder(this.order).subscribe(addedOrder => {
+  //   //   console.log(addedOrder);
+  //   // });
+  // }
+
+  getTodayOrder() {
+    this.order.items = this.todayResturantMenu.filter((menuItem: any) => menuItem.count === 1);
+  }
+
+  private resetTodayResturant() {
+    this.showResturantDetails = false;
+    this.homeService.disableResturantDetails.next(true);
+    localStorage.removeItem('order');
   }
 
   ngOnDestroy(): void {
@@ -102,6 +134,10 @@ export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
     }
     // this.countDownTimer
   }
+
+  // pushToOrder(menuItem: any) {
+  //   this.order.items.push(menuItem);
+  // }
 
   
 }

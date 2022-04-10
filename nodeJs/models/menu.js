@@ -13,6 +13,7 @@ const menuSchema = new Schema({
     },
     count: {
         type: Number,
+        required: true
     },
     resturantId: {
         type: Schema.Types.ObjectId,

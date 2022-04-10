@@ -57,6 +57,7 @@ exports.addOrder = (req, res, next) => {
     error.statusCode = 422;
     throw error;
   }
+  let addedOrder;
   const order = new Order({
     userId: req.body.userId,
     resturantId: req.body.resturantId,
@@ -64,12 +65,16 @@ exports.addOrder = (req, res, next) => {
     totalOrderPrice: req.body.totalOrderPrice
   });
   order.save()
-    .then(order => {
+  .then(order => {
+      return order.populate('items');
       // let order = req.body;
       // order.id = new Date().toISOString();
       // Create order in db
       // 201 status code means created in db
       // 200 status code means just success
+    })
+    .then(populatedOrder => {
+      addedOrder = populatedOrder;
       return User.findById(req.body.userId);
     })
     .then(user => {
@@ -79,7 +84,7 @@ exports.addOrder = (req, res, next) => {
     .then(result => {
       res.status(201).json({
         message: "order added successfully",
-        order: order,
+        order: addedOrder,
       });
     })
     .catch(err => {
@@ -165,22 +170,26 @@ exports.getUserOrders = (req, res, next) => {
   Order.find({ userId: userId })
     .populate('resturantId', 'name')
     // .populate(['resturantId', 'items'])
-    // .populate('orders')
-    // // .exec(function (err, user) {
-    // //     if (err) return handleError(err);
-    // //     console.log('The user orders is', user.orders);
-    // //     res.status(200).json(user.orders)
-    // // })
-    .populate('items', 'name')
+    .populate('items')
     .then(orders => {
-      // if (!user) {
-      //     const error = new Error('Could not find a user');
-      //     error.statusCode = 404;
-      //     throw error;
-      // }
+      let updatedOrders = [];
+      orders.forEach(order => {
+        let updatedOrder = order;
+        let orderItems = [];
+        order.items.forEach(item => {
+          if (orderItems?.some(orderItem => item._id === orderItem._id)) {
+            orderItems[orderItems.findIndex(orderItem => item._id === orderItem._id)].count += 1;
+          } else {
+            item.count = 1;
+            orderItems.push(item);
+          }
+        })
+        updatedOrder.items = orderItems;
+        updatedOrders.push(updatedOrder);
+      })
       res
         .status(200)
-        .json(orders);
+        .json(updatedOrders);
     })
     .catch(err => {
       if (!err.statusCode) {

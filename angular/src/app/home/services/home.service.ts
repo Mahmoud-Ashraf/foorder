@@ -1,19 +1,14 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
-  public showPollSubject: BehaviorSubject<boolean>;
-  public showPoll: Observable<boolean>;
-  // voteEnd = [17, 0, 0];
   timeLeft: Observable<any>;
   date = this.calcTime(2);
-  constructor() {
-    this.showPollSubject = new BehaviorSubject<boolean>(true);
-    this.showPoll = this.showPollSubject.asObservable();
-  }
+  disableResturantDetails = new Subject<boolean>();
+  constructor() { }
 
   calcDateDiff(endTime = [0, 0, 0]): any {
     const milliSecondsInASecond = 1000;
@@ -79,6 +74,10 @@ export class HomeService {
     const nd = new Date(utc + (3600000 * offset));
     // return new adjusted date
     return nd;
+  }
+
+  getDisableResturantDetails() {
+    return this.disableResturantDetails.asObservable();
   }
 
 

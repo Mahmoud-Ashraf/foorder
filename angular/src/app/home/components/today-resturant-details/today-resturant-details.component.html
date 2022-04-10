@@ -1,4 +1,4 @@
-<div *ngIf="showResturantDetails">
+<div *ngIf="showResturantDetails" [ngStyle]="{'pointer-events':disableTodayResturant ? 'none' : 'auto' }">
   <p class="today-resturant row">
     <span class="col-auto resturant-welcome">Restaurant of the Day</span>
     <span class="col text-center resturant-brand">{{todayResturant?.name}}</span>
@@ -42,21 +42,21 @@
             class="fas fa-shopping-cart"></i> Add to
           cart</button> -->
           <!-- <ng-template #itemCount> -->
-          <button *ngIf="menuItem?.count > 1" class="btn btn-action btn-sm"
-            (click)="decreseOrderCount(menuItem)">-</button>
+          <!-- <button *ngIf="menuItem?.count > 1" class="btn btn-action btn-sm"
+            (click)="decreseOrderCount(menuItem)">-</button> -->
           <i *ngIf="menuItem.count == 0" class="fas text-main fa-shopping-cart"
-            (click)="increaseOrderCount(menuItem)"></i>
+            (click)="addItemToCart(menuItem)"></i>
           <i *ngIf="menuItem.count == 1" class="fas text-main-danger fa-trash"
-            (click)="decreseOrderCount(menuItem)"></i>
-          <span *ngIf="menuItem?.count > 0" class="cart-count">{{menuItem?.count}}</span>
+            (click)="removeItemFromCart(menuItem)"></i>
+          <!-- <span *ngIf="menuItem?.count > 0" class="cart-count">{{menuItem?.count}}</span>
           <button *ngIf="menuItem?.count > 0 && menuItem?.count < 4" class="btn btn-action btn-sm"
-            (click)="increaseOrderCount(menuItem)">+</button>
+            (click)="increaseOrderCount(menuItem)">+</button> -->
           <!-- </ng-template> -->
         </td>
-        <td class="menu-table-items-price">
+        <!-- <td class="menu-table-items-price">
           {{menuItem.price * menuItem.count}}
           <span class="menu-table-items-price-unit">EGP</span>
-        </td>
+        </td> -->
       </tr>
     </ng-container>
     <!-- <tr class="menu-table-items">
@@ -70,7 +70,7 @@
 
   <div class="row justify-content-end">
     <div class="col-md-4">
-      <button class="btn btn-main w-100" [routerLink]="'/cart'">Checkout</button>
+      <button class="btn btn-main w-100" (click)="addOrderToCart()">Checkout</button>
     </div>
   </div>
 

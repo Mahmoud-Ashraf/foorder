@@ -3,8 +3,10 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{order?.resturantId?.name}}</h5>
-                <p class="card-text">{{order?.createdAt | date: 'dd/MM/yyyy | hh:mm'}}</p>
-                <a href="#" class="btn btn-primary">Order Total: {{order?.totalOrderPrice}}</a>
+                <!-- <p class="card-text">{{order?.createdAt | date: 'dd/MM/yyyy | hh:mm'}}</p> -->
+                <p class="card-text" *ngFor="let item of order?.items">{{item.count}}× {{item.name}}</p>
+
+                <a href="#" class="btn btn-primary">Total Order Price: {{order?.totalOrderPrice}}</a>
             </div>
         </div>
     </div>

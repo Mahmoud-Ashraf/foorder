@@ -1,3 +1,4 @@
+import { HomeService } from './../../../home/services/home.service';
 import { OrderService } from './../../services/order.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,20 +10,21 @@ import { Component, OnInit } from '@angular/core';
 export class CartComponent implements OnInit {
   order: any;
   constructor(
-    private orderService: OrderService
+    private orderService: OrderService,
+    private homeService: HomeService
   ) { }
   ngOnInit(): void {
     this.getCurrentOrder();
   }
 
-  private getCurrentOrder() {
+  getCurrentOrder() {
     let jsonOrder = localStorage.getItem('order');
     if (jsonOrder) {
       this.order = JSON.parse(jsonOrder);
+      // this.order.items = this.order?.items.filter((menuItem: any) => menuItem.count > 0);
+      this.getTotalOrderPrice();
     }
     // console.log('order before filter', this.order);
-    this.order.items = this.order?.items.filter((menuItem: any) => menuItem.count > 0);
-    this.getTotalOrderPrice();
   }
 
   increaseOrderCount(menuItem: any) {
@@ -38,16 +40,40 @@ export class CartComponent implements OnInit {
   editCartItems() {
     this.order.items = this.order.items.filter((item: any) => item.count > 0);
     this.getTotalOrderPrice();
-    localStorage.setItem('order', JSON.stringify(this.order));
+    // localStorage.setItem('order', JSON.stringify(this.order));
   }
 
   addOrder() {
     this.setUserAndResturantToOrder();
     // console.log('order before add', this.order);
+    // let orderToAdd: {
+    //   userId: string,
+    //   resturantId: string,
+    //   totalOrderPrice: number,
+    //   items: any[]
+    // };
+    // orderToAdd = {
+    //   userId: '',
+    //   resturantId: '',
+    //   totalOrderPrice: 0,
+    //   items: []
+    // };
+    // orderToAdd.userId = this.order.userId;
+    // orderToAdd.resturantId = this.order.resturantId;
+    // orderToAdd.totalOrderPrice = this.order.totalOrderPrice;
+    // this.order.items.forEach((orderItem: any) => {
+    //   let count = orderItem.count;
+    //   for (let i = 0; i < count; i++) {
+    //     orderItem.count = 1;
+    //     orderToAdd.items.push(orderItem);
+    //   }
+    // });
+    console.log(this.order);
     this.orderService.addOrder(this.order).subscribe(addedOrder => {
       console.log(addedOrder);
       localStorage.removeItem('order');
       this.order.items = [];
+      this.homeService.disableResturantDetails.next(true);
     });
   }
 

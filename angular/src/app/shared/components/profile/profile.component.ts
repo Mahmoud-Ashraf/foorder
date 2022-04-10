@@ -16,9 +16,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getuserOrders();
-    this.authService.getAuthUserListner().subscribe((user: any) => {
-      this.getuserOrders()
-    })
+    // this.authService.getAuthUserListner().subscribe((user: any) => {
+    //   this.getuserOrders()
+    // })
   }
 
   getuserOrders() {
@@ -26,6 +26,8 @@ export class ProfileComponent implements OnInit {
     if (loggedUserId) {
       this.orderService.getOrdersPerUser(loggedUserId).subscribe(userOrders => {
         this.orders = userOrders;
+        // const uniqeOrder = new Set(this.orders.items);
+        // console.log(this.orders);
       });
     }
   }

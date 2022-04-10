@@ -8,11 +8,12 @@ exports.getMenu = (req, res, next) => {
     let perPage = req.query.perPage || 2;
     const resturantId = req.params.resturantId;
     let totalItems;
-    Menu.find({ resturantId: resturantId })
-        .then(menu => {
+    Resturant.findById(resturantId)
+    .populate('menu')
+        .then(resturant => {
             res
                 .status(200)
-                .json({ message: 'menu fetched', menu: menu, });
+                .json({ message: 'menu fetched', menu: resturant.menu });
         })
         .catch(err => {
             if (!err.statusCode) {
@@ -59,7 +60,7 @@ exports.addMenuItem = (req, res, next) => {
     }
     const name = req.body.name;
     const price = req.body.price;
-    const count = req.body.count;
+    // const count = req.body.count;
     // const resturant = req.body.resturantId;
     console.log(req);
     let joinResturant;
@@ -67,7 +68,8 @@ exports.addMenuItem = (req, res, next) => {
     const menuItem = new Menu({
         name: name,
         price: price,
-        resturantId: req.body.resturantId
+        resturantId: req.body.resturantId,
+        // count: 0
     });
     menuItem.save()
         .then(menuItem => {

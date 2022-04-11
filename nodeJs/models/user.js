@@ -30,6 +30,10 @@ const userSchema = new Schema({
     todayOrder: {
         type: Schema.Types.ObjectId,
         ref: 'Order'
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
     }
 }
 );

@@ -6,6 +6,7 @@
     </div>
     <div class="links">
       <ul class="links-list">
+        <li *ngIf="loggedUser?.isAdmin"><a (click)="navigate('/admin')"><i class="fas fa-users-cog fa-2x"></i></a></li>
         <li><a (click)="navigate('/cart')"><i class="fas fa-shopping-cart fa-2x"></i></a></li>
         <li><a (click)="navigate('/wallet')"><i class="fas fa-wallet fa-2x"></i></a></li>
         <li><a (click)="navigate('/home')"><i class="fas fa-home fa-2x"></i></a></li>

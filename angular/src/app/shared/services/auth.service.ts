@@ -13,6 +13,7 @@ export class AuthService {
   private authStatusListener = new Subject<boolean>();
   private isAuthenticated = false;
   private loggedUser = new Subject();
+  private isAdmin = false;
   tokenTimer: any;
   constructor(
     private requests: RequestsService,
@@ -29,6 +30,7 @@ export class AuthService {
         this.isAuthenticated = true;
         this.authStatusListener.next(true);
         this.loggedUser.next(response.user);
+        this.isAdmin = response.user.isAdmin;
         const expirationDate = new Date(new Date().getTime() + expiresInDuration * 1000);
         console.log(expirationDate);
         this.saveAuthData(token, expirationDate, loggedUserId);
@@ -56,6 +58,7 @@ export class AuthService {
         this.isAuthenticated = true;
         this.authStatusListener.next(true);
         this.loggedUser.next(response.user);
+        this.isAdmin = response.user.isAdmin;
         const expirationDate = new Date(new Date().getTime() + expiresInDuration * 1000);
         console.log(expirationDate);
         this.saveAuthData(token, expirationDate, loggedUserId);
@@ -96,6 +99,10 @@ export class AuthService {
 
   getIsAuth() {
     return this.isAuthenticated;
+  }
+
+  getIsAdmin() {
+    return this.isAdmin;
   }
 
   getAuthUserListner() {
@@ -165,8 +172,9 @@ export class AuthService {
   }
 
   private setAuthUser(userId: string) {
-    this.requests.getApi(`auth/user/${userId}`).subscribe(user => {
+    this.requests.getApi(`auth/user/${userId}`).subscribe((user: any) => {
       this.loggedUser.next(user);
+      this.isAdmin = user.isAdmin;
     })
   }
 

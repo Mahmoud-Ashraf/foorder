@@ -1,3 +1,4 @@
+import { AdminGuard } from './guards/admin.guards';
 import { ProfileComponent } from './shared/components/profile/profile.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -10,7 +11,7 @@ import { WalletComponent } from './shared/components/wallet/wallet.component';
 const routes: Routes = [
   // { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
-  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate: [AuthGuard] },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate: [AuthGuard, AdminGuard] },
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard] },
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
   { path: 'wallet', component: WalletComponent, canActivate: [AuthGuard] },
@@ -24,7 +25,7 @@ const routes: Routes = [
       { preloadingStrategy: QuicklinkStrategy })
   ],
   exports: [RouterModule],
-  providers: [AuthGuard]
+  providers: [AuthGuard, AdminGuard]
 })
 
 export class AppRoutingModule { }

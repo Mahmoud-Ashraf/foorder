@@ -90,6 +90,7 @@ export class PollComponent implements OnInit, OnDestroy {
   }
 
   getUser() {
+    this.currentUser = this.authService.getLoggedUser();
     this.getUserSub = this.authService.getAuthUserListner().subscribe(user => {
       this.currentUser = user;
       // console.log('get current User', this.currentUser);

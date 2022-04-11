@@ -12,7 +12,8 @@ export class AuthService {
   private token: string | null;
   private authStatusListener = new Subject<boolean>();
   private isAuthenticated = false;
-  private loggedUser = new Subject();
+  private loggedUser: any = undefined;
+  private loggedUserListener = new Subject();
   private isAdmin = false;
   tokenTimer: any;
   constructor(
@@ -28,9 +29,10 @@ export class AuthService {
         const expiresInDuration = response.expiresIn;
         this.setAuthTimer(expiresInDuration);
         this.isAuthenticated = true;
+        this.loggedUser = response.user;
         this.authStatusListener.next(true);
-        this.loggedUser.next(response.user);
-        this.isAdmin = response.user.isAdmin;
+        this.loggedUserListener.next(response.user);
+        // this.isAdmin = response.user.isAdmin;
         const expirationDate = new Date(new Date().getTime() + expiresInDuration * 1000);
         console.log(expirationDate);
         this.saveAuthData(token, expirationDate, loggedUserId);
@@ -56,8 +58,9 @@ export class AuthService {
         const expiresInDuration = response.expiresIn;
         this.setAuthTimer(expiresInDuration);
         this.isAuthenticated = true;
+        this.loggedUser = response.user;
         this.authStatusListener.next(true);
-        this.loggedUser.next(response.user);
+        this.loggedUserListener.next(response.user);
         this.isAdmin = response.user.isAdmin;
         const expirationDate = new Date(new Date().getTime() + expiresInDuration * 1000);
         console.log(expirationDate);
@@ -100,13 +103,16 @@ export class AuthService {
   getIsAuth() {
     return this.isAuthenticated;
   }
+  getLoggedUser() {
+    return this.loggedUser;
+  }
 
   getIsAdmin() {
     return this.isAdmin;
   }
 
   getAuthUserListner() {
-    return this.loggedUser.asObservable();
+    return this.loggedUserListener.asObservable();
   }
 
   autoAuthUser() {
@@ -128,8 +134,9 @@ export class AuthService {
   logout(): void {
     this.token = null;
     this.isAuthenticated = false;
+    this.loggedUser = undefined;
     this.authStatusListener.next(false);
-    this.loggedUser.next(null);
+    this.loggedUserListener.next(null);
     clearTimeout(this.tokenTimer);
     // this.clearAuthData();
     localStorage.clear();
@@ -173,7 +180,8 @@ export class AuthService {
 
   private setAuthUser(userId: string) {
     this.requests.getApi(`auth/user/${userId}`).subscribe((user: any) => {
-      this.loggedUser.next(user);
+      this.loggedUser = user;
+      this.loggedUserListener.next(user);
       this.isAdmin = user.isAdmin;
     })
   }

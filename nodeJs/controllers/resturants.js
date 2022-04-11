@@ -8,10 +8,10 @@ exports.getResturants = (req, res, next) => {
   Resturant.find().countDocuments()
     .then(count => {
       if (perPage == 0) {
-        console.log('not per page');
+        // console.log('not per page');
         perPage = count;
       }
-      console.log('perPage =', perPage);
+      // console.log('perPage =', perPage);
       totalItems = count;
       return Resturant.find()
         .skip((currentPage - 1) * perPage)
@@ -38,7 +38,7 @@ exports.getToDayResturant = (req, res, next) => {
     .sort('-vote')
     .exec((err, doc) => {
       // let max = doc.vote;
-      console.log('max', doc);
+      // console.log('max', doc);
       // if (!doc) {
       //   const error = new Error('Could not find a resturant');
       //   error.statusCode = 404;
@@ -62,7 +62,7 @@ exports.getToDayResturant = (req, res, next) => {
   //   })
 };
 exports.getResturant = (req, res, next) => {
-  console.log(req.params.resturantId);
+  // console.log(req.params.resturantId);
   const resturantId = req.params.resturantId;
   Resturant.findById(resturantId)
     .then(resturant => {
@@ -71,7 +71,7 @@ exports.getResturant = (req, res, next) => {
         error.statusCode = 404;
         throw error;
       }
-      console.log('mahmoud', resturant)
+      // console.log('mahmoud', resturant)
       res
         .status(200)
         .json(resturant);

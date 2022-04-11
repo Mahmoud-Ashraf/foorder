@@ -24,7 +24,7 @@ exports.getMenu = (req, res, next) => {
 };
 
 exports.getMenuItem = (req, res, next) => {
-    console.log(req.params.menuItemId);
+    // console.log(req.params.menuItemId);
     const menuItemId = req.params.menuItemId;
     Menu.findById(menuItemId)
         .then(menuItem => {
@@ -33,7 +33,7 @@ exports.getMenuItem = (req, res, next) => {
                 error.statusCode = 404;
                 throw error;
             }
-            console.log('mahmoud', menuItem)
+            // console.log('mahmoud', menuItem)
             res
                 .status(200)
                 .json(menuItem);
@@ -46,7 +46,7 @@ exports.getMenuItem = (req, res, next) => {
 };
 
 exports.addMenuItem = (req, res, next) => {
-    console.log('menu request', req);
+    // console.log('menu request', req);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         const error = new Error('Validation Faild, Enter data in correct format');
@@ -62,7 +62,7 @@ exports.addMenuItem = (req, res, next) => {
     const price = req.body.price;
     // const count = req.body.count;
     // const resturant = req.body.resturantId;
-    console.log(req);
+    // console.log(req);
     let joinResturant;
 
     const menuItem = new Menu({
@@ -81,7 +81,7 @@ exports.addMenuItem = (req, res, next) => {
             return Resturant.findById(req.body.resturantId);
         })
         .then(resturant => {
-            console.log('resturaaaaant', resturant);
+            // console.log('resturaaaaant', resturant);
             joinResturant = resturant;
             resturant.menu.push(menuItem);
             return resturant.save();

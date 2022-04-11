@@ -1,8 +1,9 @@
 export interface Order {
-  id?: string;
-  userId?: string | undefined;
-  resturantId?: string | undefined;
-  date?: number;
-  order?: any[];
-
+  _id?: string;
+  userId: any;
+  resturantId: any;
+  // date?: number;
+  items: any[];
+  totalOrderPrice?: Number,
+  createdOn: string
 }

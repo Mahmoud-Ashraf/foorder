@@ -80,6 +80,9 @@ export class AuthService {
     // }));
   }
 
+  getUsers(page: number = 1, perPage: number = 0) {
+    return this.requests.getApi(`auth/users?page=${page}&perPage=${perPage}`);
+  }
   updateUser(userId: any, user: any) {
     return this.requests.putApi(`auth/user/${userId}`, user);
   }

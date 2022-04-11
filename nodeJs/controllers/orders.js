@@ -28,7 +28,7 @@ exports.getOrders = (req, res, next) => {
 };
 
 exports.getOrder = (req, res, next) => {
-  console.log(req.params.orderId);
+  // console.log(req.params.orderId);
   const orderId = req.params.orderId;
   Order.findById(orderId)
     .then(order => {
@@ -37,7 +37,7 @@ exports.getOrder = (req, res, next) => {
         error.statusCode = 404;
         throw error;
       }
-      console.log('mahmoud', order)
+      // console.log('mahmoud', order)
       res
         .status(200)
         .json(order);
@@ -50,7 +50,8 @@ exports.getOrder = (req, res, next) => {
 };
 
 exports.addOrder = (req, res, next) => {
-  console.log('order req', req);
+  // console.log('order req', req);
+  console.log(new Date().getFullYear() + '-' + new Date().getMonth() + '-' + new Date().getDate());
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const error = new Error('Validation Faild, Enter data in correct format');
@@ -62,10 +63,21 @@ exports.addOrder = (req, res, next) => {
     userId: req.body.userId,
     resturantId: req.body.resturantId,
     items: req.body.items,
-    totalOrderPrice: req.body.totalOrderPrice
+    totalOrderPrice: req.body.totalOrderPrice,
+    createdOn: new Date().getFullYear() + '-' + new Date().getMonth() + '-' + new Date().getDate()
   });
-  order.save()
-  .then(order => {
+  // console.log(order);
+  Order.find({ userId: req.body.userId, createdOn: new Date().getFullYear() + '-' + new Date().getMonth() + '-' + new Date().getDate() })
+    .then(orders => {
+      console.log(orders);
+      if (orders.length > 0) {
+        const error = new Error('You already have an order today');
+        error.statusCode = 404;
+        throw error;
+      }
+      return order.save();
+    })
+    .then(order => {
       return order.populate('items');
       // let order = req.body;
       // order.id = new Date().toISOString();
@@ -161,7 +173,7 @@ exports.getAllOrder = (req, res, next) => {
     .populate('items')
     .exec(function (err, order) {
       if (err) return handleError(err);
-      console.log('The order is', order);
+      // console.log('The order is', order);
     });
 }
 
@@ -190,6 +202,28 @@ exports.getUserOrders = (req, res, next) => {
       res
         .status(200)
         .json(updatedOrders);
+    })
+    .catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    })
+}
+
+exports.getTodayOrders = (req, res, next) => {
+  Order.find({ createdOn: new Date().getFullYear() + '-' + new Date().getMonth() + '-' + new Date().getDate() })
+    .populate(['resturantId', 'userId', 'items'])
+    .then(todayorders => {
+      console.log(todayorders);
+      if (!todayorders) {
+        const error = new Error('Could not find any orders');
+        error.statusCode = 404;
+        throw error;
+      }
+      res
+        .status(200)
+        .json({ orders: todayorders, resturant: todayorders[0].resturantId });
     })
     .catch(err => {
       if (!err.statusCode) {

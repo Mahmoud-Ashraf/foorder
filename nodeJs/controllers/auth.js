@@ -59,6 +59,7 @@ exports.login = (req, res, next) => {
     const password = req.body.password;
     let loadedUser;
     User.findOne({ email: email })
+        .populate('orders')
         .then(user => {
             if (!user) {
                 const error = new Error('A user with this email could not be found');
@@ -86,6 +87,11 @@ exports.login = (req, res, next) => {
                 'somesupersecretjwtsecretjwt',
                 { expiresIn: '1h' }
             );
+            loadedUser.todayOrder  = loadedUser.orders.reduce((prev, current) => {
+                return (new Date(prev.createdAt)  > new Date(current.createdAt) ) ? prev : current
+            }) //returns object
+            // console.log(loadedUser);
+            // loadedUser.todayOrder = Math.max.apply(Math, array.map((o) =>  o.createdAt ))
             res.status(200).json({
                 token: token,
                 expiresIn: 3600, // duration in seconds when it will expire
@@ -100,13 +106,42 @@ exports.login = (req, res, next) => {
             next(err);
         })
 }
-
+exports.getUsers = (req, res, next) => {
+    const currentPage = req.query.page || 1;
+    let perPage = req.query.perPage || 2;
+    let totalItems;
+    User.find().countDocuments()
+      .then(count => {
+        if (perPage == 0) {
+          // console.log('not per page');
+          perPage = count;
+        }
+        // console.log('perPage =', perPage);
+        totalItems = count;
+        return User.find()
+          .skip((currentPage - 1) * perPage)
+          .limit(perPage);
+      })
+      .then(users => {
+        res
+          .status(200)
+          .json({ message: 'Users fetched', users: users, totalItems: totalItems, perPage: perPage, currentPage: currentPage });
+      })
+      .catch(err => {
+        if (!err.statusCode) {
+          err.statusCode = 500;
+        }
+        next(err);
+      })
+  
+  };
+  
 exports.getUser = (req, res, next) => {
-    console.log(req.params.userId);
+    // console.log(req.params.userId);
     const userId = req.params.userId;
     User.findById(userId)
         .then(user => {
-            console.log('mahmoud', user);
+            // console.log('mahmoud', user);
             if (!user) {
                 const error = new Error('Could not find a user');
                 error.statusCode = 404;

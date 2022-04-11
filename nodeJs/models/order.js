@@ -20,6 +20,10 @@ const orderSchema = new Schema({
     deliveryFees: {
         type: Number,
     },
+    createdOn: {
+        type: String,
+        required: true
+    },
     items: [
         {
             type: Schema.Types.ObjectId,
@@ -27,8 +31,7 @@ const orderSchema = new Schema({
             required: true
         }
     ]
-},
-    { timestamps: true }
+}
 );
 
 module.exports = mongoose.model('Order', orderSchema);

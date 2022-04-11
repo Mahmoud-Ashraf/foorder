@@ -50,7 +50,7 @@ export class OrderService {
   //   return this.requests.deleteApi(`resturant/${id}`);
   // }
 
-  getTodayOrder() {
-    return this.requests.getApi('toDayResturant');
+  getTodayOrders() {
+    return this.requests.getApi('todayOrders');
   }
 }

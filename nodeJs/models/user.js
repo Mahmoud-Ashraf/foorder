@@ -26,7 +26,11 @@ const userSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Order'
         }
-    ]
+    ],
+    todayOrder: {
+        type: Schema.Types.ObjectId,
+        ref: 'Order'
+    }
 }
 );
 // it validate for a uniqe email

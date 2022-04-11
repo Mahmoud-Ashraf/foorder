@@ -29,6 +29,7 @@ router.put("/signup",
 );
 
 router.post('/login', authController.login);
+router.get('/users', authController.getUsers);
 router.get('/user/:userId', authController.getUser);
 router.put('/user/:userId', authController.updateUser);
 

@@ -87,9 +87,11 @@ exports.login = (req, res, next) => {
                 'somesupersecretjwtsecretjwt',
                 { expiresIn: '1h' }
             );
-            loadedUser.todayOrder  = loadedUser.orders.reduce((prev, current) => {
-                return (new Date(prev.createdAt)  > new Date(current.createdAt) ) ? prev : current
-            }) //returns object
+            if (loadedUser.orders.length > 0) {
+                loadedUser.todayOrder = loadedUser.orders.reduce((prev, current) => {
+                    return (new Date(prev.createdAt) > new Date(current.createdAt)) ? prev : current
+                }) //returns object
+            }
             // console.log(loadedUser);
             // loadedUser.todayOrder = Math.max.apply(Math, array.map((o) =>  o.createdAt ))
             res.status(200).json({
@@ -111,31 +113,31 @@ exports.getUsers = (req, res, next) => {
     let perPage = req.query.perPage || 2;
     let totalItems;
     User.find().countDocuments()
-      .then(count => {
-        if (perPage == 0) {
-          // console.log('not per page');
-          perPage = count;
-        }
-        // console.log('perPage =', perPage);
-        totalItems = count;
-        return User.find()
-          .skip((currentPage - 1) * perPage)
-          .limit(perPage);
-      })
-      .then(users => {
-        res
-          .status(200)
-          .json({ message: 'Users fetched', users: users, totalItems: totalItems, perPage: perPage, currentPage: currentPage });
-      })
-      .catch(err => {
-        if (!err.statusCode) {
-          err.statusCode = 500;
-        }
-        next(err);
-      })
-  
-  };
-  
+        .then(count => {
+            if (perPage == 0) {
+                // console.log('not per page');
+                perPage = count;
+            }
+            // console.log('perPage =', perPage);
+            totalItems = count;
+            return User.find()
+                .skip((currentPage - 1) * perPage)
+                .limit(perPage);
+        })
+        .then(users => {
+            res
+                .status(200)
+                .json({ message: 'Users fetched', users: users, totalItems: totalItems, perPage: perPage, currentPage: currentPage });
+        })
+        .catch(err => {
+            if (!err.statusCode) {
+                err.statusCode = 500;
+            }
+            next(err);
+        })
+
+};
+
 exports.getUser = (req, res, next) => {
     // console.log(req.params.userId);
     const userId = req.params.userId;
@@ -167,7 +169,8 @@ exports.updateUser = (req, res, next) => {
     // }
     // const name = req.body.name;
     // const content = req.body.content;
-    const voted = req.body.voted;
+    // const voted = req.body.voted;
+    const lastVoteDate = req.body.lastVoteDate;
     User.findById(userId)
         .then(user => {
             if (!user) {
@@ -177,7 +180,8 @@ exports.updateUser = (req, res, next) => {
             }
             // user.name = name;
             // user.content = content;
-            user.voted = voted;
+            // user.voted = voted;
+            user.lastVoteDate = lastVoteDate;
             return user.save();
         })
         .then(result => {

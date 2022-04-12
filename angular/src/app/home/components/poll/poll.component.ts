@@ -47,14 +47,15 @@ export class PollComponent implements OnInit, OnDestroy {
 
   vote(): void {
     // console.log('selected before update', this.selectedResturant);
-    if (this.selectedResturant && this.currentUser && !this.currentUser.voted) {
+    if (this.selectedResturant && this.currentUser && !this.currentUser?.voted) {
       this.selectedResturant.vote += 1;
       this.currentUser.voted = true;
+      this.currentUser.lastVoteDate = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
       // console.log('selected after update', this.selectedResturant, this.currentUser);
       this.updateResturant(this.selectedResturant._id, this.selectedResturant);
       this.updateUser(this.currentUser._id, this.currentUser);
       this.getResturants();
-      this.authService.autoAuthUser();
+      // this.authService.autoAuthUser();
       this.selectedResturant = undefined;
     }
   }
@@ -72,10 +73,10 @@ export class PollComponent implements OnInit, OnDestroy {
       // this.getResturants();
     })
   }
-  private updateUser(userId: string | undefined, user: Resturant) {
+  private updateUser(userId: string | undefined, user: any) {
     this.updateUserSub = this.authService.updateUser(userId, user).subscribe(user => {
-      // console.log('updated user', user, this.currentUser);
-      this.getUser();
+      console.log('updated user', user, this.currentUser);
+      // this.getUser();
     })
   }
 
@@ -91,10 +92,20 @@ export class PollComponent implements OnInit, OnDestroy {
 
   getUser() {
     this.currentUser = this.authService.getLoggedUser();
-    this.getUserSub = this.authService.getAuthUserListner().subscribe(user => {
+    this.checkUserVote();
+    this.getUserSub = this.authService.getAuthUserListner().subscribe((user: any) => {
       this.currentUser = user;
-      // console.log('get current User', this.currentUser);
+      this.checkUserVote();
+      // this.currentUser.voted = user.lastVoteDate == new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
     })
+  }
+
+  checkUserVote() {
+    if( this.currentUser ) {
+      console.log('current before edit', this.currentUser);
+      this.currentUser.voted = this.currentUser?.lastVoteDate == new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
+      console.log('current after edit', this.currentUser);
+    }
   }
 
   ngOnDestroy(): void {

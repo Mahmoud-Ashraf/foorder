@@ -51,7 +51,7 @@ exports.getOrder = (req, res, next) => {
 
 exports.addOrder = (req, res, next) => {
   // console.log('order req', req);
-  console.log(new Date().getFullYear() + '-' + new Date().getMonth() + '-' + new Date().getDate());
+  console.log(new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate());
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const error = new Error('Validation Faild, Enter data in correct format');
@@ -64,10 +64,10 @@ exports.addOrder = (req, res, next) => {
     resturantId: req.body.resturantId,
     items: req.body.items,
     totalOrderPrice: req.body.totalOrderPrice,
-    createdOn: new Date().getFullYear() + '-' + new Date().getMonth() + '-' + new Date().getDate()
+    createdOn: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate()
   });
   // console.log(order);
-  Order.find({ userId: req.body.userId, createdOn: new Date().getFullYear() + '-' + new Date().getMonth() + '-' + new Date().getDate() })
+  Order.find({ userId: req.body.userId, createdOn: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate() })
     .then(orders => {
       console.log(orders);
       if (orders.length > 0) {
@@ -212,7 +212,7 @@ exports.getUserOrders = (req, res, next) => {
 }
 
 exports.getTodayOrders = (req, res, next) => {
-  Order.find({ createdOn: new Date().getFullYear() + '-' + new Date().getMonth() + '-' + new Date().getDate() })
+  Order.find({ createdOn: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(), resturantId: req.params.resturantId })
     .populate(['resturantId', 'userId', 'items'])
     .then(todayorders => {
       console.log(todayorders);

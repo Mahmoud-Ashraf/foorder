@@ -19,7 +19,6 @@ const userSchema = new Schema({
     },
     voted: {
         type: Boolean,
-        required: true
     },
     orders: [
         {
@@ -34,6 +33,9 @@ const userSchema = new Schema({
     isAdmin: {
         type: Boolean,
         default: false
+    },
+    lastVoteDate: {
+        type: String
     }
 }
 );

@@ -9,7 +9,7 @@ import { OrderService } from 'src/app/shared/services/order.service';
   styleUrls: ['./collected-order.component.scss']
 })
 export class CollectedOrderComponent implements OnInit {
-
+  resturantId: any;
   orders: {
     orders: Order[],
     collectedOrderPrice: number,
@@ -28,6 +28,7 @@ export class CollectedOrderComponent implements OnInit {
 
   ngOnInit(): void {
     // this.orders.collectedOrderPrice = 0;
+    this.resturantId = localStorage.getItem('toDayResturantId');
     this.getTodayOrders();
     // this.authService.getAuthUserListner().subscribe((user: any) => {
     //   this.getuserOrders()
@@ -35,13 +36,15 @@ export class CollectedOrderComponent implements OnInit {
   }
 
   getTodayOrders() {
-    this.orderService.getTodayOrders().subscribe((todayOrders: any) => {
-      console.log(todayOrders);
-      this.orders = todayOrders;
-      this.getCollectedOrderPrice();
-      // const uniqeOrder = new Set(this.orders.items);
-      // console.log(this.orders);
-    });
+    if (this.resturantId) {
+      this.orderService.getTodayOrders(this.resturantId).subscribe((todayOrders: any) => {
+        console.log(todayOrders);
+        this.orders = todayOrders;
+        this.getCollectedOrderPrice();
+        // const uniqeOrder = new Set(this.orders.items);
+        // console.log(this.orders);
+      });
+    }
   }
 
   getCollectedOrderPrice() {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ResturantsService } from '../../../../shared/services/resturants.service';
 
 @Component({
@@ -12,7 +13,10 @@ export class AddResturantComponent implements OnInit {
     content: ''
   };
   errors: any;
-  constructor(private resturantsService: ResturantsService) { }
+  constructor(
+    private resturantsService: ResturantsService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
 
@@ -29,6 +33,7 @@ export class AddResturantComponent implements OnInit {
           name: '',
           content: ''
         };
+        this.router.navigate(['admin/resturants']);
       },
       err => {
         this.errors = err.error.errors;

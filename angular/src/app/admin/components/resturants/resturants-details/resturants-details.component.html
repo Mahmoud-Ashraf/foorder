@@ -1,4 +1,4 @@
-<div *ngIf="resturants?.length > 0 else noDataFound">
+<div *ngIf="totalItems > 0 else noDataFound">
 
 </div>
 <div class="border p-2" *ngFor="let res of resturants">
@@ -16,9 +16,11 @@
 </div>
 
 <!-- Paginator -->
-<button *ngIf="currentPage <= (totalItems/perPage)" (click)="nextPage()">Next</button>
+<button *ngIf="currentPage < (totalItems/perPage)" (click)="nextPage()">Next</button>
 <button *ngIf="currentPage > 1" (click)="prevPage()">Prev</button>
 
 <ng-template #noDataFound>
   <app-no-data-found [msg]="'Sorry, No Resturants Found'"></app-no-data-found>
 </ng-template>
+
+<button class="btn btn-main" [routerLink]="'add-resturant'">Add New Resturant</button>

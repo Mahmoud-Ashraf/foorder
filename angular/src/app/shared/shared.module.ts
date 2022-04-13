@@ -14,6 +14,7 @@ import { MenuService } from './services/menu.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NetworkInterceptor } from './interceptors/network.interceptor';
 import { AuthInterceptor } from '../login/interceptors/auth.interceptor';
+import { NoDataFoundComponent } from './components/no-data-found/no-data-found.component';
 
 
 
@@ -23,7 +24,8 @@ import { AuthInterceptor } from '../login/interceptors/auth.interceptor';
     HeaderComponent,
     FooterComponent,
     NotFoundComponent,
-    LoaderComponent
+    LoaderComponent,
+    NoDataFoundComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +38,8 @@ import { AuthInterceptor } from '../login/interceptors/auth.interceptor';
     FooterComponent,
     NotFoundComponent,
     FormsModule,
-    LoaderComponent
+    LoaderComponent,
+    NoDataFoundComponent
   ],
   providers: [LoaderService, RequestsService, ResturantsService, MenuService,
     {

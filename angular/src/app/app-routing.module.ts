@@ -1,12 +1,12 @@
 import { AdminGuard } from './guards/admin.guards';
-import { ProfileComponent } from './shared/components/profile/profile.component';
+import { ProfileComponent } from './home/components/profile/profile.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { QuicklinkStrategy } from 'ngx-quicklink';
 import { AuthGuard } from './guards/auth.guards';
-import { CartComponent } from './shared/components/cart/cart.component';
+import { CartComponent } from './home/components/cart/cart.component';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
-import { WalletComponent } from './shared/components/wallet/wallet.component';
+import { WalletComponent } from './home/components/wallet/wallet.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: 'login', pathMatch: 'full' },

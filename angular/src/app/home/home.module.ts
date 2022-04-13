@@ -8,6 +8,9 @@ import { PollComponent } from './components/poll/poll.component';
 import { CountDownComponent } from './components/count-down/count-down.component';
 import { TodayResturantDetailsComponent } from './components/today-resturant-details/today-resturant-details.component';
 import { ResturantMenuComponent } from './components/resturant-menu/resturant-menu.component';
+import { CartComponent } from './components/cart/cart.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { WalletComponent } from './components/wallet/wallet.component';
 
 
 @NgModule({
@@ -17,6 +20,9 @@ import { ResturantMenuComponent } from './components/resturant-menu/resturant-me
     CountDownComponent,
     TodayResturantDetailsComponent,
     ResturantMenuComponent,
+    CartComponent,
+    ProfileComponent,
+    WalletComponent
   ],
   imports: [
     CommonModule,

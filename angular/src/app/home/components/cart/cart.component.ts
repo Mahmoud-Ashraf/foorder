@@ -1,5 +1,5 @@
-import { HomeService } from './../../../home/services/home.service';
-import { OrderService } from './../../services/order.service';
+import { HomeService } from '../../services/home.service';
+import { OrderService } from '../../../shared/services/order.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

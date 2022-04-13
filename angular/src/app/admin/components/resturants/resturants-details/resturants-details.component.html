@@ -1,3 +1,6 @@
+<div *ngIf="resturants?.length > 0 else noDataFound">
+
+</div>
 <div class="border p-2" *ngFor="let res of resturants">
   <h6 class="d-flex justify-content-between" [routerLink]="res._id">
     {{res?.name}}
@@ -15,3 +18,7 @@
 <!-- Paginator -->
 <button *ngIf="currentPage <= (totalItems/perPage)" (click)="nextPage()">Next</button>
 <button *ngIf="currentPage > 1" (click)="prevPage()">Prev</button>
+
+<ng-template #noDataFound>
+  <app-no-data-found [msg]="'Sorry, No Resturants Found'"></app-no-data-found>
+</ng-template>

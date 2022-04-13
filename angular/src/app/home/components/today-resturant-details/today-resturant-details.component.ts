@@ -48,7 +48,7 @@ export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
     })
   }
   getMenu() {
-    this.menuService.getMenu(this.todayResturant._id).subscribe((menu: any) => {
+    this.menuService.getMenu(this.todayResturant?._id).subscribe((menu: any) => {
       // console.log('menu before', menu);
       menu.menu.forEach((menuItem: any) => {
         menuItem.count = 0;

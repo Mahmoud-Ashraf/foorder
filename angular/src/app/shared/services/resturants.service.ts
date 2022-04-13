@@ -44,7 +44,7 @@ export class ResturantsService {
   setTodayResturant() {
     this.requests.getApi('toDayResturant').subscribe((todayResturant: any) => {
       this.todayResturant.next(todayResturant);
-      localStorage.setItem('toDayResturantId', todayResturant._id);
+      localStorage.setItem('toDayResturantId', todayResturant?._id);
     })
   }
   getToDayResturantListner() {

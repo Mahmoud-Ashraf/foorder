@@ -94,15 +94,15 @@ export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  addItemToCart(menuItem: any) {
-    menuItem.count = 1;
-    // this.editCartItems();
-  }
+  // addItemToCart(menuItem: any) {
+  //   menuItem.count = 1;
+  //   // this.editCartItems();
+  // }
   
-  removeItemFromCart(menuItem: any) {
-    menuItem.count = 0;
-    // this.editCartItems();
-  }
+  // removeItemFromCart(menuItem: any) {
+  //   menuItem.count = 0;
+  //   // this.editCartItems();
+  // }
 
   addOrderToCart() {
     this.getTodayOrder();
@@ -119,7 +119,7 @@ export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
   // }
 
   getTodayOrder() {
-    this.order.items = this.todayResturantMenu.filter((menuItem: any) => menuItem.count === 1);
+    this.order.items = this.todayResturantMenu.filter((menuItem: any) => menuItem.count > 0);
   }
 
   private resetTodayResturant() {
@@ -138,6 +138,12 @@ export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
   // pushToOrder(menuItem: any) {
   //   this.order.items.push(menuItem);
   // }
+  decreseOrderCount(menuItem: any) {
+    menuItem.count -=1;
+  }
+  increaseOrderCount(menuItem: any) {
+    menuItem.count +=1;
+  }
 
   
 }

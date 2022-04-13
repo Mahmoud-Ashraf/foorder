@@ -182,26 +182,26 @@ exports.getUserOrders = (req, res, next) => {
   Order.find({ userId: userId })
     .populate('resturantId', 'name')
     // .populate(['resturantId', 'items'])
-    .populate('items')
+    .populate('items.item')
     .then(orders => {
-      let updatedOrders = [];
-      orders.forEach(order => {
-        let updatedOrder = order;
-        let orderItems = [];
-        order.items.forEach(item => {
-          if (orderItems?.some(orderItem => item._id === orderItem._id)) {
-            orderItems[orderItems.findIndex(orderItem => item._id === orderItem._id)].count += 1;
-          } else {
-            item.count = 1;
-            orderItems.push(item);
-          }
-        })
-        updatedOrder.items = orderItems;
-        updatedOrders.push(updatedOrder);
-      })
+      // let updatedOrders = [];
+      // orders.forEach(order => {
+      // let updatedOrder = order;
+      // let orderItems = [];
+      // order.items.forEach(item => {
+      //   if (orderItems?.some(orderItem => item._id === orderItem._id)) {
+      //     orderItems[orderItems.findIndex(orderItem => item._id === orderItem._id)].count += 1;
+      //   } else {
+      //     item.count = 1;
+      //     orderItems.push(item);
+      //   }
+      // })
+      //   updatedOrder.items = orderItems;
+      //   updatedOrders.push(updatedOrder);
+      // })
       res
         .status(200)
-        .json(updatedOrders);
+        .json(orders);
     })
     .catch(err => {
       if (!err.statusCode) {

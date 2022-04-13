@@ -26,9 +26,15 @@ const orderSchema = new Schema({
     },
     items: [
         {
-            type: Schema.Types.ObjectId,
-            ref: 'Menu',
-            required: true
+            count: {
+                type: Number,
+                required: true
+            },
+            item: {
+                type: Schema.Types.ObjectId,
+                ref: 'Menu',
+                required: true
+            }
         }
     ]
 }

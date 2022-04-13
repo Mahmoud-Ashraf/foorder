@@ -11,10 +11,10 @@ const menuSchema = new Schema({
         type: Number,
         required: true
     },
-    count: {
-        type: Number,
-        // required: true
-    },
+    // count: {
+    //     type: Number,
+    //     // required: true
+    // },
     resturantId: {
         type: Schema.Types.ObjectId,
         ref: 'Resturant',

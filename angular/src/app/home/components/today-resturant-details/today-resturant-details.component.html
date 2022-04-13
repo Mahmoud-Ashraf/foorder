@@ -42,15 +42,15 @@
             class="fas fa-shopping-cart"></i> Add to
           cart</button> -->
           <!-- <ng-template #itemCount> -->
-          <!-- <button *ngIf="menuItem?.count > 1" class="btn btn-action btn-sm"
-            (click)="decreseOrderCount(menuItem)">-</button> -->
+          <button *ngIf="menuItem?.count > 1" class="btn btn-action btn-sm"
+            (click)="decreseOrderCount(menuItem)">-</button>
           <i *ngIf="menuItem.count == 0" class="fas text-main fa-shopping-cart"
-            (click)="addItemToCart(menuItem)"></i>
+            (click)="increaseOrderCount(menuItem)"></i>
           <i *ngIf="menuItem.count == 1" class="fas text-main-danger fa-trash"
-            (click)="removeItemFromCart(menuItem)"></i>
-          <!-- <span *ngIf="menuItem?.count > 0" class="cart-count">{{menuItem?.count}}</span>
+            (click)="decreseOrderCount(menuItem)"></i>
+          <span *ngIf="menuItem?.count > 0" class="cart-count">{{menuItem?.count}}</span>
           <button *ngIf="menuItem?.count > 0 && menuItem?.count < 4" class="btn btn-action btn-sm"
-            (click)="increaseOrderCount(menuItem)">+</button> -->
+            (click)="increaseOrderCount(menuItem)">+</button>
           <!-- </ng-template> -->
         </td>
         <!-- <td class="menu-table-items-price">

@@ -29,12 +29,12 @@ export class CartComponent implements OnInit {
 
   increaseOrderCount(menuItem: any) {
     menuItem.count += 1
-    this.editCartItems();
+    // this.editCartItems();
   }
 
   decreseOrderCount(menuItem: any) {
     menuItem.count -= 1
-    this.editCartItems();
+    // this.editCartItems();
   }
 
   editCartItems() {
@@ -68,6 +68,7 @@ export class CartComponent implements OnInit {
     //     orderToAdd.items.push(orderItem);
     //   }
     // });
+    this.order.items = this.order.items.map((item: any) => ({ item: {_id: item._id, name: item.name, price: item.price, resturantId: item.resturantId}, count: item.count }))
     console.log(this.order);
     this.orderService.addOrder(this.order).subscribe(addedOrder => {
       console.log(addedOrder);
@@ -90,14 +91,15 @@ export class CartComponent implements OnInit {
     }
   }
 
-  private getTotalOrderPrice() {
-    this.order.items = this.order.items.map((item: any) => ({ ...item, totalPrice: item.price * item.count }));
+  getTotalOrderPrice() {
+    // this.order.items = this.order.items.map((item: any) => ({ ...item, totalPrice: item.price * item.count }));
     let total = 0;
     // let initialValue = 0
     this.order.totalOrderPrice = this.order.items.reduce(
-      (previousValue: any, currentValue: any) => previousValue + currentValue.totalPrice
+      (previousValue: any, currentValue: any) => previousValue + (currentValue.price * currentValue.count)
       , total
     )
+    return this.order.totalOrderPrice;
     // console.log('get total price', this.order);
   }
   // resetCart() {

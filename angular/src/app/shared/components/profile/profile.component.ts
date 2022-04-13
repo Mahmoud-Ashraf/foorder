@@ -25,6 +25,7 @@ export class ProfileComponent implements OnInit {
     const loggedUserId = localStorage.getItem('loggedUserId');
     if (loggedUserId) {
       this.orderService.getOrdersPerUser(loggedUserId).subscribe(userOrders => {
+        console.log(userOrders);
         this.orders = userOrders;
         // const uniqeOrder = new Set(this.orders.items);
         // console.log(this.orders);

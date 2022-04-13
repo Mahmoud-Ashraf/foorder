@@ -3,9 +3,7 @@ $primary: #2BB58B;
 $nav-link-font-size: 2.4rem;
 $nav-link-font-weight: 500;
 $red: #c0392b;
-$custom-colors: (
-  "action": #FFC233
-);
+$custom-colors: ("action": #FFC233);
 $theme-colors: map-merge($theme-colors, $custom-colors);
 
 // My Variables
@@ -19,12 +17,10 @@ $light-color: #fff;
 $light-gray: #f2f2f2;
 $main-danger: #c0392b;
 $main-gray: #999;
-$colors: (
-  main: #2BB58B,
+$colors: (main: #2BB58B,
   main-secondary: #FFC233,
   main-danger: #c0392b,
-  main-gray: #d8d8d8
-);
+  main-gray: #d8d8d8);
 $main-10: tint-color($main-color, 100%);
 $main-100: tint-color($main-color, 80%);
 $main-200: tint-color($main-color, 60%);
@@ -37,10 +33,14 @@ $main-800: shade-color($main-color, 60%);
 $main-900: shade-color($main-color, 80%);
 
 $main-secondary-10: tint-color($main-secondary-color, 100%);
-$main-secondary-100: tint-color($main-secondary-color, 80%);;
-$main-secondary-200: tint-color($main-secondary-color, 60%);;
-$main-secondary-300: tint-color($main-secondary-color, 40%);;
-$main-secondary-400: tint-color($main-secondary-color, 20%);;
+$main-secondary-100: tint-color($main-secondary-color, 80%);
+;
+$main-secondary-200: tint-color($main-secondary-color, 60%);
+;
+$main-secondary-300: tint-color($main-secondary-color, 40%);
+;
+$main-secondary-400: tint-color($main-secondary-color, 20%);
+;
 $main-secondary-500: $main-secondary-color;
 $main-secondary-600: shade-color($main-secondary-color, 20%);
 $main-secondary-700: shade-color($main-secondary-color, 40%);
@@ -48,10 +48,14 @@ $main-secondary-800: shade-color($main-secondary-color, 60%);
 $main-secondary-900: shade-color($main-secondary-color, 80%);
 
 $main-danger-10: tint-color($main-danger, 100%);
-$main-danger-100: tint-color($main-danger, 80%);;
-$main-danger-200: tint-color($main-danger, 60%);;
-$main-danger-300: tint-color($main-danger, 40%);;
-$main-danger-400: tint-color($main-danger, 20%);;
+$main-danger-100: tint-color($main-danger, 80%);
+;
+$main-danger-200: tint-color($main-danger, 60%);
+;
+$main-danger-300: tint-color($main-danger, 40%);
+;
+$main-danger-400: tint-color($main-danger, 20%);
+;
 $main-danger-500: $main-danger;
 $main-danger-600: shade-color($main-danger, 20%);
 $main-danger-700: shade-color($main-danger, 40%);
@@ -59,10 +63,14 @@ $main-danger-800: shade-color($main-danger, 60%);
 $main-danger-900: shade-color($main-danger, 80%);
 
 $main-gray-10: tint-color($main-gray, 100%);
-$main-gray-100: tint-color($main-gray, 80%);;
-$main-gray-200: tint-color($main-gray, 60%);;
-$main-gray-300: tint-color($main-gray, 40%);;
-$main-gray-400: tint-color($main-gray, 20%);;
+$main-gray-100: tint-color($main-gray, 80%);
+;
+$main-gray-200: tint-color($main-gray, 60%);
+;
+$main-gray-300: tint-color($main-gray, 40%);
+;
+$main-gray-400: tint-color($main-gray, 20%);
+;
 $main-gray-500: $main-gray;
 $main-gray-600: shade-color($main-gray, 20%);
 $main-gray-700: shade-color($main-gray, 40%);
@@ -107,8 +115,7 @@ $poll-font-size: $main-font-size * 1.2;
 // $main-danger-800: shade-color($main-danger, 60%) ;
 // $main-danger-900: shade-color($main-danger, 80%) ;
 
-$mains: (
-  "10": $main-10,
+$mains: ("10": $main-10,
   "100": $main-100,
   "200": $main-200,
   "300": $main-300,
@@ -117,10 +124,8 @@ $mains: (
   "600": $main-600,
   "700": $main-700,
   "800": $main-800,
-  "900": $main-900
-) !default;
-$main-secondaries: (
-  "10": $main-secondary-10,
+  "900": $main-900) !default;
+$main-secondaries: ("10": $main-secondary-10,
   "100": $main-secondary-100,
   "200": $main-secondary-200,
   "300": $main-secondary-300,
@@ -129,10 +134,8 @@ $main-secondaries: (
   "600": $main-secondary-600,
   "700": $main-secondary-700,
   "800": $main-secondary-800,
-  "900": $main-secondary-900
-) !default;
-$main-dangers: (
-  "10": $main-danger-10,
+  "900": $main-secondary-900) !default;
+$main-dangers: ("10": $main-danger-10,
   "100": $main-danger-100,
   "200": $main-danger-200,
   "300": $main-danger-300,
@@ -141,5 +144,4 @@ $main-dangers: (
   "600": $main-danger-600,
   "700": $main-danger-700,
   "800": $main-danger-800,
-  "900": $main-danger-900
-) !default;
+  "900": $main-danger-900) !default;

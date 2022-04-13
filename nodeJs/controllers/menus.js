@@ -8,12 +8,27 @@ exports.getMenu = (req, res, next) => {
     let perPage = req.query.perPage || 2;
     const resturantId = req.params.resturantId;
     let totalItems;
-    Resturant.findById(resturantId)
-    .populate('menu')
-        .then(resturant => {
+    Menu.find({ resturantId: resturantId })
+        .countDocuments()
+        .then(count => {
+            if (count === 0) {
+                const error = new Error('No Menu Found');
+                error.statusCode = 404;
+                throw error;
+            }
+            if (perPage == 0) {
+                perPage = count;
+            }
+            totalItems = count;
+            return Menu.find({ resturantId: resturantId })
+                .skip((currentPage - 1) * perPage)
+                .limit(perPage)
+        })
+        // .populate('menu')
+        .then(menu => {
             res
                 .status(200)
-                .json({ message: 'menu fetched', menu: resturant.menu });
+                .json({ message: 'menu fetched', menu: menu, currentPage: currentPage, perPage: perPage, totalItems: totalItems });
         })
         .catch(err => {
             if (!err.statusCode) {

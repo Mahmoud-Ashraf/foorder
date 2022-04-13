@@ -1,1 +1,26 @@
-<p>menu-details works!</p>
+<div *ngIf="totalItems > 0 else noDataFound">
+
+</div>
+<div class="border p-2" *ngFor="let menuItem of resturantMenu">
+  <h6 class="d-flex justify-content-between" [routerLink]="menuItem._id">
+    {{menuItem?.name}}
+    <span>
+      <i class="fas fa-bell text-danger ms-2"></i>
+      <i class="fas fa-hand-pointer text-main"></i>
+    </span>
+    <span class="text-muted"></span>
+  </h6>
+  <p class="m-0">{{menuItem?.price}}</p>
+  <button class="btn btn-warning" [routerLink]="'edit-menu-item/'+menuItem._id">Edit</button>
+  <button class="btn btn-danger" (click)="deleteMenuItem(menuItem._id)">Delete</button>
+</div>
+
+<!-- Paginator -->
+<button *ngIf="currentPage < (totalItems/perPage)" (click)="nextPage()">Next</button>
+<button *ngIf="currentPage > 1" (click)="prevPage()">Prev</button>
+
+<ng-template #noDataFound>
+  <app-no-data-found [msg]="'Sorry, No Menu Items Found'"></app-no-data-found>
+</ng-template>
+
+<button class="btn btn-main" [routerLink]="'add-menu-item'">Add New Menu Item</button>

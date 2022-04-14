@@ -138,6 +138,7 @@ exports.updateResturant = (req, res, next) => {
   const name = req.body.name;
   const content = req.body.content;
   const vote = req.body.vote;
+  const lastVotedAt = req.body.lastVotedAt;
   Resturant.findById(resturantId)
     .then(resturant => {
       if (!resturant) {
@@ -148,6 +149,7 @@ exports.updateResturant = (req, res, next) => {
       resturant.name = name;
       resturant.content = content;
       resturant.vote = vote;
+      resturant.lastVotedAt = lastVotedAt;
       return resturant.save();
     })
     .then(result => {
@@ -181,4 +183,9 @@ exports.deleteResturant = (req, res, next) => {
       }
       next(err);
     })
+}
+
+exports.resetResturantsVote = (req, res, next) => {
+  Resturant.updateMany({}, { vote: 0 })
+    .then(resturants => { console.log(resturants) })
 }

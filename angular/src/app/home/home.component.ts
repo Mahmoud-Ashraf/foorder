@@ -1,3 +1,4 @@
+import { ResturantsService } from 'src/app/shared/services/resturants.service';
 import { Subscription } from 'rxjs';
 import { HomeService } from './services/home.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -14,7 +15,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   showOrder = true;
   showPoll = true;
   constructor(
-    private homeService: HomeService
+    private homeService: HomeService,
+    // private resturantsService: ResturantsService
   ) {
   }
 
@@ -23,32 +25,34 @@ export class HomeComponent implements OnInit, OnDestroy {
     //   console.log('show Poll: ', showPoll);
     //   this.showPoll = showPoll;
     // })
-    const jsonPollEndTime = localStorage.getItem('pollEndTime');
-    const jsonOrderEndTime = localStorage.getItem('orderEndTime');
-    if (jsonPollEndTime) {
-      const pollEndTime = JSON.parse(jsonPollEndTime);
-      const timeRemainingToPoll = this.homeService.calcDateDiff(pollEndTime);
-      console.log(timeRemainingToPoll);
-      if (timeRemainingToPoll.secondsToDday == '00' && timeRemainingToPoll.minutesToDday == '00' && timeRemainingToPoll.hoursToDday == '00' ) {
-        this.showPoll = false;
-      }
-      else {
-        this.showPoll = true;
-      }
-    }
-    if (jsonOrderEndTime) {
-      const orderEndTime = JSON.parse(jsonOrderEndTime);
-      const timeRemainingToOrder = this.homeService.calcDateDiff(orderEndTime);
-      console.log(timeRemainingToOrder);
-      if (timeRemainingToOrder.secondsToDday == '00' && timeRemainingToOrder.minutesToDday == '00' && timeRemainingToOrder.hoursToDday == '00' ) {
-        this.showOrder = false;
-      }
-      else {
-        this.showOrder = true;
-      }
-    }
+    this.showOrder = this.calcDiff('orderEndTime');
+    this.showPoll = this.calcDiff('pollEndTime');
   }
   ngOnDestroy(): void {
     // this.showPollSub.unsubscribe();
   }
+
+  calcDiff(localName: string) {
+    const jsonEndTime = localStorage.getItem(localName);
+    console.log(jsonEndTime);
+    if (jsonEndTime) {
+      const endTime = JSON.parse(jsonEndTime);
+      const timeRemaining = this.homeService.calcDateDiff(endTime);
+      if (timeRemaining.secondsToDday == '00' && timeRemaining.minutesToDday == '00' && timeRemaining.hoursToDday == '00') {
+        return false;
+      }
+      else {
+        return true;
+      }
+    }
+    return true;
+  }
+
+  // checkforPollReset() {
+  //   this.resturantsService.getResturants().subscribe((resturantsRes: any) => {
+  //     resturantsRes.resturants.forEach(resturant => {
+        
+  //     });
+  //   })
+  // }
 }

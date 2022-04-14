@@ -12,4 +12,5 @@ export interface Resturant {
   todaySelection?: boolean;
   registeredPhone?: string;
   vote?: number;
+  lastVotedAt?: string
 }

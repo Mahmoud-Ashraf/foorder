@@ -40,5 +40,6 @@ router.put("/resturant/:resturantId",
 );
 
 router.delete("/resturant/:resturantId", isAuth, resturantsController.deleteResturant);
+router.put("/resetResturantsVote", isAuth, resturantsController.resetResturantsVote);
 
 module.exports = router;

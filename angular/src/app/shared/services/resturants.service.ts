@@ -50,6 +50,10 @@ export class ResturantsService {
   getToDayResturantListner() {
     return this.todayResturant.asObservable();
   }
+
+  resetResturantsVote() {
+    return this.requests.putApi('resetResturantsVote');
+  }
   // async getResturantsAsync() {
   //   const response = await this.requests.getApi('resturants').toPromise();
   //   console.log(response);

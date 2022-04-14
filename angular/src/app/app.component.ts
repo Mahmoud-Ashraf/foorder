@@ -1,3 +1,4 @@
+import { RequestsService } from './shared/services/requests.service';
 import { AuthService } from './shared/services/auth.service';
 import { AfterContentInit, Component, OnInit } from '@angular/core';
 import { User } from './models/User';
@@ -12,7 +13,8 @@ export class AppComponent implements OnInit, AfterContentInit {
   title = 'food-order';
   showAdminBtn = false;
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private requestsService: RequestsService
   ) {
   }
 

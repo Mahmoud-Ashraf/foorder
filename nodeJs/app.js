@@ -6,13 +6,13 @@ const resturantsRoutes = require("./routes/resturants");
 const authRoutes = require("./routes/auth");
 const menuRoutes = require('./routes/menus');
 const ordersRoutes = require('./routes/orders');
-const cors = require('cors')
+// const cors = require('cors')
 
 // const mongoConnect = require('./utils/database').mongoConnect;
 
 const app = express();
 
-app.use(cors()); // Use this after the variable declaration
+// app.use(cors()); // Use this after the variable declaration
 // app.use(bodyParser.urlencoded()); // x-www-form-urlencoded <form>
 app.use(bodyParser.json()); // apllication json
 

@@ -1,4 +1,4 @@
-<header class="header" *ngIf="userIsAuthenticated">
+<aside class="header" *ngIf="userIsAuthenticated">
   <div class="header-container">
     <div class="user">
       <span class="user-welcome" (click)="navigate('/profile')"><i class="fas fa-user user-welcome--icon fa-2x"></i>
@@ -10,7 +10,7 @@
         </li>
         <li><a (click)="navigate('/admin')"><i class="fas fa-shopping-cart"></i>Wallet</a></li>
         <li><a (click)="navigate('/admin/resturants')"><i class="fas fa-shopping-cart"></i>My Resturants</a></li>
-        <li><a (click)="navigate('admin/orders')"><i class="fas fa-wallet"></i> Food Orders</a></li>
+        <li><a (click)="navigate('/admin/orders')"><i class="fas fa-wallet"></i> Food Orders</a></li>
         <li><a (click)="navigate('/home')"><i class="fas fa-home"></i> Home</a></li>
       </ul>
       <ul class="links-list">
@@ -18,4 +18,4 @@
       </ul>
     </div>
   </div>
-</header>
+</aside>

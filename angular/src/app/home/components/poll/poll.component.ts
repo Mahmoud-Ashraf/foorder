@@ -20,7 +20,7 @@ export class PollComponent implements OnInit, OnDestroy {
   updateUserSub: Subscription;
   getUserSub: Subscription;
   currentUser: any;
-  pollEndTime: number[] = [23, 0, 0];
+  pollEndTime: number[] = [23, 55, 0];
   showPoll: boolean = false;
   countDownTimer: any;
   constructor(

@@ -1,10 +1,17 @@
 //  Bootstrap override variables
-$primary: #2BB58B;
+$primary: #5D5FEF;
+$secondary: #828282;
+// $success: ;
+$info: #56CCF2;
+// $warning: ;
+$danger: #EB5757;
+// $light: ;
+// $dark: ;
 $nav-link-font-size: 2.4rem;
 $nav-link-font-weight: 500;
 $red: #c0392b;
-$custom-colors: ("action": #FFC233);
-$theme-colors: map-merge($theme-colors, $custom-colors);
+// $custom-colors: ("action": #FFC233);
+// $theme-colors: map-merge($theme-colors, $custom-colors);
 
 // My Variables
 
@@ -17,10 +24,10 @@ $light-color: #fff;
 $light-gray: #f2f2f2;
 $main-danger: #c0392b;
 $main-gray: #999;
-$colors: (main: #2BB58B,
-  main-secondary: #FFC233,
-  main-danger: #c0392b,
-  main-gray: #d8d8d8);
+// $colors: (main: #2BB58B,
+//   main-secondary: #FFC233,
+//   main-danger: #c0392b,
+//   main-gray: #d8d8d8);
 $main-10: tint-color($main-color, 100%);
 $main-100: tint-color($main-color, 80%);
 $main-200: tint-color($main-color, 60%);

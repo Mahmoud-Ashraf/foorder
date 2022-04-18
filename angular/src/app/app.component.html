@@ -1,9 +1,19 @@
 <app-loader></app-loader>
-<app-header></app-header>
-<div class="basic-layout">
-  <div class="container">
-    <flash-messages></flash-messages>
-    <router-outlet></router-outlet>
+<flash-messages></flash-messages>
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <app-header></app-header>
+    </div>
+    <div class="col-9">
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+    </div>
   </div>
 </div>
-<app-footer></app-footer>
+<!-- <div class="basic-layout">
+  <div class="container">
+  </div>
+</div> -->
+<!-- <app-footer></app-footer> -->

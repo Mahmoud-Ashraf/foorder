@@ -31,6 +31,7 @@
 
 .double-form {
   min-height: 100vh;
+
   .left-form,
   .right-form {
     min-height: 100vh;
@@ -47,6 +48,7 @@
   padding: 50px;
   display: flex;
   align-items: center;
+
   .logo {
     background-color: #c4c4c4;
     padding: 0.5rem 2rem;
@@ -59,6 +61,7 @@
     color: $dark-color;
     margin-bottom: 100px;
   }
+
   .welcome {
     // font-family: DM Sans;
     font-size: $main-font-size;
@@ -69,6 +72,7 @@
     text-align: left;
     color: #98989e;
   }
+
   .join {
     color: #212429;
     font-style: normal;
@@ -97,46 +101,77 @@
 
 .header {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   background-color: $main-color;
-  padding: 1rem 2rem;
+  justify-content: space-between;
+  padding: 4rem 2rem;
   align-items: center;
   color: $light-color;
+  position: fixed;
+  height: 100vh;
+  width: 20%;
+
+  ;
+
   .header-container {
     width: 70%;
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
+
     .user {
       &-welcome {
-        font-size: 2rem;
-        line-height: 2.5rem;
+        font-size: 22px;
+        text-align: center;
         font-weight: 700;
         display: flex;
+        flex-direction: column;
         align-items: center;
+
         &--icon {
-          margin-inline-end: 1rem;
           background-color: $light-color;
           border-radius: 50%;
           color: $main-color;
-          width: 65px;
-          height: 65px;
+          width: 150px;
+          height: 150px;
           display: flex;
+          flex-direction: column;
           justify-content: center;
           align-items: center;
+          margin-bottom: 24px;
         }
       }
     }
+
     .links {
       display: flex;
+      flex-direction: column;
       align-items: center;
+      justify-content: space-between;
+
       &-list {
         list-style: none;
         display: flex;
-        align-items: center;
-        margin: 0;
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        margin: 60px 0;
+        padding-left: 0;
+
         li {
           margin-inline-end: 1rem;
           cursor: pointer;
+          margin-bottom: 20px;
+          width: 180px;
+
+          a {
+            font-size: 18px;
+            font-weight: bold;
+          }
+
+          i {
+            margin-right: 16px;
+          }
         }
       }
     }
@@ -150,6 +185,7 @@
     line-height: 3.35rem;
     font-weight: 700;
   }
+
   &-timer {
     background-color: rgba(242, 242, 242, 0.8);
     border-radius: 8px;
@@ -160,17 +196,20 @@
     margin-inline-end: 1rem;
     width: 100px;
     display: inline-block;
-    border:  1px solid var(--main-500);
+    border: 1px solid var(--main-500);
     font-weight: 500;
+
     &:last-child {
       margin-inline-end: 0;
     }
   }
+
   &-list {
     display: flex;
     flex-direction: column;
     list-style: none;
     padding: 0;
+
     li {
       padding: 1.3rem 7.85rem;
       font-size: 2rem;
@@ -184,19 +223,23 @@
       transition: all 0.3s ease-in-out;
       display: flex;
       justify-content: space-between;
+
       &:last-child {
         margin-bottom: 0;
       }
+
       &:hover {
         background-color: lighten($light-gray, 1.5);
         border-color: $main-color;
       }
+
       &.poll-selected {
         background-color: $main-secondary-color;
         // color: $light-color;
       }
     }
   }
+
   &-submit {
     height: 80px;
     font-size: 2rem;
@@ -216,8 +259,12 @@
     // margin-inline-end: 1rem;
     width: 50px;
     display: inline-block;
-    border:  1px solid var(--main-500);
+    border: 1px solid var(--main-500);
     font-weight: 400;
     margin: 0 .5rem;
   }
+}
+
+.text-bold {
+  font-weight: 600;
 }

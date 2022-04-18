@@ -16,13 +16,13 @@
 //   font-weight: 700;
 // }
 @font-face {
-  font-family: "poppins-regular";
+  font-family: "poppins";
   src: url("../fonts/Poppins-Regular.ttf") format("truetype");
   font-weight: 400;
 }
 
 @font-face {
-  font-family: "poppins-bold";
+  font-family: "poppins";
   src: url("../fonts/Poppins-SemiBold.ttf") format("truetype");
   font-weight: 600;
 }
@@ -34,5 +34,5 @@
 // }
 
 body {
-  font-family: "poppins-regular";
+  font-family: "poppins";
 }

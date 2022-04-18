@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuicklinkModule } from 'ngx-quicklink';
-import { HeaderComponent } from './components/header/header.component';
+import { AsideComponent } from './components/aside/aside.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { FormsModule } from '@angular/forms';
@@ -21,7 +21,7 @@ import { NoDataFoundComponent } from './components/no-data-found/no-data-found.c
 
 @NgModule({
   declarations: [
-    HeaderComponent,
+    AsideComponent,
     FooterComponent,
     NotFoundComponent,
     LoaderComponent,
@@ -34,7 +34,7 @@ import { NoDataFoundComponent } from './components/no-data-found/no-data-found.c
   ],
   exports: [
     QuicklinkModule,
-    HeaderComponent,
+    AsideComponent,
     FooterComponent,
     NotFoundComponent,
     FormsModule,

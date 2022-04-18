@@ -11,7 +11,7 @@
 @import "./helpers";
 
 /* ==================== Generate btns texts bgs alerts coloring classes ==================== */
-// @include coloring($colors);
+@include coloring($colors);
 
 // loader
 .loader {

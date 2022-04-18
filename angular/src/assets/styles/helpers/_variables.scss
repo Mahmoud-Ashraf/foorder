@@ -15,19 +15,19 @@ $red: #c0392b;
 
 // My Variables
 
-$main-color: #2BB58B;
-$main-secondary-color: #FFC233;
+$main-color: $primary;
+$main-secondary-color: $info;
 $border-color: #d8d8d8;
 $text-main-color: #212429;
 $dark-color: #000;
 $light-color: #fff;
 $light-gray: #f2f2f2;
-$main-danger: #c0392b;
-$main-gray: #999;
-// $colors: (main: #2BB58B,
-//   main-secondary: #FFC233,
-//   main-danger: #c0392b,
-//   main-gray: #d8d8d8);
+$main-danger: $danger;
+$main-gray: $secondary;
+$colors: (main: $main-color,
+  main-secondary: $main-secondary-color,
+  main-danger: $main-danger,
+  main-gray: $main-gray);
 $main-10: tint-color($main-color, 100%);
 $main-100: tint-color($main-color, 80%);
 $main-200: tint-color($main-color, 60%);

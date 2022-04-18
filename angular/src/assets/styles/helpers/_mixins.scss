@@ -1,132 +1,132 @@
-// /* ==================== Global Mixins for Coloring ( Buttons, Backgrounds, Texts & Alerts) ==================== */
-// // @function tint($color, $amount) {
-// //     $inverse: mix(white, $color, $amount);
-// //   @return $inverse;
-// // }
-
-// @mixin coloring($colors) {
-//   .btn {
-//     font-size: $main-font-size;
-//     line-height: 20px;
-//     padding: 14px;
-//     text-align: center;
-//     // margin-bottom: 20px;
-//     border-radius: 8px;
-//     transition: all 0.3s ease-in-out;
-//   }
-//   @each $colorName, $colorCode in $colors {
-//     // /* ==================== Generate css Color gradients ==================== */
-//     // body {
-//     //   // --main-blue-200: mix(white, #09c, 50%);
-//     //   @each $i, $percentage in $gradients-light {
-//     //     --#{$colorName}-#{$i}: tint(#{$colorCode}, #{$percentage});
-//     //     // --#{$colorName}-#{$i}: mix(white, #{$colorCode}, #{$percentage});
-//     //   }
-//     //   --#{$colorName}-500: #{$colorCode};
-//     //   @each $i, $percentage in $gradients-dark {
-//     //     --#{$colorName}-#{$i}: mix(white, #{$colorCode}, #{$percentage});
-//     //   }
-//     // }
-
-//     /* ==================== Coloring Buttons ==================== */
-
-//     // Normal Button
-//     .btn.btn-#{$colorName} {
-//       color: var(--#{$colorName}-10);
-//       border: 1px solid var(--#{$colorName}600);
-//       background-color: var(--#{$colorName}-500);
-//       transition: 0.3s ease-in-out;
-//       &:hover {
-//         background-color: var(--#{$colorName}-600);
-//         border-color: var(--#{$colorName}-600);
-//         color: var(--#{$colorName}-10);
-//       }
-//       &:focus {
-//         box-shadow: 0 0 0 0.2rem var(--#{$colorName}-200);
-//       }
-//       &:disabled {
-//         cursor: not-allowed;
-//         background-color: var(--#{$colorName}-300);
-//       }
-//       &:not(:disabled) {
-//         &:active {
-//           color: var(--#{$colorName}-10);
-//           background-color: var(--#{$colorName}-500);
-//           border-color: var(--#{$colorName}-600);
-//           &:focus {
-//             box-shadow: 0 0 0 0.2rem var(--#{$colorName}-200);
-//           }
-//         }
-//       }
-//     }
-
-//     // Outline Button
-//     .btn.btn-outline-#{$colorName} {
-//       color: var(--#{$colorName}-500);
-//       border: 1px solid var(--#{$colorName}-500);
-//       background-color: transparent;
-//       transition: 0.3s ease-in-out;
-//       &:hover {
-//         background-color: var(--#{$colorName}-500);
-//         color: var(--#{$colorName}-10);
-//         border-color: var(--#{$colorName}-500);
-//       }
-//       &:focus {
-//         box-shadow: 0 0 0 0.2rem var(--#{$colorName}-200);
-//       }
-//       &:disabled {
-//         cursor: not-allowed !important;
-//         &:hover {
-//           color: var(--#{$colorName}-500);
-//           border: 1px solid var(--#{$colorName}-500);
-//           background-color: transparent;
-//         }
-//       }
-//       &:not(:disabled) {
-//         &:active {
-//           color: var(--#{$colorName}-10);
-//           background-color: var(--#{$colorName}-500);
-//           border-color: var(--#{$colorName}-500);
-//           &:focus {
-//             box-shadow: 0 0 0 0.2rem var(--#{$colorName}-200);
-//           }
-//         }
-//       }
-//     }
-
-//     /* ==================== Coloring Backgrounds ==================== */
-
-//     .bg-#{$colorName} {
-//       background-color: var(--#{$colorName}-500);
-//     }
-
-//     /* ==================== Coloring Texts ==================== */
-
-//     .text-#{$colorName} {
-//       color: var(--#{$colorName}-500);
-//     }
-
-//     /* ==================== Coloring Alerts ==================== */
-
-//     .alert-#{$colorName} {
-//       color: var(--#{$colorName}-700);
-//       background-color: var(--#{$colorName}-100);
-//       border-color: var(--#{$colorName}-500);
-//       hr {
-//         border-top-color: var(--#{$colorName}-400);
-//       }
-//       &.alert-link {
-//         color: var(--#{$colorName}-600);
-//       }
-//     }
-//     .flash-message-#{$colorName} {
-//       padding: 1rem 2rem;
-//       display: block;
-//       font-size: 1.3rem;
-//       margin: 1rem 0;
-//       background-color: var(--#{$colorName}-100);
-//       border: 1px solid var(--#{$colorName}-500);
-//       color: var(--#{$colorName}-600);
-//     }
-//   }
+/* ==================== Global Mixins for Coloring ( Buttons, Backgrounds, Texts & Alerts) ==================== */
+// @function tint($color, $amount) {
+//     $inverse: mix(white, $color, $amount);
+//   @return $inverse;
 // }
+
+@mixin coloring($colors) {
+  .btn {
+    font-size: $main-font-size;
+    line-height: 20px;
+    padding: 14px;
+    text-align: center;
+    // margin-bottom: 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+  }
+  @each $colorName, $colorCode in $colors {
+    // /* ==================== Generate css Color gradients ==================== */
+    // body {
+    //   // --main-blue-200: mix(white, #09c, 50%);
+    //   @each $i, $percentage in $gradients-light {
+    //     --#{$colorName}-#{$i}: tint(#{$colorCode}, #{$percentage});
+    //     // --#{$colorName}-#{$i}: mix(white, #{$colorCode}, #{$percentage});
+    //   }
+    //   --#{$colorName}-500: #{$colorCode};
+    //   @each $i, $percentage in $gradients-dark {
+    //     --#{$colorName}-#{$i}: mix(white, #{$colorCode}, #{$percentage});
+    //   }
+    // }
+
+    /* ==================== Coloring Buttons ==================== */
+
+    // Normal Button
+    .btn.btn-#{$colorName} {
+      color: var(--#{$colorName}-10);
+      border: 1px solid var(--#{$colorName}600);
+      background-color: var(--#{$colorName}-500);
+      transition: 0.3s ease-in-out;
+      &:hover {
+        background-color: var(--#{$colorName}-600);
+        border-color: var(--#{$colorName}-600);
+        color: var(--#{$colorName}-10);
+      }
+      &:focus {
+        box-shadow: 0 0 0 0.2rem var(--#{$colorName}-200);
+      }
+      &:disabled {
+        cursor: not-allowed;
+        background-color: var(--#{$colorName}-300);
+      }
+      &:not(:disabled) {
+        &:active {
+          color: var(--#{$colorName}-10);
+          background-color: var(--#{$colorName}-500);
+          border-color: var(--#{$colorName}-600);
+          &:focus {
+            box-shadow: 0 0 0 0.2rem var(--#{$colorName}-200);
+          }
+        }
+      }
+    }
+
+    // Outline Button
+    .btn.btn-outline-#{$colorName} {
+      color: var(--#{$colorName}-500);
+      border: 1px solid var(--#{$colorName}-500);
+      background-color: transparent;
+      transition: 0.3s ease-in-out;
+      &:hover {
+        background-color: var(--#{$colorName}-500);
+        color: var(--#{$colorName}-10);
+        border-color: var(--#{$colorName}-500);
+      }
+      &:focus {
+        box-shadow: 0 0 0 0.2rem var(--#{$colorName}-200);
+      }
+      &:disabled {
+        cursor: not-allowed !important;
+        &:hover {
+          color: var(--#{$colorName}-500);
+          border: 1px solid var(--#{$colorName}-500);
+          background-color: transparent;
+        }
+      }
+      &:not(:disabled) {
+        &:active {
+          color: var(--#{$colorName}-10);
+          background-color: var(--#{$colorName}-500);
+          border-color: var(--#{$colorName}-500);
+          &:focus {
+            box-shadow: 0 0 0 0.2rem var(--#{$colorName}-200);
+          }
+        }
+      }
+    }
+
+    /* ==================== Coloring Backgrounds ==================== */
+
+    .bg-#{$colorName} {
+      background-color: var(--#{$colorName}-500);
+    }
+
+    /* ==================== Coloring Texts ==================== */
+
+    .text-#{$colorName} {
+      color: var(--#{$colorName}-500);
+    }
+
+    /* ==================== Coloring Alerts ==================== */
+
+    .alert-#{$colorName} {
+      color: var(--#{$colorName}-700);
+      background-color: var(--#{$colorName}-100);
+      border-color: var(--#{$colorName}-500);
+      hr {
+        border-top-color: var(--#{$colorName}-400);
+      }
+      &.alert-link {
+        color: var(--#{$colorName}-600);
+      }
+    }
+    .flash-message-#{$colorName} {
+      padding: 1rem 2rem;
+      display: block;
+      font-size: 1.3rem;
+      margin: 1rem 0;
+      background-color: var(--#{$colorName}-100);
+      border: 1px solid var(--#{$colorName}-500);
+      color: var(--#{$colorName}-600);
+    }
+  }
+}

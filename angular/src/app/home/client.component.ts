@@ -5,11 +5,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-client',
+  templateUrl: './client.component.html',
+  styleUrls: ['./client.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class ClientComponent implements OnInit, OnDestroy {
   // showPollSub: Subscription;
   // showPoll: boolean = false;
   showOrder = true;

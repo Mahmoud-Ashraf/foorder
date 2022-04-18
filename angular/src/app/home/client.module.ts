@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { HomeRoutingModule } from './home-routing.module';
-import { HomeComponent } from './home.component';
+import { HomeRoutingModule } from './client-routing.module';
+import { ClientComponent } from './client.component';
 import { SharedModule } from '../shared/shared.module';
 import { PollComponent } from './components/poll/poll.component';
 import { CountDownComponent } from './components/count-down/count-down.component';
@@ -11,18 +11,20 @@ import { ResturantMenuComponent } from './components/resturant-menu/resturant-me
 import { CartComponent } from './components/cart/cart.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { WalletComponent } from './components/wallet/wallet.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent,
+    ClientComponent,
     PollComponent,
     CountDownComponent,
     TodayResturantDetailsComponent,
     ResturantMenuComponent,
     CartComponent,
     ProfileComponent,
-    WalletComponent
+    WalletComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,
@@ -33,4 +35,4 @@ import { WalletComponent } from './components/wallet/wallet.component';
   //   SharedModule
   // ]
 })
-export class HomeModule { }
+export class ClientModule { }

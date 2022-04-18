@@ -3,4 +3,11 @@
 <button class="btn btn-main" [routerLink]="'users'">Users</button>
 <button class="btn btn-main" [routerLink]="'menu'">Menu</button>
 <button class="btn btn-main" [routerLink]="'collected-order'">Collected orders</button> -->
-<router-outlet></router-outlet>
+<div class="row">
+    <div class="col-3">
+        <app-header></app-header>
+    </div>
+    <div class="col-9">
+        <router-outlet></router-outlet>
+    </div>
+</div>

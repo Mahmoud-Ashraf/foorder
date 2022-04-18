@@ -30,7 +30,7 @@
       <th>السعر</th>
       <th>اضف للعربة</th>
     </tr>
-    <ng-container>
+    <!-- <ng-container> -->
       <tr class="menu-table-items" *ngFor="let menuItem of todayResturantMenu">
         <td>{{menuItem?.name}}</td>
         <td class="menu-table-items-price">
@@ -58,7 +58,7 @@
           <span class="menu-table-items-price-unit">EGP</span>
         </td> -->
       </tr>
-    </ng-container>
+    <!-- </ng-container> -->
     <!-- <tr class="menu-table-items">
     <th colspan="3">إجمالي السعر غير شامل التوصيل ولا الخدمة</th>
     <td class="menu-table-items-price">
@@ -70,7 +70,7 @@
 
   <div class="row justify-content-end">
     <div class="col-md-4">
-      <button class="btn btn-main w-100" (click)="addOrderToCart()">Checkout</button>
+      <button class="btn btn-main w-100" [disabled]="order.items.length <= 0" (click)="addOrderToCart()">Checkout</button>
     </div>
   </div>
 

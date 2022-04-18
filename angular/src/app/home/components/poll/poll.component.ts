@@ -13,7 +13,7 @@ import { HomeService } from '../../services/home.service';
   styleUrls: ['./poll.component.scss']
 })
 export class PollComponent implements OnInit, OnDestroy {
-  resturants: Resturant[];
+  resturants: any[];
   selectedResturant: any;
   resturantsSub: Subscription;
   updateResturantSub: Subscription;
@@ -49,6 +49,7 @@ export class PollComponent implements OnInit, OnDestroy {
     // console.log('selected before update', this.selectedResturant);
     if (this.selectedResturant && this.currentUser && !this.currentUser?.voted) {
       this.selectedResturant.vote += 1;
+      this.selectedResturant.lastVotedAt = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
       this.currentUser.voted = true;
       this.currentUser.lastVoteDate = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
       // console.log('selected after update', this.selectedResturant, this.currentUser);
@@ -63,8 +64,19 @@ export class PollComponent implements OnInit, OnDestroy {
   private getResturants() {
     this.resturantsSub = this.resturantsService.getResturants().subscribe((resturants: any) => {
       this.resturants = resturants.resturants;
-      // console.log('get res', this.resturants);
+      this.resetResturantsVote();
     })
+  }
+
+  resetResturantsVote() {
+    const notReset = this.resturants.some(resturant => {
+      return new Date().getDate() === new Date(resturant.lastVotedAt).getDate();
+    });
+    if (!notReset) {
+      this.resturantsService.resetResturantsVote().subscribe(resturants => {
+        console.log(resturants);
+      });
+    }
   }
 
   private updateResturant(resturantId: string | undefined, resturant: Resturant) {
@@ -101,7 +113,7 @@ export class PollComponent implements OnInit, OnDestroy {
   }
 
   checkUserVote() {
-    if( this.currentUser ) {
+    if (this.currentUser) {
       console.log('current before edit', this.currentUser);
       this.currentUser.voted = this.currentUser?.lastVoteDate == new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
       console.log('current after edit', this.currentUser);

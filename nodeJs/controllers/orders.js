@@ -58,6 +58,11 @@ exports.addOrder = (req, res, next) => {
     error.statusCode = 422;
     throw error;
   }
+  if (req.body.items.length <= 0) {
+    const error = new Error('You haven\'t any Items to add');
+    error.statusCode = 404;
+    throw error;
+  }
   let addedOrder;
   const order = new Order({
     userId: req.body.userId,

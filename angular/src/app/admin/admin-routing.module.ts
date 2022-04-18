@@ -46,13 +46,13 @@ const routes: Routes = [
       {
         path: 'menu', component: MenuComponent,
         children: [
-          {path: '', component: MenuDetailsComponent},
-          {path: 'add-menu-item', component: AddMenuItemComponent},
-          {path: 'edit-menu-item', component: EditMeuItemComponent}
+          { path: '', component: MenuDetailsComponent },
+          { path: 'add-menu-item', component: AddMenuItemComponent },
+          { path: 'edit-menu-item', component: EditMeuItemComponent }
         ]
       },
       { path: 'orders', component: OrdersComponent },
-      { path: 'collected-order', component: CollectedOrderComponent},
+      { path: 'collected-order', component: CollectedOrderComponent },
       { path: 'wallets', component: WalletsComponent }
       // { path: }
       // { path: 'resturants/:id', component: ResturantDetailsComponent }
@@ -61,7 +61,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+    RouterModule.forChild(routes)
+  ],
   exports: [RouterModule]
 })
 export class AdminRoutingModule { }

@@ -44,6 +44,6 @@
 
 <div class="row justify-content-end">
   <div class="col-md-4">
-    <button class="btn btn-main w-100" (click)="addOrder()">Confirm Order</button>
+    <button [disabled]="order?.items?.length <= 0" class="btn btn-main w-100" (click)="addOrder()">Confirm Order</button>
   </div>
 </div>

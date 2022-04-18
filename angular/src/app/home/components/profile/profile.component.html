@@ -4,9 +4,9 @@
             <div class="card-body">
                 <h5 class="card-title">{{order?.resturantId?.name}}</h5>
                 <!-- <p class="card-text">{{order?.createdAt | date: 'dd/MM/yyyy | hh:mm'}}</p> -->
-                <p class="card-text" *ngFor="let item of order?.items">{{item.count}}× {{item.item?.name}}</p>
-
+                <p class="card-text" *ngFor="let item of order?.items">{{item?.count}}× {{item?.item?.name}}</p>
                 <a href="#" class="btn btn-primary">Total Order Price: {{order?.totalOrderPrice}}</a>
+                <button *ngIf="order?.resturantId?._id === getTodayResturantId()" class="btn btn-primary">Reorder</button>
             </div>
         </div>
     </div>

@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
     // this.authService.getAuthUserListner().subscribe((user: any) => {
     //   this.getuserOrders()
     // })
+    this.getTodayResturantId();
   }
 
   getuserOrders() {
@@ -31,6 +32,9 @@ export class ProfileComponent implements OnInit {
         // console.log(this.orders);
       });
     }
+  }
+  getTodayResturantId() {
+    return localStorage.getItem('toDayResturantId');
   }
 
 

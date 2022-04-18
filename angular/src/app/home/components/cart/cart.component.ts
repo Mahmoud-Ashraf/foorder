@@ -22,7 +22,7 @@ export class CartComponent implements OnInit {
     if (jsonOrder) {
       this.order = JSON.parse(jsonOrder);
       // this.order.items = this.order?.items.filter((menuItem: any) => menuItem.count > 0);
-      this.getTotalOrderPrice();
+      this.order.totalOrderPrice = this.getTotalOrderPrice();
     }
     // console.log('order before filter', this.order);
   }
@@ -40,11 +40,15 @@ export class CartComponent implements OnInit {
   editCartItems() {
     this.order.items = this.order.items.filter((item: any) => item.count > 0);
     localStorage.setItem('order', JSON.stringify(this.order));
-    this.getTotalOrderPrice();
+    this.order.totalOrderPrice = this.getTotalOrderPrice();
     // localStorage.setItem('order', JSON.stringify(this.order));
   }
 
   addOrder() {
+    if(!this.order) {
+      this.order = {};
+      this.order.items = [];
+    }
     this.setUserAndResturantToOrder();
     // console.log('order before add', this.order);
     // let orderToAdd: {
@@ -69,13 +73,17 @@ export class CartComponent implements OnInit {
     //     orderToAdd.items.push(orderItem);
     //   }
     // });
-    this.order.items = this.order.items.map((item: any) => ({ item: { _id: item._id, name: item.name, price: item.price, resturantId: item.resturantId }, count: item.count }))
+    const itemsToAdd = this.order?.items?.map((item: any) => ({ item: { _id: item._id, name: item.name, price: item.price, resturantId: item.resturantId }, count: item.count }))
+    let orderToAdd = {...this.order};
+    orderToAdd.items = itemsToAdd;
     console.log(this.order);
-    this.orderService.addOrder(this.order).subscribe(addedOrder => {
+    this.orderService.addOrder(orderToAdd).subscribe(addedOrder => {
       console.log(addedOrder);
       localStorage.removeItem('order');
       this.order.items = [];
       this.homeService.disableResturantDetails.next(true);
+    }, err => {
+      console.log(err);
     });
   }
 
@@ -96,16 +104,16 @@ export class CartComponent implements OnInit {
     // this.order.items = this.order.items.map((item: any) => ({ ...item, totalPrice: item.price * item.count }));
     let total = 0;
     // let initialValue = 0
-    if (this.order.items.length > 0) {
-      this.order.totalOrderPrice = this.order.items.reduce(
+    if (this.order?.items?.length > 0) {
+      return this.order.items.reduce(
         (previousValue: any, currentValue: any) => previousValue + (currentValue.price * currentValue.count)
         , total
       )
     } else {
-      this.order.totalOrderPrice = 0;
+      return 0;
     }
     // console.log(total);
-    return this.order.totalOrderPrice;
+    // return this.order.totalOrderPrice;
     // return this.order.totalOrderPrice;
     // console.log('get total price', this.order);
   }

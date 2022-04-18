@@ -29,16 +29,17 @@ export class CartComponent implements OnInit {
 
   increaseOrderCount(menuItem: any) {
     menuItem.count += 1
-    // this.editCartItems();
+    this.editCartItems();
   }
 
   decreseOrderCount(menuItem: any) {
     menuItem.count -= 1
-    // this.editCartItems();
+    this.editCartItems();
   }
 
   editCartItems() {
     this.order.items = this.order.items.filter((item: any) => item.count > 0);
+    localStorage.setItem('order', JSON.stringify(this.order));
     this.getTotalOrderPrice();
     // localStorage.setItem('order', JSON.stringify(this.order));
   }
@@ -68,7 +69,7 @@ export class CartComponent implements OnInit {
     //     orderToAdd.items.push(orderItem);
     //   }
     // });
-    this.order.items = this.order.items.map((item: any) => ({ item: {_id: item._id, name: item.name, price: item.price, resturantId: item.resturantId}, count: item.count }))
+    this.order.items = this.order.items.map((item: any) => ({ item: { _id: item._id, name: item.name, price: item.price, resturantId: item.resturantId }, count: item.count }))
     console.log(this.order);
     this.orderService.addOrder(this.order).subscribe(addedOrder => {
       console.log(addedOrder);
@@ -95,11 +96,17 @@ export class CartComponent implements OnInit {
     // this.order.items = this.order.items.map((item: any) => ({ ...item, totalPrice: item.price * item.count }));
     let total = 0;
     // let initialValue = 0
-    this.order.totalOrderPrice = this.order.items.reduce(
-      (previousValue: any, currentValue: any) => previousValue + (currentValue.price * currentValue.count)
-      , total
-    )
+    if (this.order.items.length > 0) {
+      this.order.totalOrderPrice = this.order.items.reduce(
+        (previousValue: any, currentValue: any) => previousValue + (currentValue.price * currentValue.count)
+        , total
+      )
+    } else {
+      this.order.totalOrderPrice = 0;
+    }
+    // console.log(total);
     return this.order.totalOrderPrice;
+    // return this.order.totalOrderPrice;
     // console.log('get total price', this.order);
   }
   // resetCart() {

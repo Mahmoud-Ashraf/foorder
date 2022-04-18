@@ -53,9 +53,27 @@ export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
       menu.menu.forEach((menuItem: any) => {
         menuItem.count = 0;
       });
+      let jsonOrder = localStorage.getItem('order');
+      if (jsonOrder) {
+        const localOrder = JSON.parse(jsonOrder);
+        menu.menu = menu.menu.filter((menuItem: any) => {
+          return this.getIndex(localOrder.items, menuItem._id) < 0
+        });
+        menu.menu = [...localOrder.items, ...menu.menu];
+        // let mergedOrder = localOrder.items.concat(menu.menu.filter((menuItem: any) => localOrder.items.indexOf(menuItem._id) < 0));
+      }
+      // var a = [1, 2, 3], b = [101, 2, 1, 10]
+      // var c = a.concat(b.filter((item) => a.indexOf(item) < 0))
       this.todayResturantMenu = menu.menu;
+      this.getTodayOrder();
       // console.log('menu after', this.todayResturantMenu);
     })
+  }
+
+  getIndex(arr: any, id: any): number {
+    return arr.findIndex((object: any) => {
+      return object._id === id;
+    });
   }
 
   private getTodayResturant() {
@@ -66,7 +84,7 @@ export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
       // if (jsonOrder) {
       //   this.getCurrentOrder();
       // } else {
-        this.getMenu();
+      this.getMenu();
       // }
     })
   }
@@ -98,7 +116,7 @@ export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
   //   menuItem.count = 1;
   //   // this.editCartItems();
   // }
-  
+
   // removeItemFromCart(menuItem: any) {
   //   menuItem.count = 0;
   //   // this.editCartItems();
@@ -129,7 +147,7 @@ export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if(this.countDownTimer) {
+    if (this.countDownTimer) {
       clearTimeout(this.countDownTimer);
     }
     // this.countDownTimer
@@ -139,11 +157,13 @@ export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
   //   this.order.items.push(menuItem);
   // }
   decreseOrderCount(menuItem: any) {
-    menuItem.count -=1;
+    menuItem.count -= 1;
+    this.getTodayOrder();
   }
   increaseOrderCount(menuItem: any) {
-    menuItem.count +=1;
+    menuItem.count += 1;
+    this.getTodayOrder();
   }
 
-  
+
 }

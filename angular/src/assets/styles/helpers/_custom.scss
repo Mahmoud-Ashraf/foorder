@@ -1,4 +1,3 @@
-
 @import "./variables";
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "./functions";
@@ -161,9 +160,11 @@
           cursor: pointer;
           margin-bottom: 2rem;
           max-width: 12rem;
+
           &:last-child {
             margin-bottom: 0;
           }
+
           a {
             font-size: 1.25rem;
             line-height: 1em;
@@ -187,6 +188,7 @@
           }
         }
       }
+
       &:last-child {
         .links-list {
           li {

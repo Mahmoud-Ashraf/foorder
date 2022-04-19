@@ -36,6 +36,9 @@ const userSchema = new Schema({
     },
     lastVoteDate: {
         type: String
+    },
+    wallet: {
+        type: Number
     }
 }
 );

@@ -53,5 +53,24 @@
 }
 
 .form-control {
-  padding: 13px;
+  height: 55px;
+}
+
+.upload-file {
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  height: 55px;
+  margin-bottom: 10px;
+  padding-top: 2px;
+
+  p {
+    font-size: 1rem;
+    font-weight: 600;
+    opacity: 0.7;
+  }
+}
+
+::placeholder {
+  font-size: 1rem;
+  font-weight: 600;
 }

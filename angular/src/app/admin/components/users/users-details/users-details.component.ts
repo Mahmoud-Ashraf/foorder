@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsersDetailsComponent implements OnInit {
   usersRes: any;
+  admins: any;
+  users: any;
   constructor(
     private authService: AuthService
   ) { }
@@ -19,6 +21,8 @@ export class UsersDetailsComponent implements OnInit {
   getUsers() {
     this.authService.getUsers().subscribe(usersRes => {
       this.usersRes = usersRes;
+      this.admins = this.usersRes.users.filter((user: any) => user.isAdmin);
+      this.users = this.usersRes.users.filter((user: any) => !user.isAdmin);
     })
   }
 

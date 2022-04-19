@@ -1,22 +1,74 @@
-<div class="row">
-    <div class="col-12 text-center">
-        Users
+<!-- NEW STRUCTURE -->
+<div class="row mt-5">
+    <div class="col-12">
+        <h3 class="text-bold">Manage Users</h3>
     </div>
 </div>
-<div class="row">
-    <div class="col-4" *ngFor="let user of usersRes?.users">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">{{user.name}}</h5>
-                <!-- <p class="card-text">{{order?.createdAt | date: 'dd/MM/yyyy | hh:mm'}}</p> -->
-                <p class="card-text">{{user?.email}}</p>
 
-            </div>
+<div class="row mt-3">
+    <div class="col-12">
+        <div class="input-group mb-3 py-2">
+            <input type="text" class="form-control search-input" placeholder="Search by name" aria-label="Username"
+                aria-describedby="basic-addon1">
         </div>
     </div>
 </div>
+
+
 <div class="row">
-    <div class="col-12 text-center">
-        <a href="#" class="btn btn-primary">Total Users: {{usersRes?.totalItems}}</a>
+    <div class="">
+        <h2 class="text-bold table-heading">Admins</h2>
+        <table class="table table-borderless">
+            <thead>
+                <tr class="table-header">
+                    <th>Name</th>
+                    <th class="text-center">Mail</th>
+                    <th class="text-center">Wallet</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of admins">
+                    <td>{{user.name}}</td>
+                    <td class="text-center">{{user?.email}}</td>
+                    <td class="wallet-amount wallet-amount-minus text-center">20 EGP</td>
+                    <td class="text-center">
+                        <button class="btn btn-outline-danger btn-remove-admin">
+                            Remove admin
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="">
+        <h2 class="text-bold table-heading">Users</h2>
+        <table class="table table-borderless">
+            <thead>
+                <tr class="table-header">
+                    <th>Name</th>
+                    <th class="text-center">Mail</th>
+                    <th class="text-center">Wallet</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{user.name}}</td>
+                    <td class="text-center">{{user?.email}}</td>
+                    <td class="text-center wallet-amount">13 EGP</td>
+                    <td class="text-center mw-90">
+                        <button class="btn btn-primary btn-pay mx-2">
+                            Pay
+                        </button>
+                        <button class="btn btn-outline-info btn-make-admin">
+                            Make admin
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

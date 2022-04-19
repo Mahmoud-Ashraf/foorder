@@ -61,7 +61,7 @@
 
 <!-- Paginator -->
 <button *ngIf="currentPage < (totalItems/perPage)" (click)="nextPage()" class="btn btn-primary px-3">1</button>
-<button *ngIf="currentPage > 1" (click)="prevPage()" class="btn btn-outlined-secondary  px-3">2</button>
+<button *ngIf="currentPage > 1" (click)="prevPage()" class="btn btn-outline-secondary  px-3">2</button>
 
 <ng-template #noDataFound>
   <app-no-data-found [msg]="'Sorry, No Resturants Found'"></app-no-data-found>

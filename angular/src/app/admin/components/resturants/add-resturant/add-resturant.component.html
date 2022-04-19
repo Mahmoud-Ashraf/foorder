@@ -1,4 +1,4 @@
-<form #addResturantForm=ngForm (ngSubmit)="addResturant(addResturantForm)">
+<!-- <form #addResturantForm=ngForm (ngSubmit)="addResturant(addResturantForm)">
   <div class="form-group">
     <input type="text" class="form-control" name="name" placeholder="Resturant Name" #resturantName
       [(ngModel)]="resturant.name" required minlength="5">
@@ -14,7 +14,7 @@
     </div>
   </div>
   <button type="submit" [disabled]="addResturantForm.invalid">Add Resturant</button>
-</form>
+</form> -->
 
 <!-- New Layout -->
 
@@ -34,10 +34,18 @@
 <form>
   <div class="row my-3">
     <div class="col-6">
-      <input type="text" class="form-control" placeholder="Resturant Name">
+      <input type="text" class="form-control" name="name" placeholder="Resturant Name" #resturantName
+        [(ngModel)]="resturant.name" required minlength="5">
+      <div class="has-error" *ngIf="errors && errors[getIndex(errors, resturantName)]">
+        {{errors[getIndex(errors, resturantName)]?.msg}}
+      </div>
     </div>
     <div class="col-6">
-      <input type="text" class="form-control" placeholder="Description">
+      <input type="text" class="form-control" name="content" placeholder="Resturant Content" #resturantContent
+        [(ngModel)]="resturant.content" required minlength="5">
+      <div class="has-error" *ngIf="errors && errors[getIndex(errors, resturantContent)]">
+        {{errors[getIndex(errors, resturantContent)]?.msg}}
+      </div>
     </div>
   </div>
   <div class="row mb-3">
@@ -49,6 +57,14 @@
     </div>
     <div class="col-4">
       <input type="text" class="form-control" placeholder="Elmenues URL">
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12">
+      <h5 class="text-bold">Upload menu images</h5>
+    </div>
+    <div class="col-12">
+      <input class="form-control" id="formFileLg" type="file" multiple>
     </div>
   </div>
 </form>

@@ -294,24 +294,27 @@
 }
 
 // Admin Home
-.home{
+.home {
   &-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
     &--info {
       span {
         font-size: 1.25rem;
         line-height: 1.75rem;
         margin-bottom: .5rem;
       }
+
       h2 {
         font-size: 2.5rem;
         line-height: 2.75rem;
         margin-bottom: 1rem;
         font-weight: 600;
       }
+
       h3 {
         font-size: 2rem;
         line-height: 2.2rem;
@@ -319,4 +322,28 @@
       }
     }
   }
+}
+
+// Add Restaurant
+
+.text-upload {
+  margin: 32px 0;
+}
+
+.wallet-amount {
+  font-size: 18px;
+  font-weight: 600;
+  color: #27AE60;
+}
+
+.wallet-amount-minus {
+  color: #EB5757;
+}
+
+.mw-90 {
+  max-width: 130px;
+}
+
+.table-heading {
+  margin-bottom: 20px;
 }

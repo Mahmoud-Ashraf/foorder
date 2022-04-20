@@ -19,6 +19,25 @@
 //   }
 // }
 
-.btn-wide {
+.btn.btn-browse-file {
+    font-size: 14px;
     padding: 14px 28px;
+    line-height: 17px;
+    margin-top: 3px;
+    margin-right: 3px;
+}
+
+.btn.btn-save {
+    color: $main-color;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.btn.btn-remove-admin,
+.btn.btn-make-admin {
+    padding: 11px 10px;
+}
+
+.btn.btn-pay {
+    padding: 12px 32px;
 }

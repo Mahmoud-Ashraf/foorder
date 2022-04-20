@@ -23,7 +23,7 @@
     <h3 class="text-bold">Add new Restaurant</h3>
   </div>
   <div class="col-6 text-end">
-    <button type="submit" class="btn px-5 text-bold">
+    <button type="submit" class="btn btn-save text-bold">
       Save
     </button>
   </div>
@@ -61,26 +61,26 @@
   </div>
   <div class="row mb-3">
     <div class="col-12">
-      <h5 class="text-bold">Upload menu images</h5>
+      <h5 class="text-bold text-upload">Upload menu images</h5>
     </div>
     <div class="col-12">
-      <div class="upload-file">
+      <div class="upload-file" (click)="browseImages.click()">
         <div class="row">
-          <div class="col-auto">
+          <div class="col">
             <p>
               No File Selected
             </p>
           </div>
-          <div class="col text-end">
-            <button class="btn btn-primary btn-wide">
+          <div class="col-auto text-end">
+            <button class="btn btn-primary btn-browse-file">
               Browse
             </button>
           </div>
         </div>
       </div>
     </div>
-    <!-- <div class="col-12">
-      <input class="form-control" id="formFileLg" type="file" multiple>
-    </div> -->
+    <div class="col-12" hidden>
+      <input #browseImages class="form-control" id="formFileLg" type="file" multiple>
+    </div>
   </div>
 </form>

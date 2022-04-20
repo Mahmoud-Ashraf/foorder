@@ -27,7 +27,6 @@ import { ResturantsService } from './shared/services/resturants.service';
     SharedModule,
     FlashMessagesModule.forRoot(),
     HttpClientModule
-
   ],
   bootstrap: [AppComponent],
   providers: []

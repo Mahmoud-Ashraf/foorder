@@ -1,3 +1,4 @@
+import { HomeComponent } from './../admin/components/home/home.component';
 import { EditMeuItemComponent } from './components/menu/edit-meu-item/edit-meu-item.component';
 import { AddMenuItemComponent } from './components/menu/add-menu-item/add-menu-item.component';
 import { MenuDetailsComponent } from './components/menu/menu-details/menu-details.component';
@@ -24,6 +25,9 @@ const routes: Routes = [
   {
     path: '', component: AdminComponent,
     children: [
+      {
+        path: '', component: HomeComponent
+      },
       {
         path: 'resturants', component: ResturantsComponent,
         children: [

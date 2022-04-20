@@ -28,6 +28,10 @@ import { MenuComponent } from './components/menu/menu.component';
 import { AddMenuItemComponent } from './components/menu/add-menu-item/add-menu-item.component';
 import { MenuDetailsComponent } from './components/menu/menu-details/menu-details.component';
 import { EditMeuItemComponent } from './components/menu/edit-meu-item/edit-meu-item.component';
+import { HomeComponent } from './components/home/home.component';
+// import {ChartModule} from 'primeng/chart';
+import { NgChartsModule } from 'ng2-charts';
+
 
 
 @NgModule({
@@ -57,11 +61,14 @@ import { EditMeuItemComponent } from './components/menu/edit-meu-item/edit-meu-i
     AddMenuItemComponent,
     MenuDetailsComponent,
     EditMeuItemComponent,
+    HomeComponent,
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
-    SharedModule
+    SharedModule,
+    // ChartModule
+    NgChartsModule
   ],
 })
 export class AdminModule { }

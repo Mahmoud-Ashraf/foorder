@@ -16,12 +16,18 @@ router.post(
   "/resturant",
   isAuth,
   [
-    body("name", "name is too small min length 5 char.")
+    body("name", "name is too small min length 4 char.")
       .trim()
-      .isLength({ min: 5 }),
-    body("content", "content is too small min length 5 char.")
+      .isLength({ min: 3 }),
+    body("type", "Type is too small min length 3 char.")
       .trim()
-      .isLength({ min: 5 }),
+      .isLength({ min: 3 }),
+    body("phone", "You Entered a wrong phone number.")
+      .trim()
+      .isLength({ min: 5, max: 11 }),
+    body("savedPhone", "a phone must be 11 numbers.")
+      .trim()
+      .isLength({ min: 11, max: 11 }),
   ],
   resturantsController.addResturant
 );
@@ -29,12 +35,18 @@ router.post(
 router.put("/resturant/:resturantId",
   isAuth,
   [
-    body("name", "name is too small min length 5 char.")
-      .trim()
-      .isLength({ min: 5 }),
-    body("content", "content is too small min length 5 char.")
-      .trim()
-      .isLength({ min: 5 }),
+    body("name", "name is too small min length 4 char.")
+    .trim()
+    .isLength({ min: 3 }),
+  body("type", "Type is too small min length 3 char.")
+    .trim()
+    .isLength({ min: 3 }),
+  body("phone", "You Entered a wrong phone number.")
+    .trim()
+    .isLength({ min: 5, max: 11 }),
+  body("savedPhone", "a phone must be 11 numbers.")
+    .trim()
+    .isLength({ min: 11, max: 11 }),
   ],
   resturantsController.updateResturant
 );

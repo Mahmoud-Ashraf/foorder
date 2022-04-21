@@ -7,16 +7,30 @@ const resturantSchema = new Schema({
         type: String,
         required: true
     },
-    content: {
+    type: {
         type: String,
         required: true
     },
-    vote: {
-        type: Number,
+    phone: {
+        type: String,
         required: true
     },
+    savedPhone: {
+        type: String,
+        required: true
+    },
+    elmenusUrl: {
+        type: String,
+        default: ''
+    },
+    vote: {
+        type: Number,
+        required: true,
+        default: 0,
+    },
     lastVotedAt: {
-        type: String
+        type: String,
+        default: ''
     },
     menu: [
         {

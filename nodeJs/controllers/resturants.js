@@ -107,13 +107,15 @@ exports.addResturant = (req, res, next) => {
     // console.log('hello', res);
   }
 
-  const name = req.body.name;
-  const content = req.body.content;
-  const resturant = new Resturant({
-    name: name,
-    content: content,
-    vote: 0
-  });
+  // const name = req.body.name;
+  // const content = req.body.type;
+  const resturant = new Resturant(req.body);
+  // const resturant = new Resturant({
+  //   name: name,
+  //   content: content,
+  //   vote: 0
+  // });
+  console.log(resturant);
   resturant.save()
     .then(resturant => {
       // let resturant = req.body;
@@ -146,10 +148,6 @@ exports.updateResturant = (req, res, next) => {
     // });
     // console.log('hello', res);
   }
-  const name = req.body.name;
-  const content = req.body.content;
-  const vote = req.body.vote;
-  const lastVotedAt = req.body.lastVotedAt;
   Resturant.findById(resturantId)
     .then(resturant => {
       if (!resturant) {
@@ -157,10 +155,11 @@ exports.updateResturant = (req, res, next) => {
         error.statusCode = 404;
         throw error;
       }
-      resturant.name = name;
-      resturant.content = content;
-      resturant.vote = vote;
-      resturant.lastVotedAt = lastVotedAt;
+      resturant.name = req.body.name;
+      resturant.type = req.body.type;
+      resturant.phone = req.body.phone;
+      resturant.savedPhone = req.body.savedPhone;
+      resturant.elmenusUrl = req.body.elmenusUrl;
       return resturant.save();
     })
     .then(result => {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ResturantsService } from 'src/app/shared/services/resturants.service';
 import { HelperService } from 'src/app/shared/services/helper.service';
@@ -11,10 +11,14 @@ import { HelperService } from 'src/app/shared/services/helper.service';
 export class EditResturantComponent implements OnInit {
   resturant: any = {
     name: '',
-    content: ''
+    type: '',
+    phone: '',
+    savedPhone: '',
+    elmenusUrl: ''
   };
   errors: any;
   resturantId: any;
+  @ViewChild('editResturantForm') editResturantForm: any;
   constructor(
     private resturantsService: ResturantsService,
     private activatedRoute: ActivatedRoute,
@@ -23,7 +27,7 @@ export class EditResturantComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.resturantId = params.resturantId;
       return this.resturantsService.getResturant(this.resturantId).subscribe(res => {
-        console.log('getted res', res);
+        console.log(this.resturant);
         this.resturant = res;
       })
     });
@@ -33,16 +37,17 @@ export class EditResturantComponent implements OnInit {
 
   }
 
-  updateResturant() {
+  updateResturant(form: any) {
+    console.log(form);
     this.resturantsService.updateResturant(this.resturantId, this.resturant).subscribe(
       res => {
-        this.errors = undefined;
-        console.log('success response from component', res);
+        form.reset();
         this.helperService.goBack();
       },
       err => {
+        // console.log('err', err);
         this.errors = err.error.errors;
-        console.log('faild response from component', this.errors);
+        // console.log('faild response from component', this.errors);
       }
     );
   }

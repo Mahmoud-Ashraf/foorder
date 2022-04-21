@@ -8,15 +8,18 @@ import { ResturantsService } from '../../../../shared/services/resturants.servic
   styleUrls: ['./add-resturant.component.scss']
 })
 export class AddResturantComponent implements OnInit {
-  resturant = {
-    name: '',
-    content: ''
-  };
+  // resturant = {
+  //   name: '',
+  //   type: '',
+  //   phone: '',
+  //   savedPhone: '',
+  //   elmenusUrl: ''
+  // };
   errors: any;
   constructor(
     private resturantsService: ResturantsService,
     private router: Router
-    ) { }
+  ) { }
 
   ngOnInit(): void {
 
@@ -24,15 +27,9 @@ export class AddResturantComponent implements OnInit {
 
   addResturant(form: any) {
     console.log(form);
-    this.resturantsService.addResturant(this.resturant).subscribe(
+    this.resturantsService.addResturant(form.value).subscribe(
       res => {
-        this.errors = undefined;
-        console.log('success response from component', res);
-        // this.error = undefined;
-        this.resturant = {
-          name: '',
-          content: ''
-        };
+        form.reset();
         this.router.navigate(['admin/resturants']);
       },
       err => {

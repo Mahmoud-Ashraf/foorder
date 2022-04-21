@@ -31,6 +31,7 @@ import { EditMeuItemComponent } from './components/menu/edit-meu-item/edit-meu-i
 import { HomeComponent } from './components/home/home.component';
 // import {ChartModule} from 'primeng/chart';
 import { NgChartsModule } from 'ng2-charts';
+import { Chart } from 'chart.js';
 
 
 
@@ -71,4 +72,11 @@ import { NgChartsModule } from 'ng2-charts';
     NgChartsModule
   ],
 })
-export class AdminModule { }
+export class AdminModule {
+  constructor() {
+    Chart.defaults.elements.bar.borderRadius = 8;
+    Chart.defaults.elements.bar.backgroundColor = '#56CCF2';
+    Chart.defaults.elements.bar.borderColor = '#56CCF2';
+    Chart.defaults.plugins.legend.display = false;
+  }
+}

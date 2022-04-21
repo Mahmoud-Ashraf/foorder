@@ -12,13 +12,32 @@
     <div class="home-content">
         <div class="home-charts">
             <!-- <p-chart type="bar" [data]="data" [options]="options"></p-chart> -->
-            <div style="display: block">
-                <canvas baseChart
-                  [data]="barChartData"
-                  [options]="barChartOptions"
-                  [type]="barChartType">
-                </canvas>
-              </div>
+            <div class="resturants-vote mb-2">
+                <div class="resturant-vote-title">
+                    <header>
+                        <h3>We vote for</h3>
+                    </header>
+                </div>
+                <div class="resturant-vote-chart">
+                    <div style="display: block">
+                        <canvas #resturantsChart baseChart [data]="resturantsChartData" [options]="resturantsChartOptions" [type]="barChartType">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="users-wallet mb-5">
+                <div class="users-wallet-title">
+                    <header>
+                        <h3>Wallet</h3>
+                    </header>
+                </div>
+                <div class="users wallet-chart">
+                    <div style="display: block">
+                        <canvas #usersChart baseChart [data]="usersChartData" [options]="usersChartOptions" [type]="barChartType">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

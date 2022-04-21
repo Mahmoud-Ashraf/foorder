@@ -1,8 +1,8 @@
 <div class="row mt-5">
-  <div class="col-6">
-    <h3 class="text-bold">My Restaurants</h3>
+  <div class="col">
+    <h4>My Restaurants</h4>
   </div>
-  <div class="col-6 text-end">
+  <div class="col-auto text-end">
     <button class="btn btn-primary px-5" [routerLink]="'add-resturant'">
       <i class="fas fa-plus"></i> Add New Resturant
     </button>
@@ -25,7 +25,7 @@
         <tr *ngFor="let res of resturants">
           <td [routerLink]="res._id" class="clickable">{{res?.name}}</td>
           <td>{{res?.content}}</td>
-          <td class="text-center"><button class="btn btn-primary" [routerLink]="'edit-resturant/'+res._id">Edit</button>
+          <td class="text-center"><button class="btn btn-info" [routerLink]="'edit-resturant/'+res._id">Edit</button>
             <!-- <button class="btn btn-outline-danger" (click)="deleteResturant(res._id)">Delete</button> -->
           </td>
         </tr>

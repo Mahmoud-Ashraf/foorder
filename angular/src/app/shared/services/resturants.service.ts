@@ -15,8 +15,8 @@ export class ResturantsService {
 
 
 
-  getResturants(page: number = 1, perPage: number = 0) {
-    return this.requests.getApi(`resturants?page=${page}&perPage=${perPage}`);
+  getResturants(page: number = 1, perPage: number = 0, filter: string = '') {
+    return this.requests.getApi(`resturants?page=${page}&perPage=${perPage}&filter=${filter}`);
     // .then(res => {
     //   if (res.status !== 200) {
     //     throw new Error('Faild To Fetch Resturants');

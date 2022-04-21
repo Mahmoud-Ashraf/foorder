@@ -4,16 +4,27 @@ const { validationResult } = require("express-validator");
 exports.getResturants = (req, res, next) => {
   const currentPage = req.query.page || 1;
   let perPage = req.query.perPage || 2;
+  let filter = req.query.filter || '';
   let totalItems;
-  Resturant.find().countDocuments()
+  const regex = new RegExp(filter, 'i') // i for case insensitive
+  Resturant.find({
+    $or: [
+      { name: { $regex: regex } },
+      { content: { $regex: regex } },
+    ]
+  })
+    .countDocuments()
     .then(count => {
       if (perPage == 0) {
-        // console.log('not per page');
         perPage = count;
       }
-      // console.log('perPage =', perPage);
       totalItems = count;
-      return Resturant.find()
+      return Resturant.find({
+        $or: [
+          { name: { $regex: regex } },
+          { content: { $regex: regex } },
+        ]
+      })
         .skip((currentPage - 1) * perPage)
         .limit(perPage);
     })

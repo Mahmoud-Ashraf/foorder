@@ -32,6 +32,7 @@ import { HomeComponent } from './components/home/home.component';
 // import {ChartModule} from 'primeng/chart';
 import { NgChartsModule } from 'ng2-charts';
 import { Chart } from 'chart.js';
+import { TableFilterComponent } from './components/table-filter/table-filter.component';
 
 
 
@@ -63,6 +64,7 @@ import { Chart } from 'chart.js';
     MenuDetailsComponent,
     EditMeuItemComponent,
     HomeComponent,
+    TableFilterComponent,
   ],
   imports: [
     CommonModule,

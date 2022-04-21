@@ -34,8 +34,8 @@
   </div>
   <div class="col-12">
     <!-- Paginator -->
-    <button *ngIf="currentPage < (totalItems/perPage)" (click)="nextPage()" class="btn btn-primary px-3">1</button>
-    <button *ngIf="currentPage > 1" (click)="prevPage()" class="btn btn-outline-secondary  px-3">2</button>
+    <app-paginator [currentPage]="currentPage" [perPage]="perPage" [totalItems]="totalItems" (pageChange)="goToPage($event)"></app-paginator>
+    <!-- <button *ngIf="currentPage > 1" (click)="prevPage()" class="btn btn-outline-secondary  px-3">2</button> -->
   </div>
 </div>
 

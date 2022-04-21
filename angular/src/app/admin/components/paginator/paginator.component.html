@@ -1,0 +1,5 @@
+<div class="row justify-content-end">
+    <div class="col-auto">
+        <button *ngFor="let page of pagesArr" (click)="onPageChange(page)" [ngClass]="page === currentPage? 'btn-primary': 'btn-outline-secondary'" class="btn px-3 me-2">{{page}}</button>
+    </div>
+</div>

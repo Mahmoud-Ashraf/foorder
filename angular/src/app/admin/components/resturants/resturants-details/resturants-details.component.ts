@@ -14,6 +14,8 @@ export class ResturantsDetailsComponent implements OnInit {
   currentPage: number = 1;
   totalItems: number;
   perPage: number = 4;
+  pagesArr: any;
+  filterValue: string;
 
   constructor(
     private resturantsService: ResturantsService,
@@ -24,6 +26,8 @@ export class ResturantsDetailsComponent implements OnInit {
     this.getResturants();
   }
   onFilter(e:any) {
+    this.currentPage = 1;
+    this.filterValue = e;
     this.getResturants(e);
   }
   getResturants(filterValue: string = '') {
@@ -38,26 +42,20 @@ export class ResturantsDetailsComponent implements OnInit {
   navigate(id: any) {
     this.router.navigate([`resturant/:${id}`]);
   }
-  deleteResturant(id: any) {
-    this.resturantsService.deleteResturant(id).subscribe(
-      res => {
-        console.log(res);
-        this.getResturants();
-      },
-      err => {
-        console.log(err);
-      },
-    );
-  }
-
-  // Paginator
-  nextPage() {
-    this.currentPage ++;
-    this.getResturants();
-  }
-  prevPage() {
-    this.currentPage --;
-    this.getResturants();
+  // deleteResturant(id: any) {
+  //   this.resturantsService.deleteResturant(id).subscribe(
+  //     res => {
+  //       console.log(res);
+  //       this.getResturants();
+  //     },
+  //     err => {
+  //       console.log(err);
+  //     },
+  //   );
+  // }
+  goToPage(pageNo: any) {
+    this.currentPage = pageNo;
+    this.getResturants(this.filterValue);
   }
 
 }

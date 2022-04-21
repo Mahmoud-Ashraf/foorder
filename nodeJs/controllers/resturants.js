@@ -31,7 +31,7 @@ exports.getResturants = (req, res, next) => {
     .then(resturants => {
       res
         .status(200)
-        .json({ message: 'resturant fetched', resturants: resturants, totalItems: totalItems, perPage: perPage, currentPage: currentPage });
+        .json({ message: 'resturant fetched', resturants: resturants, totalItems: totalItems, perPage: parseInt(perPage), currentPage: parseInt(currentPage) });
     })
     .catch(err => {
       if (!err.statusCode) {

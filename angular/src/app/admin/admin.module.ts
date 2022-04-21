@@ -33,6 +33,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NgChartsModule } from 'ng2-charts';
 import { Chart } from 'chart.js';
 import { TableFilterComponent } from './components/table-filter/table-filter.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 
 
 
@@ -65,6 +66,7 @@ import { TableFilterComponent } from './components/table-filter/table-filter.com
     EditMeuItemComponent,
     HomeComponent,
     TableFilterComponent,
+    PaginatorComponent,
   ],
   imports: [
     CommonModule,

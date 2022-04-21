@@ -1,8 +1,8 @@
 import { ResturantsService } from './../../../shared/services/resturants.service';
 import { AuthService } from './../../../shared/services/auth.service';
 import { Subscription } from 'rxjs';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { ChartConfiguration, ChartType, Chart } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 
 
@@ -11,45 +11,107 @@ import { BaseChartDirective } from 'ng2-charts';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   now = new Date();
   private userListnerSub: Subscription;
+  private usersSub: Subscription;
+  private resturantsSub: Subscription;
   loggedUser: any;
   resturants: any;
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
-  public barChartType: ChartType = 'bar';
-  public barChartData = {
-    // labels: ['2006', '2007', '2008', '2009', '2010', '2011', '2012'],
-    datasets: [
-      {
-        data: [
-          { name: 'Hamada Sheraton', vote: 5 },
-          { name: 'Bashandy', vote: 3 },
-          { name: 'Anas Al Demashqy', vote: 2 },
-
-        ]
-      }
-    ]
+  @ViewChild(BaseChartDirective) resturantsChart: BaseChartDirective | undefined;
+  @ViewChild(BaseChartDirective) usersChart: BaseChartDirective | undefined;
+  barChartType: ChartType = 'bar';
+  resturantsChartData = {
+    datasets: [{
+      backgroundColor: '#09c',
+      data: [],
+      // color: '#fff',
+      borderColor: '#09c'
+    }]
+  };
+  usersChartData = {
+    datasets: [{
+      backgroundColor: '#09c',
+      data: [],
+      // color: '#fff',
+      borderColor: '#09c'
+    }]
   };
 
-  public barChartOptions: ChartConfiguration['options'] = {
+  usersChartOptions: ChartConfiguration['options'] = {
     responsive: true,
-    // // We use these empty structures as placeholders for dynamic theming.
+    parsing: {
+      xAxisKey: 'name',
+      yAxisKey: 'wallet',
+    },
+    scales: {
+      x: {
+        display: false
+      }
+    },
     // scales: {
-    //   x: {},
-    //   y: {
-    //     min: 10
+    
+    //   ticks: {
+    //     fontSize: 12,
+    //     padding: 0,
+    //     fontFamily: 'Hacen-Algeria'
     //   }
-    // },
-    // plugins: {
-    //   legend: {
-    //     display: true,
-    //   },
-    // },
+    // }
+    plugins: {
+      legend: {
+        display: false
+      }
+    }
+  };
+  resturantsChartOptions: ChartConfiguration['options'] = {
+    responsive: true,
     parsing: {
       xAxisKey: 'name',
       yAxisKey: 'vote',
-    }
+    },
+    scales: {
+      x: {
+        ticks: {
+          padding: 16,
+          // callback: (value, index, values) => {
+          //   console.log(value, index, values);
+          //   return value;
+          // },
+          // backdropColor: '#5D5FEF',
+          // backdropPadding: 50,
+          // showLabelBackdrop: true,
+          // color: '#fff',
+          font: {
+            size: 14,
+            lineHeight: 1.375,
+            family: 'poppins'
+          }
+        }
+      }
+    },
+    // plugins: {
+    //   legend: {
+    //     display: true,
+    //     labels: {
+    //       font: {
+    //         size: 16,
+    //         lineHeight: 1.375,
+    //         family: 'poppins'
+    //       }
+    //     }
+    //   }
+    // },
+    // elements: {
+    //   bar: {
+    //     borderRadius: 8,
+    //     backgroundColor: '#56CCF2',
+    //     borderColor: '#56CCF2',
+    //   }
+    // },
+    // layout: {
+    //   autoPadding: false,
+    //   padding: 90
+    // }
   };
   constructor(
     private authService: AuthService,
@@ -71,14 +133,21 @@ export class HomeComponent implements OnInit {
       .getAuthUserListner()
       .subscribe((user: any) => {
         this.loggedUser = user;
-        // console.log('loggedUser: ', this.loggedUser);
       });
-    this.resturantsService.getResturants().subscribe((resturantsRes: any) => {
-      this.resturants = resturantsRes.resturants;
-      this.barChartData.datasets[0].data = this.resturants;
-      this.chart?.update();
-      console.log(this.resturants);
+    this.resturantsSub = this.resturantsService.getResturants().subscribe((resturantsRes: any) => {
+      this.resturantsChartData.datasets[0].data = resturantsRes.resturants;
+      this.resturantsChart?.update();
+    });
+    this.usersSub = this.authService.getUsers().subscribe((usersRes: any) => {
+      this.usersChartData.datasets[0].data = usersRes.users;
+      this.usersChart?.update();
     })
+  }
+
+  ngOnDestroy() {
+    this.userListnerSub?.unsubscribe();
+    this.usersSub?.unsubscribe();
+    this.resturantsSub?.unsubscribe();
   }
 
 }

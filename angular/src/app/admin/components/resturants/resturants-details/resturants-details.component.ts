@@ -21,10 +21,13 @@ export class ResturantsDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getResturants()
+    this.getResturants();
   }
-  getResturants() {
-    this.resturantsService.getResturants(this.currentPage, this.perPage).subscribe((res: any) => {
+  onFilter(e:any) {
+    this.getResturants(e);
+  }
+  getResturants(filterValue: string = '') {
+    this.resturantsService.getResturants(this.currentPage, this.perPage, filterValue).subscribe((res: any) => {
       this.resturants = res.resturants;
       this.currentPage = res.currentPage;
       this.perPage = res.perPage;

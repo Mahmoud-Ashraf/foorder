@@ -1,57 +1,65 @@
-<div class="row mt-5">
-  <div class="col">
-    <h4>My Restaurants</h4>
-  </div>
-  <div class="col-auto text-end">
-    <button class="btn btn-primary px-5" [routerLink]="'add-resturant'">
-      <i class="fas fa-plus"></i> Add New Resturant
-    </button>
-  </div>
-</div>
-
-<app-table-filter (onFilter)="onFilter($event)"></app-table-filter>
-
-<div class="row" *ngIf="totalItems > 0 else noDataFound">
+<div class="row gy-3">
   <div class="col-12">
-    <table class="table table-borderless">
-      <thead>
-        <tr class="table-header">
-          <th>Restaurant Name</th>
-          <th>Food type</th>
-          <th class="text-center">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let res of resturants">
-          <td [routerLink]="res._id" class="clickable">{{res?.name}}</td>
-          <td>{{res?.type}}</td>
-          <td class="text-center"><button class="btn btn-info" [routerLink]="'edit-resturant/'+res._id">Edit</button>
-            <!-- <button class="btn btn-outline-danger" (click)="deleteResturant(res._id)">Delete</button> -->
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="row mt-5">
+      <div class="col">
+        <h4>My Restaurants</h4>
+      </div>
+      <div class="col-auto text-end">
+        <button class="btn btn-primary px-5" [routerLink]="'add-resturant'">
+          <i class="fas fa-plus"></i> Add New Resturant
+        </button>
+      </div>
+    </div>
   </div>
   <div class="col-12">
-    <!-- Paginator -->
-    <app-paginator [currentPage]="currentPage" [perPage]="perPage" [totalItems]="totalItems" (pageChange)="goToPage($event)"></app-paginator>
-    <!-- <button *ngIf="currentPage > 1" (click)="prevPage()" class="btn btn-outline-secondary  px-3">2</button> -->
+    <app-table-filter (onFilter)="onFilter($event)"></app-table-filter>
+  </div>
+  <div class="col-12">
+    <div class="row" *ngIf="totalItems > 0 else noDataFound">
+      <div class="col-12">
+        <table class="table table-borderless">
+          <thead>
+            <tr class="table-header">
+              <th>Restaurant Name</th>
+              <th>Food type</th>
+              <th class="text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let res of resturants">
+              <td [routerLink]="res._id" class="clickable">{{res?.name}}</td>
+              <td>{{res?.type}}</td>
+              <td class="text-center"><button class="btn btn-info"
+                  [routerLink]="'edit-resturant/'+res._id">Edit</button>
+                <!-- <button class="btn btn-outline-danger" (click)="deleteResturant(res._id)">Delete</button> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-12">
+        <!-- Paginator -->
+        <app-paginator [currentPage]="currentPage" [perPage]="perPage" [totalItems]="totalItems"
+          (pageChange)="goToPage($event)"></app-paginator>
+        <!-- <button *ngIf="currentPage > 1" (click)="prevPage()" class="btn btn-outline-secondary  px-3">2</button> -->
+      </div>
+    </div>
+
+    <!-- <div class="border p-2" *ngFor="let res of resturants">
+      <h6 class="d-flex justify-content-between" [routerLink]="res._id">
+        {{res?.name}}
+        <span>
+          <i class="fa-solid fa-bell text-danger ms-2"></i>
+          <i class="fa-solid fa-hand-pointer text-main"></i>
+        </span>
+        <span class="text-muted"></span>
+      </h6>
+      <p class="m-0">{{res?.content}}</p>
+      <button class="btn btn-warning" [routerLink]="'edit-resturant/'+res._id">Edit</button>
+      <button class="btn btn-danger" (click)="deleteResturant(res._id)">Delete</button>
+    </div> -->
+    <ng-template #noDataFound>
+      <app-no-data-found [msg]="'Sorry, No Resturants Found'"></app-no-data-found>
+    </ng-template>
   </div>
 </div>
-
-<!-- <div class="border p-2" *ngFor="let res of resturants">
-  <h6 class="d-flex justify-content-between" [routerLink]="res._id">
-    {{res?.name}}
-    <span>
-      <i class="fa-solid fa-bell text-danger ms-2"></i>
-      <i class="fa-solid fa-hand-pointer text-main"></i>
-    </span>
-    <span class="text-muted"></span>
-  </h6>
-  <p class="m-0">{{res?.content}}</p>
-  <button class="btn btn-warning" [routerLink]="'edit-resturant/'+res._id">Edit</button>
-  <button class="btn btn-danger" (click)="deleteResturant(res._id)">Delete</button>
-</div> -->
-<ng-template #noDataFound>
-  <app-no-data-found [msg]="'Sorry, No Resturants Found'"></app-no-data-found>
-</ng-template>

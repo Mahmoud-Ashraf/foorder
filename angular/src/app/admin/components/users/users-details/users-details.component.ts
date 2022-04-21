@@ -10,6 +10,7 @@ export class UsersDetailsComponent implements OnInit {
   usersRes: any;
   admins: any;
   users: any;
+  filterValue: string;
   constructor(
     private authService: AuthService
   ) { }
@@ -18,12 +19,17 @@ export class UsersDetailsComponent implements OnInit {
     this.getUsers();
   }
 
-  getUsers() {
-    this.authService.getUsers().subscribe(usersRes => {
+  getUsers(filterValue: string = '') {
+    this.authService.getUsers({filter: filterValue}).subscribe(usersRes => {
       this.usersRes = usersRes;
       this.admins = this.usersRes.users.filter((user: any) => user.isAdmin);
       this.users = this.usersRes.users.filter((user: any) => !user.isAdmin);
     })
+  }
+  onFilter(e:any) {
+    // this.currentPage = 1;
+    this.filterValue = e;
+    this.getUsers(e);
   }
 
 }

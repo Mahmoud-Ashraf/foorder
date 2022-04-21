@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-table-filter',
@@ -6,7 +6,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./table-filter.component.scss']
 })
 export class TableFilterComponent implements OnInit {
-  filterValue: string;
+  @Input() filterValue: string;
   @Output() onFilter: EventEmitter<any> = new EventEmitter();
   constructor() { }
 

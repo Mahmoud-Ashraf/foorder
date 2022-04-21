@@ -11,6 +11,9 @@ const menuSchema = new Schema({
         type: Number,
         required: true
     },
+    ingredients: {
+        type: String
+    },
     // count: {
     //     type: Number,
     //     // required: true

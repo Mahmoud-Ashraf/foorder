@@ -8,12 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-menu-item.component.scss']
 })
 export class AddMenuItemComponent implements OnInit {
-  menuItem = {
-    name: undefined,
-    price: undefined,
-    resturantId: undefined,
-    count: 0
-  };
+  // menuItem = {
+  //   name: '',
+  //   price: '',
+  //   ingredients: '',
+  //   resturantId: ''
+  // };
   errors: any;
   resturants: any;
   constructor(
@@ -27,20 +27,14 @@ export class AddMenuItemComponent implements OnInit {
 
   addMenuItem(form: any) {
     console.log(form);
-    this.menuService.addMenuItem(this.menuItem).subscribe(
+    this.menuService.addMenuItem(form.value).subscribe(
       res => {
-        this.errors = undefined;
-        console.log('success response from component', res);
-        // this.error = undefined;
-        this.menuItem = {
-          name: undefined,
-          price: undefined,
-          resturantId: undefined,
-          count: 0
-        };
+        console.log(res);
+        form.reset();
       },
       err => {
-        this.errors = err.error.errors;
+        console.log(err);
+        this.errors = err?.error?.errors;
         console.log('faild response from component', this.errors);
       },
     );

@@ -111,16 +111,27 @@ exports.login = (req, res, next) => {
 exports.getUsers = (req, res, next) => {
     const currentPage = req.query.page || 1;
     let perPage = req.query.perPage || 2;
+    let filter = req.query.filter || '';
     let totalItems;
-    User.find().countDocuments()
+    const regex = new RegExp(filter, 'i') // i for case insensitive
+    User.find({
+        $or: [
+            { name: { $regex: regex } },
+            { email: { $regex: regex } },
+        ]
+    })
+        .countDocuments()
         .then(count => {
             if (perPage == 0) {
-                // console.log('not per page');
                 perPage = count;
             }
-            // console.log('perPage =', perPage);
             totalItems = count;
-            return User.find()
+            return User.find({
+                $or: [
+                    { name: { $regex: regex } },
+                    { email: { $regex: regex } },
+                ]
+            })
                 .skip((currentPage - 1) * perPage)
                 .limit(perPage);
         })

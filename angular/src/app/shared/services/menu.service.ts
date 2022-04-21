@@ -9,8 +9,8 @@ export class MenuService {
     private requests: RequestsService
   ) {}
 
-  getMenu(resturantId: string, page: number = 1, perPage: number = 0) {
-    return this.requests.getApi(`menu/${resturantId}?page=${page}&perPage=${perPage}`);
+  getMenu(resturantId: string = '', page: number = 1, perPage: number = 0, filter: string = '') {
+    return this.requests.getApi(`menu?resturantId=${resturantId}&page=${page}&perPage=${perPage}&filter=${filter}`);
   }
 
   getMenuItem(id: any) {

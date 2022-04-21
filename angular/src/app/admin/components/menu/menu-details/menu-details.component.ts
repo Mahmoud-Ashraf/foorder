@@ -1,3 +1,4 @@
+import { ResturantsService } from 'src/app/shared/services/resturants.service';
 import { MenuService } from './../../../../shared/services/menu.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -12,18 +13,29 @@ export class MenuDetailsComponent implements OnInit {
   currentPage: number = 1;
   totalItems: number;
   perPage: number = 4;
+  @Input() filterValue: string;
+  resturants: any;
+  selectedResturantId: string = '';
   @Input() resturantId: string;
   constructor(
     private menuService: MenuService,
+    private resturantsService: ResturantsService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-
-    this.getMenu(this.resturantId);
+    this.getResturants();
+    this.getMenu();
   }
-  getMenu(resturantId: string) {
-    this.menuService.getMenu(resturantId, this.currentPage, this.perPage).subscribe((res: any) => {
+
+  onFilter(e:any) {
+    this.currentPage = 1;
+    this.filterValue = e;
+    this.getMenu(e);
+  }
+
+  getMenu(filterValue: string = '') {
+    this.menuService.getMenu(this.selectedResturantId, this.currentPage, this.perPage, filterValue).subscribe((res: any) => {
       this.resturantMenu = res.menu;
       this.currentPage = res.currentPage;
       this.perPage = res.perPage;
@@ -48,12 +60,26 @@ export class MenuDetailsComponent implements OnInit {
   }
 
   // Paginator
-  nextPage() {
-    this.currentPage++;
-    // this.getMenu();
+  // nextPage() {
+  //   this.currentPage++;
+  //   // this.getMenu();
+  // }
+  // prevPage() {
+  //   this.currentPage--;
+  //   // this.getMenu();
+  // }
+  goToPage(pageNo: any) {
+    this.currentPage = pageNo;
+    this.getMenu(this.filterValue);
   }
-  prevPage() {
-    this.currentPage--;
-    // this.getMenu();
+  getResturants() {
+    this.resturantsService.getResturants().subscribe((resturants: any) => {
+      this.resturants = resturants.resturants;
+    })
+  }
+
+  filterMenuByResturant() {
+    this.filterValue = '';
+    this.getMenu();
   }
 }

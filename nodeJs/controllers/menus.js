@@ -2,40 +2,98 @@ const Menu = require('../models/menu');
 const Resturant = require('../models/resturant');
 const { validationResult } = require("express-validator");
 const user = require('../models/user');
+// const mongoose = require('mongoose');
+const ObjectId = require('mongoose').Types.ObjectId;
+
 
 exports.getMenu = (req, res, next) => {
     const currentPage = req.query.page || 1;
     let perPage = req.query.perPage || 2;
-    const resturantId = req.params.resturantId;
+    let resturantId = req.query.resturantId || '';
+    console.log(resturantId, typeof (resturantId));
+    // let resturantId = new ObjectId((req.query.resturantId.length < 12) ? "123456789012" : req.query.resturantId);
+    let filter = req.query.filter || '';
     let totalItems;
-    Menu.find({ resturantId: resturantId })
-        .countDocuments()
-        .then(count => {
-            if (count === 0) {
-                const error = new Error('No Menu Found');
-                error.statusCode = 404;
-                throw error;
-            }
-            if (perPage == 0) {
-                perPage = count;
-            }
-            totalItems = count;
-            return Menu.find({ resturantId: resturantId })
-                .skip((currentPage - 1) * perPage)
-                .limit(perPage)
+    const regex = new RegExp(filter, 'i') // i for case insensitive
+    if (resturantId === '') {
+        Menu.find({
+            name: { $regex: regex }
         })
-        // .populate('menu')
-        .then(menu => {
-            res
-                .status(200)
-                .json({ message: 'menu fetched', menu: menu, currentPage: currentPage, perPage: perPage, totalItems: totalItems });
+            .countDocuments()
+            .then(count => {
+                if (perPage == 0) {
+                    perPage = count;
+                }
+                totalItems = count;
+                return Menu.find({
+                    name: { $regex: regex }
+                })
+                    .skip((currentPage - 1) * perPage)
+                    .limit(perPage)
+            })
+            // .populate('menu')
+            .then(menu => {
+                res
+                    .status(200)
+                    .json({ message: 'menu fetched', menu: menu, currentPage: parseInt(currentPage), perPage: parseInt(perPage), totalItems: totalItems });
+                // res.end();
+            })
+            .catch(err => {
+                if (!err.statusCode) {
+                    err.statusCode = 500;
+                }
+                next(err);
+            })
+    }
+    else {
+        Menu.find({
+            $and: [
+                { name: { $regex: regex } },
+                { resturantId: resturantId },
+                // '_id': { $in: [
+                //     mongoose.Types.ObjectId('4ed3ede8844f0f351100000c'),
+                //     mongoose.Types.ObjectId('4ed3f117a844e0471100000d'), 
+                //     mongoose.Types.ObjectId('4ed3f18132f50c491100000e')
+                // ]}
+            ],
         })
-        .catch(err => {
-            if (!err.statusCode) {
-                err.statusCode = 500;
-            }
-            next(err);
-        })
+            .countDocuments()
+            .then(count => {
+                // if (count === 0) {
+                //     // const error = new Error('No Menu Found');
+                //     // error.statusCode = 200;
+                //     // throw error;
+                //     res
+                //         .status(200)
+                //         .json({ message: 'No Menu Found', menu: [], totalItems: 0 })
+                // }
+                if (perPage == 0) {
+                    perPage = count;
+                }
+                totalItems = count;
+                resturantId = (req.query.resturantId.length < 12) ? "" : req.query.resturantId
+                return Menu.find({
+                    $and: [
+                        { name: { $regex: regex } },
+                        { resturantId: resturantId }
+                    ],
+                })
+                    .skip((currentPage - 1) * perPage)
+                    .limit(perPage)
+            })
+            // .populate('menu')
+            .then(menu => {
+                res
+                    .status(200)
+                    .json({ message: 'menu fetched', menu: menu, currentPage: parseInt(currentPage), perPage: parseInt(perPage), totalItems: totalItems });
+            })
+            .catch(err => {
+                if (!err.statusCode) {
+                    err.statusCode = 500;
+                }
+                next(err);
+            })
+    }
 };
 
 exports.getMenuItem = (req, res, next) => {
@@ -62,6 +120,7 @@ exports.getMenuItem = (req, res, next) => {
 
 exports.addMenuItem = (req, res, next) => {
     // console.log('menu request', req);
+    console.log(req);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         const error = new Error('Validation Faild, Enter data in correct format');
@@ -80,12 +139,7 @@ exports.addMenuItem = (req, res, next) => {
     // console.log(req);
     let joinResturant;
 
-    const menuItem = new Menu({
-        name: name,
-        price: price,
-        resturantId: req.body.resturantId,
-        // count: 0
-    });
+    const menuItem = new Menu(req.body);
     menuItem.save()
         .then(menuItem => {
             // let menuItem = req.body;

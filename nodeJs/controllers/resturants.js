@@ -10,7 +10,7 @@ exports.getResturants = (req, res, next) => {
   Resturant.find({
     $or: [
       { name: { $regex: regex } },
-      { content: { $regex: regex } },
+      { type: { $regex: regex } },
     ]
   })
     .countDocuments()
@@ -22,7 +22,7 @@ exports.getResturants = (req, res, next) => {
       return Resturant.find({
         $or: [
           { name: { $regex: regex } },
-          { content: { $regex: regex } },
+          { type: { $regex: regex } },
         ]
       })
         .skip((currentPage - 1) * perPage)

@@ -1,7 +1,42 @@
+<div class="row my-3">
+  <div class="col-6">
+    <h3 class="text-bold">Menu Items</h3>
+  </div>
+  <div class="col-6 text-end">
+    <button class="btn btn-primary px-5" [routerLink]="'/admin/menu/add-menu-item'">
+      <i class="fas fa-plus"></i> Add Menu Item
+    </button>
+  </div>
+</div>
+
 <div *ngIf="totalItems > 0 else noDataFound">
 
+  <!-- TABLE -->
+
+  <table class="table table-borderless">
+    <thead>
+      <tr class="table-header">
+        <th>Name & ING.</th>
+        <th class="text-center">Price</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let menuItem of resturantMenu">
+        <td [routerLink]="menuItem._id">{{menuItem?.name}}</td>
+        <td class="text-center">{{menuItem?.price}}</td>
+        <td class="text-center mw-90">
+          <button class="btn btn-info btn-pay mx-2"
+            [routerLink]="'/admin/menu/edit-menu-item/'+menuItem._id">Edit</button>
+          <button class="btn btn-outline-danger" (click)="deleteMenuItem(menuItem._id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
 </div>
-<div class="border p-2" *ngFor="let menuItem of resturantMenu">
+
+<!-- <div class="border p-2" *ngFor="let menuItem of resturantMenu">
   <h6 class="d-flex justify-content-between" [routerLink]="menuItem._id">
     {{menuItem?.name}}
     <span>
@@ -13,14 +48,12 @@
   <p class="m-0">{{menuItem?.price}}</p>
   <button class="btn btn-warning" [routerLink]="'edit-menu-item/'+menuItem._id">Edit</button>
   <button class="btn btn-danger" (click)="deleteMenuItem(menuItem._id)">Delete</button>
-</div>
+</div> -->
 
 <!-- Paginator -->
-<button *ngIf="currentPage < (totalItems/perPage)" (click)="nextPage()">Next</button>
-<button *ngIf="currentPage > 1" (click)="prevPage()">Prev</button>
+<button *ngIf="currentPage < (totalItems/perPage)" (click)="nextPage()" class="btn btn-primary">Next</button>
+<button *ngIf="currentPage > 1" (click)="prevPage()" class="btn btn-outline-secondary">Prev</button>
 
 <ng-template #noDataFound>
   <app-no-data-found [msg]="'Sorry, No Menu Items Found'"></app-no-data-found>
 </ng-template>
-
-<button class="btn btn-main" [routerLink]="'add-menu-item'">Add New Menu Item</button>

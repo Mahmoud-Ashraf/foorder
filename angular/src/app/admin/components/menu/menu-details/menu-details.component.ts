@@ -1,5 +1,5 @@
 import { MenuService } from './../../../../shared/services/menu.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,7 +12,7 @@ export class MenuDetailsComponent implements OnInit {
   currentPage: number = 1;
   totalItems: number;
   perPage: number = 4;
-
+  @Input() resturantId: string;
   constructor(
     private menuService: MenuService,
     private router: Router
@@ -20,7 +20,7 @@ export class MenuDetailsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.getMenu()
+    this.getMenu(this.resturantId);
   }
   getMenu(resturantId: string) {
     this.menuService.getMenu(resturantId, this.currentPage, this.perPage).subscribe((res: any) => {

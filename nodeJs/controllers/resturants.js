@@ -155,11 +155,15 @@ exports.updateResturant = (req, res, next) => {
         error.statusCode = 404;
         throw error;
       }
+      console.log(req.body);
+      // resturant = req.body;
       resturant.name = req.body.name;
       resturant.type = req.body.type;
       resturant.phone = req.body.phone;
       resturant.savedPhone = req.body.savedPhone;
       resturant.elmenusUrl = req.body.elmenusUrl;
+      resturant.lastVotedAt = req.body.lastVotedAt;
+      resturant.vote = req.body.vote;
       return resturant.save();
     })
     .then(result => {
@@ -197,5 +201,9 @@ exports.deleteResturant = (req, res, next) => {
 
 exports.resetResturantsVote = (req, res, next) => {
   Resturant.updateMany({}, { vote: 0 })
-    .then(resturants => { console.log(resturants) })
+    .then(resturants => {
+      res
+        .status(200)
+        .json(resturants);
+    })
 }

@@ -36,17 +36,17 @@ router.put("/resturant/:resturantId",
   isAuth,
   [
     body("name", "name is too small min length 4 char.")
-    .trim()
-    .isLength({ min: 3 }),
-  body("type", "Type is too small min length 3 char.")
-    .trim()
-    .isLength({ min: 3 }),
-  body("phone", "You Entered a wrong phone number.")
-    .trim()
-    .isLength({ min: 5, max: 11 }),
-  body("savedPhone", "a phone must be 11 numbers.")
-    .trim()
-    .isLength({ min: 11, max: 11 }),
+      .trim()
+      .isLength({ min: 3 }),
+    body("type", "Type is too small min length 3 char.")
+      .trim()
+      .isLength({ min: 3 }),
+    body("phone", "You Entered a wrong phone number.")
+      .trim()
+      .isLength({ min: 5, max: 11 }),
+    body("savedPhone", "a phone must be 11 numbers.")
+      .trim()
+      .isLength({ min: 11, max: 11 }),
   ],
   resturantsController.updateResturant
 );

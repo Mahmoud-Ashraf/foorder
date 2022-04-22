@@ -55,7 +55,7 @@ export class PollComponent implements OnInit, OnDestroy {
       // console.log('selected after update', this.selectedResturant, this.currentUser);
       this.updateResturant(this.selectedResturant._id, this.selectedResturant);
       this.updateUser(this.currentUser._id, this.currentUser);
-      this.getResturants();
+      // this.getResturants();
       // this.authService.autoAuthUser();
       this.selectedResturant = undefined;
     }
@@ -63,6 +63,7 @@ export class PollComponent implements OnInit, OnDestroy {
 
   private getResturants() {
     this.resturantsSub = this.resturantsService.getResturants().subscribe((resturants: any) => {
+      console.log('Resturants object', resturants);
       this.resturants = resturants.resturants;
       this.resetResturantsVote();
     })
@@ -70,8 +71,10 @@ export class PollComponent implements OnInit, OnDestroy {
 
   resetResturantsVote() {
     const notReset = this.resturants.some(resturant => {
+      console.log('resturant ', resturant,'lastVotedAt is today?: ', new Date().getDate() === new Date(resturant.lastVotedAt).getDate())
       return new Date().getDate() === new Date(resturant.lastVotedAt).getDate();
     });
+    console.log('reset status', notReset);
     if (!notReset) {
       this.resturantsService.resetResturantsVote().subscribe(resturants => {
         console.log(resturants);

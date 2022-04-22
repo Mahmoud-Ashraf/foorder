@@ -1,1 +1,68 @@
-<p>edit-meu-item works!</p>
+
+
+<form #editMenuItemForm=ngForm (ngSubmit)="updateMenuItem(editMenuItemForm)">
+    <div class="row mt-5">
+      <div class="col">
+        <h4>Edit Menu item {{menuItem?.name}}</h4>
+      </div>
+      <div class="col-auto text-end">
+        <button type="submit" class="btn btn-save text-bold">
+          Save
+        </button>
+      </div>
+    </div>
+    <div class="row gy-3">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <input type="text" class="form-control" name="name" placeholder="Menu Item Name" #menuItemName [(ngModel)]="menuItem.name" required minlength="3">
+              <div class="has-error" *ngIf="errors && errors[getIndex(errors, menuItemName)]">
+                {{errors[getIndex(errors, menuItemName)]?.msg}}
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <select class="form-select" name="resturantId" placeholder="Select Resturant" aria-label="Default select example" #resturant required>
+                <option [value]="menuItem?.resturantId?._id" disabled selected hidden>{{menuItem?.resturantId?.name}}</option>
+                <!-- <option *ngFor="let resturant of resturants" [value]="resturant._id">{{resturant.name}}</option> -->
+              </select>
+              <div class="has-error" *ngIf="errors && errors[getIndex(errors, resturant)]">
+                {{errors[getIndex(errors, resturant)]?.msg}}
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="row">
+          <div class="col-8">
+            <div class="form-group">
+              <input type="text" class="form-control" name="ingredients"
+                placeholder="Ingredients (lettuce, green burger, potatoes, ...)" #menuItemingredients [(ngModel)]="menuItem.ingredients">
+              <div class="has-error" *ngIf="errors && errors[getIndex(errors, menuItemingredients)]">
+                {{errors[getIndex(errors, menuItemingredients)]?.msg}}
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group">
+              <input type="number" class="form-control" name="price" placeholder="Menu Item Price" #menuItemPrice [(ngModel)]="menuItem.price" required minlength="1">
+              <div class="has-error" *ngIf="errors && errors[getIndex(errors, menuItemPrice)]">
+                {{errors[getIndex(errors, menuItemPrice)]?.msg}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-12">
+        <button type="submit" [disabled]="addMenuItemForm.invalid">Add Menu Item</button>
+      </div> -->
+    </div>
+    
+    
+  
+    
+  </form>

@@ -100,6 +100,7 @@ exports.getMenuItem = (req, res, next) => {
     // console.log(req.params.menuItemId);
     const menuItemId = req.params.menuItemId;
     Menu.findById(menuItemId)
+        .populate('resturantId')
         .then(menuItem => {
             if (!menuItem) {
                 const error = new Error('Could not find a order');

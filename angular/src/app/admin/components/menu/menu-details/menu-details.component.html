@@ -19,7 +19,8 @@
       <div class="col-6">
         <div class="form-group">
           <select class="form-select" (change)="filterMenuByResturant()" name="resturant" placeholder="Select Resturant" aria-label="Default select example" #resturant [(ngModel)]="selectedResturantId" required>
-            <option value="">All</option>
+            <option value="" disabled selected hidden>Filter By Resturant</option>
+            <option value="">All Resturants</option>
             <option *ngFor="let resturant of resturants" [value]="resturant._id">{{resturant.name}}</option>
           </select>
           <!-- <div class="has-error" *ngIf="errors && errors[getIndex(errors, resturant)]">
@@ -48,7 +49,7 @@
             <td class="text-center">{{menuItem?.price}}</td>
             <td class="text-center mw-90">
               <button class="btn btn-info btn-pay mx-2"
-                [routerLink]="'/admin/menu/edit-menu-item/'+menuItem._id">Edit</button>
+                [routerLink]="'edit-menu-item/'+menuItem._id">Edit</button>
               <button class="btn btn-outline-danger" (click)="deleteMenuItem(menuItem._id)">Delete</button>
             </td>
           </tr>

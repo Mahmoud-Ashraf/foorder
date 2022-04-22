@@ -49,9 +49,10 @@ export class MenuDetailsComponent implements OnInit {
   deleteMenuItem(id: any) {
     this.menuService.deleteMenuItem(id).subscribe(
       res => {
-        console.log(res);
+        // console.log(res);
+        this.getMenu(this.filterValue);
         // this.getResturants();
-        this.navigate(id);
+        // this.navigate(id);
       },
       err => {
         console.log(err);

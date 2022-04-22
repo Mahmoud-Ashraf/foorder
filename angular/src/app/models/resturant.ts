@@ -1,16 +1,19 @@
+import { MenuItem } from './menu-item';
 // import { MenuSections } from "./menu";
 
 export interface Resturant {
-  _id?: string;
+  _id: string;
   name: string;
-  content: string;
-  phone?: string;
-  scannedMenu?: [];
-  // menu: MenuSections[];
-  elmenusLink?: string;
-  logo?: string;
-  todaySelection?: boolean;
-  registeredPhone?: string;
+  type: string;
   vote?: number;
+  elmenusUrl?: string;
   lastVotedAt?: string
+  phone?: string;
+  savedPhone?: string;
+  menu?: MenuItem[] | string[] 
+  // scannedMenu?: [];
+  // // menu: MenuSections[];
+  // logo?: string;
+  // todaySelection?: boolean;
+  // registeredPhone?: string;
 }

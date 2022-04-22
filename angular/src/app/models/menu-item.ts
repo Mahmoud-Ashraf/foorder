@@ -1,8 +1,11 @@
+import { Resturant } from "./resturant";
 
 export interface MenuItem {
-  id: string;
-  itemName: string;
-  itemPrice: string;
-  itemSize: string;
-  count: number;
+  _id?: string;
+  name?: string;
+  price?: string;
+  ingredients?: string;
+  // itemSize: string;
+  // count: number;
+  resturantId?: Resturant
 }

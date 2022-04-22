@@ -1,5 +1,7 @@
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { RequestsService } from './requests.service';
+import { MenuItem } from 'src/app/models/menu-item';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,7 @@ export class MenuService {
     return this.requests.getApi(`menu?resturantId=${resturantId}&page=${page}&perPage=${perPage}&filter=${filter}`);
   }
 
-  getMenuItem(id: any) {
+  getMenuItem(id: any): Observable<MenuItem> {
     return this.requests.getApi(`menu/${id}`);
   }
 

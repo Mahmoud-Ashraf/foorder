@@ -30,7 +30,7 @@ export class AddResturantComponent implements OnInit {
     this.resturantsService.addResturant(form.value).subscribe(
       res => {
         form.reset();
-        this.router.navigate(['admin/resturants']);
+        // this.router.navigate(['admin/resturants']);
       },
       err => {
         this.errors = err.error.errors;

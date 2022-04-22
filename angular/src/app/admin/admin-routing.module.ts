@@ -52,7 +52,7 @@ const routes: Routes = [
         children: [
           { path: '', component: MenuDetailsComponent },
           { path: 'add-menu-item', component: AddMenuItemComponent },
-          { path: 'edit-menu-item', component: EditMeuItemComponent }
+          { path: 'edit-menu-item/:menuItemId', component: EditMeuItemComponent }
         ]
       },
       { path: 'orders', component: OrdersComponent },

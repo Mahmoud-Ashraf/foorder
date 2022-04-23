@@ -21,8 +21,8 @@ import { EditUserComponent } from './components/users/edit-user/edit-user.compon
 import { UserOrdersComponent } from './components/users/user-orders/user-orders.component';
 
 import { WalletsComponent } from './components/wallets/wallets.component';
-import { CollectedOrderComponent } from './components/collected-order/collected-order.component';
-import { TodayOrderComponent } from './components/today-order/today-order.component';
+import { CollectedOrderComponent } from './components/orders/collected-order/collected-order.component';
+import { TodayOrderComponent } from './components/orders/today-order/today-order.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { AddMenuItemComponent } from './components/menu/add-menu-item/add-menu-item.component';

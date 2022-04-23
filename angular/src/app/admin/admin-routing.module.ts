@@ -1,10 +1,11 @@
+import { TodayOrderComponent } from './components/orders/today-order/today-order.component';
 import { HomeComponent } from './../admin/components/home/home.component';
 import { EditMeuItemComponent } from './components/menu/edit-meu-item/edit-meu-item.component';
 import { AddMenuItemComponent } from './components/menu/add-menu-item/add-menu-item.component';
 import { MenuDetailsComponent } from './components/menu/menu-details/menu-details.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { WalletsComponent } from './components/wallets/wallets.component';
-import { CollectedOrderComponent } from './components/collected-order/collected-order.component';
+import { CollectedOrderComponent } from './components/orders/collected-order/collected-order.component';
 import { UserOrdersComponent } from './components/users/user-orders/user-orders.component';
 import { EditUserComponent } from './components/users/edit-user/edit-user.component';
 import { AddUserComponent } from './components/users/add-user/add-user.component';
@@ -55,8 +56,14 @@ const routes: Routes = [
           { path: 'edit-menu-item/:menuItemId', component: EditMeuItemComponent }
         ]
       },
-      { path: 'orders', component: OrdersComponent },
-      { path: 'collected-order', component: CollectedOrderComponent },
+      {
+        path: 'orders', component: OrdersComponent,
+        children: [
+          { path: '', redirectTo: 'today-order'},
+          { path: 'today-order', component: TodayOrderComponent },
+          { path: 'collected-order', component: CollectedOrderComponent },
+        ]
+      },
       { path: 'wallets', component: WalletsComponent }
       // { path: }
       // { path: 'resturants/:id', component: ResturantDetailsComponent }

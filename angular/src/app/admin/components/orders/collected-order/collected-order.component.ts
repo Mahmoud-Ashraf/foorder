@@ -1,5 +1,5 @@
 import { ResturantsService } from 'src/app/shared/services/resturants.service';
-import { Order } from './../../../models/order';
+import { Order } from '../../../../models/order';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { OrderService } from 'src/app/shared/services/order.service';

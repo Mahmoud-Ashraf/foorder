@@ -19,11 +19,11 @@
             class="fas fa-shopping-cart"></i> Add to
           cart</button> -->
       <!-- <ng-template #itemCount> -->
-      <button *ngIf="item?.count > 1" class="btn btn-action btn-sm" (click)="decreseOrderCount(item)">-</button>
+      <button *ngIf="item?.count > 1" class="btn btn-info btn-sm" (click)="decreseOrderCount(item)">-</button>
       <a><i *ngIf="item.count == 0" class="fas text-main fa-shopping-cart" (click)="increaseOrderCount(item)"></i></a>
       <a><i *ngIf="item.count == 1" class="fas text-main-danger fa-trash" (click)="decreseOrderCount(item)"></i></a>
       <span *ngIf="item?.count > 0" class="cart-count">{{item?.count}}</span>
-      <button *ngIf="item?.count > 0 && item?.count < 4" class="btn btn-action btn-sm"
+      <button *ngIf="item?.count > 0 && item?.count < 4" class="btn btn-info btn-sm"
         (click)="increaseOrderCount(item)">+</button>
       <!-- </ng-template> -->
     </td>
@@ -44,6 +44,6 @@
 
 <div class="row justify-content-end">
   <div class="col-md-4">
-    <button [disabled]="order?.items?.length <= 0" class="btn btn-main w-100" (click)="addOrder()">Confirm Order</button>
+    <button [disabled]="order?.items?.length <= 0" class="btn btn-primary w-100" (click)="addOrder()">Confirm Order</button>
   </div>
 </div>

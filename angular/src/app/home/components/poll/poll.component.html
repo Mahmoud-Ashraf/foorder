@@ -11,7 +11,7 @@
         <span>{{resturant?.name}}</span><span>{{resturant?.vote}}</span>
       </li>
     </ul>
-    <button class="btn btn-main w-100 poll-submit" (click)="vote()"
+    <button class="btn btn-primary w-100 poll-submit" (click)="vote()"
       [disabled]="!selectedResturant || currentUser?.voted">Submit Vote</button>
   </div>
 </div>

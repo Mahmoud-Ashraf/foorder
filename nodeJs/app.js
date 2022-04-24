@@ -6,13 +6,14 @@ const resturantsRoutes = require("./routes/resturants");
 const authRoutes = require("./routes/auth");
 const menuRoutes = require('./routes/menus');
 const ordersRoutes = require('./routes/orders');
-// const cors = require('cors')
+const collectedOrdersRoutes = require('./routes/collectedOrders');
+const cors = require('cors')
 
 // const mongoConnect = require('./utils/database').mongoConnect;
 
 const app = express();
 
-// app.use(cors()); // Use this after the variable declaration
+app.use(cors()); // Use this after the variable declaration
 // app.use(bodyParser.urlencoded()); // x-www-form-urlencoded <form>
 app.use(bodyParser.json()); // apllication json
 
@@ -31,6 +32,7 @@ app.use(resturantsRoutes);
 app.use('/auth', authRoutes);
 app.use(menuRoutes);
 app.use(ordersRoutes);
+app.use(collectedOrdersRoutes);
 
 // mongoConnect(() => {
 //   app.listen(8080);

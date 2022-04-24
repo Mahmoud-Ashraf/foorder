@@ -53,4 +53,20 @@ export class OrderService {
   getTodayOrders(resturantId: string) {
     return this.requests.getApi(`todayOrders/${resturantId}`);
   }
+
+  getCollectedOrders(page: number = 1, perPage: number = 0) {
+    return this.requests.getApi(`collected-orders?page=${page}&perPage=${perPage}`);
+  }
+
+  getCollectedOrder(collectedOrderId?: string) {
+    return this.requests.getApi(`collected-order/${collectedOrderId}`);
+  }
+
+  collectOrder(collectedOrder: any) {
+    return this.requests.postApi(`collect-order`, collectedOrder);
+  }
+  checkTodayCollectedOrder() {
+    return this.requests.getApi(`checkTodayCollectedOrder`);
+
+  }
 }

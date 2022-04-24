@@ -4,7 +4,7 @@
         <div class="row mt-5">
             <div class="col-12">
                 <h4>Collected Order</h4>
-                <h6>{{resturant?.name}}</h6>
+                <h6>{{collectedOrder?.resturantId?.name}}</h6>
             </div>
         </div>
         <div class="row mt-5">
@@ -14,7 +14,7 @@
                         <span class="text-muted">Resturant number</span>
                     </div>
                     <div class="col">
-                        <span class="text-primary fw-bold">{{resturant?.phone}}</span>
+                        <span class="text-primary fw-bold">{{collectedOrder?.resturantId?.phone}}</span>
                     </div>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                         <span class="text-muted">Saved number</span>
                     </div>
                     <div class="col">
-                        <span class="text-primary fw-bold">{{resturant?.savedPhone}}</span>
+                        <span class="text-primary fw-bold">{{collectedOrder?.resturantId?.savedPhone}}</span>
                     </div>
                 </div>
             </div>
@@ -33,7 +33,7 @@
     <div class="col-12">
         <div class="row">
             <div class="col-12">
-                <table class="table table-borderless" *ngIf="collectedOrder?.length > 0 else noOrderFound">
+                <table class="table table-borderless">
                     <thead>
                         <tr class="table-header">
                             <th>Items</th>
@@ -43,7 +43,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of collectedOrder">
+                        <tr *ngFor="let item of collectedOrder?.items">
                             <td>{{item?.item?.name}}</td>
                             <td class="text-center">{{item?.item?.price}} EGP</td>
                             <td class="text-center">X{{item?.count}}</td>
@@ -51,9 +51,9 @@
                         </tr>
                     </tbody>
                 </table>
-                <ng-template #noOrderFound>
+                <!-- <ng-template #noOrderFound>
                     <app-no-data-found [msg]="'Sorry, No Orders Found'"></app-no-data-found>
-                </ng-template>
+                </ng-template> -->
             </div>
         </div>
 
@@ -61,13 +61,13 @@
     <div class="col-12">
         <hr>
     </div>
-    <div class="col-12" *ngIf="false">
+    <div class="col-12">
         <form>
             <div class="row">
                 <div class="col-4">
                     <div class="form-group">
                         <label for="order-tax" class="form-label">Tax</label>
-                        <input id="order-tax" type="number" class="form-control" name="tax" #orderTax ngModel
+                        <input id="order-tax" type="number" class="form-control" name="tax" #orderTax [(ngModel)]="collectedOrder.taxFees"
                             maxlength="2">
                     </div>
                 </div>
@@ -75,13 +75,13 @@
                     <div class="form-group">
                         <label for="order-delivery" class="form-label">Delivery Fees</label>
                         <input id="order-delivery" type="number" class="form-control" name="delivery" #orderDelivery
-                            ngModel maxlength="2">
+                        [(ngModel)]="collectedOrder.deliveryFees" maxlength="2">
                     </div>
                 </div>
                 <div class="col-4">
                     <div class="form-group">
                         <label for="order-discount" class="form-label">Discount</label>
-                        <input id="order-discount" type="number" class="form-control" name="tax" #orderDiscount ngModel
+                        <input id="order-discount" type="number" class="form-control" name="tax" #orderDiscount [(ngModel)]="collectedOrder.discount"
                             maxlength="3">
                     </div>
                 </div>
@@ -93,10 +93,10 @@
             </div>
         </form>
     </div>
-    <div class="col-12">
+    <div class="col-12" *ngIf="false">
         <h4>Summary</h4>
     </div>
-    <div class="col-12">
+    <div class="col-12" *ngIf="false">
         <div class="row justify-content-end">
             <div class="col-12">
                 <div class="summary-card">

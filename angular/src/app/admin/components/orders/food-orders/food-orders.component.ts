@@ -1,3 +1,4 @@
+import { OrderService } from './../../../../shared/services/order.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./food-orders.component.scss']
 })
 export class FoodOrdersComponent implements OnInit {
-
-  constructor() { }
+  ordersHistory: any;
+  constructor(
+    private orderService: OrderService
+  ) { }
 
   ngOnInit(): void {
+    this.orderService.getCollectedOrders().subscribe(collectedOrders => {
+      this.ordersHistory = collectedOrders.collectedOrders;
+    })
   }
 
 }

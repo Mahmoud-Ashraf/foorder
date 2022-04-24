@@ -64,8 +64,8 @@ const routes: Routes = [
           { path: '', redirectTo: 'food-orders' },
           { path: 'food-orders', component: FoodOrdersComponent },
           { path: 'today-order', component: TodayOrderComponent },
-          { path: 'collected-order', component: CollectedOrderComponent },
-          { path: 'order-reciept:orderId', component: OrderRecieptComponent }
+          { path: 'collected-order/:orderId', component: CollectedOrderComponent },
+          { path: 'order-reciept/:orderId', component: OrderRecieptComponent }
         ]
       },
       { path: 'wallets', component: WalletsComponent }

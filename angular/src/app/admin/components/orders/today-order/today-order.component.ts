@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ResturantsService } from 'src/app/shared/services/resturants.service';
 import { Order } from '../../../../models/order';
 import { Component, OnInit } from '@angular/core';
@@ -9,6 +10,25 @@ import { OrderService } from 'src/app/shared/services/order.service';
 })
 export class TodayOrderComponent implements OnInit {
   resturant: any;
+  collectedOrder: {
+    items: any[],
+    status: string,
+    resturantId: string,
+    deliveryFees: number,
+    taxFees: number,
+    discount: number,
+    usersCount: number,
+    subtotalOrderPrice: number
+  } = {
+      items: [],
+      status: '',
+      resturantId: '',
+      deliveryFees: 0,
+      taxFees: 0,
+      discount: 0,
+      usersCount: 0,
+      subtotalOrderPrice: 0
+    }
   orders: {
     orders: Order[],
     collectedOrderPrice: number,
@@ -23,20 +43,16 @@ export class TodayOrderComponent implements OnInit {
   constructor(
     private orderService: OrderService,
     private resturantsService: ResturantsService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.orderService.checkTodayCollectedOrder().subscribe(collectedOrder => {
+      if (collectedOrder.collectedOrder) {
+        this.router.navigate([`admin/orders/collected-order/${collectedOrder.collectedOrder._id}`]);
+      }
+    })
     this.getTodayResturant();
-  }
-
-  getTodayOrders() {
-    if (this.resturant._id) {
-      this.orderService.getTodayOrders(this.resturant._id).subscribe((todayOrders: any) => {
-        console.log(todayOrders);
-        this.orders = todayOrders;
-        this.getCollectedOrderPrice();
-      });
-    }
   }
 
   getCollectedOrderPrice() {
@@ -52,5 +68,55 @@ export class TodayOrderComponent implements OnInit {
       this.resturant = toDayResturant;
       this.getTodayOrders();
     })
+  }
+
+  getTodayOrders() {
+    if (this.resturant._id) {
+      this.orderService.getTodayOrders(this.resturant._id).subscribe((todayOrders: any) => {
+        console.log(todayOrders);
+        this.orders = todayOrders;
+        this.getCollectedOrderPrice();
+      });
+    }
+  }
+
+  collectOrder() {
+    this.setCollectedOrderConfig();
+    this.addCollectedOrder();
+  }
+
+  getCollectedOrderItems() {
+    let orderItems: any = [];
+    this.orders.orders.forEach(order => {
+      orderItems = [...orderItems, ...order.items];
+    })
+    const arrayHashmap = orderItems.reduce((obj: any, item: any) => {
+      obj[item._id] ? obj[item._id].count += item.count : (obj[item._id] = { ...item });
+      return obj;
+    }, {});
+    return Object.values(arrayHashmap);
+    // console.log(this.collectedOrder);
+  }
+
+  setCollectedOrderConfig() {
+    this.collectedOrder.items = this.getCollectedOrderItems();
+    this.collectedOrder.status = 'PENDING';
+    this.collectedOrder.resturantId = this.resturant._id;
+    this.collectedOrder.deliveryFees = 0;
+    this.collectedOrder.taxFees = 0;
+    this.collectedOrder.discount = 0;
+    this.collectedOrder.usersCount = this.orders.orders.length;
+    this.collectedOrder.subtotalOrderPrice = this.orders.collectedOrderPrice;
+  }
+
+  addCollectedOrder() {
+    this.orderService.collectOrder(this.collectedOrder).subscribe(
+      (collectedOrder: any) => {
+        console.log(collectedOrder);
+        this.router.navigate([`admin/orders/collected-order/${collectedOrder.collectedOrder._id}`]);
+      },
+      err => {
+        console.log(err);
+      })
   }
 }

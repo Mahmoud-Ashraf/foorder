@@ -45,7 +45,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let menuItem of resturantMenu">
-            <td [routerLink]="menuItem._id">{{menuItem?.name}}</td>
+            <td>{{menuItem?.name}}</td>
             <td class="text-center">{{menuItem?.price}}</td>
             <td class="text-center mw-90">
               <button class="btn btn-info btn-pay mx-2"

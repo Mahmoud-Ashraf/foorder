@@ -1,7 +1,6 @@
 import { ResturantsService } from 'src/app/shared/services/resturants.service';
 import { Order } from '../../../../models/order';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/shared/services/auth.service';
 import { OrderService } from 'src/app/shared/services/order.service';
 
 @Component({
@@ -11,14 +10,15 @@ import { OrderService } from 'src/app/shared/services/order.service';
 })
 export class CollectedOrderComponent implements OnInit {
   resturant: any;
+  collectedOrder: any;
   orders: {
     orders: Order[],
-    collectedOrderPrice: number,
+    collectedOrderSubTotal: number,
     resturant: any
   } =
     {
       orders: [],
-      collectedOrderPrice: 0,
+      collectedOrderSubTotal: 0,
       resturant: {}
     };
 
@@ -36,14 +36,27 @@ export class CollectedOrderComponent implements OnInit {
       this.orderService.getTodayOrders(this.resturant._id).subscribe((todayOrders: any) => {
         console.log(todayOrders);
         this.orders = todayOrders;
-        this.getCollectedOrderPrice();
+        this.getCollectedOrderSubTotal();
+        this.collectdOrders();
       });
     }
   }
 
-  getCollectedOrderPrice() {
+  collectdOrders() {
+    let orderItems: any = [];
+    this.orders.orders.forEach(order => {
+      orderItems = [...orderItems, ...order.items];
+    })
+    const arrayHashmap = orderItems.reduce((obj: any, item: any) => {
+      obj[item._id] ? obj[item._id].count += item.count : (obj[item._id] = { ...item });
+      return obj;
+    }, {});
+    this.collectedOrder = Object.values(arrayHashmap);
+  }
+
+  getCollectedOrderSubTotal() {
     let total = 0;
-    this.orders.collectedOrderPrice = this.orders.orders.reduce(
+    this.orders.collectedOrderSubTotal = this.orders.orders.reduce(
       (previousValue: any, currentValue: any) => previousValue + currentValue.totalOrderPrice
       , total
     )

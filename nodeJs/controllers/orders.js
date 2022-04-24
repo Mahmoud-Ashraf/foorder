@@ -218,7 +218,7 @@ exports.getUserOrders = (req, res, next) => {
 
 exports.getTodayOrders = (req, res, next) => {
   Order.find({ createdOn: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(), resturantId: req.params.resturantId })
-    .populate(['resturantId', 'userId', 'items'])
+    .populate(['resturantId', 'userId', 'items.item'])
     .then(todayorders => {
       if (!todayorders) {
         console.log(todayorders);
@@ -231,6 +231,11 @@ exports.getTodayOrders = (req, res, next) => {
           .status(200)
           .json({ message: 'No Orders Found' });
       } else {
+        todayorders.forEach(order => {
+          order.items.forEach(item => {
+            item._id = item.item._id;
+          })
+        })
         res
           .status(200)
           .json({ orders: todayorders, resturant: todayorders[0].resturantId });

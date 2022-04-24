@@ -1,3 +1,5 @@
+import { OrderRecieptComponent } from './components/orders/order-reciept/order-reciept.component';
+import { FoodOrdersComponent } from './components/orders/food-orders/food-orders.component';
 import { TodayOrderComponent } from './components/orders/today-order/today-order.component';
 import { HomeComponent } from './../admin/components/home/home.component';
 import { EditMeuItemComponent } from './components/menu/edit-meu-item/edit-meu-item.component';
@@ -59,9 +61,11 @@ const routes: Routes = [
       {
         path: 'orders', component: OrdersComponent,
         children: [
-          { path: '', redirectTo: 'today-order'},
+          { path: '', redirectTo: 'food-orders' },
+          { path: 'food-orders', component: FoodOrdersComponent },
           { path: 'today-order', component: TodayOrderComponent },
           { path: 'collected-order', component: CollectedOrderComponent },
+          { path: 'order-reciept:orderId', component: OrderRecieptComponent }
         ]
       },
       { path: 'wallets', component: WalletsComponent }

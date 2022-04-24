@@ -7,9 +7,9 @@ const ordersController = require("../controllers/orders");
 
 const isAuth = require('../middleware/is-auth');
 // GET /orders
-router.get("/orders", isAuth, ordersController.getOrders);
-router.get("/orders/:orderId", isAuth, ordersController.getOrder);
-router.get("/allOrder/:orderId", ordersController.getAllOrder);
+// router.get("/orders", isAuth, ordersController.getOrders);
+// router.get("/orders/:orderId", isAuth, ordersController.getOrder);
+// router.get("/allOrder/:orderId", ordersController.getAllOrder);
 
 // POST /order
 router.post(
@@ -18,12 +18,12 @@ router.post(
   ordersController.addOrder
 );
 
-router.put("/order/:orderId",
-  isAuth,
-  ordersController.updateOrder
-);
+// router.put("/order/:orderId",
+//   isAuth,
+//   ordersController.updateOrder
+// );
 
-router.delete("/order/:orderId", isAuth, ordersController.deleteOrder);
+// router.delete("/order/:orderId", isAuth, ordersController.deleteOrder);
 router.get('/userOrders/:userId', isAuth, ordersController.getUserOrders);
 router.get('/todayOrders/:resturantId', isAuth, ordersController.getTodayOrders);
 

@@ -291,6 +291,7 @@
 
 .text-bold {
   font-weight: 600;
+  font-size: 1.25rem;
 }
 
 // Admin Home
@@ -346,4 +347,13 @@
 
 .table-heading {
   margin-bottom: 20px;
+}
+
+.text-blue {
+  color: $main-color;
+}
+
+.history-date {
+  color: #828282;
+  font-size: 14px;
 }

@@ -1,0 +1,120 @@
+<!-- NEW STRUCTURE -->
+<div class="row gy-3">
+    <div class="col-12">
+        <div class="row mt-5">
+            <div class="col-12">
+                <h4>Collected Order</h4>
+                <h6>{{resturant?.name}}</h6>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-4">
+                <div class="row">
+                    <div class="col-auto">
+                        <span class="text-muted">Resturant number</span>
+                    </div>
+                    <div class="col">
+                        <span class="text-primary fw-bold">{{resturant?.phone}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="row">
+                    <div class="col-auto">
+                        <span class="text-muted">Saved number</span>
+                    </div>
+                    <div class="col">
+                        <span class="text-primary fw-bold">{{resturant?.savedPhone}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-borderless" *ngIf="collectedOrder?.length > 0 else noOrderFound">
+                    <thead>
+                        <tr class="table-header">
+                            <th>Items</th>
+                            <th class="text-center">Price</th>
+                            <th class="text-center">QTY</th>
+                            <th class="text-center">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of collectedOrder">
+                            <td>{{item?.item?.name}}</td>
+                            <td class="text-center">{{item?.item?.price}} EGP</td>
+                            <td class="text-center">X{{item?.count}}</td>
+                            <td class="text-center">{{item?.item?.price * item?.count}} EGP</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ng-template #noOrderFound>
+                    <app-no-data-found [msg]="'Sorry, No Orders Found'"></app-no-data-found>
+                </ng-template>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-12">
+        <hr>
+    </div>
+    <div class="col-12">
+        <h4>Summary</h4>
+    </div>
+    <div class="col-12">
+        <div class="row justify-content-end">
+            <div class="col-12">
+                <div class="summary-card">
+                    <div class="row justify-content-between">
+                        <div class="col-auto">
+                            <span>Subtotal</span>
+                        </div>
+                        <div class="col-auto">
+                            <span><span class="fw-bold">{{orders.collectedOrderSubTotal}}</span><span class="text-muted"> EGP</span></span>
+                        </div>
+                    </div>
+                    <div class="row justify-content-between">
+                        <div class="col-auto">
+                            <span>Tax</span>
+                        </div>
+                        <div class="col-auto">
+                            <span><span class="fw-bold">120</span><span class="text-muted"> EGP</span></span>
+                        </div>
+                    </div>
+                    <div class="row justify-content-between">
+                        <div class="col-auto">
+                            <span>Delivery</span>
+                        </div>
+                        <div class="col-auto">
+                            <span><span class="fw-bold">120</span><span class="text-muted"> EGP</span></span>
+                        </div>
+                    </div>
+                    <div class="row justify-content-between">
+                        <div class="col-auto">
+                            <span>Discount</span>
+                        </div>
+                        <div class="col-auto">
+                            <span><span class="fw-bold">120</span><span class="text-muted"> EGP</span></span>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row justify-content-between fs-4">
+                        <div class="col-auto">
+                            <span>Total</span>
+                        </div>
+                        <div class="col-auto">
+                            <span><span class="fw-bold">120</span><span class="text-muted"> EGP</span></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-primary px-5">Done</button>
+            </div>
+        </div>
+    </div>
+</div>

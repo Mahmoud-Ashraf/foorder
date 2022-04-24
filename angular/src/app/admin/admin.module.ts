@@ -34,6 +34,8 @@ import { NgChartsModule } from 'ng2-charts';
 import { Chart } from 'chart.js';
 import { TableFilterComponent } from './components/table-filter/table-filter.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
+import { FoodOrdersComponent } from './components/orders/food-orders/food-orders.component';
+import { OrderRecieptComponent } from './components/orders/order-reciept/order-reciept.component';
 
 
 
@@ -67,6 +69,8 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
     HomeComponent,
     TableFilterComponent,
     PaginatorComponent,
+    FoodOrdersComponent,
+    OrderRecieptComponent,
   ],
   imports: [
     CommonModule,

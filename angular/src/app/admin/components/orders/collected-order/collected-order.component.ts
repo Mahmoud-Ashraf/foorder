@@ -1,7 +1,9 @@
+import { Resturant } from 'src/app/models/resturant';
 import { ResturantsService } from 'src/app/shared/services/resturants.service';
 import { Order } from '../../../../models/order';
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from 'src/app/shared/services/order.service';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-collected-order',
@@ -9,63 +11,58 @@ import { OrderService } from 'src/app/shared/services/order.service';
   styleUrls: ['./collected-order.component.scss']
 })
 export class CollectedOrderComponent implements OnInit {
-  resturant: any;
-  collectedOrder: any;
-  orders: {
-    orders: Order[],
-    collectedOrderSubTotal: number,
-    resturant: any
-  } =
-    {
-      orders: [],
-      collectedOrderSubTotal: 0,
-      resturant: {}
-    };
+  // resturant: any;
+  collectedOrder: {
+    items: any[],
+    status: string,
+    resturantId: Resturant,
+    deliveryFees: number,
+    taxFees: number,
+    discount: number,
+    usersCount: number,
+    subtotalOrderPrice: number
+  } = {
+      items: [],
+      status: '',
+      resturantId: {
+        _id: '',
+        name: '',
+        type: '',
+      },
+      deliveryFees: 0,
+      taxFees: 0,
+      discount: 0,
+      usersCount: 0,
+      subtotalOrderPrice: 0
+    }
+  // orders: {
+  //   orders: Order[],
+  //   collectedOrderSubTotal: number,
+  //   resturant: any
+  // } =
+  //   {
+  //     orders: [],
+  //     collectedOrderSubTotal: 0,
+  //     resturant: {}
+  //   };
 
   constructor(
     private orderService: OrderService,
-    private resturantsService: ResturantsService,
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.getTodayResturant();
+    this.activatedRoute.params.subscribe((params: Params) => {
+      // const collecter = params.collectedOrderId;
+      console.log(params);
+      this.getCollectedOrder(params.orderId);
+    });
   }
 
-  getTodayOrders() {
-    if (this.resturant._id) {
-      this.orderService.getTodayOrders(this.resturant._id).subscribe((todayOrders: any) => {
-        console.log(todayOrders);
-        this.orders = todayOrders;
-        this.getCollectedOrderSubTotal();
-        this.collectdOrders();
-      });
-    }
-  }
-
-  collectdOrders() {
-    let orderItems: any = [];
-    this.orders.orders.forEach(order => {
-      orderItems = [...orderItems, ...order.items];
-    })
-    const arrayHashmap = orderItems.reduce((obj: any, item: any) => {
-      obj[item._id] ? obj[item._id].count += item.count : (obj[item._id] = { ...item });
-      return obj;
-    }, {});
-    this.collectedOrder = Object.values(arrayHashmap);
-  }
-
-  getCollectedOrderSubTotal() {
-    let total = 0;
-    this.orders.collectedOrderSubTotal = this.orders.orders.reduce(
-      (previousValue: any, currentValue: any) => previousValue + currentValue.totalOrderPrice
-      , total
-    )
-  }
-
-  getTodayResturant() {
-    this.resturantsService.getTodayResturant().subscribe(toDayResturant => {
-      this.resturant = toDayResturant;
-      this.getTodayOrders();
+  getCollectedOrder(collectedOrderId: string) {
+    this.orderService.getCollectedOrder(collectedOrderId).subscribe(collectedOrder => {
+      this.collectedOrder = collectedOrder;
+      // this.getTodayOrders();
     })
   }
 }

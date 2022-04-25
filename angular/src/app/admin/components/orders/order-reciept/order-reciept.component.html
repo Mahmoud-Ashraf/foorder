@@ -3,37 +3,14 @@
     <div class="col-12">
         <div class="row mt-5">
             <div class="col-12">
-                <h4>Collected Order</h4>
-                <h6>{{resturant?.name}}</h6>
-            </div>
-        </div>
-        <div class="row mt-5">
-            <div class="col-4">
-                <div class="row">
-                    <div class="col-auto">
-                        <span class="text-muted">Resturant number</span>
-                    </div>
-                    <div class="col">
-                        <span class="text-primary fw-bold">{{resturant?.phone}}</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="row">
-                    <div class="col-auto">
-                        <span class="text-muted">Saved number</span>
-                    </div>
-                    <div class="col">
-                        <span class="text-primary fw-bold">{{resturant?.savedPhone}}</span>
-                    </div>
-                </div>
+                <h4>Order Reciept</h4>
             </div>
         </div>
     </div>
     <div class="col-12">
         <div class="row">
             <div class="col-12">
-                <table class="table table-borderless" *ngIf="collectedOrder?.length > 0 else noOrderFound">
+                <table class="table table-borderless">
                     <thead>
                         <tr class="table-header">
                             <th>Items</th>
@@ -43,7 +20,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of collectedOrder">
+                        <tr *ngFor="let item of collectedOrder?.items">
                             <td>{{item?.item?.name}}</td>
                             <td class="text-center">{{item?.item?.price}} EGP</td>
                             <td class="text-center">X{{item?.count}}</td>
@@ -51,9 +28,6 @@
                         </tr>
                     </tbody>
                 </table>
-                <ng-template #noOrderFound>
-                    <app-no-data-found [msg]="'Sorry, No Orders Found'"></app-no-data-found>
-                </ng-template>
             </div>
         </div>
 
@@ -73,7 +47,7 @@
                             <span>Subtotal</span>
                         </div>
                         <div class="col-auto">
-                            <span><span class="fw-bold">{{orders.collectedOrderSubTotal}}</span><span class="text-muted"> EGP</span></span>
+                            <span><span class="fw-bold">120</span><span class="text-muted"> EGP</span></span>
                         </div>
                     </div>
                     <div class="row justify-content-between">
@@ -86,7 +60,7 @@
                     </div>
                     <div class="row justify-content-between">
                         <div class="col-auto">
-                            <span>Delivery</span>
+                            <span>Delivery Fees</span>
                         </div>
                         <div class="col-auto">
                             <span><span class="fw-bold">120</span><span class="text-muted"> EGP</span></span>

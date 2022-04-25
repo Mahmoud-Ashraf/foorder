@@ -11,27 +11,39 @@ const collectedOrderSchema = new Schema(
         resturantId: {
             type: Schema.Types.ObjectId,
             ref: 'Resturant',
+            required: true
         },
         subtotalOrderPrice: {
             type: Number,
+            required: true
         },
         deliveryFees: {
             type: Number,
+            default: 0
         },
         taxFees: {
-            type: Number
+            type: Number,
+            default: 0
         },
         discount: {
-            type: Number
+            type: Number,
+            default: 0
         },
         usersCount: {
-            type: Number
+            type: Number,
+            required: true
         },
         status: {
-            type: String
+            type: String,
+            default: 'PENDING'
+        },
+        total: {
+            type: Number,
+            default: 0
         },
         createdOn: {
-            type: String
+            type: String,
+            default: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate()
         },
         items: [
             {

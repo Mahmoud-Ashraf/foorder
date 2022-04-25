@@ -12,20 +12,12 @@ export class TodayOrderComponent implements OnInit {
   resturant: any;
   collectedOrder: {
     items: any[],
-    status: string,
     resturantId: string,
-    deliveryFees: number,
-    taxFees: number,
-    discount: number,
     usersCount: number,
     subtotalOrderPrice: number
   } = {
       items: [],
-      status: '',
       resturantId: '',
-      deliveryFees: 0,
-      taxFees: 0,
-      discount: 0,
       usersCount: 0,
       subtotalOrderPrice: 0
     }
@@ -100,11 +92,11 @@ export class TodayOrderComponent implements OnInit {
 
   setCollectedOrderConfig() {
     this.collectedOrder.items = this.getCollectedOrderItems();
-    this.collectedOrder.status = 'PENDING';
+    // this.collectedOrder.status = 'PENDING';
     this.collectedOrder.resturantId = this.resturant._id;
-    this.collectedOrder.deliveryFees = 0;
-    this.collectedOrder.taxFees = 0;
-    this.collectedOrder.discount = 0;
+    // this.collectedOrder.deliveryFees = 0;
+    // this.collectedOrder.taxFees = 0;
+    // this.collectedOrder.discount = 0;
     this.collectedOrder.usersCount = this.orders.orders.length;
     this.collectedOrder.subtotalOrderPrice = this.orders.collectedOrderPrice;
   }

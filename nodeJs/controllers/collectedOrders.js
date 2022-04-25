@@ -83,7 +83,7 @@ exports.addCollectedOrder = (req, res, next) => {
 };
 
 exports.updateCollectedOrder = (req, res, next) => {
-    const resturantId = req.params.resturantId;
+    const collectedOrderId = req.params.collectedOrderId;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         const error = new Error('Validation Faild, Enter data in correct format');
@@ -95,22 +95,23 @@ exports.updateCollectedOrder = (req, res, next) => {
         // });
         // console.log('hello', res);
     }
-    CollectedOrder.findById(resturantId)
+    CollectedOrder.findById(collectedOrderId)
         .then(collectedOrder => {
             if (!collectedOrder) {
-                const error = new Error('Could not find a resturant');
+                const error = new Error('Could not find an Order');
                 error.statusCode = 404;
                 throw error;
             }
-            console.log(req.body);
             collectedOrder.deliveryFees = req.body.deliveryFees;
             collectedOrder.taxFees = req.body.taxFees;
             collectedOrder.status = req.body.status;
             collectedOrder.discount = req.body.discount;
+            collectedOrder.total = req.body.total;
+
             return collectedOrder.save();
         })
         .then(result => {
-            return res.status(200).json({ message: 'resturant updat success', collectedOrder: result });
+            return res.status(200).json({ message: 'Collected Order Done success', collectedOrder: result });
         })
         .catch(err => {
             if (!err.statusCode) {

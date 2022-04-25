@@ -15,7 +15,7 @@ router.post(
   collectedOrdersController.addCollectedOrder
 );
 router.put(
-  "/collect-order/:collectedOrder",
+  "/update-collected-order/:collectedOrderId",
   isAuth,
   collectedOrdersController.updateCollectedOrder
 );

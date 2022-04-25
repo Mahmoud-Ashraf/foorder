@@ -65,8 +65,13 @@ export class OrderService {
   collectOrder(collectedOrder: any) {
     return this.requests.postApi(`collect-order`, collectedOrder);
   }
+
   checkTodayCollectedOrder() {
     return this.requests.getApi(`checkTodayCollectedOrder`);
 
+  }
+
+  updateCollectedOrder(collectedOrderId: string, collectedOrder: any) {
+    return this.requests.putApi(`update-collected-order/${collectedOrderId}`, collectedOrder);
   }
 }

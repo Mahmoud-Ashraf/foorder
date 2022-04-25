@@ -3,7 +3,7 @@ import { ResturantsService } from 'src/app/shared/services/resturants.service';
 import { Order } from '../../../../models/order';
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from 'src/app/shared/services/order.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-collected-order',
@@ -13,6 +13,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class CollectedOrderComponent implements OnInit {
   // resturant: any;
   collectedOrder: {
+    _id: string,
     items: any[],
     status: string,
     resturantId: Resturant,
@@ -20,8 +21,10 @@ export class CollectedOrderComponent implements OnInit {
     taxFees: number,
     discount: number,
     usersCount: number,
-    subtotalOrderPrice: number
+    subtotalOrderPrice: number,
+    total?: number
   } = {
+      _id: '',
       items: [],
       status: '',
       resturantId: {
@@ -49,6 +52,7 @@ export class CollectedOrderComponent implements OnInit {
   constructor(
     private orderService: OrderService,
     private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -63,6 +67,14 @@ export class CollectedOrderComponent implements OnInit {
     this.orderService.getCollectedOrder(collectedOrderId).subscribe(collectedOrder => {
       this.collectedOrder = collectedOrder;
       // this.getTodayOrders();
+    })
+  }
+
+  generateReciept() {
+    this.collectedOrder.status = 'DONE';
+    this.collectedOrder.total = this.collectedOrder.subtotalOrderPrice + this.collectedOrder.taxFees + this.collectedOrder.deliveryFees - this.collectedOrder.discount;
+    this.orderService.updateCollectedOrder(this.collectedOrder._id, this.collectedOrder).subscribe((updatedCollectedOrder: any) => {
+      this.router.navigate([`/admin/order/order-reciept/${updatedCollectedOrder.collectedOrder._id}`]);
     })
   }
 }

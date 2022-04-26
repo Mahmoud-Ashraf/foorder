@@ -1,23 +1,42 @@
-<div class="row">
-    <div class="col-12 text-center">
-        Resturant: {{resturant?.name}}
-    </div>
-</div>
-<div class="row">
-    <div class="col-4" *ngFor="let order of orders?.orders">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">{{order?.userId?.name}}</h5>
-                <!-- <p class="card-text">{{order?.createdAt | date: 'dd/MM/yyyy | hh:mm'}}</p> -->
-                <p class="card-text">Order Price:{{order?.totalOrderPrice}}</p>
-
+<div class="row gy-3">
+    <div class="col-12">
+        <div class="row mt-5">
+            <div class="col-12">
+                <h4>Collected Order</h4>
+                <p class="my-2">{{resturant?.name}}</p>
             </div>
         </div>
     </div>
 </div>
+
+<div class="row my-3">
+    <div class="col-12">
+        <div class="single-order-card my-2" *ngFor="let order of orders?.orders">
+            <div class="row">
+                <div class="col-3">
+                    <div class="user-avatar">
+                        <h1 class="user-first-name">AS</h1>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <h5 class="my-3">{{order?.userId?.name}}</h5>
+                    <ul>
+                        <li class="my-2">Fool <span> x1</span></li>
+                        <li class="my-2">Fool <span> x2</span></li>
+                        <li class="my-2">Fool <span> x1</span></li>
+                    </ul>
+                </div>
+                <div class="col-4 text-center align-self-end">
+                    <p class="text-bold">Total cost <span class="text-blue">{{order?.totalOrderPrice}}</span> EGP</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="row">
     <div class="col-12 text-center">
         <button (click)="collectOrder()" class="btn btn-primary">Collect Order</button>
     </div>
 </div>
-

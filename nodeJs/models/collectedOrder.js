@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const opts = {
     // Make Mongoose use Unix time (seconds since Jan 1, 1970)
     timestamps: { currentTime: () => Date.now().toISOString().split('T')[0] },
-  };
+};
 const collectedOrderSchema = new Schema(
     {
         resturantId: {
@@ -29,10 +29,10 @@ const collectedOrderSchema = new Schema(
             type: Number,
             default: 0
         },
-        usersCount: {
-            type: Number,
-            required: true
-        },
+        // usersCount: {
+        //     type: Number,
+        //     required: true
+        // },
         status: {
             type: String,
             default: 'PENDING'
@@ -56,6 +56,13 @@ const collectedOrderSchema = new Schema(
                     ref: 'Menu',
                     required: true
                 }
+            }
+        ],
+        users: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User',
+                required: true
             }
         ]
     },

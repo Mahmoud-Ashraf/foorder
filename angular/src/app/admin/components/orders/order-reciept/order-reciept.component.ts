@@ -17,7 +17,8 @@ export class OrderRecieptComponent implements OnInit {
     taxFees: number,
     discount: number,
     usersCount: number,
-    subtotalOrderPrice: number
+    subtotalOrderPrice: number,
+    total?: number
   } = {
       items: [],
       status: '',

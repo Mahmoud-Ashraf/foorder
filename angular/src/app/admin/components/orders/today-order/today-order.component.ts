@@ -10,11 +10,13 @@ import { OrderService } from 'src/app/shared/services/order.service';
 })
 export class TodayOrderComponent implements OnInit {
   resturant: any;
+  users: any[] = [];
   collectedOrder: {
     items: any[],
     resturantId: string,
     usersCount: number,
-    subtotalOrderPrice: number
+    subtotalOrderPrice: number,
+    users?: string[];
   } = {
       items: [],
       resturantId: '',
@@ -81,6 +83,7 @@ export class TodayOrderComponent implements OnInit {
     let orderItems: any = [];
     this.orders.orders.forEach(order => {
       orderItems = [...orderItems, ...order.items];
+      this.users.push(order.userId);
     })
     const arrayHashmap = orderItems.reduce((obj: any, item: any) => {
       obj[item._id] ? obj[item._id].count += item.count : (obj[item._id] = { ...item });
@@ -97,6 +100,7 @@ export class TodayOrderComponent implements OnInit {
     // this.collectedOrder.deliveryFees = 0;
     // this.collectedOrder.taxFees = 0;
     // this.collectedOrder.discount = 0;
+    this.collectedOrder.users = this.users;
     this.collectedOrder.usersCount = this.orders.orders.length;
     this.collectedOrder.subtotalOrderPrice = this.orders.collectedOrderPrice;
   }

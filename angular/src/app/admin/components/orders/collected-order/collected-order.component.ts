@@ -72,9 +72,11 @@ export class CollectedOrderComponent implements OnInit {
 
   generateReciept() {
     this.collectedOrder.status = 'DONE';
+    this.collectedOrder.taxFees = (this.collectedOrder.taxFees / 100) * this.collectedOrder.subtotalOrderPrice;
+    this.collectedOrder.discount = (this.collectedOrder.discount / 100) * this.collectedOrder.subtotalOrderPrice;
     this.collectedOrder.total = this.collectedOrder.subtotalOrderPrice + this.collectedOrder.taxFees + this.collectedOrder.deliveryFees - this.collectedOrder.discount;
     this.orderService.updateCollectedOrder(this.collectedOrder._id, this.collectedOrder).subscribe((updatedCollectedOrder: any) => {
-      this.router.navigate([`/admin/order/order-reciept/${updatedCollectedOrder.collectedOrder._id}`]);
+      this.router.navigate([`/admin/orders/order-reciept/${updatedCollectedOrder.collectedOrder._id}`]);
     })
   }
 }

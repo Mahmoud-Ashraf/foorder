@@ -77,6 +77,9 @@ export class PollComponent implements OnInit, OnDestroy {
     console.log('reset status', notReset);
     if (!notReset) {
       this.resturantsService.resetResturantsVote().subscribe(resturants => {
+        this.resturants.forEach(resturant => {
+          resturant.vote = 0;
+        });
         console.log(resturants);
       });
     }

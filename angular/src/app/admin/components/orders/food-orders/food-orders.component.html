@@ -16,9 +16,9 @@
         <div class="today-order-card">
             <div class="row">
                 <div class="col-6">
-                    <p>Monday, 12 March 2022</p>
-                    <h4 class="my-3">Mcdonald's</h4>
-                    <p class="text-bold">Total cost <span>1400 EGP</span></p>
+                    <p class="fs-5 text-light">{{now | date: 'EEEE, d MMMM, y'}}</p>
+                    <h4 class="my-3">{{todayResturant.name}}</h4>
+                    <!-- <p class="text-bold">Total cost <span>1400 EGP</span></p> -->
                 </div>
                 <div class="col-6 text-end align-self-end">
                     <button class="btn btn-info btn-see-order" [routerLink]="'/admin/orders/today-order'">
@@ -40,14 +40,14 @@
     </div>
 
     <div class="col-12" *ngFor="let order of ordersHistory;">
-        <div class="history-order-card my-2" >
+        <div class="history-order-card my-2" [routerLink]="'/admin/orders/order-reciept/' + order._id">
             <div class="row">
                 <div class="col-6">
                     <h4 class="text-blue my-2">{{order?.resturantId?.name}}</h4>
                     <p class="history-date">{{order?.createdAt | date: 'EEEE, d MMMM, y'}}</p>
                 </div>
                 <div class="col-6 text-end align-self-end">
-                    <p class="text-bold pricing-text">Total <span class="text-blue">{{order?.total}}</span></p>
+                    <p class="text-bold pricing-text">Total <span class="text-blue">{{order?.total}}</span><span class="text-muted"> EGP</span></p>
                 </div>
             </div>
         </div>

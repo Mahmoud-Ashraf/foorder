@@ -2,8 +2,8 @@
     <div class="col-12">
         <div class="row mt-5">
             <div class="col-12">
-                <h4>Collected Order</h4>
-                <p class="my-2">{{resturant?.name}}</p>
+                <h4>Today's Order</h4>
+                <p class="my-2 fs-5 text-muted">{{resturant?.name}}</p>
             </div>
         </div>
     </div>
@@ -11,23 +11,21 @@
 
 <div class="row my-3">
     <div class="col-12">
-        <div class="single-order-card my-2" *ngFor="let order of orders?.orders">
+        <div class="single-order-card my-3" *ngFor="let order of orders?.orders">
             <div class="row">
-                <div class="col-3">
+                <div class="col-auto">
                     <div class="user-avatar">
-                        <h1 class="user-first-name">AS</h1>
+                        <span class="user-first-name text-uppercase">{{order?.userId?.avatar}}</span>
                     </div>
                 </div>
                 <div class="col-4">
-                    <h5 class="my-3">{{order?.userId?.name}}</h5>
-                    <ul>
-                        <li class="my-2">Fool <span> x1</span></li>
-                        <li class="my-2">Fool <span> x2</span></li>
-                        <li class="my-2">Fool <span> x1</span></li>
+                    <h6 class="my-3">{{order?.userId?.name}}</h6>
+                    <ul class="p-0 orders-list">
+                        <li class="my-2 orders-list-item" *ngFor="let orderItem of order.items"><span>{{orderItem.item.name}}</span> <span> x{{orderItem.count}}</span></li>
                     </ul>
                 </div>
-                <div class="col-4 text-center align-self-end">
-                    <p class="text-bold">Total cost <span class="text-blue">{{order?.totalOrderPrice}}</span> EGP</p>
+                <div class="col-5 text-center align-self-end">
+                    <p class="text-bold">Total <span class="text-blue">{{order?.totalOrderPrice}}</span> <span class="text-muted"> EGP</span></p>
                 </div>
             </div>
         </div>
@@ -36,7 +34,7 @@
 
 
 <div class="row">
-    <div class="col-12 text-center">
-        <button (click)="collectOrder()" class="btn btn-primary">Collect Order</button>
+    <div class="col-12 text-end">
+        <button (click)="collectOrder()" class="btn btn-primary px-5">Collect Order</button>
     </div>
 </div>

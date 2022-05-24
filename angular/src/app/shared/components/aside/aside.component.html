@@ -1,20 +1,27 @@
 <aside class="aside" *ngIf="userIsAuthenticated">
   <div class="aside-container">
     <div class="user">
-      <span class="user-welcome" (click)="navigate('/home/profile')"><i class="fas fa-user user-welcome--icon fa-6x"></i>
-        {{loggedUser?.name}}</span>
+      <span class="user-welcome" (click)="navigate('/home/profile')">
+        <div class="user-welcome--avatar">
+          <span class="user-first-name text-uppercase">{{loggedUser?.avatar}}</span>
+        </div>
+        {{loggedUser?.name}}
+      </span>
     </div>
     <div class="links">
       <ul class="links-list">
         <li><a (click)="navigate('/admin')"><span><img src="assets/styles/images/icons/home.svg"></span>Home</a></li>
-        <li><a (click)="navigate('/admin/orders')"><span><img src="assets/styles/images/icons/orders.svg"></span>Food Orders</a></li>
-        <li><a (click)="navigate('/admin/resturants')"><span><img src="assets/styles/images/icons/resturants.svg"></span>My
+        <li><a (click)="navigate('/admin/orders')"><span><img src="assets/styles/images/icons/orders.svg"></span>Food
+            Orders</a></li>
+        <li><a (click)="navigate('/admin/resturants')"><span><img
+                src="assets/styles/images/icons/resturants.svg"></span>My
             Resturants</a></li>
         <li><a (click)="navigate('/admin/menu')"><span><img src="assets/styles/images/icons/resturants.svg"></span>My
             Menus</a></li>
-        <li><a (click)="navigate('/admin/wallets')"><span><img src="assets/styles/images/icons/wallet.svg"></span>Wallet</a></li>
+        <li><a (click)="navigate('/admin/wallets')"><span><img
+                src="assets/styles/images/icons/wallet.svg"></span>Wallet</a></li>
         <li *ngIf="loggedUser?.isAdmin"><a (click)="navigate('/admin/users')"><span><img
-              src="assets/styles/images/icons/users.svg"></span>Users</a></li>
+                src="assets/styles/images/icons/users.svg"></span>Users</a></li>
       </ul>
     </div>
     <div class="links">

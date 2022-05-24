@@ -30,7 +30,8 @@ exports.getCollectedOrders = (req, res, next) => {
                 // }
             )
                 .skip((currentPage - 1) * perPage)
-                .limit(perPage);
+                .limit(perPage)
+                .populate('resturantId')
         })
         .then(collectedOrders => {
             res

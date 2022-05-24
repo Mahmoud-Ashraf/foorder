@@ -127,12 +127,14 @@
         flex-direction: column;
         align-items: center;
 
-        &--icon {
+        &--avatar {
           background-color: $light-color;
           border-radius: 50%;
           color: $main-color;
           width: 200px;
           height: 200px;
+          font-size: 5.36rem;
+          line-height: 1.1em;
           display: flex;
           flex-direction: column;
           justify-content: center;

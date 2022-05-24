@@ -15,6 +15,11 @@ exports.signup = (req, res, next) => {
         error.data = errors.array();
         throw error;
     }
+    let avatar = '';
+    splitedName = req.body.name.split(' ');
+    splitedName.forEach(namePhrase => {
+        avatar += namePhrase[0];
+    });
     const email = req.body.email;
     const name = req.body.name;
     const password = req.body.password;
@@ -24,7 +29,8 @@ exports.signup = (req, res, next) => {
                 email: email,
                 password: hashedPassword,
                 name: name,
-                voted: false
+                voted: false,
+                avatar: avatar
             });
             return user.save();
         }).then(result => {

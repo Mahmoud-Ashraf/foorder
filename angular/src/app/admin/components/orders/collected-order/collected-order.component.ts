@@ -95,7 +95,7 @@ export class CollectedOrderComponent implements OnInit {
           console.log('order before update', order);
           this.orderService.updateTodayOrder(order._id, order).subscribe((updatedOrder) => {
             console.log('updated Order', updatedOrder);
-            order.userId.wallet += order.grandTotal;
+            order.userId.wallet -= order.grandTotal;
             this.authService.updateUser(order.userId._id, order.userId).subscribe((updatedUser) => {
               console.log('updated User', updatedUser);
             })

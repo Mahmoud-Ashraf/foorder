@@ -47,7 +47,7 @@
                     <p class="history-date">{{order?.createdAt | date: 'EEEE, d MMMM, y'}}</p>
                 </div>
                 <div class="col-6 text-end align-self-end">
-                    <p class="text-bold pricing-text">Total <span class="text-blue">{{order?.total}}</span><span class="text-muted"> EGP</span></p>
+                    <p class="text-bold pricing-text">Total <span class="text-blue">{{order?.total | number}}</span><span class="text-muted"> EGP</span></p>
                 </div>
             </div>
         </div>

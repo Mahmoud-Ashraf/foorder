@@ -1,3 +1,4 @@
+import { HelperService } from 'src/app/shared/services/helper.service';
 import { Router } from '@angular/router';
 import { ResturantsService } from 'src/app/shared/services/resturants.service';
 import { Order } from '../../../../models/order';
@@ -37,7 +38,8 @@ export class TodayOrderComponent implements OnInit {
   constructor(
     private orderService: OrderService,
     private resturantsService: ResturantsService,
-    private router: Router
+    private router: Router,
+    private helperService: HelperService
   ) { }
 
   ngOnInit(): void {
@@ -114,5 +116,8 @@ export class TodayOrderComponent implements OnInit {
       err => {
         console.log(err);
       })
+  }
+  generateUserAvatar(userName: string) {
+    return this.helperService.generateUserAvatar(userName);
   }
 }

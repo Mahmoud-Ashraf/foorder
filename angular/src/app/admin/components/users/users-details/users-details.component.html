@@ -27,7 +27,7 @@
                         <tr *ngFor="let user of admins">
                             <td>{{user.name}}</td>
                             <td class="text-center">{{user?.email}}</td>
-                            <td class="wallet-amount text-center" [class.wallet-amount-minus]="user.wallet < 0">{{user?.wallet? user.wallet : 0 | number}} EGP</td>
+                            <td class="wallet-amount text-center" [class.wallet-amount-minus]="user.wallet < 0">{{(user?.wallet? user.wallet : 0) | number}} EGP</td>
                             <td class="text-center">
                                 <button class="btn btn-primary btn-pay me-2">
                                     Pay
@@ -63,7 +63,7 @@
                         <tr *ngFor="let user of users">
                             <td>{{user.name}}</td>
                             <td class="text-center">{{user?.email}}</td>
-                            <td class="text-center wallet-amount"  [class.wallet-amount-minus]="user.wallet < 0">{{user?.wallet? user.wallet : 0 | number}} EGP</td>
+                            <td class="text-center wallet-amount"  [class.wallet-amount-minus]="user.wallet < 0">{{(user?.wallet? user.wallet : 0) | number}} EGP</td>
                             <td class="text-center">
                                 <button class="btn btn-primary btn-pay me-2">
                                     Pay

@@ -3,7 +3,7 @@
     <div class="user">
       <span class="user-welcome" (click)="navigate('/home/profile')">
         <div class="user-welcome--avatar">
-          <span class="user-first-name text-uppercase">{{loggedUser?.avatar}}</span>
+          <span class="user-first-name text-uppercase">{{generateUserAvatar(loggedUser?.name)}}</span>
         </div>
         {{loggedUser?.name}}
       </span>

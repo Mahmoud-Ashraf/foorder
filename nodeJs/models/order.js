@@ -19,6 +19,19 @@ const orderSchema = new Schema({
     },
     deliveryFees: {
         type: Number,
+        default: 0
+    },
+    taxFees: {
+        type: Number,
+        default: 0
+    },
+    discount: {
+        type: Number,
+        default: 0
+    },
+    grandTotal: {
+        type: Number,
+        default: 0
     },
     createdOn: {
         type: String,

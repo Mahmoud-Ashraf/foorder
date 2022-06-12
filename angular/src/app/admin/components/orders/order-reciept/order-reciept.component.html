@@ -55,7 +55,7 @@
                             <span>Tax</span>
                         </div>
                         <div class="col-auto">
-                            <span><span class="fw-bold">{{collectedOrder?.taxFees}}</span><span class="text-muted"> EGP</span></span>
+                            <span><span class="fw-bold">{{calculateValueFromPerc(collectedOrder.taxFees) | number}} ({{collectedOrder?.taxFees}}%)</span><span class="text-muted"> EGP</span></span>
                         </div>
                     </div>
                     <div class="row justify-content-between">
@@ -71,7 +71,7 @@
                             <span>Discount</span>
                         </div>
                         <div class="col-auto">
-                            <span><span class="fw-bold">-{{collectedOrder?.discount}}</span><span class="text-muted"> EGP</span></span>
+                            <span><span class="fw-bold">-{{calculateValueFromPerc(collectedOrder.discount) | number}} ({{collectedOrder?.discount}}%)</span><span class="text-muted"> EGP</span></span>
                         </div>
                     </div>
                     <hr>
@@ -80,7 +80,7 @@
                             <span>Total</span>
                         </div>
                         <div class="col-auto">
-                            <span><span class="fw-bold">{{collectedOrder?.total}}</span><span class="text-muted"> EGP</span></span>
+                            <span><span class="fw-bold">{{collectedOrder?.total | number}}</span><span class="text-muted"> EGP</span></span>
                         </div>
                     </div>
 

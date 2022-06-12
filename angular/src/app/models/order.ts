@@ -5,5 +5,6 @@ export interface Order {
   // date?: number;
   items: any[];
   totalOrderPrice?: Number,
-  createdOn: string
+  createdOn: string,
+  grandTotal: Number
 }

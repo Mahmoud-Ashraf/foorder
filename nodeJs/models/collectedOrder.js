@@ -29,10 +29,9 @@ const collectedOrderSchema = new Schema(
             type: Number,
             default: 0
         },
-        // usersCount: {
-        //     type: Number,
-        //     required: true
-        // },
+        usersCount: {
+            type: Number
+        },
         status: {
             type: String,
             default: 'PENDING'

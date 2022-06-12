@@ -18,10 +18,7 @@ router.post(
   ordersController.addOrder
 );
 
-// router.put("/order/:orderId",
-//   isAuth,
-//   ordersController.updateOrder
-// );
+router.put("/updateTodayOrder/:orderId", isAuth, ordersController.updateTodayOrder);
 
 // router.delete("/order/:orderId", isAuth, ordersController.deleteOrder);
 router.get('/userOrders/:userId', isAuth, ordersController.getUserOrders);

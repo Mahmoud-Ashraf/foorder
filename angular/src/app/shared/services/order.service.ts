@@ -74,4 +74,8 @@ export class OrderService {
   updateCollectedOrder(collectedOrderId: string, collectedOrder: any) {
     return this.requests.putApi(`update-collected-order/${collectedOrderId}`, collectedOrder);
   }
+
+  updateTodayOrder(id: string, order: any) {
+    return this.requests.putApi(`updateTodayOrder/${id}`, order);
+  }
 }

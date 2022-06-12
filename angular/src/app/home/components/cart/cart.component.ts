@@ -26,6 +26,7 @@ export class CartComponent implements OnInit {
     if (jsonOrder) {
       this.order = JSON.parse(jsonOrder);
       this.order.totalOrderPrice = this.getTotalOrderPrice();
+      this.order.grandTotal = this.getTotalOrderPrice();
     }
   }
 
@@ -43,6 +44,7 @@ export class CartComponent implements OnInit {
     this.order.items = this.order.items.filter((item: any) => item.count > 0);
     localStorage.setItem('order', JSON.stringify(this.order));
     this.order.totalOrderPrice = this.getTotalOrderPrice();
+    this.order.grandTotal = this.getTotalOrderPrice();
   }
 
   submitOrder() {

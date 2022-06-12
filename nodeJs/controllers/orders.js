@@ -247,3 +247,39 @@ exports.getTodayOrders = (req, res, next) => {
       next(err);
     })
 }
+
+exports.updateTodayOrder = (req, res, next) => {
+  const orderId = req.params.orderId;
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const error = new Error('Validation Faild, Enter data in correct format');
+    error.statusCode = 422;
+    throw error;
+  }
+  const taxFees = req.body.taxFees;
+  const deliveryFees = req.body.deliveryFees;
+  const discount = req.body.discount;
+  const grandTotal = req.body.grandTotal;
+  Order.findById(orderId)
+    .then(order => {
+      if (!order) {
+        const error = new Error('Could not find a Order');
+        error.statusCode = 404;
+        throw error;
+      }
+      order.taxFees = taxFees;
+      order.deliveryFees = deliveryFees;
+      order.discount = discount;
+      order.grandTotal = grandTotal;
+      return order.save();
+    })
+    .then(result => {
+      return res.status(200).json({ message: 'Order update success', order: result });
+    })
+    .catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    })
+}

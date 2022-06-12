@@ -1,3 +1,4 @@
+import { HelperService } from 'src/app/shared/services/helper.service';
 import { User } from 'src/app/models/User';
 import { AuthService } from '../../services/auth.service';
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
@@ -16,7 +17,8 @@ export class AsideComponent implements OnInit, OnDestroy {
   loggedUser: any;
   constructor(
     private router: Router,
-    public authService: AuthService
+    public authService: AuthService,
+    private helperService: HelperService
   ) { }
 
   ngOnInit(): void {
@@ -45,6 +47,9 @@ export class AsideComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.authListenerSubs.unsubscribe();
     this.userListnerSub.unsubscribe();
+  }
+  generateUserAvatar(userName: string) {
+    return this.helperService.generateUserAvatar(userName);
   }
 
 }

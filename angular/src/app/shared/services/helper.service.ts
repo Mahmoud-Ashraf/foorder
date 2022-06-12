@@ -10,4 +10,17 @@ export class HelperService {
   goBack(): void {
     this.location.back();
   }
+
+  calculateValueFromPerc(perc: number, total: number) {
+    return perc*total/100;
+  }
+
+  generateUserAvatar(userName: string) {
+    let avatar = '';
+    let splitedName = userName.split(' ');
+    splitedName.forEach(namePhrase => {
+        avatar += namePhrase[0];
+    });
+    return avatar;
+  }
 }

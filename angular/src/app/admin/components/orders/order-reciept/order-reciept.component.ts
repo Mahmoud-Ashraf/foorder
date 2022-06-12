@@ -1,7 +1,9 @@
+import { HelperService } from './../../../../shared/services/helper.service';
 import { Resturant } from 'src/app/models/resturant';
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from 'src/app/shared/services/order.service';
 import { ActivatedRoute, Params } from '@angular/router';
+import { ThisReceiver } from '@angular/compiler';
 @Component({
   selector: 'app-order-reciept',
   templateUrl: './order-reciept.component.html',
@@ -47,6 +49,7 @@ export class OrderRecieptComponent implements OnInit {
   constructor(
     private orderService: OrderService,
     private activatedRoute: ActivatedRoute,
+    private helperService: HelperService
   ) { }
 
   ngOnInit(): void {
@@ -62,5 +65,8 @@ export class OrderRecieptComponent implements OnInit {
       this.collectedOrder = collectedOrder;
       // this.getTodayOrders();
     })
+  }
+  calculateValueFromPerc(perc: number) {
+    return this.helperService.calculateValueFromPerc(perc, this.collectedOrder.subtotalOrderPrice);
   }
 }

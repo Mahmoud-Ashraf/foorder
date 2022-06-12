@@ -15,11 +15,11 @@ exports.signup = (req, res, next) => {
         error.data = errors.array();
         throw error;
     }
-    let avatar = '';
-    splitedName = req.body.name.split(' ');
-    splitedName.forEach(namePhrase => {
-        avatar += namePhrase[0];
-    });
+    // let avatar = '';
+    // splitedName = req.body.name.split(' ');
+    // splitedName.forEach(namePhrase => {
+    //     avatar += namePhrase[0];
+    // });
     const email = req.body.email;
     const name = req.body.name;
     const password = req.body.password;
@@ -30,7 +30,7 @@ exports.signup = (req, res, next) => {
                 password: hashedPassword,
                 name: name,
                 voted: false,
-                avatar: avatar
+                // avatar: avatar
             });
             return user.save();
         }).then(result => {
@@ -188,6 +188,7 @@ exports.updateUser = (req, res, next) => {
     // const content = req.body.content;
     // const voted = req.body.voted;
     const lastVoteDate = req.body.lastVoteDate;
+    const wallet = req.body.wallet;
     User.findById(userId)
         .then(user => {
             if (!user) {
@@ -199,6 +200,7 @@ exports.updateUser = (req, res, next) => {
             // user.content = content;
             // user.voted = voted;
             user.lastVoteDate = lastVoteDate;
+            user.wallet = wallet;
             return user.save();
         })
         .then(result => {

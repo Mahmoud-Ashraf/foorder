@@ -1,3 +1,5 @@
+import { HelperService } from './../../../../shared/services/helper.service';
+import { AuthService } from './../../../../shared/services/auth.service';
 import { Resturant } from 'src/app/models/resturant';
 import { ResturantsService } from 'src/app/shared/services/resturants.service';
 import { Order } from '../../../../models/order';
@@ -22,7 +24,8 @@ export class CollectedOrderComponent implements OnInit {
     discount: number,
     usersCount: number,
     subtotalOrderPrice: number,
-    total?: number
+    total?: number,
+    users: string[]
   } = {
       _id: '',
       items: [],
@@ -36,7 +39,8 @@ export class CollectedOrderComponent implements OnInit {
       taxFees: 0,
       discount: 0,
       usersCount: 0,
-      subtotalOrderPrice: 0
+      subtotalOrderPrice: 0,
+      users: []
     }
   // orders: {
   //   orders: Order[],
@@ -52,7 +56,9 @@ export class CollectedOrderComponent implements OnInit {
   constructor(
     private orderService: OrderService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
+    private helperService: HelperService
   ) { }
 
   ngOnInit(): void {
@@ -66,17 +72,41 @@ export class CollectedOrderComponent implements OnInit {
   getCollectedOrder(collectedOrderId: string) {
     this.orderService.getCollectedOrder(collectedOrderId).subscribe(collectedOrder => {
       this.collectedOrder = collectedOrder;
+      console.log(this.collectedOrder);
       // this.getTodayOrders();
     })
   }
 
   generateReciept() {
     this.collectedOrder.status = 'DONE';
-    this.collectedOrder.taxFees = (this.collectedOrder.taxFees / 100) * this.collectedOrder.subtotalOrderPrice;
-    this.collectedOrder.discount = (this.collectedOrder.discount / 100) * this.collectedOrder.subtotalOrderPrice;
-    this.collectedOrder.total = this.collectedOrder.subtotalOrderPrice + this.collectedOrder.taxFees + this.collectedOrder.deliveryFees - this.collectedOrder.discount;
+    // this.collectedOrder.taxFees = (this.collectedOrder.taxFees / 100) * this.collectedOrder.subtotalOrderPrice;
+    // this.collectedOrder.discount = (this.collectedOrder.discount / 100) * this.collectedOrder.subtotalOrderPrice;
+    this.collectedOrder.total = this.collectedOrder.subtotalOrderPrice + this.calculateValueFromPerc(this.collectedOrder.taxFees, this.collectedOrder.subtotalOrderPrice) + this.collectedOrder.deliveryFees - this.calculateValueFromPerc(this.collectedOrder.discount, this.collectedOrder.subtotalOrderPrice);
     this.orderService.updateCollectedOrder(this.collectedOrder._id, this.collectedOrder).subscribe((updatedCollectedOrder: any) => {
       this.router.navigate([`/admin/orders/order-reciept/${updatedCollectedOrder.collectedOrder._id}`]);
-    })
+      this.orderService.getTodayOrders(this.collectedOrder.resturantId._id).subscribe((todayOrders: any) => {
+        console.log(this.collectedOrder.users.length);
+        todayOrders.orders.forEach((order: any) => {
+          console.log('order when enter', order);
+          order.deliveryFees = this.collectedOrder.deliveryFees / this.collectedOrder.users.length;
+          order.taxFees = this.calculateValueFromPerc(this.collectedOrder.taxFees, order.totalOrderPrice);
+          order.discount = this.calculateValueFromPerc(this.collectedOrder.discount, order.totalOrderPrice);
+          order.grandTotal = order.totalOrderPrice + order.deliveryFees + order.taxFees - order.discount;
+          console.log('order before update', order);
+          this.orderService.updateTodayOrder(order._id, order).subscribe((updatedOrder) => {
+            console.log('updated Order', updatedOrder);
+            order.userId.wallet += order.grandTotal;
+            this.authService.updateUser(order.userId._id, order.userId).subscribe((updatedUser) => {
+              console.log('updated User', updatedUser);
+            })
+          })
+        });
+      })
+    });
+
+  }
+  
+  calculateValueFromPerc(perc: number, total: number) {
+    return this.helperService.calculateValueFromPerc(perc, total);
   }
 }

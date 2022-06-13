@@ -1,1 +1,14 @@
-<p>wallet works!</p>
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div class="alert text-center" [ngClass]="{'alert-danger': loggedUser?.wallet < 0}">
+            <p *ngIf="loggedUser?.wallet < 0">Adf3 Elly 3leeeeek</p>
+            <p *ngIf="loggedUser?.wallet >= 0">3aaaaaash</p>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="today-order-card">
+            <h3>{{loggedUser?.name}}'s Wallet</h3>
+            <h4 class="h1 text-center" [ngClass]="{'text-danger': loggedUser?.wallet < 0, 'text-success': loggedUser?.wallet >= 0}">{{loggedUser?.wallet | number}}</h4>
+        </div>
+    </div>
+</div>

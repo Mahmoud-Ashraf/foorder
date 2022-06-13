@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-12">
                 <h5 class="table-heading">Admins</h5>
-                <table class="table table-borderless" *ngIf="admins.length > 0 else noAdminsFound">
+                <table class="table table-borderless" *ngIf="admins?.length > 0 else noAdminsFound">
                     <thead>
                         <tr class="table-header">
                             <th>Name</th>
@@ -25,13 +25,31 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let user of admins">
-                            <td>{{user.name}}</td>
+                            <td>{{user?.name}}</td>
                             <td class="text-center">{{user?.email}}</td>
-                            <td class="wallet-amount text-center" [class.wallet-amount-minus]="user.wallet < 0">{{(user?.wallet? user.wallet : 0) | number}} EGP</td>
+                            <td class="wallet-amount text-center" [class.wallet-amount-minus]="user?.wallet < 0">
+                                {{(user?.wallet? user?.wallet : 0) | number}} EGP</td>
                             <td class="text-center">
-                                <button class="btn btn-primary btn-pay me-2">
+                                <button class="btn btn-primary btn-pay me-2" (click)="openPayModal(adminPayModal)">
                                     Pay
                                 </button>
+                                <ng-template #adminPayModal let-modal>
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="modal-basic-title">Pay For {{user?.name}}</h4>
+                                        <button type="button" class="btn-close" aria-label="Close"
+                                            (click)="modal.close()"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <input id="userPay" type="number" class="form-control" placeholder="Adf3 Ya Prince"
+                                                name="userPay" [(ngModel)]="userPayment">
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-dark"
+                                            (click)="modal.close(user)">Save</button>
+                                    </div>
+                                </ng-template> 
                                 <button class="btn btn-outline-danger btn-remove-admin">
                                     Remove admin
                                 </button>
@@ -44,13 +62,13 @@
                 </ng-template>
             </div>
         </div>
-        
+
     </div>
     <div class="col-12">
         <div class="row">
             <div class="col-12">
                 <h5 class="table-heading">Users</h5>
-                <table class="table table-borderless" *ngIf="users.length > 0 else noUsersFound">
+                <table class="table table-borderless" *ngIf="users?.length > 0 else noUsersFound">
                     <thead>
                         <tr class="table-header">
                             <th>Name</th>
@@ -61,13 +79,31 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let user of users">
-                            <td>{{user.name}}</td>
+                            <td>{{user?.name}}</td>
                             <td class="text-center">{{user?.email}}</td>
-                            <td class="text-center wallet-amount"  [class.wallet-amount-minus]="user.wallet < 0">{{(user?.wallet? user.wallet : 0) | number}} EGP</td>
+                            <td class="text-center wallet-amount" [class.wallet-amount-minus]="user?.wallet < 0">
+                                {{(user?.wallet? user?.wallet : 0) | number}} EGP</td>
                             <td class="text-center">
-                                <button class="btn btn-primary btn-pay me-2">
+                                <button class="btn btn-primary btn-pay me-2" (click)="openPayModal(userPayModal)">
                                     Pay
                                 </button>
+                                <ng-template #userPayModal let-modal>
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="modal-basic-title">Pay For {{user?.name}}</h4>
+                                        <button type="button" class="btn-close" aria-label="Close"
+                                            (click)="modal.close()"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <input id="userPay" type="number" class="form-control" placeholder="Adf3 Ya Prince"
+                                                name="userPay" [(ngModel)]="userPayment">
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-dark"
+                                            (click)="modal.close(user)">Save</button>
+                                    </div>
+                                </ng-template> 
                                 <button class="btn btn-outline-info btn-make-admin">
                                     Make admin
                                 </button>
@@ -80,6 +116,6 @@
                 </ng-template>
             </div>
         </div>
-        
+
     </div>
 </div>

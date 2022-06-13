@@ -15,7 +15,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NetworkInterceptor } from './interceptors/network.interceptor';
 import { AuthInterceptor } from '../login/interceptors/auth.interceptor';
 import { NoDataFoundComponent } from './components/no-data-found/no-data-found.component';
-
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -31,6 +31,7 @@ import { NoDataFoundComponent } from './components/no-data-found/no-data-found.c
     CommonModule,
     QuicklinkModule,
     FormsModule,
+    NgbModalModule
   ],
   exports: [
     QuicklinkModule,

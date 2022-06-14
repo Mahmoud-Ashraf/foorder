@@ -1,0 +1,48 @@
+// .btn {
+//   font-size: $main-font-size;
+//   line-height: 20px;
+//   padding: 14px;
+//   text-align: center;
+//   // margin-bottom: 20px;
+//   border-radius: 8px;
+//   transition: all 0.3s ease-in-out;
+//   &.btn-main {
+//     background-color: $main-color;
+//     border: 1px solid darken($main-color, 10);
+//     color: $light-color;
+//     &:hover,
+//     &:focus,
+//     &:active {
+//       background-color: darken($main-color, 10);
+//       color: $light-color;
+//     }
+//   }
+// }
+
+.btn.btn-browse-file {
+    font-size: 14px;
+    padding: 14px 28px;
+    line-height: 17px;
+    margin-top: 3px;
+    margin-right: 3px;
+}
+
+.btn.btn-save {
+    color: $main-color;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.btn.btn-remove-admin,
+.btn.btn-make-admin {
+    padding: 11px 10px;
+}
+
+.btn.btn-pay {
+    padding: 12px 32px;
+}
+
+.btn.btn-see-order {
+    padding: 14px 87px;
+    color: #fff;
+}

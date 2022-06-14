@@ -1,0 +1,372 @@
+@import "./variables";
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "./functions";
+@import "./mixins";
+@import "./root";
+@import "./buttons";
+@import "./fonts";
+@import "./inputs";
+@import "./tables";
+@import "./helpers";
+
+/* ==================== Generate btns texts bgs alerts coloring classes ==================== */
+@include coloring($colors);
+
+// loader
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $light-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+// Sign in & register
+
+.double-form {
+  min-height: 100vh;
+
+  .left-form,
+  .right-form {
+    min-height: 100vh;
+    height: 100%;
+  }
+}
+
+.left-form {
+  background: $main-color;
+  background: linear-gradient(180deg, darken($main-color, 10) 0%, darken($main-color, 7) 50%, $main-color 100%);
+}
+
+.right-form {
+  padding: 50px;
+  display: flex;
+  align-items: center;
+
+  .logo {
+    background-color: #c4c4c4;
+    padding: 0.5rem 2rem;
+    font-size: $main-font-size * 1.625;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: $dark-color;
+    margin-bottom: 100px;
+  }
+
+  .welcome {
+    // font-family: DM Sans;
+    font-size: $main-font-size;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #98989e;
+  }
+
+  .join {
+    color: #212429;
+    font-style: normal;
+    font-weight: bold;
+    font-size: $main-font-size * 1.625;
+    line-height: 32px;
+    margin-bottom: 24px;
+  }
+}
+
+// Loader
+.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $light-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+// Header
+
+.aside {
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  background-color: $main-color;
+  // justify-content: space-between;
+  padding: 3rem;
+  // align-items: center;
+  color: $light-color;
+  position: sticky;
+  top: 0;
+  // left: 0;
+  height: 100vh;
+
+  .aside-container {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    .user {
+      &-welcome {
+        font-size: 1.25rem;
+        text-align: center;
+        font-weight: 600;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &--avatar {
+          background-color: $light-color;
+          border-radius: 50%;
+          color: $main-color;
+          width: 200px;
+          height: 200px;
+          font-size: 5.36rem;
+          line-height: 1.1em;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 1.5rem;
+        }
+      }
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      &-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 0;
+        padding-left: 0;
+
+        li {
+          // margin-inline-end: 1rem;
+          cursor: pointer;
+          margin-bottom: 2rem;
+          max-width: 12rem;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          a {
+            font-size: 1.25rem;
+            line-height: 1em;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+          }
+
+          span {
+            display: inline-flex;
+            width: 24px;
+            height: 24px;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            // i,img {
+            //   display: inline-flex;
+            //   justify-content: center;
+            //   align-items: center;
+            // }
+          }
+        }
+      }
+
+      &:last-child {
+        .links-list {
+          li {
+            a {
+              font-weight: 400;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Poll
+.poll {
+  &-vote {
+    font-size: 2.57rem;
+    line-height: 3.35rem;
+    font-weight: 600;
+  }
+
+  &-timer {
+    background-color: rgba(242, 242, 242, 0.8);
+    border-radius: 8px;
+    padding: 0.5rem;
+    color: $main-color;
+    font-size: 2.57rem;
+    line-height: 3.35rem;
+    margin-inline-end: 1rem;
+    width: 100px;
+    display: inline-block;
+    border: 1px solid var(--main-500);
+    font-weight: 600;
+
+    &:last-child {
+      margin-inline-end: 0;
+    }
+  }
+
+  &-list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+
+    li {
+      padding: 1.3rem 7.85rem;
+      font-size: 2rem;
+      line-height: 3rem;
+      background-color: $light-gray;
+      border-radius: 0.5rem;
+      border: 1px solid darken($light-gray, 4);
+      margin-bottom: 0.7rem;
+      cursor: pointer;
+      color: $dark-color;
+      transition: all 0.3s ease-in-out;
+      display: flex;
+      justify-content: space-between;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &:hover {
+        background-color: lighten($light-gray, 1.5);
+        border-color: $main-color;
+      }
+
+      &.poll-selected {
+        background-color: $main-secondary-color;
+        // color: $light-color;
+      }
+    }
+  }
+
+  &-submit {
+    height: 80px;
+    font-size: 2rem;
+    line-height: 3rem;
+  }
+}
+
+// Cart
+.cart {
+  &-count {
+    background-color: rgba(242, 242, 242, 0.8);
+    border-radius: 8px;
+    padding: 0.3rem;
+    color: $main-color;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    // margin-inline-end: 1rem;
+    width: 50px;
+    display: inline-block;
+    border: 1px solid var(--main-500);
+    font-weight: 400;
+    margin: 0 .5rem;
+  }
+}
+
+.text-bold {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+// Admin Home
+.home {
+  &-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    &--info {
+      span {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        margin-bottom: .5rem;
+      }
+
+      h2 {
+        font-size: 2.5rem;
+        line-height: 2.75rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      h3 {
+        font-size: 2rem;
+        line-height: 2.2rem;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+// Add Restaurant
+
+.text-upload {
+  margin: 32px 0;
+}
+
+.wallet-amount {
+  font-size: 18px;
+  font-weight: 600;
+  color: #27AE60;
+}
+
+.wallet-amount-minus {
+  color: #EB5757;
+}
+
+.mw-90 {
+  max-width: 130px;
+}
+
+.table-heading {
+  margin-bottom: 20px;
+}
+
+.text-blue {
+  color: $main-color;
+}
+
+.history-date {
+  color: #828282;
+  font-size: 14px;
+}
+
+li {
+  list-style: none;
+}
+
+.today-order-card {
+  background-color: #5D5FEF;
+  padding: 33px 20px;
+  border-radius: 5px;
+  color: #fff;
+}

@@ -1,39 +1,5 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["vendor"],{
 
-/***/ "/4xg":
-/*!**********************************************************************************!*\
-  !*** ./node_modules/flash-messages-angular/__ivy_ngcc__/module/flash-message.js ***!
-  \**********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var FlashMessage = /** @class */ (function () {
-    function FlashMessage(text, cssClass, closeOnClick, showCloseBtn) {
-        this.id = (FlashMessage.nextId++);
-        this.text = 'default text';
-        this.cssClass = '';
-        this.closeOnClick = false;
-        this.showCloseBtn = false;
-        if (text)
-            this.text = text;
-        if (cssClass)
-            this.cssClass = cssClass;
-        if (closeOnClick)
-            this.closeOnClick = closeOnClick;
-        if (showCloseBtn)
-            this.showCloseBtn = showCloseBtn;
-    }
-    FlashMessage.nextId = 0;
-    return FlashMessage;
-}());
-exports.FlashMessage = FlashMessage;
-//# sourceMappingURL=flash-message.js.map
-
-/***/ }),
-
 /***/ "/d8p":
 /*!*****************************************************************!*\
   !*** ./node_modules/rxjs/_esm2015/internal/operators/repeat.js ***!
@@ -21146,40 +21112,6 @@ function partition(predicate, thisArg) {
 
 /***/ }),
 
-/***/ "BBmC":
-/*!*******************************************************************************************!*\
-  !*** ./node_modules/flash-messages-angular/__ivy_ngcc__/module/flash-messages.service.js ***!
-  \*******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var ɵngcc0 = __webpack_require__(/*! @angular/core */ "fXoL");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "fXoL");
-var FlashMessagesService = /** @class */ (function () {
-    function FlashMessagesService() {
-    }
-FlashMessagesService.ɵfac = function FlashMessagesService_Factory(t) { return new (t || FlashMessagesService)(); };
-FlashMessagesService.ɵprov = ɵngcc0.ɵɵdefineInjectable({ token: FlashMessagesService, factory: function (t) { return FlashMessagesService.ɵfac(t); } });
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵngcc0.ɵsetClassMetadata(FlashMessagesService, [{
-        type: core_1.Injectable
-    }], function () { return []; }, null); })();
-    return FlashMessagesService;
-}());
-exports.FlashMessagesService = FlashMessagesService;
-
-//# sourceMappingURL=flash-messages.service.js.map
-
-/***/ }),
-
 /***/ "BFxc":
 /*!*******************************************************************!*\
   !*** ./node_modules/rxjs/_esm2015/internal/operators/takeLast.js ***!
@@ -25906,26 +25838,6 @@ function switchMapTo(innerObservable, resultSelector) {
 
 /***/ }),
 
-/***/ "ajg5":
-/*!**************************************************************************!*\
-  !*** ./node_modules/flash-messages-angular/__ivy_ngcc__/module/index.js ***!
-  \**************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var ɵngcc0 = __webpack_require__(/*! ./flash-messages.component */ "u3yK");
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var module_1 = __webpack_require__(/*! ./module */ "dnkk");
-exports.FlashMessagesModule = module_1.FlashMessagesModule;
-var flash_messages_service_1 = __webpack_require__(/*! ./flash-messages.service */ "BBmC");
-exports.FlashMessagesService = flash_messages_service_1.FlashMessagesService;
-
-exports.FlashMessagesComponent = ɵngcc0.FlashMessagesComponent;
-//# sourceMappingURL=index.js.map
-
-/***/ }),
-
 /***/ "bHdf":
 /*!*******************************************************************!*\
   !*** ./node_modules/rxjs/_esm2015/internal/operators/mergeAll.js ***!
@@ -26477,61 +26389,6 @@ class MaterializeSubscriber extends _Subscriber__WEBPACK_IMPORTED_MODULE_0__["Su
     }
 }
 //# sourceMappingURL=materialize.js.map
-
-/***/ }),
-
-/***/ "dnkk":
-/*!***************************************************************************!*\
-  !*** ./node_modules/flash-messages-angular/__ivy_ngcc__/module/module.js ***!
-  \***************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var ɵngcc0 = __webpack_require__(/*! @angular/core */ "fXoL");
-var ɵngcc1 = __webpack_require__(/*! ./flash-messages.component */ "u3yK");
-var ɵngcc2 = __webpack_require__(/*! @angular/common */ "ofXK");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "fXoL");
-var common_1 = __webpack_require__(/*! @angular/common */ "ofXK");
-var flash_messages_component_1 = __webpack_require__(/*! ./flash-messages.component */ "u3yK");
-var flash_messages_service_1 = __webpack_require__(/*! ./flash-messages.service */ "BBmC");
-var FlashMessagesModule = /** @class */ (function () {
-    function FlashMessagesModule() {
-    }
-    FlashMessagesModule_1 = FlashMessagesModule;
-    FlashMessagesModule.forRoot = function () {
-        return {
-            ngModule: FlashMessagesModule_1,
-            providers: [flash_messages_service_1.FlashMessagesService]
-        };
-    };
-    var FlashMessagesModule_1;
-FlashMessagesModule.ɵfac = function FlashMessagesModule_Factory(t) { return new (t || FlashMessagesModule)(); };
-FlashMessagesModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: FlashMessagesModule });
-FlashMessagesModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ providers: [], imports: [[common_1.CommonModule]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(FlashMessagesModule, { declarations: [ɵngcc1.FlashMessagesComponent], imports: [ɵngcc2.CommonModule], exports: [ɵngcc1.FlashMessagesComponent] }); })();
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵngcc0.ɵsetClassMetadata(FlashMessagesModule, [{
-        type: core_1.NgModule,
-        args: [{
-                imports: [common_1.CommonModule],
-                declarations: [flash_messages_component_1.FlashMessagesComponent],
-                exports: [flash_messages_component_1.FlashMessagesComponent],
-                providers: []
-            }]
-    }], function () { return []; }, null); })();
-    return FlashMessagesModule;
-}());
-exports.FlashMessagesModule = FlashMessagesModule;
-
-//# sourceMappingURL=module.js.map
 
 /***/ }),
 
@@ -79208,146 +79065,6 @@ const VERSION = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["Version"]('11.2.
 
 
 //# sourceMappingURL=router.js.map
-
-/***/ }),
-
-/***/ "u3yK":
-/*!*********************************************************************************************!*\
-  !*** ./node_modules/flash-messages-angular/__ivy_ngcc__/module/flash-messages.component.js ***!
-  \*********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var ɵngcc0 = __webpack_require__(/*! @angular/core */ "fXoL");
-var ɵngcc1 = __webpack_require__(/*! ./flash-messages.service */ "BBmC");
-var ɵngcc2 = __webpack_require__(/*! @angular/common */ "ofXK");
-
-function FlashMessagesComponent_div_1_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelement(0, "div", 3);
-} }
-function FlashMessagesComponent_div_2_button_1_Template(rf, ctx) { if (rf & 1) {
-    var _r6 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "button", 7);
-    ɵngcc0.ɵɵlistener("click", function FlashMessagesComponent_div_2_button_1_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r6); var message_r2 = ɵngcc0.ɵɵnextContext().$implicit; var ctx_r4 = ɵngcc0.ɵɵnextContext(); return ctx_r4.close(message_r2); });
-    ɵngcc0.ɵɵelementStart(1, "span", 8);
-    ɵngcc0.ɵɵtext(2, "\u00D7");
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-} }
-var _c0 = function (a0) { return { "alert-dismissible": a0 }; };
-function FlashMessagesComponent_div_2_Template(rf, ctx) { if (rf & 1) {
-    var _r8 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "div", 4);
-    ɵngcc0.ɵɵlistener("click", function FlashMessagesComponent_div_2_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r8); var message_r2 = ctx.$implicit; var ctx_r7 = ɵngcc0.ɵɵnextContext(); return ctx_r7.alertClicked(message_r2); });
-    ɵngcc0.ɵɵtemplate(1, FlashMessagesComponent_div_2_button_1_Template, 3, 0, "button", 5);
-    ɵngcc0.ɵɵelement(2, "div", 6);
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    var message_r2 = ctx.$implicit;
-    ɵngcc0.ɵɵclassMapInterpolate1("alert flash-message ", message_r2.cssClass, "");
-    ɵngcc0.ɵɵstyleProp("cursor", message_r2.closeOnClick ? "pointer" : "inherit");
-    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(8, _c0, message_r2.showCloseBtn));
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", message_r2.showCloseBtn);
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("innerHTML", message_r2.text, ɵngcc0.ɵɵsanitizeHtml);
-} }
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "fXoL");
-var flash_message_1 = __webpack_require__(/*! ./flash-message */ "/4xg");
-var flash_messages_service_1 = __webpack_require__(/*! ./flash-messages.service */ "BBmC");
-var FlashMessagesComponent = /** @class */ (function () {
-    function FlashMessagesComponent(_flashMessagesService, _cdRef) {
-        this._flashMessagesService = _flashMessagesService;
-        this._cdRef = _cdRef;
-        this._defaults = {
-            text: 'default message',
-            closeOnClick: false,
-            showCloseBtn: false,
-            cssClass: ''
-        };
-        this.messages = [];
-        this.classes = '';
-        this._grayOut = false;
-        this._flashMessagesService.show = this.show.bind(this);
-        this._flashMessagesService.grayOut = this.grayOut.bind(this);
-    }
-    FlashMessagesComponent.prototype.ngOnInit = function () { };
-    FlashMessagesComponent.prototype.show = function (text, options) {
-        var _this = this;
-        if (options === void 0) { options = {}; }
-        var defaults = {
-            timeout: 2500,
-            closeOnClick: false,
-            showCloseBtn: false,
-            cssClass: '',
-            text: "default message"
-        };
-        for (var attrname in options) {
-            defaults[attrname] = options[attrname];
-        }
-        var message = new flash_message_1.FlashMessage(text, defaults.cssClass, defaults.closeOnClick, defaults.showCloseBtn);
-        message.timer = window.setTimeout(function () {
-            _this._remove(message);
-            _this._cdRef.detectChanges();
-        }, defaults.timeout);
-        this.messages.push(message);
-        this._cdRef.detectChanges();
-    };
-    FlashMessagesComponent.prototype.close = function (message) {
-        clearTimeout(message.timer);
-        this._remove(message);
-        this._cdRef.detectChanges();
-    };
-    FlashMessagesComponent.prototype.alertClicked = function (message) {
-        if (message.closeOnClick) {
-            this.close(message);
-        }
-    };
-    FlashMessagesComponent.prototype.grayOut = function (value) {
-        if (value === void 0) { value = false; }
-        this._grayOut = value;
-    };
-    FlashMessagesComponent.prototype._remove = function (message) {
-        this.messages = this.messages.filter(function (msg) { return msg.id !== message.id; });
-    };
-    FlashMessagesComponent = __decorate([ __metadata("design:paramtypes", [flash_messages_service_1.FlashMessagesService, core_1.ChangeDetectorRef])
-    ], FlashMessagesComponent);
-FlashMessagesComponent.ɵfac = function FlashMessagesComponent_Factory(t) { return new (t || FlashMessagesComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.FlashMessagesService), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ChangeDetectorRef)); };
-FlashMessagesComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: FlashMessagesComponent, selectors: [["flash-messages"]], decls: 3, vars: 2, consts: [["id", "flashMessages", 1, "flash-messages"], ["id", "grayOutDiv", 4, "ngIf"], [3, "class", "ngClass", "cursor", "click", 4, "ngFor", "ngForOf"], ["id", "grayOutDiv"], [3, "ngClass", "click"], ["type", "button", "class", "close", "data-dismiss", "alert", "aria-label", "Close", 3, "click", 4, "ngIf"], [3, "innerHTML"], ["type", "button", "data-dismiss", "alert", "aria-label", "Close", 1, "close", 3, "click"], ["aria-hidden", "true"]], template: function FlashMessagesComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵelementStart(0, "div", 0);
-        ɵngcc0.ɵɵtemplate(1, FlashMessagesComponent_div_1_Template, 1, 0, "div", 1);
-        ɵngcc0.ɵɵtemplate(2, FlashMessagesComponent_div_2_Template, 3, 10, "div", 2);
-        ɵngcc0.ɵɵelementEnd();
-    } if (rf & 2) {
-        ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("ngIf", ctx._grayOut && ctx.messages.length);
-        ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("ngForOf", ctx.messages);
-    } }, directives: [ɵngcc2.NgIf, ɵngcc2.NgForOf, ɵngcc2.NgClass], encapsulation: 2 });
-(function () { (typeof ngDevMode === "undefined" || ngDevMode) && ɵngcc0.ɵsetClassMetadata(FlashMessagesComponent, [{
-        type: core_1.Component,
-        args: [{
-                selector: 'flash-messages',
-                template: "\n      <div id=\"flashMessages\" class=\"flash-messages\">\n          <div id=\"grayOutDiv\" *ngIf='_grayOut && messages.length'></div>\n          <div class=\"alert flash-message {{message.cssClass}}\" [ngClass]=\"{'alert-dismissible':message.showCloseBtn}\" [style.cursor]=\"message.closeOnClick?'pointer':'inherit'\" *ngFor='let message of messages' (click)=\"alertClicked(message)\">\n              <button *ngIf=\"message.showCloseBtn\" type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\" (click)=\"close(message)\"><span aria-hidden=\"true\">&times;</span></button>\n              <div [innerHTML]=\"message.text\"></div>\n          </div> \n      </div>\n  "
-            }]
-    }], function () { return [{ type: ɵngcc1.FlashMessagesService }, { type: ɵngcc0.ChangeDetectorRef }]; }, null); })();
-    return FlashMessagesComponent;
-}());
-exports.FlashMessagesComponent = FlashMessagesComponent;
-
-//# sourceMappingURL=flash-messages.component.js.map
 
 /***/ }),
 

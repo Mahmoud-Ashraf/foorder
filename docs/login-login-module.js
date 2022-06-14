@@ -32,11 +32,7 @@ function SignInComponent_div_32_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx_r1.errorMessage);
 } }
 class SignInComponent {
-    constructor(router, 
-    // private loader: LoaderService,
-    // private flashMessage: FlashMessagesService,
-    // private resturantsService: ResturantsService
-    authService) {
+    constructor(router, authService) {
         this.router = router;
         this.authService = authService;
         this.disableSignIn = false;
@@ -183,7 +179,7 @@ class RegisterComponent {
     }
 }
 RegisterComponent.ɵfac = function RegisterComponent_Factory(t) { return new (t || RegisterComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"])); };
-RegisterComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: RegisterComponent, selectors: [["app-register"]], decls: 51, vars: 2, consts: [[1, "right-form"], [1, "row"], [1, "col-12"], [1, "logo"], [1, "welcome"], [1, "join"], [1, "row", "row-cols-1", 3, "ngSubmit"], ["signUpForm", "ngForm"], [1, "col"], [1, "custom-form-group"], ["for", "name", 1, "custom-input-label"], [1, "custom-form-input-group"], [1, "custom-form-addon"], [1, "fas", "fa-user"], ["type", "text", "name", "name", "ngModel", "", "required", "", "autocomplete", "given-name", 1, "custom-form-input"], ["for", "email", 1, "custom-input-label"], [1, "fas", "fa-envelope"], ["type", "email", "name", "email", "ngModel", "", "required", "", "autocomplete", "email", "email", "", 1, "custom-form-input"], ["for", "password", 1, "custom-input-label"], [1, "fas", "fa-lock"], ["type", "password", "name", "password", "ngModel", "", "required", "", "autocomplete", "new-password", "minlength", "8", 1, "custom-form-input"], ["class", "alert alert-danger", 4, "ngIf"], ["type", "submit", 1, "sign-in-btn", "w-100", 3, "disabled"], [1, "text-right"], [1, "text-muted"], ["href", "#", "routerLink", "/auth/login", 1, "text-dark", "text-decoration-none"], [1, "alert", "alert-danger"]], template: function RegisterComponent_Template(rf, ctx) { if (rf & 1) {
+RegisterComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: RegisterComponent, selectors: [["app-register"]], decls: 51, vars: 2, consts: [[1, "right-form"], [1, "row"], [1, "col-12"], [1, "logo"], [1, "welcome"], [1, "join"], [1, "row", "row-cols-1", 3, "ngSubmit"], ["signUpForm", "ngForm"], [1, "col"], [1, "custom-form-group"], ["for", "name", 1, "custom-input-label"], [1, "custom-form-input-group"], [1, "custom-form-addon"], [1, "fas", "fa-user"], ["type", "text", "name", "name", "ngModel", "", "required", "", "autocomplete", "given-name", 1, "custom-form-input"], ["for", "email", 1, "custom-input-label"], [1, "fas", "fa-envelope"], ["type", "email", "name", "email", "ngModel", "", "required", "", "autocomplete", "email", "email", "", 1, "custom-form-input"], ["for", "password", 1, "custom-input-label"], [1, "fas", "fa-lock"], ["type", "password", "name", "password", "ngModel", "", "required", "", "autocomplete", "new-password", "minlength", "8", 1, "custom-form-input"], ["class", "alert alert-danger", 4, "ngIf"], ["type", "submit", 1, "btn", "btn-primary", "w-100", 3, "disabled"], [1, "text-right"], [1, "text-muted"], ["href", "#", "routerLink", "/auth/login", 1, "text-dark", "text-decoration-none"], [1, "alert", "alert-danger"]], template: function RegisterComponent_Template(rf, ctx) { if (rf & 1) {
         const _r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);

@@ -12097,8 +12097,8 @@ h6, .h6 {
   padding: 0.75rem 0.5rem;
 }
 .menu-table-head {
-  font-size: 2.1rem;
-  line-height: 2.8rem;
+  font-size: 1.7rem;
+  line-height: 1.87rem;
   font-weight: 500;
   color: #000;
   border-bottom: 1px solid tint-color(#828282, 40%);
@@ -12109,20 +12109,20 @@ h6, .h6 {
   color: #5D5FEF;
 }
 .menu-table-items {
-  font-size: 2.1rem;
-  line-height: 2.8rem;
+  font-size: 1.6rem;
+  line-height: 1.76rem;
   font-weight: 500;
   color: #000;
   border-bottom: 1px solid tint-color(#828282, 40%);
 }
 .menu-table-items-price {
-  font-size: 2.5rem;
-  line-height: 3.3rem;
+  font-size: 1.5rem;
+  line-height: 1.65rem;
   color: #5D5FEF;
 }
 .menu-table-items-price-unit {
-  font-size: 1.5rem;
-  line-height: 1.75rem;
+  font-size: 1.2rem;
+  line-height: 1.32rem;
   color: tint-color(#828282, 40%);
 }
 .item-name-width {
@@ -12727,11 +12727,11 @@ td {
 .cart-count {
   background-color: rgba(242, 242, 242, 0.8);
   border-radius: 8px;
-  padding: 0.3rem;
+  padding: 0.5rem;
   color: #5D5FEF;
-  font-size: 1.5rem;
-  line-height: 2rem;
-  width: 50px;
+  font-size: 1.2rem;
+  line-height: 1.32rem;
+  width: 35px;
   display: inline-block;
   border: 1px solid var(--main-500);
   font-weight: 400;

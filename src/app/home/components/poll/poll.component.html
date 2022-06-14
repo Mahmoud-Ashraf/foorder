@@ -1,8 +1,8 @@
 <div class="row justify-content-center poll" *ngIf="showPoll">
   <!-- <div class="row justify-content-center"> -->
   <div class="col-12">
-    <p class="poll-vote">Thanks for your vote, wait the result in</p>
-    <p class="poll-vote">Vote for one of this restaurants in</p>
+    <p class="poll-vote" *ngIf="currentUser?.voted">Thanks for your vote, wait the result in</p>
+    <p class="poll-vote" *ngIf="!currentUser?.voted">Vote for one of this restaurants in</p>
     <app-count-down [endTime]="pollEndTime"></app-count-down>
     <ul class="poll-list">
       <li *ngFor="let resturant of resturants"

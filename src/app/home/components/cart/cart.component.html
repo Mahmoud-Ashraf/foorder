@@ -3,9 +3,10 @@
 </div>
 <table class="menu-table">
   <tr class="menu-table-head">
-    <th>اسم المنتج</th>
-    <th>السعر</th>
-    <th>اضف للعربة</th>
+    <th>Product Name</th>
+    <th>Price</th>
+    <th>Add To Cart</th>
+    <th>Total</th>
   </tr>
   <!-- <ng-container> -->
   <tr class="menu-table-items" *ngFor="let item of order?.items">
@@ -20,7 +21,7 @@
           cart</button> -->
       <!-- <ng-template #itemCount> -->
       <button *ngIf="item?.count > 1" class="btn btn-info btn-sm" (click)="decreseOrderCount(item)">-</button>
-      <a><i *ngIf="item.count == 0" class="fas text-main fa-shopping-cart" (click)="increaseOrderCount(item)"></i></a>
+      <a><i *ngIf="item.count == 0" class="fas text-primary fa-shopping-cart" (click)="increaseOrderCount(item)"></i></a>
       <a><i *ngIf="item.count == 1" class="fas text-main-danger fa-trash" (click)="decreseOrderCount(item)"></i></a>
       <span *ngIf="item?.count > 0" class="cart-count">{{item?.count}}</span>
       <button *ngIf="item?.count > 0 && item?.count < 4" class="btn btn-info btn-sm"
@@ -34,7 +35,7 @@
   </tr>
   <!-- </ng-container> -->
   <tr class="menu-table-items">
-    <th colspan="3">إجمالي السعر غير شامل التوصيل ولا الخدمة</th>
+    <th colspan="3">Total Price Without Taxes Or Delivery Fees</th>
     <td class="menu-table-items-price">
       {{getTotalOrderPrice()}}
       <span class="menu-table-items-price-unit">EGP</span>

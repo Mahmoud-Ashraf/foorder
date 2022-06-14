@@ -1,5 +1,8 @@
 <aside class="aside" *ngIf="userIsAuthenticated">
   <div class="aside-container">
+    <div class="brand">
+      <h1 class="text-center" (click)="navigate('/home')">Foorder</h1>
+    </div>
     <div class="user">
       <span class="user-welcome" (click)="navigate('/home/profile')">
         <div class="user-welcome--avatar">

@@ -1,6 +1,7 @@
 import { AuthService } from '../../../shared/services/auth.service';
 import { OrderService } from '../../../shared/services/order.service';
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -9,12 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
   orders: any;
+  private userListnerSub: Subscription;
+  loggedUser: any;
   constructor(
     private orderService: OrderService,
     private authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.loggedUser = this.authService.getLoggedUser();
+    this.userListnerSub = this.authService
+      .getAuthUserListner()
+      .subscribe((user: any) => {
+        this.loggedUser = user;
+      })
     this.getuserOrders();
     // this.authService.getAuthUserListner().subscribe((user: any) => {
     //   this.getuserOrders()

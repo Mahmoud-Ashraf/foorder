@@ -1,4 +1,9 @@
 <div class="row">
+    <div class="col-12">
+        <h2>Welcome, {{loggedUser?.name}}</h2>
+    </div>
+</div>
+<div class="row" *ngIf="orders?.length > 0 else noOrdersFound">
     <div class="col-4" *ngFor="let order of orders">
         <div class="card">
             <div class="card-body">
@@ -6,8 +11,12 @@
                 <!-- <p class="card-text">{{order?.createdAt | date: 'dd/MM/yyyy | hh:mm'}}</p> -->
                 <p class="card-text" *ngFor="let item of order?.items">{{item?.count}}× {{item?.item?.name}}</p>
                 <a href="#" class="btn btn-primary">Total Order Price: {{order?.totalOrderPrice}}</a>
-                <button *ngIf="order?.resturantId?._id === getTodayResturantId()" class="btn btn-primary">Reorder</button>
+                <button *ngIf="order?.resturantId?._id === getTodayResturantId()"
+                    class="btn btn-primary">Reorder</button>
             </div>
         </div>
     </div>
 </div>
+<ng-template #noOrdersFound>
+    <app-no-data-found [msg]="'Sorry, No Orders Yet'"></app-no-data-found>
+</ng-template>

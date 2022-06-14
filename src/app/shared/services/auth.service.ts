@@ -18,7 +18,7 @@ export class AuthService {
   tokenTimer: any;
   constructor(
     private requests: RequestsService,
-    private router: Router
+    private router: Router,
   ) { }
   register(user: Credintials) {
     return this.requests.putApi('auth/signup', user).subscribe((response: any) => {

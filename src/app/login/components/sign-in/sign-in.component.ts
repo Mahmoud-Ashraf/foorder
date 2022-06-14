@@ -2,9 +2,6 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from './../../../shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoaderService } from 'src/app/shared/services/loader.service';
-import { FlashMessagesService } from 'flash-messages-angular';
-import { ResturantsService } from 'src/app/shared/services/resturants.service';
 import { User } from 'src/app/models/User';
 
 @Component({
@@ -21,9 +18,6 @@ export class SignInComponent implements OnInit {
   loginUser: User;
   constructor(
     private router: Router,
-    // private loader: LoaderService,
-    // private flashMessage: FlashMessagesService,
-    // private resturantsService: ResturantsService
     private authService: AuthService
   ) { }
 

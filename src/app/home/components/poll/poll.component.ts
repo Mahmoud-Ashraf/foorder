@@ -4,7 +4,6 @@ import { ResturantsService } from './../../../shared/services/resturants.service
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Resturant } from 'src/app/models/resturant';
 import { LoaderService } from 'src/app/shared/services/loader.service';
-import { FlashMessagesService } from 'flash-messages-angular';
 import { HomeService } from '../../services/home.service';
 
 @Component({
@@ -25,7 +24,6 @@ export class PollComponent implements OnInit, OnDestroy {
   countDownTimer: any;
   constructor(
     private loader: LoaderService,
-    private flashMessage: FlashMessagesService,
     private resturantsService: ResturantsService,
     private authService: AuthService,
     private homeService: HomeService

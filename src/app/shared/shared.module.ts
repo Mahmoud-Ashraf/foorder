@@ -19,6 +19,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
+
 @NgModule({
   declarations: [
     AsideComponent,
@@ -31,7 +32,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     QuicklinkModule,
     FormsModule,
-    NgbModalModule
+    NgbModalModule,
+    
   ],
   exports: [
     QuicklinkModule,
@@ -40,7 +42,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
     NotFoundComponent,
     FormsModule,
     LoaderComponent,
-    NoDataFoundComponent
+    NoDataFoundComponent,
   ],
   providers: [LoaderService, RequestsService, ResturantsService, MenuService,
     {

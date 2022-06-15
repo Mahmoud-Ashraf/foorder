@@ -46,7 +46,22 @@ export class HomeComponent implements OnInit, OnDestroy {
     },
     scales: {
       x: {
-        display: false
+        ticks: {
+          padding: 16,
+          // callback: (value, index, values) => {
+          //   console.log(value, index, values);
+          //   return value;
+          // },
+          // backdropColor: '#5D5FEF',
+          // backdropPadding: 50,
+          // showLabelBackdrop: true,
+          // color: '#fff',
+          font: {
+            size: 14,
+            lineHeight: 1.375,
+            family: 'poppins'
+          }
+        }
       }
     },
     // scales: {
@@ -136,10 +151,12 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
     this.resturantsSub = this.resturantsService.getResturants().subscribe((resturantsRes: any) => {
       this.resturantsChartData.datasets[0].data = resturantsRes.resturants;
+      console.log(this.resturantsChartData.datasets[0].data);
       this.resturantsChart?.update();
     });
     this.usersSub = this.authService.getUsers().subscribe((usersRes: any) => {
       this.usersChartData.datasets[0].data = usersRes.users;
+      console.log(this.usersChartData.datasets[0].data);
       this.usersChart?.update();
     })
   }

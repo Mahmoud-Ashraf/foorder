@@ -13,7 +13,7 @@ export class ResturantsDetailsComponent implements OnInit {
   resturants: any;
   currentPage: number = 1;
   totalItems: number;
-  perPage: number = 4;
+  perPage: number = 10;
   pagesArr: any;
   filterValue: string;
 

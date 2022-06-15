@@ -17,10 +17,12 @@ export class HelperService {
 
   generateUserAvatar(userName: string) {
     let avatar = '';
-    let splitedName = userName.split(' ');
-    splitedName.forEach(namePhrase => {
-        avatar += namePhrase[0];
-    });
+    if(userName) {
+      let splitedName = userName.split(' ');
+      splitedName.forEach(namePhrase => {
+          avatar += namePhrase[0];
+      });
+    }
     return avatar;
   }
 }

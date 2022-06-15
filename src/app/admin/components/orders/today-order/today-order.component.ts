@@ -71,14 +71,18 @@ export class TodayOrderComponent implements OnInit {
       this.orderService.getTodayOrders(this.resturant._id).subscribe((todayOrders: any) => {
         console.log(todayOrders);
         this.orders = todayOrders;
-        this.getCollectedOrderPrice();
+        if (this.orders && this.orders.orders && this.orders.orders.length > 0) {
+          this.getCollectedOrderPrice();
+        }
       });
     }
   }
 
   collectOrder() {
-    this.setCollectedOrderConfig();
-    this.addCollectedOrder();
+    if (this.orders && this.orders.orders && this.orders.orders.length > 0) {
+      this.setCollectedOrderConfig();
+      this.addCollectedOrder();
+    }
   }
 
   getCollectedOrderItems() {

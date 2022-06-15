@@ -10,7 +10,7 @@
 </div>
 
 <div class="row my-3">
-    <div class="col-12" *ngIf="orders && (orders?.orders) && orders?.orders?.length === 0 else noDataFound">
+    <div class="col-12" *ngIf="orders && (orders?.orders) && orders?.orders?.length !== 0 else noDataFound">
         <div class="single-order-card my-3" *ngFor="let order of orders?.orders">
             <div class="row">
                 <div class="col-auto">

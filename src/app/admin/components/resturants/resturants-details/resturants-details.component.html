@@ -29,7 +29,7 @@
             <tr *ngFor="let res of resturants">
               <td [routerLink]="res._id" class="clickable">{{res?.name}}</td>
               <td>{{res?.type}}</td>
-              <td class="text-center"><button class="btn btn-info"
+              <td class="text-center"><button class="btn btn-info px-4"
                   [routerLink]="'edit-resturant/'+res._id">Edit</button>
                 <!-- <button class="btn btn-outline-danger" (click)="deleteResturant(res._id)">Delete</button> -->
               </td>

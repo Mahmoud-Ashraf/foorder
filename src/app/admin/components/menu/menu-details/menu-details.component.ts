@@ -12,7 +12,7 @@ export class MenuDetailsComponent implements OnInit {
   resturantMenu: any;
   currentPage: number = 1;
   totalItems: number;
-  perPage: number = 4;
+  perPage: number = 10;
   @Input() filterValue: string;
   resturants: any;
   selectedResturantId: string = '';
@@ -81,6 +81,7 @@ export class MenuDetailsComponent implements OnInit {
 
   filterMenuByResturant() {
     this.filterValue = '';
+    this.currentPage = 1;
     this.getMenu();
   }
 }

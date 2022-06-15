@@ -12,20 +12,37 @@
       </span>
     </div>
     <div class="links">
-      <ul class="links-list">
-        <li *ngIf="!loggedUser?.isAdmin"><a (click)="navigate('/home')"><span><img src="assets/styles/images/icons/home.svg"></span>Home</a></li>
-        <li *ngIf="!loggedUser?.isAdmin"><a (click)="navigate('/home/cart')"><span><img src="assets/styles/images/icons/cart.svg"></span>Cart</a></li>
-        <li *ngIf="loggedUser?.isAdmin"><a (click)="navigate('/admin')"><span><img src="assets/styles/images/icons/home.svg"></span>Home</a></li>
+      <ul class="links-list" *ngIf="!adminOpen">
+        <li><a (click)="navigate('/home')"><span><img src="assets/styles/images/icons/home.svg"></span>Home</a></li>
+        <li><a (click)="navigate('/home/cart')"><span><img src="assets/styles/images/icons/cart.svg"></span>Cart</a></li>
+        <!-- <li *ngIf="loggedUser?.isAdmin"><a (click)="navigate('/admin')"><span><img src="assets/styles/images/icons/home.svg"></span>Home</a></li>
         <li *ngIf="loggedUser?.isAdmin"><a (click)="navigate('/admin/orders')"><span><img src="assets/styles/images/icons/orders.svg"></span>Food
             Orders</a></li>
         <li *ngIf="loggedUser?.isAdmin"><a (click)="navigate('/admin/resturants')"><span><img
                 src="assets/styles/images/icons/resturants.svg"></span>My
             Resturants</a></li>
         <li *ngIf="loggedUser?.isAdmin"><a (click)="navigate('/admin/menu')"><span><img src="assets/styles/images/icons/resturants.svg"></span>My
+            Menus</a></li> -->
+        <!-- <li *ngIf="loggedUser?.isAdmin"><a (click)="navigate('/admin/wallets')"><span><img src="assets/styles/images/icons/wallet.svg"></span>Wallet</a></li> -->
+        <li><a (click)="navigate('/home/wallet')"><span><img src="assets/styles/images/icons/wallet.svg"></span>Wallet</a></li>
+        <li *ngIf="loggedUser?.isAdmin"><a (click)="navigate('/admin')"><span><img src="assets/styles/images/icons/home.svg"></span>Admin</a></li>
+
+        <!-- <li *ngIf="loggedUser?.isAdmin"><a (click)="navigate('/admin/users')"><span><img
+                src="assets/styles/images/icons/users.svg"></span>Users</a></li> -->
+      </ul>
+      <ul class="links-list" *ngIf="adminOpen">
+        <!-- <li><a (click)="navigate('/home')"><span><img src="assets/styles/images/icons/home.svg"></span>Home</a></li> -->
+        <li><a (click)="navigate('/admin')"><span><img src="assets/styles/images/icons/home.svg"></span>Home</a></li>
+        <li><a (click)="navigate('/admin/orders')"><span><img src="assets/styles/images/icons/orders.svg"></span>Food
+            Orders</a></li>
+        <li><a (click)="navigate('/admin/resturants')"><span><img
+                src="assets/styles/images/icons/resturants.svg"></span>My
+            Resturants</a></li>
+        <li><a (click)="navigate('/admin/menu')"><span><img src="assets/styles/images/icons/resturants.svg"></span>My
             Menus</a></li>
         <!-- <li *ngIf="loggedUser?.isAdmin"><a (click)="navigate('/admin/wallets')"><span><img src="assets/styles/images/icons/wallet.svg"></span>Wallet</a></li> -->
-        <li *ngIf="!loggedUser?.isAdmin"><a (click)="navigate('/home/wallet')"><span><img src="assets/styles/images/icons/wallet.svg"></span>Wallet</a></li>
-        <li *ngIf="loggedUser?.isAdmin"><a (click)="navigate('/admin/users')"><span><img
+
+        <li><a (click)="navigate('/admin/users')"><span><img
                 src="assets/styles/images/icons/users.svg"></span>Users</a></li>
       </ul>
     </div>

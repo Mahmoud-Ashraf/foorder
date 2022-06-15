@@ -2,12 +2,16 @@
   width: 100%;
   text-align: center;
   margin-bottom: 4rem;
-
+  // border: 1px solid $border-color;
   tr {
-
+    // border-bottom: 1px solid $border-color;
     td,
     th {
       padding: .75rem .5rem;
+      // border-right: 1px solid $border-color;
+      // &:last-child {
+      //   border: none;
+      // }
     }
   }
 

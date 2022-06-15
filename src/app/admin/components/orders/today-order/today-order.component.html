@@ -10,7 +10,7 @@
 </div>
 
 <div class="row my-3">
-    <div class="col-12">
+    <div class="col-12" *ngIf="orders && (orders?.orders) && orders?.orders?.length === 0 else noDataFound">
         <div class="single-order-card my-3" *ngFor="let order of orders?.orders">
             <div class="row">
                 <div class="col-auto">
@@ -30,11 +30,14 @@
             </div>
         </div>
     </div>
+    <ng-template #noDataFound>
+        <app-no-data-found [msg]="'Sorry, No Orders To Collect'"></app-no-data-found>
+      </ng-template>
 </div>
 
 
 <div class="row">
     <div class="col-12 text-end">
-        <button (click)="collectOrder()" class="btn btn-primary px-5">Collect Order</button>
+        <button (click)="collectOrder()" [disabled]="!orders || !(orders?.orders) || orders?.orders?.length === 0" class="btn btn-primary px-5">Collect Order</button>
     </div>
 </div>

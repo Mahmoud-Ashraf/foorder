@@ -50,9 +50,25 @@
                                             (click)="modal.close(user)">Save</button>
                                     </div>
                                 </ng-template> 
-                                <button class="btn btn-outline-danger btn-remove-admin">
+                                <button class="btn btn-outline-danger btn-remove-admin" (click)="removeFromAdmin(removeAdminModal)">
                                     Remove admin
                                 </button>
+                                <ng-template #removeAdminModal let-modal>
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>
+                                        <button type="button" class="btn-close" aria-label="Close"
+                                            (click)="modal.close()"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Are you sure you want to remove <span class="fw-bold">{{user?.name}}</span> from admin?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger"
+                                            (click)="modal.close(user)">Yes</button>
+                                        <button type="button" class="btn btn-outline-dark"
+                                            (click)="modal.close()">No</button>
+                                    </div>
+                                </ng-template>
                             </td>
                         </tr>
                     </tbody>
@@ -104,15 +120,31 @@
                                             (click)="modal.close(user)">Save</button>
                                     </div>
                                 </ng-template> 
-                                <button class="btn btn-outline-info btn-make-admin">
+                                <button class="btn btn-outline-info btn-make-admin" (click)="addToAdmin(addAdminModal)">
                                     Make admin
                                 </button>
+                                <ng-template #addAdminModal let-modal>
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>
+                                        <button type="button" class="btn-close" aria-label="Close"
+                                            (click)="modal.close()"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Are you sure you want to add <span class="fw-bold">{{user?.name}}</span> to admin?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success"
+                                            (click)="modal.close(user)">Yes</button>
+                                        <button type="button" class="btn btn-outline-dark"
+                                            (click)="modal.close()">No</button>
+                                    </div>
+                                </ng-template>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <ng-template #noUsersFound>
-                    <app-no-data-found [msg]="'Sorry, No Admins Found For Your Search'"></app-no-data-found>
+                    <app-no-data-found [msg]="'Sorry, No Users Found For Your Search'"></app-no-data-found>
                 </ng-template>
             </div>
         </div>

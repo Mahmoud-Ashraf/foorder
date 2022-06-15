@@ -1,6 +1,6 @@
 import { AuthService } from './../../../../shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -25,13 +25,13 @@ export class UsersDetailsComponent implements OnInit {
   }
 
   getUsers(filterValue: string = '') {
-    this.authService.getUsers({filter: filterValue}).subscribe(usersRes => {
+    this.authService.getUsers({ filter: filterValue }).subscribe(usersRes => {
       this.usersRes = usersRes;
       this.admins = this.usersRes.users.filter((user: any) => user.isAdmin);
       this.users = this.usersRes.users.filter((user: any) => !user.isAdmin);
     })
   }
-  onFilter(e:any) {
+  onFilter(e: any) {
     // this.currentPage = 1;
     this.filterValue = e;
     this.getUsers(e);
@@ -45,18 +45,36 @@ export class UsersDetailsComponent implements OnInit {
   // }
   openPayModal(content: any) {
     this.modalService.open(content, { size: 'sm' }).result.then((result) => {
-      console.log(result);
       if (result) {
-        if(!result.wallet) {
+        if (!result.wallet) {
           result.wallet = 0;
         }
         result.wallet += this.userPayment;
         this.authService.updateUser(result._id, result).subscribe((updatedUser) => {
-          console.log(updatedUser)
           this.userPayment = 0;
         });
       }
     });
   }
 
+  removeFromAdmin(content: any) {
+    this.modalService.open(content, { size: 'sm' }).result.then((user) => {
+      if (user) {
+        user.isAdmin = false;
+        this.authService.updateUser(user._id, user).subscribe(() => {
+          this.getUsers();
+        });
+      }
+    });
+  }
+  addToAdmin(content: any) {
+    this.modalService.open(content, { size: 'sm' }).result.then((user) => {
+      if (user) {
+        user.isAdmin = true;
+        this.authService.updateUser(user._id, user).subscribe(() => {
+          this.getUsers();
+        });
+      }
+    });
+  }
 }

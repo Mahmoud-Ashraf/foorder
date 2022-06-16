@@ -1,3 +1,4 @@
+import { RequestsService } from './requests.service';
 import { Injectable } from '@angular/core';
 import { Location } from '@angular/common';
 
@@ -6,7 +7,8 @@ import { Location } from '@angular/common';
 })
 export class HelperService {
 
-  constructor(private location: Location) { }
+  constructor(private location: Location, private requests: RequestsService,
+    ) { }
   goBack(): void {
     this.location.back();
   }
@@ -24,5 +26,13 @@ export class HelperService {
       });
     }
     return avatar;
+  }
+
+  getConfig() {
+    return this.requests.getApi(`config`);
+  }
+  
+  updateConfig(config: any) {
+    return this.requests.putApi(`config`, config);
   }
 }

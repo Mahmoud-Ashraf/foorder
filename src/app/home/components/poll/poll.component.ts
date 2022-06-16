@@ -1,3 +1,4 @@
+import { HelperService } from 'src/app/shared/services/helper.service';
 import { AuthService } from './../../../shared/services/auth.service';
 import { Subscription } from 'rxjs';
 import { ResturantsService } from './../../../shared/services/resturants.service';
@@ -19,21 +20,30 @@ export class PollComponent implements OnInit, OnDestroy {
   updateUserSub: Subscription;
   getUserSub: Subscription;
   currentUser: any;
-  pollEndTime: number[] = [23, 55, 0];
+  pollEndTime: string = '23:55:0';
   showPoll: boolean = false;
   countDownTimer: any;
   constructor(
     private loader: LoaderService,
     private resturantsService: ResturantsService,
     private authService: AuthService,
-    private homeService: HomeService
+    private homeService: HomeService,
+    private helperService: HelperService
   ) {
   }
 
   ngOnInit(): void {
-    this.showHideDependOnCountDown();
+    // this.showHideDependOnCountDown();
+    this.getConfig();
     this.getResturants();
     this.getUser();
+  }
+
+  getConfig() {
+    this.helperService.getConfig().subscribe((config: any) => {
+      this.pollEndTime = config.config[0].voteEndTime;
+      this.showHideDependOnCountDown();
+    })
   }
 
   selectResturant(resturant: Resturant): void {

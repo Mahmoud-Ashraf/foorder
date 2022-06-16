@@ -28,6 +28,9 @@
                     </div>
                 </div>
             </div>
+            <div class="col-4">
+                <button class="btn btn-primary w-100" (click)="updateCollectedOrderStatus('ORDERED')" [disabled]="collectedOrder.status === 'ORDERED'">Ordered</button>
+            </div>
         </div>
     </div>
     <div class="col-12">
@@ -86,9 +89,9 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-end">
+            <div class="row justify-content-end mt-4">
                 <div class="col-auto">
-                    <button class="btn btn-primary px-5" (click)="generateReciept()">Generate Reciept</button>
+                    <button class="btn btn-primary px-5" (click)="generateReciept()" [disabled]="collectedOrder.status !== 'ORDERED'">Generate Reciept</button>
                 </div>
             </div>
         </form>

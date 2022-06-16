@@ -1,3 +1,4 @@
+import { HelperService } from 'src/app/shared/services/helper.service';
 import { Router } from '@angular/router';
 import { HomeService } from './../../services/home.service';
 import { AuthService } from './../../../shared/services/auth.service';
@@ -14,7 +15,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
   todayResturant: any;
   todayResturantMenu: any;
-  orderEndTime: number[] = [23, 50, 0];
+  orderEndTime: string = '23:50:0';
   order = {
     userId: '',
     resturantId: '',
@@ -27,8 +28,7 @@ export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private resturantsService: ResturantsService,
     private menuService: MenuService,
-    private orderService: OrderService,
-    private authService: AuthService,
+    private helperService: HelperService,
     private homeService: HomeService,
     private router: Router
   ) {
@@ -36,12 +36,21 @@ export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getTodayResturant();
-    this.showHideDependOnCountDown();
+    // this.showHideDependOnCountDown();
+    this.getConfig();
     this.homeService.getDisableResturantDetails().subscribe(disableOrdering => {
       console.log(disableOrdering);
       this.disableTodayResturant = disableOrdering;
     })
   }
+
+  getConfig() {
+    this.helperService.getConfig().subscribe((config: any) => {
+      this.orderEndTime = config.config[0].orderEndTime;
+      this.showHideDependOnCountDown();
+    })
+  }
+
   getMenu() {
     this.menuService.getMenu(this.todayResturant?._id).subscribe((menu: any) => {
       menu.menu.forEach((menuItem: any) => {

@@ -10,7 +10,7 @@ import { HomeService } from '../../services/home.service';
 })
 export class CountDownComponent implements OnInit {
   timeLeft$: Observable<any>;
-  @Input() endTime: number[];
+  @Input() endTime: string;
   constructor(public homeService: HomeService) {
     this.timeLeft$ = interval(1000).pipe(
       map(x => this.homeService.calcDateDiff(this.endTime))

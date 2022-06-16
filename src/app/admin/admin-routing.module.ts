@@ -1,3 +1,4 @@
+import { ConfigurationsComponent } from './components/configurations/configurations.component';
 import { OrderRecieptComponent } from './components/orders/order-reciept/order-reciept.component';
 import { FoodOrdersComponent } from './components/orders/food-orders/food-orders.component';
 import { TodayOrderComponent } from './components/orders/today-order/today-order.component';
@@ -68,7 +69,9 @@ const routes: Routes = [
           { path: 'order-reciept/:orderId', component: OrderRecieptComponent }
         ]
       },
-      { path: 'wallets', component: WalletsComponent }
+      { path: 'wallets', component: WalletsComponent },
+      { path: 'config', component: ConfigurationsComponent }
+
       // { path: }
       // { path: 'resturants/:id', component: ResturantDetailsComponent }
     ]

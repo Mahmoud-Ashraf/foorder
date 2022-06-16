@@ -36,6 +36,7 @@ import { TableFilterComponent } from './components/table-filter/table-filter.com
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { FoodOrdersComponent } from './components/orders/food-orders/food-orders.component';
 import { OrderRecieptComponent } from './components/orders/order-reciept/order-reciept.component';
+import { ConfigurationsComponent } from './components/configurations/configurations.component';
 
 
 
@@ -71,6 +72,7 @@ import { OrderRecieptComponent } from './components/orders/order-reciept/order-r
     PaginatorComponent,
     FoodOrdersComponent,
     OrderRecieptComponent,
+    ConfigurationsComponent,
   ],
   imports: [
     CommonModule,

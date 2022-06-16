@@ -10,7 +10,7 @@ export class HomeService {
   disableResturantDetails = new Subject<boolean>();
   constructor() { }
 
-  calcDateDiff(endTime = [0, 0, 0]): any {
+  calcDateDiff(endTime = '0:0:0'): any {
     const milliSecondsInASecond = 1000;
     const hoursInADay = 24;
     const minutesInAnHour = 60;
@@ -55,8 +55,10 @@ export class HomeService {
     }
   }
 
-  calcDateDiffInMs(endTime = [0, 0, 0]) {
-    const endDate = new Date(this.date.getFullYear(), this.date.getMonth(), this.date.getDate(), endTime[0], endTime[1], endTime[2]);
+  calcDateDiffInMs(endTime = '0:0:0') {
+    const endTimeArray = endTime.split(':').map((time: string) => Number(time));
+    // endTimeArray.map((time: string) => Number(time));
+    const endDate = new Date(this.date.getFullYear(), this.date.getMonth(), this.date.getDate(), endTimeArray[0], endTimeArray[1], endTimeArray[2]);
     const dDay = endDate.valueOf();
     const timeDifference = dDay - this.calcTime(2).getTime();
     return timeDifference;

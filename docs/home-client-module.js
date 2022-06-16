@@ -96,8 +96,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../../shared/services/resturants.service */ "/kEZ");
 /* harmony import */ var _shared_services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../../shared/services/auth.service */ "IYfF");
 /* harmony import */ var _services_home_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/home.service */ "jfpu");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ "ofXK");
-/* harmony import */ var _count_down_count_down_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../count-down/count-down.component */ "Sd7v");
+/* harmony import */ var src_app_shared_services_helper_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/shared/services/helper.service */ "sIil");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _count_down_count_down_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../count-down/count-down.component */ "Sd7v");
+
 
 
 
@@ -166,18 +168,26 @@ function PollComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", !ctx_r0.selectedResturant || (ctx_r0.currentUser == null ? null : ctx_r0.currentUser.voted));
 } }
 class PollComponent {
-    constructor(loader, resturantsService, authService, homeService) {
+    constructor(loader, resturantsService, authService, homeService, helperService) {
         this.loader = loader;
         this.resturantsService = resturantsService;
         this.authService = authService;
         this.homeService = homeService;
-        this.pollEndTime = [23, 55, 0];
+        this.helperService = helperService;
+        this.pollEndTime = '23:55:0';
         this.showPoll = false;
     }
     ngOnInit() {
-        this.showHideDependOnCountDown();
+        // this.showHideDependOnCountDown();
+        this.getConfig();
         this.getResturants();
         this.getUser();
+    }
+    getConfig() {
+        this.helperService.getConfig().subscribe((config) => {
+            this.pollEndTime = config.config[0].voteEndTime;
+            this.showHideDependOnCountDown();
+        });
     }
     selectResturant(resturant) {
         var _a;
@@ -273,12 +283,12 @@ class PollComponent {
         }
     }
 }
-PollComponent.ɵfac = function PollComponent_Factory(t) { return new (t || PollComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_loader_service__WEBPACK_IMPORTED_MODULE_1__["LoaderService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_2__["ResturantsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_home_service__WEBPACK_IMPORTED_MODULE_4__["HomeService"])); };
+PollComponent.ɵfac = function PollComponent_Factory(t) { return new (t || PollComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_loader_service__WEBPACK_IMPORTED_MODULE_1__["LoaderService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_2__["ResturantsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_home_service__WEBPACK_IMPORTED_MODULE_4__["HomeService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_helper_service__WEBPACK_IMPORTED_MODULE_5__["HelperService"])); };
 PollComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: PollComponent, selectors: [["app-poll"]], decls: 1, vars: 1, consts: [["class", "row justify-content-center poll", 4, "ngIf"], [1, "row", "justify-content-center", "poll"], [1, "col-12"], ["class", "poll-vote", 4, "ngIf"], [3, "endTime"], [1, "poll-list"], [3, "ngClass", "click", 4, "ngFor", "ngForOf"], [1, "btn", "btn-primary", "w-100", "poll-submit", 3, "disabled", "click"], [1, "poll-vote"], [3, "ngClass", "click"]], template: function PollComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, PollComponent_div_0_Template, 9, 5, "div", 0);
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.showPoll);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_5__["NgIf"], _count_down_count_down_component__WEBPACK_IMPORTED_MODULE_6__["CountDownComponent"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["NgForOf"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["NgClass"]], styles: [".poll-list[_ngcontent-%COMP%]   li.selected[_ngcontent-%COMP%] {\n  background-color: var(--main-secondary-500);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxccG9sbC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLDJDQUFBO0FBQ0oiLCJmaWxlIjoicG9sbC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5wb2xsLWxpc3QgbGkuc2VsZWN0ZWQge1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tbWFpbi1zZWNvbmRhcnktNTAwKTtcclxufVxyXG4iXX0= */"] });
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_6__["NgIf"], _count_down_count_down_component__WEBPACK_IMPORTED_MODULE_7__["CountDownComponent"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["NgForOf"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["NgClass"]], styles: [".poll-list[_ngcontent-%COMP%]   li.selected[_ngcontent-%COMP%] {\n  background-color: var(--main-secondary-500);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxccG9sbC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLDJDQUFBO0FBQ0oiLCJmaWxlIjoicG9sbC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5wb2xsLWxpc3QgbGkuc2VsZWN0ZWQge1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tbWFpbi1zZWNvbmRhcnktNTAwKTtcclxufVxyXG4iXX0= */"] });
 
 
 /***/ }),
@@ -356,13 +366,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var src_app_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/shared/services/resturants.service */ "/kEZ");
 /* harmony import */ var _shared_services_menu_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../../shared/services/menu.service */ "c5gl");
-/* harmony import */ var _shared_services_order_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../../shared/services/order.service */ "NuUg");
-/* harmony import */ var _shared_services_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../../shared/services/auth.service */ "IYfF");
-/* harmony import */ var _services_home_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../../services/home.service */ "jfpu");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ "ofXK");
-/* harmony import */ var _count_down_count_down_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../count-down/count-down.component */ "Sd7v");
-
+/* harmony import */ var src_app_shared_services_helper_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/shared/services/helper.service */ "sIil");
+/* harmony import */ var _services_home_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../services/home.service */ "jfpu");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _count_down_count_down_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../count-down/count-down.component */ "Sd7v");
 
 
 
@@ -502,14 +510,13 @@ function TodayResturantDetailsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", ctx_r0.order.items.length <= 0);
 } }
 class TodayResturantDetailsComponent {
-    constructor(resturantsService, menuService, orderService, authService, homeService, router) {
+    constructor(resturantsService, menuService, helperService, homeService, router) {
         this.resturantsService = resturantsService;
         this.menuService = menuService;
-        this.orderService = orderService;
-        this.authService = authService;
+        this.helperService = helperService;
         this.homeService = homeService;
         this.router = router;
-        this.orderEndTime = [23, 50, 0];
+        this.orderEndTime = '23:50:0';
         this.order = {
             userId: '',
             resturantId: '',
@@ -520,10 +527,17 @@ class TodayResturantDetailsComponent {
     }
     ngOnInit() {
         this.getTodayResturant();
-        this.showHideDependOnCountDown();
+        // this.showHideDependOnCountDown();
+        this.getConfig();
         this.homeService.getDisableResturantDetails().subscribe(disableOrdering => {
             console.log(disableOrdering);
             this.disableTodayResturant = disableOrdering;
+        });
+    }
+    getConfig() {
+        this.helperService.getConfig().subscribe((config) => {
+            this.orderEndTime = config.config[0].orderEndTime;
+            this.showHideDependOnCountDown();
         });
     }
     getMenu() {
@@ -594,12 +608,12 @@ class TodayResturantDetailsComponent {
         this.getTodayOrder();
     }
 }
-TodayResturantDetailsComponent.ɵfac = function TodayResturantDetailsComponent_Factory(t) { return new (t || TodayResturantDetailsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_1__["ResturantsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_menu_service__WEBPACK_IMPORTED_MODULE_2__["MenuService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_order_service__WEBPACK_IMPORTED_MODULE_3__["OrderService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_home_service__WEBPACK_IMPORTED_MODULE_5__["HomeService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"])); };
+TodayResturantDetailsComponent.ɵfac = function TodayResturantDetailsComponent_Factory(t) { return new (t || TodayResturantDetailsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_1__["ResturantsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_menu_service__WEBPACK_IMPORTED_MODULE_2__["MenuService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_helper_service__WEBPACK_IMPORTED_MODULE_3__["HelperService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_home_service__WEBPACK_IMPORTED_MODULE_4__["HomeService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"])); };
 TodayResturantDetailsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: TodayResturantDetailsComponent, selectors: [["app-today-resturant-details"]], decls: 1, vars: 1, consts: [[3, "ngStyle", 4, "ngIf"], [3, "ngStyle"], [1, "today-resturant", "row"], [1, "col-auto", "resturant-welcome"], [1, "col", "text-center", "resturant-brand"], [1, "poll-vote"], [3, "endTime"], [1, "menu-table"], [1, "menu-table-head"], [1, "text-start"], ["class", "menu-table-items", 4, "ngFor", "ngForOf"], [1, "row", "justify-content-end"], [1, "col-md-4"], [1, "btn", "btn-primary", "w-100", 3, "disabled", "click"], [1, "menu-table-items"], [1, "text-muted", "fs-6"], [1, "menu-table-items-price"], [1, "menu-table-items-price-unit"], ["class", "btn btn-info btn-sm", 3, "click", 4, "ngIf"], ["class", "fas text-main fa-shopping-cart", 3, "click", 4, "ngIf"], ["class", "fas text-main-danger fa-trash", 3, "click", 4, "ngIf"], ["class", "cart-count", 4, "ngIf"], [1, "btn", "btn-info", "btn-sm", 3, "click"], [1, "fas", "text-main", "fa-shopping-cart", 3, "click"], [1, "fas", "text-main-danger", "fa-trash", 3, "click"], [1, "cart-count"]], template: function TodayResturantDetailsComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, TodayResturantDetailsComponent_div_0_Template, 22, 7, "div", 0);
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.showResturantDetails);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_7__["NgIf"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["NgStyle"], _count_down_count_down_component__WEBPACK_IMPORTED_MODULE_8__["CountDownComponent"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["NgForOf"]], styles: [".today-resturant[_ngcontent-%COMP%] {\n  color: #435971;\n  font-weight: 700;\n  display: flex;\n  align-items: center;\n}\n.today-resturant[_ngcontent-%COMP%]   .resturant-welcome[_ngcontent-%COMP%] {\n  font-size: 2.1rem;\n  line-height: 2.9rem;\n}\n.today-resturant[_ngcontent-%COMP%]   .resturant-brand[_ngcontent-%COMP%] {\n  font-size: 3.428rem;\n  line-height: 4.46rem;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcdG9kYXktcmVzdHVyYW50LWRldGFpbHMuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxjQUFBO0VBQ0EsZ0JBQUE7RUFDQSxhQUFBO0VBQ0EsbUJBQUE7QUFDRjtBQUFFO0VBQ0UsaUJBQUE7RUFDQSxtQkFBQTtBQUVKO0FBQUU7RUFDRSxtQkFBQTtFQUNBLG9CQUFBO0FBRUoiLCJmaWxlIjoidG9kYXktcmVzdHVyYW50LWRldGFpbHMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudG9kYXktcmVzdHVyYW50IHtcclxuICBjb2xvcjojNDM1OTcxO1xyXG4gIGZvbnQtd2VpZ2h0OiA3MDA7XHJcbiAgZGlzcGxheTogZmxleDtcclxuICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gIC5yZXN0dXJhbnQtd2VsY29tZSB7XHJcbiAgICBmb250LXNpemU6IDIuMXJlbTtcclxuICAgIGxpbmUtaGVpZ2h0OiAyLjlyZW07XHJcbiAgfVxyXG4gIC5yZXN0dXJhbnQtYnJhbmQge1xyXG4gICAgZm9udC1zaXplOiAzLjQyOHJlbTtcclxuICAgIGxpbmUtaGVpZ2h0OiA0LjQ2cmVtO1xyXG4gIH1cclxufVxyXG4iXX0= */"] });
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_6__["NgIf"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["NgStyle"], _count_down_count_down_component__WEBPACK_IMPORTED_MODULE_7__["CountDownComponent"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["NgForOf"]], styles: [".today-resturant[_ngcontent-%COMP%] {\n  color: #435971;\n  font-weight: 700;\n  display: flex;\n  align-items: center;\n}\n.today-resturant[_ngcontent-%COMP%]   .resturant-welcome[_ngcontent-%COMP%] {\n  font-size: 2.1rem;\n  line-height: 2.9rem;\n}\n.today-resturant[_ngcontent-%COMP%]   .resturant-brand[_ngcontent-%COMP%] {\n  font-size: 3.428rem;\n  line-height: 4.46rem;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcdG9kYXktcmVzdHVyYW50LWRldGFpbHMuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxjQUFBO0VBQ0EsZ0JBQUE7RUFDQSxhQUFBO0VBQ0EsbUJBQUE7QUFDRjtBQUFFO0VBQ0UsaUJBQUE7RUFDQSxtQkFBQTtBQUVKO0FBQUU7RUFDRSxtQkFBQTtFQUNBLG9CQUFBO0FBRUoiLCJmaWxlIjoidG9kYXktcmVzdHVyYW50LWRldGFpbHMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudG9kYXktcmVzdHVyYW50IHtcclxuICBjb2xvcjojNDM1OTcxO1xyXG4gIGZvbnQtd2VpZ2h0OiA3MDA7XHJcbiAgZGlzcGxheTogZmxleDtcclxuICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gIC5yZXN0dXJhbnQtd2VsY29tZSB7XHJcbiAgICBmb250LXNpemU6IDIuMXJlbTtcclxuICAgIGxpbmUtaGVpZ2h0OiAyLjlyZW07XHJcbiAgfVxyXG4gIC5yZXN0dXJhbnQtYnJhbmQge1xyXG4gICAgZm9udC1zaXplOiAzLjQyOHJlbTtcclxuICAgIGxpbmUtaGVpZ2h0OiA0LjQ2cmVtO1xyXG4gIH1cclxufVxyXG4iXX0= */"] });
 
 
 /***/ }),
@@ -1194,7 +1208,7 @@ class HomeService {
         this.date = this.calcTime(2);
         this.disableResturantDetails = new rxjs__WEBPACK_IMPORTED_MODULE_0__["Subject"]();
     }
-    calcDateDiff(endTime = [0, 0, 0]) {
+    calcDateDiff(endTime = '0:0:0') {
         const milliSecondsInASecond = 1000;
         const hoursInADay = 24;
         const minutesInAnHour = 60;
@@ -1232,8 +1246,10 @@ class HomeService {
             };
         }
     }
-    calcDateDiffInMs(endTime = [0, 0, 0]) {
-        const endDate = new Date(this.date.getFullYear(), this.date.getMonth(), this.date.getDate(), endTime[0], endTime[1], endTime[2]);
+    calcDateDiffInMs(endTime = '0:0:0') {
+        const endTimeArray = endTime.split(':').map((time) => Number(time));
+        // endTimeArray.map((time: string) => Number(time));
+        const endDate = new Date(this.date.getFullYear(), this.date.getMonth(), this.date.getDate(), endTimeArray[0], endTimeArray[1], endTimeArray[2]);
         const dDay = endDate.valueOf();
         const timeDifference = dDay - this.calcTime(2).getTime();
         return timeDifference;

@@ -409,16 +409,10 @@ class AsideComponent {
     }
     ngOnInit() {
         this.adminOpen = this.router.url.includes('admin');
-        this.router.events.subscribe((event) => {
+        this.routerEventsSub = this.router.events.subscribe((event) => {
             if (event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_0__["NavigationEnd"]) {
                 this.adminOpen = event.url.includes('admin');
-                // if(event.url.includes('admin')) {
-                //   this.adminOpen = true;
-                // } else {
-                //   this.adminOpen = false;
-                // }
             }
-            // console.log(this.adminOpen);
         });
         console.log('adminOpen', this.adminOpen);
         this.userIsAuthenticated = this.authService.getIsAuth();
@@ -441,9 +435,10 @@ class AsideComponent {
         this.authService.logout();
     }
     ngOnDestroy() {
-        var _a, _b;
+        var _a, _b, _c;
         (_a = this.authListenerSubs) === null || _a === void 0 ? void 0 : _a.unsubscribe();
         (_b = this.userListnerSub) === null || _b === void 0 ? void 0 : _b.unsubscribe();
+        (_c = this.routerEventsSub) === null || _c === void 0 ? void 0 : _c.unsubscribe();
     }
     generateUserAvatar(userName) {
         return this.helperService.generateUserAvatar(userName);

@@ -383,18 +383,6 @@ class LoginComponent {
         this.userIsAuthenticated = false;
     }
     ngOnInit() {
-        // this.authListenerSubs = this.authService
-        //   .getAuthStatusListener()
-        //   .subscribe(isAuthenticated => {
-        //     if (isAuthenticated || this.authService.getIsAuth()) {
-        //       this.router.navigate(['/home']);
-        //     }
-        //   });
-        // console.log('authorized:', this.authService.getIsAuth());
-        // if (this.authService.getIsAuth()) {
-        //   this.router.navigate(['/home']);
-        // }
-        // console.log('Mahmoooooooooyud');
     }
 }
 LoginComponent.ɵfac = function LoginComponent_Factory(t) { return new (t || LoginComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"])); };

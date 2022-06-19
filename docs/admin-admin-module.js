@@ -921,28 +921,23 @@ function EditMeuItemComponent_div_35_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx_r8.errors[ctx_r8.getIndex(ctx_r8.errors, _r7)] == null ? null : ctx_r8.errors[ctx_r8.getIndex(ctx_r8.errors, _r7)].msg, " ");
 } }
 class EditMeuItemComponent {
-    // resturants: any;
-    constructor(menuService, 
-    // private resturantsService: ResturantsService,
-    helperService, activatedRoute) {
+    constructor(menuService, helperService, activatedRoute) {
         this.menuService = menuService;
         this.helperService = helperService;
         this.activatedRoute = activatedRoute;
         this.menuItem = {};
     }
     ngOnInit() {
-        // this.getResturants();
-        this.activatedRoute.params.subscribe((params) => {
+        this.paramsSub = this.activatedRoute.params.subscribe((params) => {
             this.menuItemId = params.menuItemId;
-            return this.menuService.getMenuItem(this.menuItemId).subscribe((res) => {
-                // console.log(this.menuItem);
+            this.getMenuItemSub = this.menuService.getMenuItem(this.menuItemId).subscribe((res) => {
                 this.menuItem = res;
             });
         });
     }
     updateMenuItem(form) {
         console.log(form);
-        this.menuService.updateMenuItem(this.menuItemId, this.menuItem).subscribe(res => {
+        this.updateMenuItemSub = this.menuService.updateMenuItem(this.menuItemId, this.menuItem).subscribe(res => {
             form.reset();
             this.helperService.goBack();
         }, err => {
@@ -952,14 +947,15 @@ class EditMeuItemComponent {
             console.log('faild response from component', this.errors);
         });
     }
-    // getResturants() {
-    //   this.resturantsService.getResturants().subscribe((resturants: any) => {
-    //     this.resturants = resturants.resturants;
-    //   })
-    // }
     getIndex(arr, fieldName) {
         // console.log(arr, fieldName?.name, arr?.findIndex((i: any) => i.param === fieldName.name));
         return arr === null || arr === void 0 ? void 0 : arr.findIndex((i) => i.param === fieldName.name);
+    }
+    ngOnDestroy() {
+        var _a, _b, _c;
+        (_a = this.paramsSub) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+        (_b = this.getMenuItemSub) === null || _b === void 0 ? void 0 : _b.unsubscribe();
+        (_c = this.updateMenuItemSub) === null || _c === void 0 ? void 0 : _c.unsubscribe();
     }
 }
 EditMeuItemComponent.ɵfac = function EditMeuItemComponent_Factory(t) { return new (t || EditMeuItemComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_menu_service__WEBPACK_IMPORTED_MODULE_1__["MenuService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_helper_service__WEBPACK_IMPORTED_MODULE_2__["HelperService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"])); };
@@ -11334,10 +11330,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddResturantComponent", function() { return AddResturantComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../shared/services/resturants.service */ "/kEZ");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "ofXK");
-
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "ofXK");
 
 
 
@@ -11393,17 +11387,15 @@ function AddResturantComponent_div_30_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx_r10.errors[ctx_r10.getIndex(ctx_r10.errors, _r9)] == null ? null : ctx_r10.errors[ctx_r10.getIndex(ctx_r10.errors, _r9)].msg, " ");
 } }
 class AddResturantComponent {
-    constructor(resturantsService, router) {
+    constructor(resturantsService) {
         this.resturantsService = resturantsService;
-        this.router = router;
     }
     ngOnInit() {
     }
     addResturant(form) {
         console.log(form);
-        this.resturantsService.addResturant(form.value).subscribe(res => {
+        this.addResturantSub = this.resturantsService.addResturant(form.value).subscribe(res => {
             form.reset();
-            // this.router.navigate(['admin/resturants']);
         }, err => {
             this.errors = err.error.errors;
             console.log('faild response from component', this.errors);
@@ -11413,8 +11405,12 @@ class AddResturantComponent {
         // console.log(arr, fieldName?.name, arr?.findIndex((i: any) => i.param === fieldName.name));
         return arr === null || arr === void 0 ? void 0 : arr.findIndex((i) => i.param === fieldName.name);
     }
+    ngOnDestroy() {
+        var _a;
+        (_a = this.addResturantSub) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+    }
 }
-AddResturantComponent.ɵfac = function AddResturantComponent_Factory(t) { return new (t || AddResturantComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_1__["ResturantsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"])); };
+AddResturantComponent.ɵfac = function AddResturantComponent_Factory(t) { return new (t || AddResturantComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_1__["ResturantsService"])); };
 AddResturantComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AddResturantComponent, selectors: [["app-add-resturant"]], decls: 47, vars: 5, consts: [[3, "ngSubmit"], ["addResturantForm", "ngForm"], [1, "row", "mt-5"], [1, "col"], [1, "col-auto", "text-end"], ["type", "submit", 1, "btn", "btn-save", "text-bold"], [1, "row", "my-3"], [1, "col-6"], ["type", "text", "name", "name", "placeholder", "Resturant Name", "ngModel", "", "required", "", "minlength", "5", 1, "form-control"], ["resturantName", ""], ["class", "has-error", 4, "ngIf"], ["type", "text", "name", "type", "placeholder", "Resturant Content", "ngModel", "", "required", "", "minlength", "5", 1, "form-control"], ["resturantType", ""], [1, "row", "mb-3"], [1, "col-4"], ["type", "text", "name", "phone", "placeholder", "Phone Number", "ngModel", "", "required", "", "minlength", "5", "maxlength", "11", 1, "form-control"], ["resturantPhone", ""], ["type", "text", "name", "savedPhone", "placeholder", "Saved Phone", "ngModel", "", "required", "", "minlength", "11", "maxlength", "11", 1, "form-control"], ["resturantSavedPhone", ""], ["type", "text", "name", "elmenusUrl", "placeholder", "Elmenues URL", "ngModel", "", 1, "form-control"], ["resturantElmenusUrl", ""], [1, "col-12"], [1, "text-bold", "text-upload"], [1, "upload-file", 3, "click"], [1, "row"], [1, "btn", "btn-primary", "btn-browse-file"], ["hidden", "", 1, "col-12"], ["id", "formFileLg", "type", "file", "multiple", "", 1, "form-control"], ["browseImages", ""], [1, "has-error"]], template: function AddResturantComponent_Template(rf, ctx) { if (rf & 1) {
         const _r12 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "form", 0, 1);
@@ -11499,7 +11495,7 @@ AddResturantComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵde
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.errors && ctx.errors[ctx.getIndex(ctx.errors, _r7)]);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.errors && ctx.errors[ctx.getIndex(ctx.errors, _r9)]);
-    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["ɵangular_packages_forms_forms_ba"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgForm"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgModel"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["RequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["MinLengthValidator"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["MaxLengthValidator"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhZGQtcmVzdHVyYW50LmNvbXBvbmVudC5zY3NzIn0= */"] });
+    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["ɵangular_packages_forms_forms_ba"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["NgForm"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["NgModel"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["RequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["MinLengthValidator"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["MaxLengthValidator"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhZGQtcmVzdHVyYW50LmNvbXBvbmVudC5zY3NzIn0= */"] });
 
 
 /***/ }),
@@ -11973,7 +11969,7 @@ class TodayOrderComponent {
         };
     }
     ngOnInit() {
-        this.orderService.checkTodayCollectedOrder().subscribe(collectedOrder => {
+        this.checkTodayCollectedOrderSub = this.orderService.checkTodayCollectedOrder().subscribe(collectedOrder => {
             if (collectedOrder.collectedOrder) {
                 this.router.navigate([`admin/orders/collected-order/${collectedOrder.collectedOrder._id}`]);
             }
@@ -11985,14 +11981,14 @@ class TodayOrderComponent {
         this.orders.collectedOrderPrice = this.orders.orders.reduce((previousValue, currentValue) => previousValue + currentValue.totalOrderPrice, total);
     }
     getTodayResturant() {
-        this.resturantsService.getTodayResturant().subscribe(toDayResturant => {
+        this.getTodayResturantSub = this.resturantsService.getTodayResturant().subscribe(toDayResturant => {
             this.resturant = toDayResturant;
             this.getTodayOrders();
         });
     }
     getTodayOrders() {
         if (this.resturant._id) {
-            this.orderService.getTodayOrders(this.resturant._id).subscribe((todayOrders) => {
+            this.getTodayOrdersSub = this.orderService.getTodayOrders(this.resturant._id).subscribe((todayOrders) => {
                 console.log(todayOrders);
                 this.orders = todayOrders;
                 if (this.orders && this.orders.orders && this.orders.orders.length > 0) {
@@ -12032,7 +12028,7 @@ class TodayOrderComponent {
         this.collectedOrder.subtotalOrderPrice = this.orders.collectedOrderPrice;
     }
     addCollectedOrder() {
-        this.orderService.collectOrder(this.collectedOrder).subscribe((collectedOrder) => {
+        this.collectOrderSub = this.orderService.collectOrder(this.collectedOrder).subscribe((collectedOrder) => {
             console.log(collectedOrder);
             this.router.navigate([`admin/orders/collected-order/${collectedOrder.collectedOrder._id}`]);
         }, err => {
@@ -12041,6 +12037,13 @@ class TodayOrderComponent {
     }
     generateUserAvatar(userName) {
         return this.helperService.generateUserAvatar(userName);
+    }
+    ngOnDestroy() {
+        var _a, _b, _c, _d;
+        (_a = this.checkTodayCollectedOrderSub) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+        (_b = this.getTodayResturantSub) === null || _b === void 0 ? void 0 : _b.unsubscribe();
+        (_c = this.getTodayOrdersSub) === null || _c === void 0 ? void 0 : _c.unsubscribe();
+        (_d = this.collectOrderSub) === null || _d === void 0 ? void 0 : _d.unsubscribe();
     }
 }
 TodayOrderComponent.ɵfac = function TodayOrderComponent_Factory(t) { return new (t || TodayOrderComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_order_service__WEBPACK_IMPORTED_MODULE_1__["OrderService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_2__["ResturantsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_helper_service__WEBPACK_IMPORTED_MODULE_4__["HelperService"])); };
@@ -14977,12 +14980,17 @@ class FoodOrdersComponent {
         this.now = new Date();
     }
     ngOnInit() {
-        this.resturantsService.getTodayResturant().subscribe(todayResturant => {
+        this.getTodayResturantSub = this.resturantsService.getTodayResturant().subscribe(todayResturant => {
             this.todayResturant = todayResturant;
         });
-        this.orderService.getCollectedOrders().subscribe(collectedOrders => {
+        this.getCollectedOrdersSub = this.orderService.getCollectedOrders().subscribe(collectedOrders => {
             this.ordersHistory = collectedOrders.collectedOrders.filter((order) => order.status === 'DONE');
         });
+    }
+    ngOnDestroy() {
+        var _a, _b;
+        (_a = this.getTodayResturantSub) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+        (_b = this.getCollectedOrdersSub) === null || _b === void 0 ? void 0 : _b.unsubscribe();
     }
 }
 FoodOrdersComponent.ɵfac = function FoodOrdersComponent_Factory(t) { return new (t || FoodOrdersComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_order_service__WEBPACK_IMPORTED_MODULE_1__["OrderService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_2__["ResturantsService"])); };
@@ -16032,9 +16040,9 @@ class EditResturantComponent {
             savedPhone: '',
             elmenusUrl: ''
         };
-        this.activatedRoute.params.subscribe((params) => {
+        this.paramsSub = this.activatedRoute.params.subscribe((params) => {
             this.resturantId = params.resturantId;
-            return this.resturantsService.getResturant(this.resturantId).subscribe(res => {
+            this.getResturantSub = this.resturantsService.getResturant(this.resturantId).subscribe(res => {
                 console.log(this.resturant);
                 this.resturant = res;
             });
@@ -16044,7 +16052,7 @@ class EditResturantComponent {
     }
     updateResturant(form) {
         console.log(form);
-        this.resturantsService.updateResturant(this.resturantId, this.resturant).subscribe(res => {
+        this.updateResturantSub = this.resturantsService.updateResturant(this.resturantId, this.resturant).subscribe(res => {
             form.reset();
             this.helperService.goBack();
         }, err => {
@@ -16056,6 +16064,12 @@ class EditResturantComponent {
     getIndex(arr, fieldName) {
         // console.log(arr, fieldName?.name, arr?.findIndex((i: any) => i.param === fieldName.name));
         return arr === null || arr === void 0 ? void 0 : arr.findIndex((i) => i.param === fieldName.name);
+    }
+    ngOnDestroy() {
+        var _a, _b, _c;
+        (_a = this.paramsSub) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+        (_b = this.getResturantSub) === null || _b === void 0 ? void 0 : _b.unsubscribe();
+        (_c = this.updateResturantSub) === null || _c === void 0 ? void 0 : _c.unsubscribe();
     }
 }
 EditResturantComponent.ɵfac = function EditResturantComponent_Factory(t) { return new (t || EditResturantComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_1__["ResturantsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_helper_service__WEBPACK_IMPORTED_MODULE_3__["HelperService"])); };
@@ -16862,26 +16876,23 @@ class ConfigurationsComponent {
         this.getConfig();
     }
     submitConfig(form) {
-        // console.log(form.value);
-        // console.log(this.config);
-        // form.value.voteEndTime = form.value.voteEndTime.split(',');
-        // form.value.orderEndTime = form.value.orderEndTime.split(',');
-        // console.log(this.config);
-        this.helperService.updateConfig(this.config).subscribe((updatedConfig) => {
+        this.updateConfigSub = this.helperService.updateConfig(this.config).subscribe((updatedConfig) => {
             console.log('updated Config', updatedConfig);
         });
     }
     getConfig() {
-        this.helperService.getConfig().subscribe((config) => {
+        this.getConfigSub = this.helperService.getConfig().subscribe((config) => {
             this.config = config.config[0];
-            console.log(this.config);
-            // this.config.voteEndTime.join(',');
-            // this.config.orderEndTime.join(',');
         });
     }
     getIndex(arr, fieldName) {
         // console.log(arr, fieldName?.name, arr?.findIndex((i: any) => i.param === fieldName.name));
         return arr === null || arr === void 0 ? void 0 : arr.findIndex((i) => i.param === fieldName.name);
+    }
+    ngOnDestroy() {
+        var _a, _b;
+        (_a = this.updateConfigSub) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+        (_b = this.getConfigSub) === null || _b === void 0 ? void 0 : _b.unsubscribe();
     }
 }
 ConfigurationsComponent.ɵfac = function ConfigurationsComponent_Factory(t) { return new (t || ConfigurationsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_helper_service__WEBPACK_IMPORTED_MODULE_1__["HelperService"])); };
@@ -18589,30 +18600,18 @@ class MenuDetailsComponent {
         this.router.navigate([`resturant/${id}`]);
     }
     deleteMenuItem(id) {
-        this.menuService.deleteMenuItem(id).subscribe(res => {
-            // console.log(res);
+        this.deleteMenuItemSub = this.menuService.deleteMenuItem(id).subscribe(res => {
             this.getMenu(this.filterValue);
-            // this.getResturants();
-            // this.navigate(id);
         }, err => {
             console.log(err);
         });
     }
-    // Paginator
-    // nextPage() {
-    //   this.currentPage++;
-    //   // this.getMenu();
-    // }
-    // prevPage() {
-    //   this.currentPage--;
-    //   // this.getMenu();
-    // }
     goToPage(pageNo) {
         this.currentPage = pageNo;
         this.getMenu(this.filterValue);
     }
     getResturants() {
-        this.resturantsService.getResturants().subscribe((resturants) => {
+        this.getResturantsSub = this.resturantsService.getResturants().subscribe((resturants) => {
             this.resturants = resturants.resturants;
         });
     }
@@ -18620,6 +18619,12 @@ class MenuDetailsComponent {
         this.filterValue = '';
         this.currentPage = 1;
         this.getMenu();
+    }
+    ngOnDestroy() {
+        var _a, _b, _c;
+        (_a = this.getMenuSub) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+        (_b = this.deleteMenuItemSub) === null || _b === void 0 ? void 0 : _b.unsubscribe();
+        (_c = this.getResturantsSub) === null || _c === void 0 ? void 0 : _c.unsubscribe();
     }
 }
 MenuDetailsComponent.ɵfac = function MenuDetailsComponent_Factory(t) { return new (t || MenuDetailsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_menu_service__WEBPACK_IMPORTED_MODULE_1__["MenuService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_2__["ResturantsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"])); };
@@ -25401,21 +25406,10 @@ function OrderRecieptComponent_tr_21_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("", (item_r1 == null ? null : item_r1.item == null ? null : item_r1.item.price) * (item_r1 == null ? null : item_r1.count), " EGP");
 } }
 class OrderRecieptComponent {
-    // orders: {
-    //   orders: Order[],
-    //   collectedOrderSubTotal: number,
-    //   resturant: any
-    // } =
-    //   {
-    //     orders: [],
-    //     collectedOrderSubTotal: 0,
-    //     resturant: {}
-    //   };
     constructor(orderService, activatedRoute, helperService) {
         this.orderService = orderService;
         this.activatedRoute = activatedRoute;
         this.helperService = helperService;
-        // resturant: any;
         this.collectedOrder = {
             items: [],
             status: '',
@@ -25432,20 +25426,22 @@ class OrderRecieptComponent {
         };
     }
     ngOnInit() {
-        this.activatedRoute.params.subscribe((params) => {
-            // const collecter = params.collectedOrderId;
-            console.log(params);
+        this.paramsSub = this.activatedRoute.params.subscribe((params) => {
             this.getCollectedOrder(params.orderId);
         });
     }
     getCollectedOrder(collectedOrderId) {
-        this.orderService.getCollectedOrder(collectedOrderId).subscribe(collectedOrder => {
+        this.getCollectedOrderSub = this.orderService.getCollectedOrder(collectedOrderId).subscribe(collectedOrder => {
             this.collectedOrder = collectedOrder;
-            // this.getTodayOrders();
         });
     }
     calculateValueFromPerc(perc) {
         return this.helperService.calculateValueFromPerc(perc, this.collectedOrder.subtotalOrderPrice);
+    }
+    ngOnDestroy() {
+        var _a, _b;
+        (_a = this.paramsSub) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+        (_b = this.getCollectedOrderSub) === null || _b === void 0 ? void 0 : _b.unsubscribe();
     }
 }
 OrderRecieptComponent.ɵfac = function OrderRecieptComponent_Factory(t) { return new (t || OrderRecieptComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_order_service__WEBPACK_IMPORTED_MODULE_1__["OrderService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_helper_service__WEBPACK_IMPORTED_MODULE_3__["HelperService"])); };
@@ -27085,7 +27081,7 @@ class AddMenuItemComponent {
     }
     addMenuItem(form) {
         console.log(form);
-        this.menuService.addMenuItem(form.value).subscribe(res => {
+        this.addMenuSub = this.menuService.addMenuItem(form.value).subscribe(res => {
             console.log(res);
             form.reset();
         }, err => {
@@ -27096,13 +27092,18 @@ class AddMenuItemComponent {
         });
     }
     getResturants() {
-        this.resturantsService.getResturants().subscribe((resturants) => {
+        this.getResturantsSub = this.resturantsService.getResturants().subscribe((resturants) => {
             this.resturants = resturants.resturants;
         });
     }
     getIndex(arr, fieldName) {
         // console.log(arr, fieldName?.name, arr?.findIndex((i: any) => i.param === fieldName.name));
         return arr === null || arr === void 0 ? void 0 : arr.findIndex((i) => i.param === fieldName.name);
+    }
+    ngOnDestroy() {
+        var _a, _b;
+        (_a = this.addMenuSub) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+        (_b = this.getResturantsSub) === null || _b === void 0 ? void 0 : _b.unsubscribe();
     }
 }
 AddMenuItemComponent.ɵfac = function AddMenuItemComponent_Factory(t) { return new (t || AddMenuItemComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_menu_service__WEBPACK_IMPORTED_MODULE_1__["MenuService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_2__["ResturantsService"])); };
@@ -27389,7 +27390,7 @@ class ResturantsDetailsComponent {
         this.getResturants(e);
     }
     getResturants(filterValue = '') {
-        this.resturantsService.getResturants(this.currentPage, this.perPage, filterValue).subscribe((res) => {
+        this.getResturantsSub = this.resturantsService.getResturants(this.currentPage, this.perPage, filterValue).subscribe((res) => {
             this.resturants = res.resturants;
             this.currentPage = res.currentPage;
             this.perPage = res.perPage;
@@ -27400,20 +27401,13 @@ class ResturantsDetailsComponent {
     navigate(id) {
         this.router.navigate([`resturant/:${id}`]);
     }
-    // deleteResturant(id: any) {
-    //   this.resturantsService.deleteResturant(id).subscribe(
-    //     res => {
-    //       console.log(res);
-    //       this.getResturants();
-    //     },
-    //     err => {
-    //       console.log(err);
-    //     },
-    //   );
-    // }
     goToPage(pageNo) {
         this.currentPage = pageNo;
         this.getResturants(this.filterValue);
+    }
+    ngOnDestroy() {
+        var _a;
+        (_a = this.getResturantsSub) === null || _a === void 0 ? void 0 : _a.unsubscribe();
     }
 }
 ResturantsDetailsComponent.ɵfac = function ResturantsDetailsComponent_Factory(t) { return new (t || ResturantsDetailsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_1__["ResturantsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"])); };
@@ -28423,23 +28417,12 @@ function CollectedOrderComponent_tr_43_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("", (item_r4 == null ? null : item_r4.item == null ? null : item_r4.item.price) * (item_r4 == null ? null : item_r4.count), " EGP");
 } }
 class CollectedOrderComponent {
-    // orders: {
-    //   orders: Order[],
-    //   collectedOrderSubTotal: number,
-    //   resturant: any
-    // } =
-    //   {
-    //     orders: [],
-    //     collectedOrderSubTotal: 0,
-    //     resturant: {}
-    //   };
     constructor(orderService, activatedRoute, router, authService, helperService) {
         this.orderService = orderService;
         this.activatedRoute = activatedRoute;
         this.router = router;
         this.authService = authService;
         this.helperService = helperService;
-        // resturant: any;
         this.collectedOrder = {
             _id: '',
             items: [],
@@ -28458,14 +28441,14 @@ class CollectedOrderComponent {
         };
     }
     ngOnInit() {
-        this.activatedRoute.params.subscribe((params) => {
+        this.paramsSub = this.activatedRoute.params.subscribe((params) => {
             // const collecter = params.collectedOrderId;
             console.log(params);
             this.getCollectedOrder(params.orderId);
         });
     }
     getCollectedOrder(collectedOrderId) {
-        this.orderService.getCollectedOrder(collectedOrderId).subscribe(collectedOrder => {
+        this.getCollectedOrderSub = this.orderService.getCollectedOrder(collectedOrderId).subscribe(collectedOrder => {
             this.collectedOrder = collectedOrder;
             console.log(this.collectedOrder);
             if (this.collectedOrder.status === 'DONE') {
@@ -28478,9 +28461,9 @@ class CollectedOrderComponent {
         if (this.collectedOrder.status === 'ORDERED') {
             this.collectedOrder.status = 'DONE';
             this.collectedOrder.total = this.collectedOrder.subtotalOrderPrice + this.calculateValueFromPerc(this.collectedOrder.taxFees, this.collectedOrder.subtotalOrderPrice) + this.collectedOrder.deliveryFees - this.calculateValueFromPerc(this.collectedOrder.discount, this.collectedOrder.subtotalOrderPrice);
-            this.orderService.updateCollectedOrder(this.collectedOrder._id, this.collectedOrder).subscribe((updatedCollectedOrder) => {
+            this.updateCollectedOrderSub = this.orderService.updateCollectedOrder(this.collectedOrder._id, this.collectedOrder).subscribe((updatedCollectedOrder) => {
                 this.router.navigate([`/admin/orders/order-reciept/${updatedCollectedOrder.collectedOrder._id}`]);
-                this.orderService.getTodayOrders(this.collectedOrder.resturantId._id).subscribe((todayOrders) => {
+                this.getTodayOrdersSub = this.orderService.getTodayOrders(this.collectedOrder.resturantId._id).subscribe((todayOrders) => {
                     console.log(this.collectedOrder.users.length);
                     todayOrders.orders.forEach((order) => {
                         console.log('order when enter', order);
@@ -28490,10 +28473,10 @@ class CollectedOrderComponent {
                         order.grandTotal = order.totalOrderPrice + order.deliveryFees + order.taxFees - order.discount;
                         order.status = 'DONE';
                         console.log('order before update', order);
-                        this.orderService.updateTodayOrder(order._id, order).subscribe((updatedOrder) => {
+                        this.updateTodayOrderSub = this.orderService.updateTodayOrder(order._id, order).subscribe((updatedOrder) => {
                             console.log('updated Order', updatedOrder);
                             order.userId.wallet -= order.grandTotal;
-                            this.authService.updateUser(order.userId._id, order.userId).subscribe((updatedUser) => {
+                            this.updateUserSub = this.authService.updateUser(order.userId._id, order.userId).subscribe((updatedUser) => {
                                 console.log('updated User', updatedUser);
                             });
                         });
@@ -28504,12 +28487,22 @@ class CollectedOrderComponent {
     }
     updateCollectedOrderStatus(status) {
         this.collectedOrder.status = status;
-        this.orderService.updateCollectedOrder(this.collectedOrder._id, this.collectedOrder).subscribe((updatedOrder) => {
+        this.updateCollectedOrderStatusSub = this.orderService.updateCollectedOrder(this.collectedOrder._id, this.collectedOrder).subscribe((updatedOrder) => {
             console.log(updatedOrder);
         });
     }
     calculateValueFromPerc(perc, total) {
         return this.helperService.calculateValueFromPerc(perc, total);
+    }
+    ngOnDestroy() {
+        var _a, _b, _c, _d, _e, _f, _g;
+        (_a = this.paramsSub) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+        (_b = this.getCollectedOrderSub) === null || _b === void 0 ? void 0 : _b.unsubscribe();
+        (_c = this.updateCollectedOrderSub) === null || _c === void 0 ? void 0 : _c.unsubscribe();
+        (_d = this.getTodayOrdersSub) === null || _d === void 0 ? void 0 : _d.unsubscribe();
+        (_e = this.updateTodayOrderSub) === null || _e === void 0 ? void 0 : _e.unsubscribe();
+        (_f = this.updateUserSub) === null || _f === void 0 ? void 0 : _f.unsubscribe();
+        (_g = this.updateCollectedOrderStatusSub) === null || _g === void 0 ? void 0 : _g.unsubscribe();
     }
 }
 CollectedOrderComponent.ɵfac = function CollectedOrderComponent_Factory(t) { return new (t || CollectedOrderComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_order_service__WEBPACK_IMPORTED_MODULE_1__["OrderService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_helper_service__WEBPACK_IMPORTED_MODULE_4__["HelperService"])); };
@@ -29443,11 +29436,13 @@ function isString(value) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeComponent", function() { return HomeComponent; });
-/* harmony import */ var ng2_charts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ng2-charts */ "LPYB");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _shared_services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../../shared/services/auth.service */ "IYfF");
-/* harmony import */ var _shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../../shared/services/resturants.service */ "/kEZ");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ "qCKp");
+/* harmony import */ var ng2_charts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ng2-charts */ "LPYB");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _shared_services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../../shared/services/auth.service */ "IYfF");
+/* harmony import */ var _shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../../shared/services/resturants.service */ "/kEZ");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ "ofXK");
+
 
 
 
@@ -29464,7 +29459,6 @@ class HomeComponent {
             datasets: [{
                     backgroundColor: '#09c',
                     data: [],
-                    // color: '#fff',
                     borderColor: '#09c'
                 }]
         };
@@ -29472,7 +29466,6 @@ class HomeComponent {
             datasets: [{
                     backgroundColor: '#09c',
                     data: [],
-                    // color: '#fff',
                     borderColor: '#09c'
                 }]
         };
@@ -29486,14 +29479,6 @@ class HomeComponent {
                 x: {
                     ticks: {
                         padding: 16,
-                        // callback: (value, index, values) => {
-                        //   console.log(value, index, values);
-                        //   return value;
-                        // },
-                        // backdropColor: '#5D5FEF',
-                        // backdropPadding: 50,
-                        // showLabelBackdrop: true,
-                        // color: '#fff',
                         font: {
                             size: 14,
                             lineHeight: 1.375,
@@ -29502,13 +29487,6 @@ class HomeComponent {
                     }
                 }
             },
-            // scales: {
-            //   ticks: {
-            //     fontSize: 12,
-            //     padding: 0,
-            //     fontFamily: 'Hacen-Algeria'
-            //   }
-            // }
             plugins: {
                 legend: {
                     display: false
@@ -29525,14 +29503,6 @@ class HomeComponent {
                 x: {
                     ticks: {
                         padding: 16,
-                        // callback: (value, index, values) => {
-                        //   console.log(value, index, values);
-                        //   return value;
-                        // },
-                        // backdropColor: '#5D5FEF',
-                        // backdropPadding: 50,
-                        // showLabelBackdrop: true,
-                        // color: '#fff',
                         font: {
                             size: 14,
                             lineHeight: 1.375,
@@ -29557,96 +29527,89 @@ class HomeComponent {
             .subscribe((user) => {
             this.loggedUser = user;
         });
-        this.resturantsSub = this.resturantsService.getResturants().subscribe((resturantsRes) => {
-            var _a;
+        this.chartsSub = Object(rxjs__WEBPACK_IMPORTED_MODULE_0__["forkJoin"])([this.resturantsService.getResturants(),
+            this.authService.getUsers()]).subscribe(([resturantsRes, usersRes]) => {
             this.resturantsChartData.datasets[0].data = resturantsRes.resturants;
-            console.log(this.resturantsChartData.datasets[0].data);
-            (_a = this.resturantsChart) === null || _a === void 0 ? void 0 : _a.update();
-        });
-        this.usersSub = this.authService.getUsers().subscribe((usersRes) => {
-            var _a;
             this.usersChartData.datasets[0].data = usersRes.users;
-            console.log(this.usersChartData.datasets[0].data);
-            (_a = this.usersChart) === null || _a === void 0 ? void 0 : _a.update();
+            this.charts.forEach((chart) => {
+                chart.update();
+            });
         });
     }
     ngOnDestroy() {
-        var _a, _b, _c;
+        var _a, _b;
         (_a = this.userListnerSub) === null || _a === void 0 ? void 0 : _a.unsubscribe();
-        (_b = this.usersSub) === null || _b === void 0 ? void 0 : _b.unsubscribe();
-        (_c = this.resturantsSub) === null || _c === void 0 ? void 0 : _c.unsubscribe();
+        (_b = this.chartsSub) === null || _b === void 0 ? void 0 : _b.unsubscribe();
     }
 }
-HomeComponent.ɵfac = function HomeComponent_Factory(t) { return new (t || HomeComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_3__["ResturantsService"])); };
-HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: HomeComponent, selectors: [["app-home"]], viewQuery: function HomeComponent_Query(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵviewQuery"](ng2_charts__WEBPACK_IMPORTED_MODULE_0__["BaseChartDirective"], 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵviewQuery"](ng2_charts__WEBPACK_IMPORTED_MODULE_0__["BaseChartDirective"], 1);
+HomeComponent.ɵfac = function HomeComponent_Factory(t) { return new (t || HomeComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_4__["ResturantsService"])); };
+HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: HomeComponent, selectors: [["app-home"]], viewQuery: function HomeComponent_Query(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵviewQuery"](ng2_charts__WEBPACK_IMPORTED_MODULE_1__["BaseChartDirective"], 1);
     } if (rf & 2) {
         let _t;
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵloadQuery"]()) && (ctx.resturantsChart = _t.first);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵloadQuery"]()) && (ctx.usersChart = _t.first);
-    } }, decls: 32, vars: 11, consts: [[1, "home"], [1, "home-header"], [1, "home-header--info"], [1, "text-muted"], [1, "text-dark"], [1, "text-main"], [1, "home-header--image"], ["src", "assets/styles/images/admin-home.svg"], [1, "home-content"], [1, "home-charts"], [1, "resturants-vote", "mb-2"], [1, "resturant-vote-title"], [1, "resturant-vote-chart"], [2, "display", "block"], ["baseChart", "", 3, "data", "options", "type"], ["resturantsChart", ""], [1, "users-wallet", "mb-5"], [1, "users-wallet-title"], [1, "users", "wallet-chart"], ["usersChart", ""]], template: function HomeComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "header", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "div", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](3, "span", 3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](4);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpipe"](5, "date");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](6, "h2", 4);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](7);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](8, "h3", 5);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](9, "Yaala n3mel Order !!");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](10, "div", 6);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](11, "img", 7);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](12, "div", 8);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](13, "div", 9);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](14, "div", 10);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](15, "div", 11);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](16, "header");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](17, "h3");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](18, "We vote for");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](19, "div", 12);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](20, "div", 13);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](21, "canvas", 14, 15);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](23, "div", 16);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](24, "div", 17);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](25, "header");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](26, "h3");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](27, "Wallet");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](28, "div", 18);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](29, "div", 13);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](30, "canvas", 14, 19);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵloadQuery"]()) && (ctx.charts = _t);
+    } }, decls: 32, vars: 11, consts: [[1, "home"], [1, "home-header"], [1, "home-header--info"], [1, "text-muted"], [1, "text-dark"], [1, "text-main"], [1, "home-header--image"], ["src", "assets/styles/images/admin-home.svg"], [1, "home-content"], [1, "home-charts"], [1, "resturants-vote", "mb-2"], [1, "resturant-vote-title"], [1, "resturant-vote-chart"], [2, "display", "block"], ["baseChart", "", 3, "data", "options", "type"], ["resturantsChart", ""], [1, "users-wallet", "mb-5"], [1, "users-wallet-title"], [1, "users-wallet-chart"], ["usersChart", ""]], template: function HomeComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](1, "header", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](2, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](3, "span", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpipe"](5, "date");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](6, "h2", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](8, "h3", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](9, "Yaala n3mel Order !!");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](10, "div", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](11, "img", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](12, "div", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](13, "div", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](14, "div", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](15, "div", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](16, "header");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](17, "h3");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](18, "We vote for");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](19, "div", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](20, "div", 13);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](21, "canvas", 14, 15);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](23, "div", 16);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](24, "div", 17);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](25, "header");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](26, "h3");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](27, "Wallet");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](28, "div", 18);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](29, "div", 13);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](30, "canvas", 14, 19);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
     } if (rf & 2) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpipeBind2"](5, 8, ctx.now, "EEEE, d MMMM, y"));
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"]("Hello, ", ctx.loggedUser == null ? null : ctx.loggedUser.name, "");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](14);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("data", ctx.resturantsChartData)("options", ctx.resturantsChartOptions)("type", ctx.barChartType);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](9);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("data", ctx.usersChartData)("options", ctx.usersChartOptions)("type", ctx.barChartType);
-    } }, directives: [ng2_charts__WEBPACK_IMPORTED_MODULE_0__["BaseChartDirective"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJob21lLmNvbXBvbmVudC5zY3NzIn0= */"] });
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpipeBind2"](5, 8, ctx.now, "EEEE, d MMMM, y"));
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate1"]("Hello, ", ctx.loggedUser == null ? null : ctx.loggedUser.name, "");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("data", ctx.resturantsChartData)("options", ctx.resturantsChartOptions)("type", ctx.barChartType);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("data", ctx.usersChartData)("options", ctx.usersChartOptions)("type", ctx.barChartType);
+    } }, directives: [ng2_charts__WEBPACK_IMPORTED_MODULE_1__["BaseChartDirective"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_5__["DatePipe"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJob21lLmNvbXBvbmVudC5zY3NzIn0= */"] });
 
 
 /***/ }),
@@ -44833,22 +44796,16 @@ class UsersDetailsComponent {
         this.getUsers();
     }
     getUsers(filterValue = '') {
-        this.authService.getUsers({ filter: filterValue }).subscribe(usersRes => {
+        this.getUsersSub = this.authService.getUsers({ filter: filterValue }).subscribe(usersRes => {
             this.usersRes = usersRes;
             this.admins = this.usersRes.users.filter((user) => user.isAdmin);
             this.users = this.usersRes.users.filter((user) => !user.isAdmin);
         });
     }
     onFilter(e) {
-        // this.currentPage = 1;
         this.filterValue = e;
         this.getUsers(e);
     }
-    // pay(user) {
-    // }
-    // togglePayInput() {
-    //   this.showPayInput = !this.showPayInput;
-    // }
     openPayModal(content) {
         this.modalService.open(content, { size: 'sm' }).result.then((result) => {
             if (result) {
@@ -44856,7 +44813,7 @@ class UsersDetailsComponent {
                     result.wallet = 0;
                 }
                 result.wallet += this.userPayment;
-                this.authService.updateUser(result._id, result).subscribe((updatedUser) => {
+                this.updateUserWalletSub = this.authService.updateUser(result._id, result).subscribe((updatedUser) => {
                     this.userPayment = 0;
                 });
             }
@@ -44866,7 +44823,7 @@ class UsersDetailsComponent {
         this.modalService.open(content, { size: 'sm' }).result.then((user) => {
             if (user) {
                 user.isAdmin = false;
-                this.authService.updateUser(user._id, user).subscribe(() => {
+                this.removeFromAdminSub = this.authService.updateUser(user._id, user).subscribe(() => {
                     this.getUsers();
                 });
             }
@@ -44876,11 +44833,18 @@ class UsersDetailsComponent {
         this.modalService.open(content, { size: 'sm' }).result.then((user) => {
             if (user) {
                 user.isAdmin = true;
-                this.authService.updateUser(user._id, user).subscribe(() => {
+                this.addToAdminSub = this.authService.updateUser(user._id, user).subscribe(() => {
                     this.getUsers();
                 });
             }
         });
+    }
+    ngOnDestroy() {
+        var _a, _b, _c, _d;
+        (_a = this.updateUserWalletSub) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+        (_b = this.getUsersSub) === null || _b === void 0 ? void 0 : _b.unsubscribe();
+        (_c = this.removeFromAdminSub) === null || _c === void 0 ? void 0 : _c.unsubscribe();
+        (_d = this.addToAdminSub) === null || _d === void 0 ? void 0 : _d.unsubscribe();
     }
 }
 UsersDetailsComponent.ɵfac = function UsersDetailsComponent_Factory(t) { return new (t || UsersDetailsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbModal"])); };
@@ -46562,25 +46526,19 @@ class ResturantDetailsComponent {
     constructor(resturantsService, activatedRoute) {
         this.resturantsService = resturantsService;
         this.activatedRoute = activatedRoute;
-        this.activatedRoute.params.subscribe((params) => {
-            // console.log(params);
-            return this.resturantsService.getResturant(params.resturantId).subscribe(res => {
+        this.paramsSub = this.activatedRoute.params.subscribe((params) => {
+            this.getResturantSub = this.resturantsService.getResturant(params.resturantId).subscribe(res => {
                 this.resturant = res;
                 console.log(res, this.resturant);
             });
-            // console.log('params', params);
         });
     }
     ngOnInit() {
-        // // this.getResturant()
-        // this.activatedRoute.params.subscribe((params: Params) => {
-        //   // console.log('params', params);
-        // });
-        // this.activatedRoute.params.pipe(concatMap((params: { id: any; }) => {
-        //   return this.resturantsService.getResturant(params.id)
-        // })).subscribe(res =>{
-        //   this.resturant = res;
-        // });
+    }
+    ngOnDestroy() {
+        var _a, _b;
+        (_a = this.getResturantSub) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+        (_b = this.paramsSub) === null || _b === void 0 ? void 0 : _b.unsubscribe();
     }
 }
 ResturantDetailsComponent.ɵfac = function ResturantDetailsComponent_Factory(t) { return new (t || ResturantDetailsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_1__["ResturantsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"])); };

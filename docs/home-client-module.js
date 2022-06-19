@@ -41,6 +41,10 @@ class WalletComponent {
             // console.log('loggedUser: ', this.loggedUser);
         });
     }
+    ngOnDestroy() {
+        var _a;
+        (_a = this.userListnerSub) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+    }
 }
 WalletComponent.ɵfac = function WalletComponent_Factory(t) { return new (t || WalletComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"])); };
 WalletComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: WalletComponent, selectors: [["app-wallet"]], decls: 12, vars: 13, consts: [[1, "row", "justify-content-center"], [1, "col-12"], [1, "alert", "text-center", 3, "ngClass"], [4, "ngIf"], [1, "col-6"], [1, "today-order-card"], [1, "h1", "text-center", 3, "ngClass"]], template: function WalletComponent_Template(rf, ctx) { if (rf & 1) {
@@ -92,36 +96,30 @@ WalletComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PollComponent", function() { return PollComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var src_app_shared_services_loader_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/shared/services/loader.service */ "cxgq");
-/* harmony import */ var _shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../../shared/services/resturants.service */ "/kEZ");
-/* harmony import */ var _shared_services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../../shared/services/auth.service */ "IYfF");
-/* harmony import */ var _services_home_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/home.service */ "jfpu");
-/* harmony import */ var src_app_shared_services_helper_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/shared/services/helper.service */ "sIil");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ "ofXK");
-/* harmony import */ var _count_down_count_down_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../count-down/count-down.component */ "Sd7v");
+/* harmony import */ var _shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../../shared/services/resturants.service */ "/kEZ");
+/* harmony import */ var _shared_services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../../shared/services/auth.service */ "IYfF");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _count_down_count_down_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../count-down/count-down.component */ "Sd7v");
 
 
 
 
 
-
-
-
-function PollComponent_div_0_p_2_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p", 8);
+function PollComponent_p_2_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p", 7);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Thanks for your vote, wait the result in");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
-function PollComponent_div_0_p_3_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p", 8);
+function PollComponent_p_3_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p", 7);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Vote for one of this restaurants in");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
 const _c0 = function (a0) { return { "selected": a0 }; };
-function PollComponent_div_0_li_6_Template(rf, ctx) { if (rf & 1) {
-    const _r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "li", 9);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PollComponent_div_0_li_6_Template_li_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r6); const resturant_r4 = ctx.$implicit; const ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r5.selectResturant(resturant_r4); });
+function PollComponent_li_6_Template(rf, ctx) { if (rf & 1) {
+    const _r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "li", 8);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PollComponent_li_6_Template_li_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r5); const resturant_r3 = ctx.$implicit; const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r4.selectResturant(resturant_r3); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "span");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -130,64 +128,22 @@ function PollComponent_div_0_li_6_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
-    const resturant_r4 = ctx.$implicit;
-    const ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](3, _c0, (ctx_r3.selectedResturant == null ? null : ctx_r3.selectedResturant._id) === (resturant_r4 == null ? null : resturant_r4._id) && !(ctx_r3.currentUser == null ? null : ctx_r3.currentUser.voted)));
+    const resturant_r3 = ctx.$implicit;
+    const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](3, _c0, (ctx_r2.selectedResturant == null ? null : ctx_r2.selectedResturant._id) === (resturant_r3 == null ? null : resturant_r3._id) && !(ctx_r2.currentUser == null ? null : ctx_r2.currentUser.voted)));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](resturant_r4 == null ? null : resturant_r4.name);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](resturant_r3 == null ? null : resturant_r3.name);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](resturant_r4 == null ? null : resturant_r4.vote);
-} }
-function PollComponent_div_0_Template(rf, ctx) { if (rf & 1) {
-    const _r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, PollComponent_div_0_p_2_Template, 2, 0, "p", 3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, PollComponent_div_0_p_3_Template, 2, 0, "p", 3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "app-count-down", 4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "ul", 5);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, PollComponent_div_0_li_6_Template, 5, 5, "li", 6);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "button", 7);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PollComponent_div_0_Template_button_click_7_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r8); const ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r7.vote(); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, "Submit Vote");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-} if (rf & 2) {
-    const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r0.currentUser == null ? null : ctx_r0.currentUser.voted);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !(ctx_r0.currentUser == null ? null : ctx_r0.currentUser.voted));
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("endTime", ctx_r0.pollEndTime);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r0.resturants);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", !ctx_r0.selectedResturant || (ctx_r0.currentUser == null ? null : ctx_r0.currentUser.voted));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](resturant_r3 == null ? null : resturant_r3.vote);
 } }
 class PollComponent {
-    constructor(loader, resturantsService, authService, homeService, helperService) {
-        this.loader = loader;
+    constructor(resturantsService, authService) {
         this.resturantsService = resturantsService;
         this.authService = authService;
-        this.homeService = homeService;
-        this.helperService = helperService;
-        this.pollEndTime = '23:55:0';
-        this.showPoll = false;
     }
     ngOnInit() {
-        // this.showHideDependOnCountDown();
-        this.getConfig();
         this.getResturants();
         this.getUser();
-    }
-    getConfig() {
-        this.helperService.getConfig().subscribe((config) => {
-            this.pollEndTime = config.config[0].voteEndTime;
-            this.showHideDependOnCountDown();
-        });
     }
     selectResturant(resturant) {
         var _a;
@@ -226,7 +182,7 @@ class PollComponent {
         });
         console.log('reset status', notReset);
         if (!notReset) {
-            this.resturantsService.resetResturantsVote().subscribe(resturants => {
+            this.resetResturantsVoteSub = this.resturantsService.resetResturantsVote().subscribe(resturants => {
                 this.resturants.forEach(resturant => {
                     resturant.vote = 0;
                 });
@@ -246,15 +202,6 @@ class PollComponent {
             // this.getUser();
         });
     }
-    showHideDependOnCountDown() {
-        const timeTillOrderEnd = this.homeService.calcDateDiffInMs(this.pollEndTime);
-        if (timeTillOrderEnd > 0) {
-            this.showPoll = true;
-            this.countDownTimer = setTimeout(() => {
-                this.showPoll = false;
-            }, timeTillOrderEnd);
-        }
-    }
     getUser() {
         this.currentUser = this.authService.getLoggedUser();
         this.checkUserVote();
@@ -273,22 +220,42 @@ class PollComponent {
         }
     }
     ngOnDestroy() {
-        var _a, _b, _c, _d;
+        var _a, _b, _c, _d, _e;
         (_a = this.getUserSub) === null || _a === void 0 ? void 0 : _a.unsubscribe();
         (_b = this.updateUserSub) === null || _b === void 0 ? void 0 : _b.unsubscribe();
         (_c = this.resturantsSub) === null || _c === void 0 ? void 0 : _c.unsubscribe();
         (_d = this.updateResturantSub) === null || _d === void 0 ? void 0 : _d.unsubscribe();
-        if (this.countDownTimer) {
-            clearTimeout(this.countDownTimer);
-        }
+        (_e = this.resetResturantsVoteSub) === null || _e === void 0 ? void 0 : _e.unsubscribe();
     }
 }
-PollComponent.ɵfac = function PollComponent_Factory(t) { return new (t || PollComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_loader_service__WEBPACK_IMPORTED_MODULE_1__["LoaderService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_2__["ResturantsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_home_service__WEBPACK_IMPORTED_MODULE_4__["HomeService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_helper_service__WEBPACK_IMPORTED_MODULE_5__["HelperService"])); };
-PollComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: PollComponent, selectors: [["app-poll"]], decls: 1, vars: 1, consts: [["class", "row justify-content-center poll", 4, "ngIf"], [1, "row", "justify-content-center", "poll"], [1, "col-12"], ["class", "poll-vote", 4, "ngIf"], [3, "endTime"], [1, "poll-list"], [3, "ngClass", "click", 4, "ngFor", "ngForOf"], [1, "btn", "btn-primary", "w-100", "poll-submit", 3, "disabled", "click"], [1, "poll-vote"], [3, "ngClass", "click"]], template: function PollComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, PollComponent_div_0_Template, 9, 5, "div", 0);
+PollComponent.ɵfac = function PollComponent_Factory(t) { return new (t || PollComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_1__["ResturantsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"])); };
+PollComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: PollComponent, selectors: [["app-poll"]], inputs: { pollEndTime: "pollEndTime" }, decls: 9, vars: 5, consts: [[1, "row", "justify-content-center", "poll"], [1, "col-12"], ["class", "poll-vote", 4, "ngIf"], [3, "endTime"], [1, "poll-list"], [3, "ngClass", "click", 4, "ngFor", "ngForOf"], [1, "btn", "btn-primary", "w-100", "poll-submit", 3, "disabled", "click"], [1, "poll-vote"], [3, "ngClass", "click"]], template: function PollComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, PollComponent_p_2_Template, 2, 0, "p", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, PollComponent_p_3_Template, 2, 0, "p", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "app-count-down", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "ul", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, PollComponent_li_6_Template, 5, 5, "li", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "button", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PollComponent_Template_button_click_7_listener() { return ctx.vote(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, "Submit Vote");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } if (rf & 2) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.showPoll);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_6__["NgIf"], _count_down_count_down_component__WEBPACK_IMPORTED_MODULE_7__["CountDownComponent"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["NgForOf"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["NgClass"]], styles: [".poll-list[_ngcontent-%COMP%]   li.selected[_ngcontent-%COMP%] {\n  background-color: var(--main-secondary-500);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxccG9sbC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLDJDQUFBO0FBQ0oiLCJmaWxlIjoicG9sbC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5wb2xsLWxpc3QgbGkuc2VsZWN0ZWQge1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tbWFpbi1zZWNvbmRhcnktNTAwKTtcclxufVxyXG4iXX0= */"] });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.currentUser == null ? null : ctx.currentUser.voted);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !(ctx.currentUser == null ? null : ctx.currentUser.voted));
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("endTime", ctx.pollEndTime);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.resturants);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", !ctx.selectedResturant || (ctx.currentUser == null ? null : ctx.currentUser.voted));
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], _count_down_count_down_component__WEBPACK_IMPORTED_MODULE_4__["CountDownComponent"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgForOf"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgClass"]], styles: [".poll-list[_ngcontent-%COMP%]   li.selected[_ngcontent-%COMP%] {\n  background-color: var(--main-secondary-500);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxccG9sbC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLDJDQUFBO0FBQ0oiLCJmaWxlIjoicG9sbC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5wb2xsLWxpc3QgbGkuc2VsZWN0ZWQge1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tbWFpbi1zZWNvbmRhcnktNTAwKTtcclxufVxyXG4iXX0= */"] });
 
 
 /***/ }),
@@ -366,11 +333,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var src_app_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/shared/services/resturants.service */ "/kEZ");
 /* harmony import */ var _shared_services_menu_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../../shared/services/menu.service */ "c5gl");
-/* harmony import */ var src_app_shared_services_helper_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/shared/services/helper.service */ "sIil");
-/* harmony import */ var _services_home_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../services/home.service */ "jfpu");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ "ofXK");
-/* harmony import */ var _count_down_count_down_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../count-down/count-down.component */ "Sd7v");
+/* harmony import */ var _services_home_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../services/home.service */ "jfpu");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _count_down_count_down_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../count-down/count-down.component */ "Sd7v");
 
 
 
@@ -378,171 +344,110 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-function TodayResturantDetailsComponent_div_0_tr_17_button_12_Template(rf, ctx) { if (rf & 1) {
-    const _r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 22);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TodayResturantDetailsComponent_div_0_tr_17_button_12_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r11); const menuItem_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit; const ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r9.decreseOrderCount(menuItem_r2); });
+function TodayResturantDetailsComponent_tr_17_button_12_Template(rf, ctx) { if (rf & 1) {
+    const _r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 21);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TodayResturantDetailsComponent_tr_17_button_12_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r10); const menuItem_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit; const ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r8.decreseOrderCount(menuItem_r1); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "-");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
-function TodayResturantDetailsComponent_div_0_tr_17_i_13_Template(rf, ctx) { if (rf & 1) {
-    const _r14 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+function TodayResturantDetailsComponent_tr_17_i_13_Template(rf, ctx) { if (rf & 1) {
+    const _r13 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "i", 22);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TodayResturantDetailsComponent_tr_17_i_13_Template_i_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r13); const menuItem_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit; const ctx_r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r11.increaseOrderCount(menuItem_r1); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} }
+function TodayResturantDetailsComponent_tr_17_i_14_Template(rf, ctx) { if (rf & 1) {
+    const _r16 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "i", 23);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TodayResturantDetailsComponent_div_0_tr_17_i_13_Template_i_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r14); const menuItem_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit; const ctx_r12 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r12.increaseOrderCount(menuItem_r2); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TodayResturantDetailsComponent_tr_17_i_14_Template_i_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r16); const menuItem_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit; const ctx_r14 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r14.decreseOrderCount(menuItem_r1); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
-function TodayResturantDetailsComponent_div_0_tr_17_i_14_Template(rf, ctx) { if (rf & 1) {
-    const _r17 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "i", 24);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TodayResturantDetailsComponent_div_0_tr_17_i_14_Template_i_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r17); const menuItem_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit; const ctx_r15 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r15.decreseOrderCount(menuItem_r2); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-} }
-function TodayResturantDetailsComponent_div_0_tr_17_span_15_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "span", 25);
+function TodayResturantDetailsComponent_tr_17_span_15_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "span", 24);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
-    const menuItem_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
+    const menuItem_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](menuItem_r2 == null ? null : menuItem_r2.count);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](menuItem_r1 == null ? null : menuItem_r1.count);
 } }
-function TodayResturantDetailsComponent_div_0_tr_17_button_16_Template(rf, ctx) { if (rf & 1) {
-    const _r21 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 22);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TodayResturantDetailsComponent_div_0_tr_17_button_16_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r21); const menuItem_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit; const ctx_r19 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r19.increaseOrderCount(menuItem_r2); });
+function TodayResturantDetailsComponent_tr_17_button_16_Template(rf, ctx) { if (rf & 1) {
+    const _r20 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 21);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TodayResturantDetailsComponent_tr_17_button_16_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r20); const menuItem_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit; const ctx_r18 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r18.increaseOrderCount(menuItem_r1); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "+");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
-function TodayResturantDetailsComponent_div_0_tr_17_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "tr", 14);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "td", 9);
+function TodayResturantDetailsComponent_tr_17_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "tr", 13);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "td", 8);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "span");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "br");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "span", 15);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "span", 14);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "td", 16);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "td", 15);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "span", 17);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "span", 16);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](10, "EGP");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "td");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](12, TodayResturantDetailsComponent_div_0_tr_17_button_12_Template, 2, 0, "button", 18);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](13, TodayResturantDetailsComponent_div_0_tr_17_i_13_Template, 1, 0, "i", 19);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](14, TodayResturantDetailsComponent_div_0_tr_17_i_14_Template, 1, 0, "i", 20);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](15, TodayResturantDetailsComponent_div_0_tr_17_span_15_Template, 2, 1, "span", 21);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](16, TodayResturantDetailsComponent_div_0_tr_17_button_16_Template, 2, 0, "button", 18);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](12, TodayResturantDetailsComponent_tr_17_button_12_Template, 2, 0, "button", 17);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](13, TodayResturantDetailsComponent_tr_17_i_13_Template, 1, 0, "i", 18);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](14, TodayResturantDetailsComponent_tr_17_i_14_Template, 1, 0, "i", 19);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](15, TodayResturantDetailsComponent_tr_17_span_15_Template, 2, 1, "span", 20);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](16, TodayResturantDetailsComponent_tr_17_button_16_Template, 2, 0, "button", 17);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
-    const menuItem_r2 = ctx.$implicit;
+    const menuItem_r1 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](menuItem_r2 == null ? null : menuItem_r2.name);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](menuItem_r1 == null ? null : menuItem_r1.name);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](menuItem_r2 == null ? null : menuItem_r2.ingredients);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](menuItem_r1 == null ? null : menuItem_r1.ingredients);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", menuItem_r2 == null ? null : menuItem_r2.price, " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", menuItem_r1 == null ? null : menuItem_r1.price, " ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (menuItem_r2 == null ? null : menuItem_r2.count) > 1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (menuItem_r1 == null ? null : menuItem_r1.count) > 1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", menuItem_r2.count == 0);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", menuItem_r1.count == 0);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", menuItem_r2.count == 1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", menuItem_r1.count == 1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (menuItem_r2 == null ? null : menuItem_r2.count) > 0);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (menuItem_r1 == null ? null : menuItem_r1.count) > 0);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (menuItem_r2 == null ? null : menuItem_r2.count) > 0 && (menuItem_r2 == null ? null : menuItem_r2.count) < 4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (menuItem_r1 == null ? null : menuItem_r1.count) > 0 && (menuItem_r1 == null ? null : menuItem_r1.count) < 4);
 } }
 const _c0 = function (a0) { return { "pointer-events": a0 }; };
-function TodayResturantDetailsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
-    const _r23 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "p", 2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "span", 3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "Restaurant of the Day");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "span", 4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "p", 5);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](7, "Add your order to cart before");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "app-count-down", 6);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "table", 7);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "tr", 8);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "th", 9);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12, "Product Name");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "th");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](14, "Price");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "th");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](16, "Add To Cart");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](17, TodayResturantDetailsComponent_div_0_tr_17_Template, 17, 8, "tr", 10);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "div", 11);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](19, "div", 12);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "button", 13);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TodayResturantDetailsComponent_div_0_Template_button_click_20_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r23); const ctx_r22 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r22.addOrderToCart(); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](21, "Checkout");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-} if (rf & 2) {
-    const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngStyle", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](5, _c0, ctx_r0.disableTodayResturant ? "none" : "auto"));
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx_r0.todayResturant == null ? null : ctx_r0.todayResturant.name);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("endTime", ctx_r0.orderEndTime);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](9);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r0.todayResturantMenu);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", ctx_r0.order.items.length <= 0);
-} }
 class TodayResturantDetailsComponent {
-    constructor(resturantsService, menuService, helperService, homeService, router) {
+    constructor(resturantsService, menuService, homeService, router) {
         this.resturantsService = resturantsService;
         this.menuService = menuService;
-        this.helperService = helperService;
         this.homeService = homeService;
         this.router = router;
-        this.orderEndTime = '23:50:0';
         this.order = {
             userId: '',
             resturantId: '',
             items: [],
             totalOrderPrice: 0,
         };
-        this.showResturantDetails = false;
     }
     ngOnInit() {
         this.getTodayResturant();
-        // this.showHideDependOnCountDown();
-        this.getConfig();
+        // this.getConfig();
         this.homeService.getDisableResturantDetails().subscribe(disableOrdering => {
             console.log(disableOrdering);
             this.disableTodayResturant = disableOrdering;
         });
     }
-    getConfig() {
-        this.helperService.getConfig().subscribe((config) => {
-            this.orderEndTime = config.config[0].orderEndTime;
-            this.showHideDependOnCountDown();
-        });
-    }
     getMenu() {
         var _a;
-        this.menuService.getMenu((_a = this.todayResturant) === null || _a === void 0 ? void 0 : _a._id).subscribe((menu) => {
+        this.getMenuSub = this.menuService.getMenu((_a = this.todayResturant) === null || _a === void 0 ? void 0 : _a._id).subscribe((menu) => {
             menu.menu.forEach((menuItem) => {
                 menuItem.count = 0;
             });
@@ -564,22 +469,10 @@ class TodayResturantDetailsComponent {
         });
     }
     getTodayResturant() {
-        this.resturantsService.getTodayResturant().subscribe(todayResturant => {
+        this.getTodayResturantSub = this.resturantsService.getTodayResturant().subscribe(todayResturant => {
             this.todayResturant = todayResturant;
             this.getMenu();
         });
-    }
-    showHideDependOnCountDown() {
-        const timeTillOrderEnd = this.homeService.calcDateDiffInMs(this.orderEndTime);
-        if (timeTillOrderEnd > 0) {
-            this.showResturantDetails = true;
-            this.countDownTimer = setTimeout(() => {
-                this.resetTodayResturant();
-            }, timeTillOrderEnd);
-        }
-        else {
-            this.resetTodayResturant();
-        }
     }
     addOrderToCart() {
         this.getTodayOrder();
@@ -590,14 +483,13 @@ class TodayResturantDetailsComponent {
         this.order.items = this.todayResturantMenu.filter((menuItem) => menuItem.count > 0);
     }
     resetTodayResturant() {
-        this.showResturantDetails = false;
         this.homeService.disableResturantDetails.next(true);
         localStorage.removeItem('order');
     }
     ngOnDestroy() {
-        if (this.countDownTimer) {
-            clearTimeout(this.countDownTimer);
-        }
+        var _a, _b;
+        (_a = this.getMenuSub) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+        (_b = this.getTodayResturantSub) === null || _b === void 0 ? void 0 : _b.unsubscribe();
     }
     decreseOrderCount(menuItem) {
         menuItem.count -= 1;
@@ -608,12 +500,55 @@ class TodayResturantDetailsComponent {
         this.getTodayOrder();
     }
 }
-TodayResturantDetailsComponent.ɵfac = function TodayResturantDetailsComponent_Factory(t) { return new (t || TodayResturantDetailsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_1__["ResturantsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_menu_service__WEBPACK_IMPORTED_MODULE_2__["MenuService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_helper_service__WEBPACK_IMPORTED_MODULE_3__["HelperService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_home_service__WEBPACK_IMPORTED_MODULE_4__["HomeService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"])); };
-TodayResturantDetailsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: TodayResturantDetailsComponent, selectors: [["app-today-resturant-details"]], decls: 1, vars: 1, consts: [[3, "ngStyle", 4, "ngIf"], [3, "ngStyle"], [1, "today-resturant", "row"], [1, "col-auto", "resturant-welcome"], [1, "col", "text-center", "resturant-brand"], [1, "poll-vote"], [3, "endTime"], [1, "menu-table"], [1, "menu-table-head"], [1, "text-start"], ["class", "menu-table-items", 4, "ngFor", "ngForOf"], [1, "row", "justify-content-end"], [1, "col-md-4"], [1, "btn", "btn-primary", "w-100", 3, "disabled", "click"], [1, "menu-table-items"], [1, "text-muted", "fs-6"], [1, "menu-table-items-price"], [1, "menu-table-items-price-unit"], ["class", "btn btn-info btn-sm", 3, "click", 4, "ngIf"], ["class", "fas text-main fa-shopping-cart", 3, "click", 4, "ngIf"], ["class", "fas text-main-danger fa-trash", 3, "click", 4, "ngIf"], ["class", "cart-count", 4, "ngIf"], [1, "btn", "btn-info", "btn-sm", 3, "click"], [1, "fas", "text-main", "fa-shopping-cart", 3, "click"], [1, "fas", "text-main-danger", "fa-trash", 3, "click"], [1, "cart-count"]], template: function TodayResturantDetailsComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, TodayResturantDetailsComponent_div_0_Template, 22, 7, "div", 0);
+TodayResturantDetailsComponent.ɵfac = function TodayResturantDetailsComponent_Factory(t) { return new (t || TodayResturantDetailsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_1__["ResturantsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_menu_service__WEBPACK_IMPORTED_MODULE_2__["MenuService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_home_service__WEBPACK_IMPORTED_MODULE_3__["HomeService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"])); };
+TodayResturantDetailsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: TodayResturantDetailsComponent, selectors: [["app-today-resturant-details"]], inputs: { orderEndTime: "orderEndTime" }, decls: 22, vars: 7, consts: [[3, "ngStyle"], [1, "today-resturant", "row"], [1, "col-auto", "resturant-welcome"], [1, "col", "text-center", "resturant-brand"], [1, "poll-vote"], [3, "endTime"], [1, "menu-table"], [1, "menu-table-head"], [1, "text-start"], ["class", "menu-table-items", 4, "ngFor", "ngForOf"], [1, "row", "justify-content-end"], [1, "col-md-4"], [1, "btn", "btn-primary", "w-100", 3, "disabled", "click"], [1, "menu-table-items"], [1, "text-muted", "fs-6"], [1, "menu-table-items-price"], [1, "menu-table-items-price-unit"], ["class", "btn btn-info btn-sm", 3, "click", 4, "ngIf"], ["class", "fas text-main fa-shopping-cart", 3, "click", 4, "ngIf"], ["class", "fas text-main-danger fa-trash", 3, "click", 4, "ngIf"], ["class", "cart-count", 4, "ngIf"], [1, "btn", "btn-info", "btn-sm", 3, "click"], [1, "fas", "text-main", "fa-shopping-cart", 3, "click"], [1, "fas", "text-main-danger", "fa-trash", 3, "click"], [1, "cart-count"]], template: function TodayResturantDetailsComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "p", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "span", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "Restaurant of the Day");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "span", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "p", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](7, "Add your order to cart before");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "app-count-down", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "table", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "tr", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "th", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12, "Product Name");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "th");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](14, "Price");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "th");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](16, "Add To Cart");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](17, TodayResturantDetailsComponent_tr_17_Template, 17, 8, "tr", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "div", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](19, "div", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "button", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TodayResturantDetailsComponent_Template_button_click_20_listener() { return ctx.addOrderToCart(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](21, "Checkout");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } if (rf & 2) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.showResturantDetails);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_6__["NgIf"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["NgStyle"], _count_down_count_down_component__WEBPACK_IMPORTED_MODULE_7__["CountDownComponent"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["NgForOf"]], styles: [".today-resturant[_ngcontent-%COMP%] {\n  color: #435971;\n  font-weight: 700;\n  display: flex;\n  align-items: center;\n}\n.today-resturant[_ngcontent-%COMP%]   .resturant-welcome[_ngcontent-%COMP%] {\n  font-size: 2.1rem;\n  line-height: 2.9rem;\n}\n.today-resturant[_ngcontent-%COMP%]   .resturant-brand[_ngcontent-%COMP%] {\n  font-size: 3.428rem;\n  line-height: 4.46rem;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcdG9kYXktcmVzdHVyYW50LWRldGFpbHMuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxjQUFBO0VBQ0EsZ0JBQUE7RUFDQSxhQUFBO0VBQ0EsbUJBQUE7QUFDRjtBQUFFO0VBQ0UsaUJBQUE7RUFDQSxtQkFBQTtBQUVKO0FBQUU7RUFDRSxtQkFBQTtFQUNBLG9CQUFBO0FBRUoiLCJmaWxlIjoidG9kYXktcmVzdHVyYW50LWRldGFpbHMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudG9kYXktcmVzdHVyYW50IHtcclxuICBjb2xvcjojNDM1OTcxO1xyXG4gIGZvbnQtd2VpZ2h0OiA3MDA7XHJcbiAgZGlzcGxheTogZmxleDtcclxuICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gIC5yZXN0dXJhbnQtd2VsY29tZSB7XHJcbiAgICBmb250LXNpemU6IDIuMXJlbTtcclxuICAgIGxpbmUtaGVpZ2h0OiAyLjlyZW07XHJcbiAgfVxyXG4gIC5yZXN0dXJhbnQtYnJhbmQge1xyXG4gICAgZm9udC1zaXplOiAzLjQyOHJlbTtcclxuICAgIGxpbmUtaGVpZ2h0OiA0LjQ2cmVtO1xyXG4gIH1cclxufVxyXG4iXX0= */"] });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngStyle", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](5, _c0, ctx.disableTodayResturant ? "none" : "auto"));
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.todayResturant == null ? null : ctx.todayResturant.name);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("endTime", ctx.orderEndTime);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.todayResturantMenu);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", ctx.order.items.length <= 0);
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_5__["NgStyle"], _count_down_count_down_component__WEBPACK_IMPORTED_MODULE_6__["CountDownComponent"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["NgForOf"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["NgIf"]], styles: [".today-resturant[_ngcontent-%COMP%] {\n  color: #435971;\n  font-weight: 700;\n  display: flex;\n  align-items: center;\n}\n.today-resturant[_ngcontent-%COMP%]   .resturant-welcome[_ngcontent-%COMP%] {\n  font-size: 2.1rem;\n  line-height: 2.9rem;\n}\n.today-resturant[_ngcontent-%COMP%]   .resturant-brand[_ngcontent-%COMP%] {\n  font-size: 3.428rem;\n  line-height: 4.46rem;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcdG9kYXktcmVzdHVyYW50LWRldGFpbHMuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxjQUFBO0VBQ0EsZ0JBQUE7RUFDQSxhQUFBO0VBQ0EsbUJBQUE7QUFDRjtBQUFFO0VBQ0UsaUJBQUE7RUFDQSxtQkFBQTtBQUVKO0FBQUU7RUFDRSxtQkFBQTtFQUNBLG9CQUFBO0FBRUoiLCJmaWxlIjoidG9kYXktcmVzdHVyYW50LWRldGFpbHMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudG9kYXktcmVzdHVyYW50IHtcclxuICBjb2xvcjojNDM1OTcxO1xyXG4gIGZvbnQtd2VpZ2h0OiA3MDA7XHJcbiAgZGlzcGxheTogZmxleDtcclxuICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gIC5yZXN0dXJhbnQtd2VsY29tZSB7XHJcbiAgICBmb250LXNpemU6IDIuMXJlbTtcclxuICAgIGxpbmUtaGVpZ2h0OiAyLjlyZW07XHJcbiAgfVxyXG4gIC5yZXN0dXJhbnQtYnJhbmQge1xyXG4gICAgZm9udC1zaXplOiAzLjQyOHJlbTtcclxuICAgIGxpbmUtaGVpZ2h0OiA0LjQ2cmVtO1xyXG4gIH1cclxufVxyXG4iXX0= */"] });
 
 
 /***/ }),
@@ -689,68 +624,81 @@ CountDownComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefin
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeComponent", function() { return HomeComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _services_home_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/home.service */ "jfpu");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "ofXK");
-/* harmony import */ var _poll_poll_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../poll/poll.component */ "HDx1");
-/* harmony import */ var _today_resturant_details_today_resturant_details_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../today-resturant-details/today-resturant-details.component */ "PohW");
+/* harmony import */ var src_app_shared_services_helper_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/shared/services/helper.service */ "sIil");
+/* harmony import */ var _services_home_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/home.service */ "jfpu");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _poll_poll_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../poll/poll.component */ "HDx1");
+/* harmony import */ var _today_resturant_details_today_resturant_details_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../today-resturant-details/today-resturant-details.component */ "PohW");
+
 
 
 
 
 
 function HomeComponent_app_poll_1_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "app-poll");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "app-poll", 3);
+} if (rf & 2) {
+    const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("pollEndTime", ctx_r0.pollEndTime);
 } }
 function HomeComponent_app_today_resturant_details_2_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "app-today-resturant-details");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "app-today-resturant-details", 4);
+} if (rf & 2) {
+    const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("orderEndTime", ctx_r1.orderEndTime);
 } }
 class HomeComponent {
-    constructor(homeService) {
+    constructor(helperService, homeService) {
+        this.helperService = helperService;
         this.homeService = homeService;
-        // showPollSub: Subscription;
-        // showPoll: boolean = false;
-        this.showOrder = true;
-        this.showPoll = true;
+        this.pollEndTime = '00:00:00';
+        this.orderEndTime = '00:00:00';
+        this.showPoll = false;
+        this.showOrder = false;
     }
     ngOnInit() {
-        // this.showPollSub = this.homeService.showPoll.subscribe(showPoll => {
-        //   console.log('show Poll: ', showPoll);
-        //   this.showPoll = showPoll;
-        // })
-        this.showOrder = this.calcDiff('orderEndTime');
-        this.showPoll = this.calcDiff('pollEndTime');
+        this.getConfig();
+    }
+    getConfig() {
+        this.getConfigSub = this.helperService.getConfig().subscribe((config) => {
+            this.pollEndTime = config.config[0].voteEndTime;
+            this.orderEndTime = config.config[0].orderEndTime;
+            this.showHideDependOnCountDown();
+        });
+    }
+    showHideDependOnCountDown() {
+        this.showPoll = this.homeService.calcDateDiffInMs(this.pollEndTime) > 0;
+        this.showOrder = this.homeService.calcDateDiffInMs(this.orderEndTime) > 0;
+        this.pollCountDownTimer = setTimeout(() => {
+            this.showPoll = false;
+        }, this.homeService.calcDateDiffInMs(this.pollEndTime));
+        this.orderCountDownTimer = setTimeout(() => {
+            this.showOrder = false;
+        }, this.homeService.calcDateDiffInMs(this.orderEndTime));
     }
     ngOnDestroy() {
-        // this.showPollSub.unsubscribe();
-    }
-    calcDiff(localName) {
-        const jsonEndTime = localStorage.getItem(localName);
-        console.log(jsonEndTime);
-        if (jsonEndTime) {
-            const endTime = JSON.parse(jsonEndTime);
-            const timeRemaining = this.homeService.calcDateDiff(endTime);
-            if (timeRemaining.secondsToDday == '00' && timeRemaining.minutesToDday == '00' && timeRemaining.hoursToDday == '00') {
-                return false;
-            }
-            else {
-                return true;
-            }
+        var _a;
+        if (this.pollCountDownTimer) {
+            clearTimeout(this.pollCountDownTimer);
         }
-        return true;
+        if (this.orderCountDownTimer) {
+            clearTimeout(this.orderCountDownTimer);
+        }
+        (_a = this.getConfigSub) === null || _a === void 0 ? void 0 : _a.unsubscribe();
     }
 }
-HomeComponent.ɵfac = function HomeComponent_Factory(t) { return new (t || HomeComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_home_service__WEBPACK_IMPORTED_MODULE_1__["HomeService"])); };
-HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: HomeComponent, selectors: [["app-home"]], decls: 3, vars: 2, consts: [[1, "home"], [4, "ngIf"]], template: function HomeComponent_Template(rf, ctx) { if (rf & 1) {
+HomeComponent.ɵfac = function HomeComponent_Factory(t) { return new (t || HomeComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_helper_service__WEBPACK_IMPORTED_MODULE_1__["HelperService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_home_service__WEBPACK_IMPORTED_MODULE_2__["HomeService"])); };
+HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: HomeComponent, selectors: [["app-home"]], decls: 3, vars: 2, consts: [[1, "home"], [3, "pollEndTime", 4, "ngIf"], [3, "orderEndTime", 4, "ngIf"], [3, "pollEndTime"], [3, "orderEndTime"]], template: function HomeComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, HomeComponent_app_poll_1_Template, 1, 0, "app-poll", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, HomeComponent_app_today_resturant_details_2_Template, 1, 0, "app-today-resturant-details", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, HomeComponent_app_poll_1_Template, 1, 1, "app-poll", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, HomeComponent_app_today_resturant_details_2_Template, 1, 1, "app-today-resturant-details", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.showPoll);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.showOrder);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["NgIf"], _poll_poll_component__WEBPACK_IMPORTED_MODULE_3__["PollComponent"], _today_resturant_details_today_resturant_details_component__WEBPACK_IMPORTED_MODULE_4__["TodayResturantDetailsComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJob21lLmNvbXBvbmVudC5zY3NzIn0= */"] });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.showOrder && !ctx.showPoll);
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], _poll_poll_component__WEBPACK_IMPORTED_MODULE_4__["PollComponent"], _today_resturant_details_today_resturant_details_component__WEBPACK_IMPORTED_MODULE_5__["TodayResturantDetailsComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJob21lLmNvbXBvbmVudC5zY3NzIn0= */"] });
 
 
 /***/ }),
@@ -906,7 +854,7 @@ class CartComponent {
     }
     addOrder(orderToAdd) {
         console.log(orderToAdd);
-        this.orderService.addOrder(orderToAdd).subscribe(addedOrder => {
+        this.addOrderSub = this.orderService.addOrder(orderToAdd).subscribe(addedOrder => {
             console.log(addedOrder);
             localStorage.removeItem('order');
             this.order.items = [];
@@ -917,7 +865,7 @@ class CartComponent {
     }
     setUserAndResturantToOrder(orderToAdd) {
         console.log(orderToAdd);
-        this.resturantsService.getTodayResturant().subscribe(todayResturant => {
+        this.getTodayResturantSub = this.resturantsService.getTodayResturant().subscribe(todayResturant => {
             console.log(todayResturant);
             orderToAdd.resturantId = todayResturant._id;
             this.authService.getLoggedUser();
@@ -934,6 +882,11 @@ class CartComponent {
         else {
             return 0;
         }
+    }
+    ngOnDestroy() {
+        var _a, _b;
+        (_a = this.addOrderSub) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+        (_b = this.getTodayResturantSub) === null || _b === void 0 ? void 0 : _b.unsubscribe();
     }
 }
 CartComponent.ɵfac = function CartComponent_Factory(t) { return new (t || CartComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_order_service__WEBPACK_IMPORTED_MODULE_1__["OrderService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_2__["ResturantsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_home_service__WEBPACK_IMPORTED_MODULE_4__["HomeService"])); };
@@ -1002,49 +955,20 @@ CartComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComp
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClientComponent", function() { return ClientComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _services_home_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/home.service */ "jfpu");
-/* harmony import */ var _shared_components_aside_aside_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/components/aside/aside.component */ "7/bn");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "tyNb");
-
+/* harmony import */ var _shared_components_aside_aside_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shared/components/aside/aside.component */ "7/bn");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
 
 
 
 class ClientComponent {
-    constructor(homeService) {
-        this.homeService = homeService;
-        // showPollSub: Subscription;
-        // showPoll: boolean = false;
-        this.showOrder = true;
-        this.showPoll = true;
+    constructor() {
     }
     ngOnInit() {
-        // this.showPollSub = this.homeService.showPoll.subscribe(showPoll => {
-        //   console.log('show Poll: ', showPoll);
-        //   this.showPoll = showPoll;
-        // })
-        this.showOrder = this.calcDiff('orderEndTime');
-        this.showPoll = this.calcDiff('pollEndTime');
     }
     ngOnDestroy() {
-        // this.showPollSub.unsubscribe();
-    }
-    calcDiff(localName) {
-        const jsonEndTime = localStorage.getItem(localName);
-        console.log(jsonEndTime);
-        if (jsonEndTime) {
-            const endTime = JSON.parse(jsonEndTime);
-            const timeRemaining = this.homeService.calcDateDiff(endTime);
-            if (timeRemaining.secondsToDday == '00' && timeRemaining.minutesToDday == '00' && timeRemaining.hoursToDday == '00') {
-                return false;
-            }
-            else {
-                return true;
-            }
-        }
-        return true;
     }
 }
-ClientComponent.ɵfac = function ClientComponent_Factory(t) { return new (t || ClientComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_home_service__WEBPACK_IMPORTED_MODULE_1__["HomeService"])); };
+ClientComponent.ɵfac = function ClientComponent_Factory(t) { return new (t || ClientComponent)(); };
 ClientComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ClientComponent, selectors: [["app-client"]], decls: 5, vars: 0, consts: [[1, "row"], [1, "col-3"], [1, "col-9", "py-4"]], template: function ClientComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
@@ -1054,7 +978,7 @@ ClientComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "router-outlet");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    } }, directives: [_shared_components_aside_aside_component__WEBPACK_IMPORTED_MODULE_2__["AsideComponent"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterOutlet"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjbGllbnQuY29tcG9uZW50LnNjc3MifQ== */"] });
+    } }, directives: [_shared_components_aside_aside_component__WEBPACK_IMPORTED_MODULE_1__["AsideComponent"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterOutlet"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjbGllbnQuY29tcG9uZW50LnNjc3MifQ== */"] });
 
 
 /***/ }),
@@ -1155,7 +1079,7 @@ class ProfileComponent {
     getuserOrders() {
         const loggedUserId = localStorage.getItem('loggedUserId');
         if (loggedUserId) {
-            this.orderService.getOrdersPerUser(loggedUserId).subscribe(userOrders => {
+            this.getuserOrdersSub = this.orderService.getOrdersPerUser(loggedUserId).subscribe(userOrders => {
                 console.log(userOrders);
                 this.orders = userOrders;
                 // const uniqeOrder = new Set(this.orders.items);
@@ -1165,6 +1089,11 @@ class ProfileComponent {
     }
     getTodayResturantId() {
         return localStorage.getItem('toDayResturantId');
+    }
+    ngOnDestroy() {
+        var _a, _b;
+        (_a = this.userListnerSub) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+        (_b = this.getuserOrdersSub) === null || _b === void 0 ? void 0 : _b.unsubscribe();
     }
 }
 ProfileComponent.ɵfac = function ProfileComponent_Factory(t) { return new (t || ProfileComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_order_service__WEBPACK_IMPORTED_MODULE_1__["OrderService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"])); };

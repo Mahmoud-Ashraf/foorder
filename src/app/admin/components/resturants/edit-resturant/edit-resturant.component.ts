@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ResturantsService } from 'src/app/shared/services/resturants.service';
 import { HelperService } from 'src/app/shared/services/helper.service';
@@ -8,7 +9,7 @@ import { HelperService } from 'src/app/shared/services/helper.service';
   templateUrl: './edit-resturant.component.html',
   styleUrls: ['./edit-resturant.component.scss']
 })
-export class EditResturantComponent implements OnInit {
+export class EditResturantComponent implements OnInit, OnDestroy {
   resturant: any = {
     name: '',
     type: '',
@@ -18,15 +19,18 @@ export class EditResturantComponent implements OnInit {
   };
   errors: any;
   resturantId: any;
+  paramsSub: Subscription;
+  getResturantSub: Subscription;
+  updateResturantSub: Subscription;
   @ViewChild('editResturantForm') editResturantForm: any;
   constructor(
     private resturantsService: ResturantsService,
     private activatedRoute: ActivatedRoute,
     private helperService: HelperService
   ) {
-    this.activatedRoute.params.subscribe((params: Params) => {
+    this.paramsSub = this.activatedRoute.params.subscribe((params: Params) => {
       this.resturantId = params.resturantId;
-      return this.resturantsService.getResturant(this.resturantId).subscribe(res => {
+      this.getResturantSub = this.resturantsService.getResturant(this.resturantId).subscribe(res => {
         console.log(this.resturant);
         this.resturant = res;
       })
@@ -39,7 +43,7 @@ export class EditResturantComponent implements OnInit {
 
   updateResturant(form: any) {
     console.log(form);
-    this.resturantsService.updateResturant(this.resturantId, this.resturant).subscribe(
+    this.updateResturantSub = this.resturantsService.updateResturant(this.resturantId, this.resturant).subscribe(
       res => {
         form.reset();
         this.helperService.goBack();
@@ -55,5 +59,11 @@ export class EditResturantComponent implements OnInit {
   getIndex(arr: [], fieldName: any) {
     // console.log(arr, fieldName?.name, arr?.findIndex((i: any) => i.param === fieldName.name));
     return arr?.findIndex((i: any) => i.param === fieldName.name);
+  }
+
+  ngOnDestroy(): void {
+    this.paramsSub?.unsubscribe();
+    this.getResturantSub?.unsubscribe();
+    this.updateResturantSub?.unsubscribe();
   }
 }

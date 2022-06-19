@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ResturantsService } from '../../../../shared/services/resturants.service';
 
@@ -7,18 +8,11 @@ import { ResturantsService } from '../../../../shared/services/resturants.servic
   templateUrl: './add-resturant.component.html',
   styleUrls: ['./add-resturant.component.scss']
 })
-export class AddResturantComponent implements OnInit {
-  // resturant = {
-  //   name: '',
-  //   type: '',
-  //   phone: '',
-  //   savedPhone: '',
-  //   elmenusUrl: ''
-  // };
+export class AddResturantComponent implements OnInit, OnDestroy {
+  addResturantSub: Subscription
   errors: any;
   constructor(
     private resturantsService: ResturantsService,
-    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -27,10 +21,9 @@ export class AddResturantComponent implements OnInit {
 
   addResturant(form: any) {
     console.log(form);
-    this.resturantsService.addResturant(form.value).subscribe(
+    this.addResturantSub = this.resturantsService.addResturant(form.value).subscribe(
       res => {
         form.reset();
-        // this.router.navigate(['admin/resturants']);
       },
       err => {
         this.errors = err.error.errors;
@@ -42,5 +35,9 @@ export class AddResturantComponent implements OnInit {
   getIndex(arr: [], fieldName: any) {
     // console.log(arr, fieldName?.name, arr?.findIndex((i: any) => i.param === fieldName.name));
     return arr?.findIndex((i: any) => i.param === fieldName.name);
+  }
+
+  ngOnDestroy(): void {
+    this.addResturantSub?.unsubscribe();
   }
 }

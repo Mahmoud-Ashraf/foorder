@@ -1,7 +1,8 @@
+import { Subscription } from 'rxjs';
 import { MenuItem } from './../../../../models/menu-item';
 // import { ResturantsService } from './../../../../shared/services/resturants.service';
 import { MenuService } from './../../../../shared/services/menu.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HelperService } from 'src/app/shared/services/helper.service';
 import { ActivatedRoute, Params } from '@angular/router';
 
@@ -10,15 +11,15 @@ import { ActivatedRoute, Params } from '@angular/router';
   templateUrl: './edit-meu-item.component.html',
   styleUrls: ['./edit-meu-item.component.scss']
 })
-export class EditMeuItemComponent implements OnInit {
+export class EditMeuItemComponent implements OnInit, OnDestroy {
   menuItem: MenuItem = {};
-  // menuItem: MenuItem;
   errors: any;
   menuItemId: any;
-  // resturants: any;
+  paramsSub: Subscription;
+  getMenuItemSub: Subscription;
+  updateMenuItemSub: Subscription;
   constructor(
     private menuService: MenuService,
-    // private resturantsService: ResturantsService,
     private helperService: HelperService,
     private activatedRoute: ActivatedRoute,
 
@@ -27,11 +28,9 @@ export class EditMeuItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.getResturants();
-    this.activatedRoute.params.subscribe((params: Params) => {
+    this.paramsSub = this.activatedRoute.params.subscribe((params: Params) => {
       this.menuItemId = params.menuItemId;
-      return this.menuService.getMenuItem(this.menuItemId).subscribe((res: MenuItem) => {
-        // console.log(this.menuItem);
+      this.getMenuItemSub = this.menuService.getMenuItem(this.menuItemId).subscribe((res: MenuItem) => {
         this.menuItem = res;
       })
     });
@@ -39,7 +38,7 @@ export class EditMeuItemComponent implements OnInit {
 
   updateMenuItem(form: any) {
     console.log(form);
-    this.menuService.updateMenuItem(this.menuItemId, this.menuItem).subscribe(
+    this.updateMenuItemSub = this.menuService.updateMenuItem(this.menuItemId, this.menuItem).subscribe(
       res => {
         form.reset();
         this.helperService.goBack();
@@ -52,15 +51,14 @@ export class EditMeuItemComponent implements OnInit {
     );
   }
 
-  // getResturants() {
-  //   this.resturantsService.getResturants().subscribe((resturants: any) => {
-  //     this.resturants = resturants.resturants;
-  //   })
-  // }
-
   getIndex(arr: [], fieldName: any) {
     // console.log(arr, fieldName?.name, arr?.findIndex((i: any) => i.param === fieldName.name));
     return arr?.findIndex((i: any) => i.param === fieldName.name);
   }
 
+  ngOnDestroy(): void {
+    this.paramsSub?.unsubscribe();
+    this.getMenuItemSub?.unsubscribe();
+    this.updateMenuItemSub?.unsubscribe();
+  }
 }

@@ -1,6 +1,7 @@
+import { Subscription } from 'rxjs';
 import { ResturantsService } from 'src/app/shared/services/resturants.service';
 import { MenuService } from './../../../../shared/services/menu.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './menu-details.component.html',
   styleUrls: ['./menu-details.component.scss']
 })
-export class MenuDetailsComponent implements OnInit {
+export class MenuDetailsComponent implements OnInit, OnDestroy {
   resturantMenu: any;
   currentPage: number = 1;
   totalItems: number;
@@ -17,6 +18,9 @@ export class MenuDetailsComponent implements OnInit {
   resturants: any;
   selectedResturantId: string = '';
   @Input() resturantId: string;
+  getMenuSub: Subscription;
+  deleteMenuItemSub: Subscription;
+  getResturantsSub: Subscription;
   constructor(
     private menuService: MenuService,
     private resturantsService: ResturantsService,
@@ -47,12 +51,9 @@ export class MenuDetailsComponent implements OnInit {
     this.router.navigate([`resturant/${id}`]);
   }
   deleteMenuItem(id: any) {
-    this.menuService.deleteMenuItem(id).subscribe(
+    this.deleteMenuItemSub = this.menuService.deleteMenuItem(id).subscribe(
       res => {
-        // console.log(res);
         this.getMenu(this.filterValue);
-        // this.getResturants();
-        // this.navigate(id);
       },
       err => {
         console.log(err);
@@ -60,21 +61,12 @@ export class MenuDetailsComponent implements OnInit {
     );
   }
 
-  // Paginator
-  // nextPage() {
-  //   this.currentPage++;
-  //   // this.getMenu();
-  // }
-  // prevPage() {
-  //   this.currentPage--;
-  //   // this.getMenu();
-  // }
   goToPage(pageNo: any) {
     this.currentPage = pageNo;
     this.getMenu(this.filterValue);
   }
   getResturants() {
-    this.resturantsService.getResturants().subscribe((resturants: any) => {
+    this.getResturantsSub = this.resturantsService.getResturants().subscribe((resturants: any) => {
       this.resturants = resturants.resturants;
     })
   }
@@ -83,5 +75,11 @@ export class MenuDetailsComponent implements OnInit {
     this.filterValue = '';
     this.currentPage = 1;
     this.getMenu();
+  }
+
+  ngOnDestroy(): void {
+    this.getMenuSub?.unsubscribe();
+    this.deleteMenuItemSub?.unsubscribe();
+    this.getResturantsSub?.unsubscribe();
   }
 }

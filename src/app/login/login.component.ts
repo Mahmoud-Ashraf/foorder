@@ -18,19 +18,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.authListenerSubs = this.authService
-    //   .getAuthStatusListener()
-    //   .subscribe(isAuthenticated => {
-    //     if (isAuthenticated || this.authService.getIsAuth()) {
-    //       this.router.navigate(['/home']);
-    //     }
 
-    //   });
-    // console.log('authorized:', this.authService.getIsAuth());
-    // if (this.authService.getIsAuth()) {
-    //   this.router.navigate(['/home']);
-    // }
-    // console.log('Mahmoooooooooyud');
   }
 
 }

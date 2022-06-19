@@ -1,9 +1,10 @@
+import { Subscription } from 'rxjs';
 import { HelperService } from './../../../../shared/services/helper.service';
 import { AuthService } from './../../../../shared/services/auth.service';
 import { Resturant } from 'src/app/models/resturant';
 import { ResturantsService } from 'src/app/shared/services/resturants.service';
 import { Order } from '../../../../models/order';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { OrderService } from 'src/app/shared/services/order.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
@@ -12,8 +13,14 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   templateUrl: './collected-order.component.html',
   styleUrls: ['./collected-order.component.scss']
 })
-export class CollectedOrderComponent implements OnInit {
-  // resturant: any;
+export class CollectedOrderComponent implements OnInit, OnDestroy {
+  paramsSub: Subscription
+  getCollectedOrderSub: Subscription
+  updateCollectedOrderSub: Subscription
+  getTodayOrdersSub: Subscription
+  updateTodayOrderSub: Subscription
+  updateUserSub: Subscription
+  updateCollectedOrderStatusSub: Subscription
   collectedOrder: {
     _id: string,
     items: any[],
@@ -42,16 +49,6 @@ export class CollectedOrderComponent implements OnInit {
       subtotalOrderPrice: 0,
       users: []
     }
-  // orders: {
-  //   orders: Order[],
-  //   collectedOrderSubTotal: number,
-  //   resturant: any
-  // } =
-  //   {
-  //     orders: [],
-  //     collectedOrderSubTotal: 0,
-  //     resturant: {}
-  //   };
 
   constructor(
     private orderService: OrderService,
@@ -62,7 +59,7 @@ export class CollectedOrderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params: Params) => {
+    this.paramsSub = this.activatedRoute.params.subscribe((params: Params) => {
       // const collecter = params.collectedOrderId;
       console.log(params);
       this.getCollectedOrder(params.orderId);
@@ -70,7 +67,7 @@ export class CollectedOrderComponent implements OnInit {
   }
 
   getCollectedOrder(collectedOrderId: string) {
-    this.orderService.getCollectedOrder(collectedOrderId).subscribe(collectedOrder => {
+    this.getCollectedOrderSub = this.orderService.getCollectedOrder(collectedOrderId).subscribe(collectedOrder => {
       this.collectedOrder = collectedOrder;
       console.log(this.collectedOrder);
       if (this.collectedOrder.status === 'DONE') {
@@ -84,9 +81,9 @@ export class CollectedOrderComponent implements OnInit {
     if (this.collectedOrder.status === 'ORDERED') {
       this.collectedOrder.status = 'DONE';
       this.collectedOrder.total = this.collectedOrder.subtotalOrderPrice + this.calculateValueFromPerc(this.collectedOrder.taxFees, this.collectedOrder.subtotalOrderPrice) + this.collectedOrder.deliveryFees - this.calculateValueFromPerc(this.collectedOrder.discount, this.collectedOrder.subtotalOrderPrice);
-      this.orderService.updateCollectedOrder(this.collectedOrder._id, this.collectedOrder).subscribe((updatedCollectedOrder: any) => {
+      this.updateCollectedOrderSub = this.orderService.updateCollectedOrder(this.collectedOrder._id, this.collectedOrder).subscribe((updatedCollectedOrder: any) => {
         this.router.navigate([`/admin/orders/order-reciept/${updatedCollectedOrder.collectedOrder._id}`]);
-        this.orderService.getTodayOrders(this.collectedOrder.resturantId._id).subscribe((todayOrders: any) => {
+        this.getTodayOrdersSub = this.orderService.getTodayOrders(this.collectedOrder.resturantId._id).subscribe((todayOrders: any) => {
           console.log(this.collectedOrder.users.length);
           todayOrders.orders.forEach((order: any) => {
             console.log('order when enter', order);
@@ -96,10 +93,10 @@ export class CollectedOrderComponent implements OnInit {
             order.grandTotal = order.totalOrderPrice + order.deliveryFees + order.taxFees - order.discount;
             order.status = 'DONE';
             console.log('order before update', order);
-            this.orderService.updateTodayOrder(order._id, order).subscribe((updatedOrder) => {
+            this.updateTodayOrderSub = this.orderService.updateTodayOrder(order._id, order).subscribe((updatedOrder) => {
               console.log('updated Order', updatedOrder);
               order.userId.wallet -= order.grandTotal;
-              this.authService.updateUser(order.userId._id, order.userId).subscribe((updatedUser) => {
+              this.updateUserSub = this.authService.updateUser(order.userId._id, order.userId).subscribe((updatedUser) => {
                 console.log('updated User', updatedUser);
               })
             })
@@ -110,12 +107,22 @@ export class CollectedOrderComponent implements OnInit {
   }
   updateCollectedOrderStatus(status: string) {
     this.collectedOrder.status = status;
-    this.orderService.updateCollectedOrder(this.collectedOrder._id, this.collectedOrder).subscribe((updatedOrder: any) => {
+    this.updateCollectedOrderStatusSub = this.orderService.updateCollectedOrder(this.collectedOrder._id, this.collectedOrder).subscribe((updatedOrder: any) => {
       console.log(updatedOrder);
     });
   }
 
   calculateValueFromPerc(perc: number, total: number) {
     return this.helperService.calculateValueFromPerc(perc, total);
+  }
+
+  ngOnDestroy(): void {
+    this.paramsSub?.unsubscribe();
+    this.getCollectedOrderSub?.unsubscribe();
+    this.updateCollectedOrderSub?.unsubscribe();
+    this.getTodayOrdersSub?.unsubscribe();
+    this.updateTodayOrderSub?.unsubscribe();
+    this.updateUserSub?.unsubscribe();
+    this.updateCollectedOrderStatusSub?.unsubscribe();
   }
 }

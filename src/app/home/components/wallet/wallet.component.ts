@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   templateUrl: './wallet.component.html',
   styleUrls: ['./wallet.component.scss']
 })
-export class WalletComponent implements OnInit {
+export class WalletComponent implements OnInit, OnDestroy {
   private userListnerSub: Subscription;
   loggedUser: any;
   constructor(public authService: AuthService) { }
@@ -20,6 +20,10 @@ export class WalletComponent implements OnInit {
       this.loggedUser = user;
       // console.log('loggedUser: ', this.loggedUser);
     })
+  }
+
+  ngOnDestroy(): void {
+    this.userListnerSub?.unsubscribe();
   }
 
 }

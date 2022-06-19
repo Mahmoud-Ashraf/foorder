@@ -1,5 +1,6 @@
+import { Subscription } from 'rxjs';
 import { AuthService } from './../../../../shared/services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -8,13 +9,17 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './users-details.component.html',
   styleUrls: ['./users-details.component.scss']
 })
-export class UsersDetailsComponent implements OnInit {
+export class UsersDetailsComponent implements OnInit, OnDestroy {
   usersRes: any;
   admins: any;
   users: any;
   filterValue: string;
   showPayInput = false;
   userPayment = 0;
+  getUsersSub: Subscription
+  updateUserWalletSub: Subscription
+  removeFromAdminSub: Subscription
+  addToAdminSub: Subscription
   constructor(
     private authService: AuthService,
     private modalService: NgbModal
@@ -25,24 +30,17 @@ export class UsersDetailsComponent implements OnInit {
   }
 
   getUsers(filterValue: string = '') {
-    this.authService.getUsers({ filter: filterValue }).subscribe(usersRes => {
+    this.getUsersSub = this.authService.getUsers({ filter: filterValue }).subscribe(usersRes => {
       this.usersRes = usersRes;
       this.admins = this.usersRes.users.filter((user: any) => user.isAdmin);
       this.users = this.usersRes.users.filter((user: any) => !user.isAdmin);
     })
   }
   onFilter(e: any) {
-    // this.currentPage = 1;
     this.filterValue = e;
     this.getUsers(e);
   }
 
-  // pay(user) {
-
-  // }
-  // togglePayInput() {
-  //   this.showPayInput = !this.showPayInput;
-  // }
   openPayModal(content: any) {
     this.modalService.open(content, { size: 'sm' }).result.then((result) => {
       if (result) {
@@ -50,7 +48,7 @@ export class UsersDetailsComponent implements OnInit {
           result.wallet = 0;
         }
         result.wallet += this.userPayment;
-        this.authService.updateUser(result._id, result).subscribe((updatedUser) => {
+        this.updateUserWalletSub = this.authService.updateUser(result._id, result).subscribe((updatedUser) => {
           this.userPayment = 0;
         });
       }
@@ -61,7 +59,7 @@ export class UsersDetailsComponent implements OnInit {
     this.modalService.open(content, { size: 'sm' }).result.then((user) => {
       if (user) {
         user.isAdmin = false;
-        this.authService.updateUser(user._id, user).subscribe(() => {
+        this.removeFromAdminSub = this.authService.updateUser(user._id, user).subscribe(() => {
           this.getUsers();
         });
       }
@@ -71,10 +69,17 @@ export class UsersDetailsComponent implements OnInit {
     this.modalService.open(content, { size: 'sm' }).result.then((user) => {
       if (user) {
         user.isAdmin = true;
-        this.authService.updateUser(user._id, user).subscribe(() => {
+        this.addToAdminSub = this.authService.updateUser(user._id, user).subscribe(() => {
           this.getUsers();
         });
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.updateUserWalletSub?.unsubscribe();
+    this.getUsersSub?.unsubscribe();
+    this.removeFromAdminSub?.unsubscribe();
+    this.addToAdminSub?.unsubscribe();
   }
 }

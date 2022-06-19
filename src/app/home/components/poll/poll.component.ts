@@ -1,11 +1,8 @@
-import { HelperService } from 'src/app/shared/services/helper.service';
 import { AuthService } from './../../../shared/services/auth.service';
 import { Subscription } from 'rxjs';
 import { ResturantsService } from './../../../shared/services/resturants.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Resturant } from 'src/app/models/resturant';
-import { LoaderService } from 'src/app/shared/services/loader.service';
-import { HomeService } from '../../services/home.service';
 
 @Component({
   selector: 'app-poll',
@@ -20,31 +17,22 @@ export class PollComponent implements OnInit, OnDestroy {
   updateUserSub: Subscription;
   getUserSub: Subscription;
   currentUser: any;
-  pollEndTime: string = '23:55:0';
-  showPoll: boolean = false;
-  countDownTimer: any;
+  @Input() pollEndTime: string;
+
   constructor(
-    private loader: LoaderService,
     private resturantsService: ResturantsService,
     private authService: AuthService,
-    private homeService: HomeService,
-    private helperService: HelperService
   ) {
   }
 
   ngOnInit(): void {
-    // this.showHideDependOnCountDown();
-    this.getConfig();
     this.getResturants();
     this.getUser();
   }
 
-  getConfig() {
-    this.helperService.getConfig().subscribe((config: any) => {
-      this.pollEndTime = config.config[0].voteEndTime;
-      this.showHideDependOnCountDown();
-    })
-  }
+  
+
+  
 
   selectResturant(resturant: Resturant): void {
     if (!this.currentUser?.voted) {
@@ -106,16 +94,6 @@ export class PollComponent implements OnInit, OnDestroy {
     })
   }
 
-  private showHideDependOnCountDown() {
-    const timeTillOrderEnd = this.homeService.calcDateDiffInMs(this.pollEndTime);
-    if (timeTillOrderEnd > 0) {
-      this.showPoll = true;
-      this.countDownTimer = setTimeout(() => {
-        this.showPoll = false;
-      }, timeTillOrderEnd);
-    }
-  }
-
   getUser() {
     this.currentUser = this.authService.getLoggedUser();
     this.checkUserVote();
@@ -139,9 +117,6 @@ export class PollComponent implements OnInit, OnDestroy {
     this.updateUserSub?.unsubscribe();
     this.resturantsSub?.unsubscribe();
     this.updateResturantSub?.unsubscribe();
-    if (this.countDownTimer) {
-      clearTimeout(this.countDownTimer);
-    }
   }
 
 }

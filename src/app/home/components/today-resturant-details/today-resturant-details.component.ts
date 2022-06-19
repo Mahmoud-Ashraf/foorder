@@ -1,11 +1,9 @@
 import { HelperService } from 'src/app/shared/services/helper.service';
 import { Router } from '@angular/router';
 import { HomeService } from './../../services/home.service';
-import { AuthService } from './../../../shared/services/auth.service';
-import { OrderService } from './../../../shared/services/order.service';
 import { MenuService } from './../../../shared/services/menu.service';
 import { ResturantsService } from 'src/app/shared/services/resturants.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 
 @Component({
   selector: 'app-today-resturant-details',
@@ -15,20 +13,21 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
   todayResturant: any;
   todayResturantMenu: any;
-  orderEndTime: string = '23:50:0';
+  // orderEndTime: string = '23:50:0';
   order = {
     userId: '',
     resturantId: '',
     items: [],
     totalOrderPrice: 0,
   };
-  showResturantDetails: boolean = false;
-  countDownTimer: any;
+  // showResturantDetails: boolean = false;
+  // countDownTimer: any;
   disableTodayResturant: boolean;
+  @Input() orderEndTime: string;
   constructor(
     private resturantsService: ResturantsService,
     private menuService: MenuService,
-    private helperService: HelperService,
+    // private helperService: HelperService,
     private homeService: HomeService,
     private router: Router
   ) {
@@ -36,20 +35,19 @@ export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getTodayResturant();
-    // this.showHideDependOnCountDown();
-    this.getConfig();
+    // this.getConfig();
     this.homeService.getDisableResturantDetails().subscribe(disableOrdering => {
       console.log(disableOrdering);
       this.disableTodayResturant = disableOrdering;
     })
   }
 
-  getConfig() {
-    this.helperService.getConfig().subscribe((config: any) => {
-      this.orderEndTime = config.config[0].orderEndTime;
-      this.showHideDependOnCountDown();
-    })
-  }
+  // getConfig() {
+  //   this.helperService.getConfig().subscribe((config: any) => {
+  //     this.orderEndTime = config.config[0].orderEndTime;
+  //     this.showHideDependOnCountDown();
+  //   })
+  // }
 
   getMenu() {
     this.menuService.getMenu(this.todayResturant?._id).subscribe((menu: any) => {
@@ -83,17 +81,17 @@ export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
     })
   }
 
-  private showHideDependOnCountDown() {
-    const timeTillOrderEnd = this.homeService.calcDateDiffInMs(this.orderEndTime);
-    if (timeTillOrderEnd > 0) {
-      this.showResturantDetails = true;
-      this.countDownTimer = setTimeout(() => {
-        this.resetTodayResturant();
-      }, timeTillOrderEnd);
-    } else {
-      this.resetTodayResturant();
-    }
-  }
+  // private showHideDependOnCountDown() {
+  //   const timeTillOrderEnd = this.homeService.calcDateDiffInMs(this.orderEndTime);
+  //   if (timeTillOrderEnd > 0) {
+  //     this.showResturantDetails = true;
+  //     this.countDownTimer = setTimeout(() => {
+  //       this.resetTodayResturant();
+  //     }, timeTillOrderEnd);
+  //   } else {
+  //     this.resetTodayResturant();
+  //   }
+  // }
 
   addOrderToCart() {
     this.getTodayOrder();
@@ -106,15 +104,15 @@ export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
   }
 
   private resetTodayResturant() {
-    this.showResturantDetails = false;
+    // this.showResturantDetails = false;
     this.homeService.disableResturantDetails.next(true);
     localStorage.removeItem('order');
   }
 
   ngOnDestroy(): void {
-    if (this.countDownTimer) {
-      clearTimeout(this.countDownTimer);
-    }
+    // if (this.countDownTimer) {
+    //   clearTimeout(this.countDownTimer);
+    // }
   }
 
   decreseOrderCount(menuItem: any) {

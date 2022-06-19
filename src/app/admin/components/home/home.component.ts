@@ -1,7 +1,7 @@
 import { ResturantsService } from './../../../shared/services/resturants.service';
 import { AuthService } from './../../../shared/services/auth.service';
-import { Subscription } from 'rxjs';
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Observable, Subscription, forkJoin } from 'rxjs';
+import { Component, OnInit, ViewChild, OnDestroy, ViewChildren, QueryList } from '@angular/core';
 import { ChartConfiguration, ChartType, Chart } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 
@@ -14,18 +14,16 @@ import { BaseChartDirective } from 'ng2-charts';
 export class HomeComponent implements OnInit, OnDestroy {
   now = new Date();
   private userListnerSub: Subscription;
-  private usersSub: Subscription;
-  private resturantsSub: Subscription;
+  private chartsSub: Subscription;
   loggedUser: any;
-  resturants: any;
-  @ViewChild(BaseChartDirective) resturantsChart: BaseChartDirective | undefined;
-  @ViewChild(BaseChartDirective) usersChart: BaseChartDirective | undefined;
+  // @ViewChild('resturantsChart') resturantsChart: BaseChartDirective | undefined;
+  // @ViewChild('usersChart') usersChart: BaseChartDirective | undefined;
+  @ViewChildren(BaseChartDirective) charts: QueryList<BaseChartDirective>;
   barChartType: ChartType = 'bar';
   resturantsChartData = {
     datasets: [{
       backgroundColor: '#09c',
       data: [],
-      // color: '#fff',
       borderColor: '#09c'
     }]
   };
@@ -33,11 +31,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     datasets: [{
       backgroundColor: '#09c',
       data: [],
-      // color: '#fff',
       borderColor: '#09c'
     }]
   };
-
   usersChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     parsing: {
@@ -48,14 +44,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       x: {
         ticks: {
           padding: 16,
-          // callback: (value, index, values) => {
-          //   console.log(value, index, values);
-          //   return value;
-          // },
-          // backdropColor: '#5D5FEF',
-          // backdropPadding: 50,
-          // showLabelBackdrop: true,
-          // color: '#fff',
           font: {
             size: 14,
             lineHeight: 1.375,
@@ -64,14 +52,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
       }
     },
-    // scales: {
-    
-    //   ticks: {
-    //     fontSize: 12,
-    //     padding: 0,
-    //     fontFamily: 'Hacen-Algeria'
-    //   }
-    // }
     plugins: {
       legend: {
         display: false
@@ -88,14 +68,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       x: {
         ticks: {
           padding: 16,
-          // callback: (value, index, values) => {
-          //   console.log(value, index, values);
-          //   return value;
-          // },
-          // backdropColor: '#5D5FEF',
-          // backdropPadding: 50,
-          // showLabelBackdrop: true,
-          // color: '#fff',
           font: {
             size: 14,
             lineHeight: 1.375,
@@ -104,29 +76,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
       }
     },
-    // plugins: {
-    //   legend: {
-    //     display: true,
-    //     labels: {
-    //       font: {
-    //         size: 16,
-    //         lineHeight: 1.375,
-    //         family: 'poppins'
-    //       }
-    //     }
-    //   }
-    // },
-    // elements: {
-    //   bar: {
-    //     borderRadius: 8,
-    //     backgroundColor: '#56CCF2',
-    //     borderColor: '#56CCF2',
-    //   }
-    // },
-    // layout: {
-    //   autoPadding: false,
-    //   padding: 90
-    // }
   };
   constructor(
     private authService: AuthService,
@@ -149,22 +98,21 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe((user: any) => {
         this.loggedUser = user;
       });
-    this.resturantsSub = this.resturantsService.getResturants().subscribe((resturantsRes: any) => {
+    this.chartsSub = forkJoin(
+      [this.resturantsService.getResturants(),
+      this.authService.getUsers()]
+    ).subscribe(([resturantsRes, usersRes]: [any, any]) => {
       this.resturantsChartData.datasets[0].data = resturantsRes.resturants;
-      console.log(this.resturantsChartData.datasets[0].data);
-      this.resturantsChart?.update();
-    });
-    this.usersSub = this.authService.getUsers().subscribe((usersRes: any) => {
       this.usersChartData.datasets[0].data = usersRes.users;
-      console.log(this.usersChartData.datasets[0].data);
-      this.usersChart?.update();
-    })
+      this.charts.forEach((chart: any) => {
+        chart.update();
+      })
+    });
   }
 
   ngOnDestroy() {
     this.userListnerSub?.unsubscribe();
-    this.usersSub?.unsubscribe();
-    this.resturantsSub?.unsubscribe();
+    this.chartsSub?.unsubscribe();
   }
 
 }

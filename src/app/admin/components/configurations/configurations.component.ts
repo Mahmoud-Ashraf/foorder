@@ -1,12 +1,15 @@
+import { Subscription } from 'rxjs';
 import { HelperService } from 'src/app/shared/services/helper.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-configurations',
   templateUrl: './configurations.component.html',
   styleUrls: ['./configurations.component.scss']
 })
-export class ConfigurationsComponent implements OnInit {
+export class ConfigurationsComponent implements OnInit, OnDestroy {
+  updateConfigSub: Subscription
+  getConfigSub: Subscription
   errors: any;
   config = {
     voteEndTime: '0:0:0',
@@ -19,26 +22,23 @@ export class ConfigurationsComponent implements OnInit {
   }
 
   submitConfig(form: any) {
-    // console.log(form.value);
-    // console.log(this.config);
-    // form.value.voteEndTime = form.value.voteEndTime.split(',');
-    // form.value.orderEndTime = form.value.orderEndTime.split(',');
-    // console.log(this.config);
-    this.helperService.updateConfig(this.config).subscribe((updatedConfig: any) => {
+    this.updateConfigSub = this.helperService.updateConfig(this.config).subscribe((updatedConfig: any) => {
       console.log('updated Config', updatedConfig);
     });
   }
 
   getConfig() {
-    this.helperService.getConfig().subscribe((config: any) => {
+    this.getConfigSub = this.helperService.getConfig().subscribe((config: any) => {
       this.config = config.config[0];
-      console.log(this.config);
-      // this.config.voteEndTime.join(',');
-      // this.config.orderEndTime.join(',');
     })
   }
   getIndex(arr: [], fieldName: any) {
     // console.log(arr, fieldName?.name, arr?.findIndex((i: any) => i.param === fieldName.name));
     return arr?.findIndex((i: any) => i.param === fieldName.name);
+  }
+
+  ngOnDestroy(): void {
+    this.updateConfigSub?.unsubscribe();
+    this.getConfigSub?.unsubscribe();
   }
 }

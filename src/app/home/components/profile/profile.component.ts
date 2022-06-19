@@ -1,6 +1,6 @@
 import { AuthService } from '../../../shared/services/auth.service';
 import { OrderService } from '../../../shared/services/order.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -8,9 +8,10 @@ import { Subscription } from 'rxjs';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
   orders: any;
   private userListnerSub: Subscription;
+  private getuserOrdersSub: Subscription;
   loggedUser: any;
   constructor(
     private orderService: OrderService,
@@ -34,7 +35,7 @@ export class ProfileComponent implements OnInit {
   getuserOrders() {
     const loggedUserId = localStorage.getItem('loggedUserId');
     if (loggedUserId) {
-      this.orderService.getOrdersPerUser(loggedUserId).subscribe(userOrders => {
+      this.getuserOrdersSub = this.orderService.getOrdersPerUser(loggedUserId).subscribe(userOrders => {
         console.log(userOrders);
         this.orders = userOrders;
         // const uniqeOrder = new Set(this.orders.items);
@@ -46,6 +47,10 @@ export class ProfileComponent implements OnInit {
     return localStorage.getItem('toDayResturantId');
   }
 
+  ngOnDestroy(): void {
+    this.userListnerSub?.unsubscribe();
+    this.getuserOrdersSub?.unsubscribe();
+  }
 
 
 }

@@ -15,6 +15,7 @@ export class AsideComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   private authListenerSubs: Subscription;
   private userListnerSub: Subscription;
+  private routerEventsSub: Subscription;
   loggedUser: any;
   adminOpen: boolean = false;
   constructor(
@@ -28,7 +29,7 @@ export class AsideComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.adminOpen = this.router.url.includes('admin');
-    this.router.events.subscribe((event: NavigationEvent) => {
+    this.routerEventsSub = this.router.events.subscribe((event: NavigationEvent) => {
       if (event instanceof NavigationEnd) {
         this.adminOpen = event.url.includes('admin');
         // if(event.url.includes('admin')) {
@@ -64,6 +65,8 @@ export class AsideComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.authListenerSubs?.unsubscribe();
     this.userListnerSub?.unsubscribe();
+    this.routerEventsSub?.unsubscribe();
+
   }
   generateUserAvatar(userName: string) {
     return this.helperService.generateUserAvatar(userName);

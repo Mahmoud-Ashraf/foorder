@@ -1,6 +1,7 @@
+import { Subscription } from 'rxjs';
 import { HelperService } from './../../../../shared/services/helper.service';
 import { Resturant } from 'src/app/models/resturant';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { OrderService } from 'src/app/shared/services/order.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ThisReceiver } from '@angular/compiler';
@@ -9,8 +10,9 @@ import { ThisReceiver } from '@angular/compiler';
   templateUrl: './order-reciept.component.html',
   styleUrls: ['./order-reciept.component.scss']
 })
-export class OrderRecieptComponent implements OnInit {
-  // resturant: any;
+export class OrderRecieptComponent implements OnInit, OnDestroy {
+  paramsSub: Subscription;
+  getCollectedOrderSub: Subscription;
   collectedOrder: {
     items: any[],
     status: string,
@@ -35,16 +37,6 @@ export class OrderRecieptComponent implements OnInit {
       usersCount: 0,
       subtotalOrderPrice: 0
     }
-  // orders: {
-  //   orders: Order[],
-  //   collectedOrderSubTotal: number,
-  //   resturant: any
-  // } =
-  //   {
-  //     orders: [],
-  //     collectedOrderSubTotal: 0,
-  //     resturant: {}
-  //   };
 
   constructor(
     private orderService: OrderService,
@@ -53,20 +45,22 @@ export class OrderRecieptComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params: Params) => {
-      // const collecter = params.collectedOrderId;
-      console.log(params);
+    this.paramsSub = this.activatedRoute.params.subscribe((params: Params) => {
       this.getCollectedOrder(params.orderId);
     });
   }
 
   getCollectedOrder(collectedOrderId: string) {
-    this.orderService.getCollectedOrder(collectedOrderId).subscribe(collectedOrder => {
+    this.getCollectedOrderSub = this.orderService.getCollectedOrder(collectedOrderId).subscribe(collectedOrder => {
       this.collectedOrder = collectedOrder;
-      // this.getTodayOrders();
     })
   }
   calculateValueFromPerc(perc: number) {
     return this.helperService.calculateValueFromPerc(perc, this.collectedOrder.subtotalOrderPrice);
+  }
+
+  ngOnDestroy(): void {
+    this.paramsSub?.unsubscribe();
+    this.getCollectedOrderSub?.unsubscribe();
   }
 }

@@ -1,15 +1,20 @@
+import { Subscription } from 'rxjs';
 import { HelperService } from 'src/app/shared/services/helper.service';
 import { Router } from '@angular/router';
 import { ResturantsService } from 'src/app/shared/services/resturants.service';
 import { Order } from '../../../../models/order';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { OrderService } from 'src/app/shared/services/order.service';
 @Component({
   selector: 'app-today-order',
   templateUrl: './today-order.component.html',
   styleUrls: ['./today-order.component.scss']
 })
-export class TodayOrderComponent implements OnInit {
+export class TodayOrderComponent implements OnInit, OnDestroy {
+  checkTodayCollectedOrderSub: Subscription;
+  getTodayResturantSub: Subscription;
+  getTodayOrdersSub: Subscription;
+  collectOrderSub: Subscription;
   resturant: any;
   users: any[] = [];
   collectedOrder: {
@@ -43,7 +48,7 @@ export class TodayOrderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.orderService.checkTodayCollectedOrder().subscribe(collectedOrder => {
+    this.checkTodayCollectedOrderSub = this.orderService.checkTodayCollectedOrder().subscribe(collectedOrder => {
       if (collectedOrder.collectedOrder) {
         this.router.navigate([`admin/orders/collected-order/${collectedOrder.collectedOrder._id}`]);
       }
@@ -60,7 +65,7 @@ export class TodayOrderComponent implements OnInit {
   }
 
   getTodayResturant() {
-    this.resturantsService.getTodayResturant().subscribe(toDayResturant => {
+    this.getTodayResturantSub = this.resturantsService.getTodayResturant().subscribe(toDayResturant => {
       this.resturant = toDayResturant;
       this.getTodayOrders();
     })
@@ -68,7 +73,7 @@ export class TodayOrderComponent implements OnInit {
 
   getTodayOrders() {
     if (this.resturant._id) {
-      this.orderService.getTodayOrders(this.resturant._id).subscribe((todayOrders: any) => {
+      this.getTodayOrdersSub = this.orderService.getTodayOrders(this.resturant._id).subscribe((todayOrders: any) => {
         console.log(todayOrders);
         this.orders = todayOrders;
         if (this.orders && this.orders.orders && this.orders.orders.length > 0) {
@@ -112,7 +117,7 @@ export class TodayOrderComponent implements OnInit {
   }
 
   addCollectedOrder() {
-    this.orderService.collectOrder(this.collectedOrder).subscribe(
+    this.collectOrderSub = this.orderService.collectOrder(this.collectedOrder).subscribe(
       (collectedOrder: any) => {
         console.log(collectedOrder);
         this.router.navigate([`admin/orders/collected-order/${collectedOrder.collectedOrder._id}`]);
@@ -123,5 +128,12 @@ export class TodayOrderComponent implements OnInit {
   }
   generateUserAvatar(userName: string) {
     return this.helperService.generateUserAvatar(userName);
+  }
+
+  ngOnDestroy(): void {
+    this.checkTodayCollectedOrderSub?.unsubscribe();
+    this.getTodayResturantSub?.unsubscribe();
+    this.getTodayOrdersSub?.unsubscribe();
+    this.collectOrderSub?.unsubscribe();
   }
 }

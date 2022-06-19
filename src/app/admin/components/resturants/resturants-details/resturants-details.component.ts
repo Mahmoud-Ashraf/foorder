@@ -1,5 +1,6 @@
+import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ResturantsService } from 'src/app/shared/services/resturants.service';
 import { HelperService } from 'src/app/shared/services/helper.service';
 // import { Interface } from 'readline';
@@ -9,14 +10,14 @@ import { HelperService } from 'src/app/shared/services/helper.service';
   templateUrl: './resturants-details.component.html',
   styleUrls: ['./resturants-details.component.scss']
 })
-export class ResturantsDetailsComponent implements OnInit {
+export class ResturantsDetailsComponent implements OnInit, OnDestroy {
   resturants: any;
   currentPage: number = 1;
   totalItems: number;
   perPage: number = 10;
   pagesArr: any;
   filterValue: string;
-
+  getResturantsSub: Subscription
   constructor(
     private resturantsService: ResturantsService,
     private router: Router
@@ -31,7 +32,7 @@ export class ResturantsDetailsComponent implements OnInit {
     this.getResturants(e);
   }
   getResturants(filterValue: string = '') {
-    this.resturantsService.getResturants(this.currentPage, this.perPage, filterValue).subscribe((res: any) => {
+    this.getResturantsSub = this.resturantsService.getResturants(this.currentPage, this.perPage, filterValue).subscribe((res: any) => {
       this.resturants = res.resturants;
       this.currentPage = res.currentPage;
       this.perPage = res.perPage;
@@ -42,20 +43,13 @@ export class ResturantsDetailsComponent implements OnInit {
   navigate(id: any) {
     this.router.navigate([`resturant/:${id}`]);
   }
-  // deleteResturant(id: any) {
-  //   this.resturantsService.deleteResturant(id).subscribe(
-  //     res => {
-  //       console.log(res);
-  //       this.getResturants();
-  //     },
-  //     err => {
-  //       console.log(err);
-  //     },
-  //   );
-  // }
   goToPage(pageNo: any) {
     this.currentPage = pageNo;
     this.getResturants(this.filterValue);
+  }
+
+  ngOnDestroy(): void {
+    this.getResturantsSub?.unsubscribe();
   }
 
 }

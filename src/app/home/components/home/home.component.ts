@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HelperService } from 'src/app/shared/services/helper.service';
 import { HomeService } from '../../services/home.service';
 
@@ -8,13 +9,14 @@ import { HomeService } from '../../services/home.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   pollEndTime: string = '00:00:00';
   orderEndTime: string = '00:00:00';
   showPoll: boolean = false;
   showOrder: boolean = false;
   pollCountDownTimer: any;
   orderCountDownTimer: any;
+  getConfigSub: Subscription
   constructor(
     private helperService: HelperService,
     private homeService: HomeService,
@@ -27,7 +29,7 @@ export class HomeComponent implements OnInit {
   }
 
   getConfig() {
-    this.helperService.getConfig().subscribe((config: any) => {
+    this.getConfigSub = this.helperService.getConfig().subscribe((config: any) => {
       this.pollEndTime = config.config[0].voteEndTime;
       this.orderEndTime = config.config[0].orderEndTime;
       this.showHideDependOnCountDown();
@@ -52,6 +54,7 @@ export class HomeComponent implements OnInit {
     if (this.orderCountDownTimer) {
       clearTimeout(this.orderCountDownTimer);
     }
+    this.getConfigSub?.unsubscribe();
   }
 
 }

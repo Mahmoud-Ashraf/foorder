@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ResturantsService } from 'src/app/shared/services/resturants.service';
 
@@ -7,38 +8,27 @@ import { ResturantsService } from 'src/app/shared/services/resturants.service';
   templateUrl: './resturant-details.component.html',
   styleUrls: ['./resturant-details.component.scss']
 })
-export class ResturantDetailsComponent implements OnInit {
+export class ResturantDetailsComponent implements OnInit, OnDestroy {
   resturant: any;
+  paramsSub: Subscription;
+  getResturantSub: Subscription;
   constructor(
     private resturantsService: ResturantsService,
     private activatedRoute: ActivatedRoute
   ) { 
-    this.activatedRoute.params.subscribe((params: Params) => {
-      // console.log(params);
-      return this.resturantsService.getResturant(params.resturantId).subscribe(res => {
+    this.paramsSub = this.activatedRoute.params.subscribe((params: Params) => {
+      this.getResturantSub = this.resturantsService.getResturant(params.resturantId).subscribe(res => {
         this.resturant = res;
         console.log(res, this.resturant)
       })
-      // console.log('params', params);
     });
   }
 
   ngOnInit(): void {
-    // // this.getResturant()
-    // this.activatedRoute.params.subscribe((params: Params) => {
-    //   // console.log('params', params);
-    // });
-    // this.activatedRoute.params.pipe(concatMap((params: { id: any; }) => {
-    //   return this.resturantsService.getResturant(params.id)
-    // })).subscribe(res =>{
-    //   this.resturant = res;
-    // });
   }
 
-  // getResturant(id: any) {
-  //   this.resturantsService.getResturant(id).subscribe(res => {
-  //     this.resturant = res;
-  //     console.log(this.resturant);
-  //   })
-  // }
+  ngOnDestroy(): void {
+    this.getResturantSub?.unsubscribe();
+    this.paramsSub?.unsubscribe();
+  }
 }

@@ -16,6 +16,7 @@ export class PollComponent implements OnInit, OnDestroy {
   updateResturantSub: Subscription;
   updateUserSub: Subscription;
   getUserSub: Subscription;
+  resetResturantsVoteSub: Subscription;
   currentUser: any;
   @Input() pollEndTime: string;
 
@@ -72,7 +73,7 @@ export class PollComponent implements OnInit, OnDestroy {
     });
     console.log('reset status', notReset);
     if (!notReset) {
-      this.resturantsService.resetResturantsVote().subscribe(resturants => {
+      this.resetResturantsVoteSub = this.resturantsService.resetResturantsVote().subscribe(resturants => {
         this.resturants.forEach(resturant => {
           resturant.vote = 0;
         });
@@ -117,6 +118,7 @@ export class PollComponent implements OnInit, OnDestroy {
     this.updateUserSub?.unsubscribe();
     this.resturantsSub?.unsubscribe();
     this.updateResturantSub?.unsubscribe();
+    this.resetResturantsVoteSub?.unsubscribe();
   }
 
 }

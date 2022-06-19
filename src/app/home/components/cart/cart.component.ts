@@ -1,7 +1,8 @@
+import { Subscription } from 'rxjs';
 import { ResturantsService } from 'src/app/shared/services/resturants.service';
 import { HomeService } from '../../services/home.service';
 import { OrderService } from '../../../shared/services/order.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -9,8 +10,10 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, OnDestroy {
   order: any;
+  addOrderSub: Subscription
+  getTodayResturantSub: Subscription
   constructor(
     private orderService: OrderService,
     private resturantsService: ResturantsService,
@@ -61,7 +64,7 @@ export class CartComponent implements OnInit {
 
   addOrder(orderToAdd: any) {
     console.log(orderToAdd);
-    this.orderService.addOrder(orderToAdd).subscribe(addedOrder => {
+    this.addOrderSub = this.orderService.addOrder(orderToAdd).subscribe(addedOrder => {
       console.log(addedOrder);
       localStorage.removeItem('order');
       this.order.items = [];
@@ -73,7 +76,7 @@ export class CartComponent implements OnInit {
 
   setUserAndResturantToOrder(orderToAdd: any) {
     console.log(orderToAdd);
-    this.resturantsService.getTodayResturant().subscribe(todayResturant => {
+    this.getTodayResturantSub = this.resturantsService.getTodayResturant().subscribe(todayResturant => {
       console.log(todayResturant);
       orderToAdd.resturantId = todayResturant._id;
       this.authService.getLoggedUser();
@@ -92,6 +95,11 @@ export class CartComponent implements OnInit {
     } else {
       return 0;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.addOrderSub?.unsubscribe();
+    this.getTodayResturantSub?.unsubscribe();
   }
 
 }

@@ -3,16 +3,20 @@
         <h2>Welcome, {{loggedUser?.name}}</h2>
     </div>
 </div>
-<div class="row" *ngIf="orders?.length > 0 else noOrdersFound">
+<div class="row g-3" *ngIf="orders?.length > 0 else noOrdersFound">
     <div class="col-4" *ngFor="let order of orders">
-        <div class="card">
-            <div class="card-body">
+        <div class="card h-100">
+            <div class="card-header">
                 <h5 class="card-title">{{order?.resturantId?.name}}</h5>
+            </div>
+            <div class="card-body">
                 <!-- <p class="card-text">{{order?.createdAt | date: 'dd/MM/yyyy | hh:mm'}}</p> -->
                 <p class="card-text" *ngFor="let item of order?.items">{{item?.count}}× {{item?.item?.name}}</p>
-                <a href="#" class="btn btn-primary">Total Order Price: {{order?.totalOrderPrice}}</a>
-                <button *ngIf="order?.resturantId?._id === getTodayResturantId()"
-                    class="btn btn-primary">Reorder</button>
+            </div>
+            <div class="card-footer">
+                <p class="badge border border-primary m-0 d-block fs-6 fw-normal py-2 text-primary">Total Order Price: {{order?.totalOrderPrice}}</p>
+                <button *ngIf="order?.resturantId?._id === todayResturant?._id"
+                    class="btn btn-primary w-100 mt-2" (click)="reorder(order)">Reorder</button>
             </div>
         </div>
     </div>

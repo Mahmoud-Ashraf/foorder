@@ -6,7 +6,6 @@ import { RequestsService } from './requests.service';
   providedIn: 'root'
 })
 export class ResturantsService {
-
   constructor(
     private requests: RequestsService
   ) {

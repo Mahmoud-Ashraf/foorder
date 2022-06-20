@@ -69,6 +69,7 @@ export class CartComponent implements OnInit, OnDestroy {
       localStorage.removeItem('order');
       this.order.items = [];
       this.homeService.disableResturantDetails.next(true);
+      
     }, err => {
       console.log(err);
     });

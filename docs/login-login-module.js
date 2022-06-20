@@ -174,7 +174,6 @@ class RegisterComponent {
         }
     }
     register(registerForm) {
-        console.log(registerForm.value);
         this.authService.register(registerForm.value);
     }
 }

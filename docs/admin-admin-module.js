@@ -936,15 +936,12 @@ class EditMeuItemComponent {
         });
     }
     updateMenuItem(form) {
-        console.log(form);
         this.updateMenuItemSub = this.menuService.updateMenuItem(this.menuItemId, this.menuItem).subscribe(res => {
             form.reset();
             this.helperService.goBack();
         }, err => {
             var _a;
-            console.log(err);
             this.errors = (_a = err === null || err === void 0 ? void 0 : err.error) === null || _a === void 0 ? void 0 : _a.errors;
-            console.log('faild response from component', this.errors);
         });
     }
     getIndex(arr, fieldName) {
@@ -11393,12 +11390,10 @@ class AddResturantComponent {
     ngOnInit() {
     }
     addResturant(form) {
-        console.log(form);
         this.addResturantSub = this.resturantsService.addResturant(form.value).subscribe(res => {
             form.reset();
         }, err => {
             this.errors = err.error.errors;
-            console.log('faild response from component', this.errors);
         });
     }
     getIndex(arr, fieldName) {
@@ -11989,7 +11984,6 @@ class TodayOrderComponent {
     getTodayOrders() {
         if (this.resturant._id) {
             this.getTodayOrdersSub = this.orderService.getTodayOrders(this.resturant._id).subscribe((todayOrders) => {
-                console.log(todayOrders);
                 this.orders = todayOrders;
                 if (this.orders && this.orders.orders && this.orders.orders.length > 0) {
                     this.getCollectedOrderPrice();
@@ -12029,7 +12023,6 @@ class TodayOrderComponent {
     }
     addCollectedOrder() {
         this.collectOrderSub = this.orderService.collectOrder(this.collectedOrder).subscribe((collectedOrder) => {
-            console.log(collectedOrder);
             this.router.navigate([`admin/orders/collected-order/${collectedOrder.collectedOrder._id}`]);
         }, err => {
             console.log(err);
@@ -16043,7 +16036,6 @@ class EditResturantComponent {
         this.paramsSub = this.activatedRoute.params.subscribe((params) => {
             this.resturantId = params.resturantId;
             this.getResturantSub = this.resturantsService.getResturant(this.resturantId).subscribe(res => {
-                console.log(this.resturant);
                 this.resturant = res;
             });
         });
@@ -16051,14 +16043,11 @@ class EditResturantComponent {
     ngOnInit() {
     }
     updateResturant(form) {
-        console.log(form);
         this.updateResturantSub = this.resturantsService.updateResturant(this.resturantId, this.resturant).subscribe(res => {
             form.reset();
             this.helperService.goBack();
         }, err => {
-            // console.log('err', err);
             this.errors = err.error.errors;
-            // console.log('faild response from component', this.errors);
         });
     }
     getIndex(arr, fieldName) {
@@ -16877,7 +16866,6 @@ class ConfigurationsComponent {
     }
     submitConfig(form) {
         this.updateConfigSub = this.helperService.updateConfig(this.config).subscribe((updatedConfig) => {
-            console.log('updated Config', updatedConfig);
         });
     }
     getConfig() {
@@ -18593,7 +18581,6 @@ class MenuDetailsComponent {
             this.currentPage = res.currentPage;
             this.perPage = res.perPage;
             this.totalItems = res.totalItems;
-            console.log('test pagination', this.resturantMenu);
         });
     }
     navigate(id) {
@@ -27080,15 +27067,11 @@ class AddMenuItemComponent {
         this.getResturants();
     }
     addMenuItem(form) {
-        console.log(form);
         this.addMenuSub = this.menuService.addMenuItem(form.value).subscribe(res => {
-            console.log(res);
             form.reset();
         }, err => {
             var _a;
-            console.log(err);
             this.errors = (_a = err === null || err === void 0 ? void 0 : err.error) === null || _a === void 0 ? void 0 : _a.errors;
-            console.log('faild response from component', this.errors);
         });
     }
     getResturants() {
@@ -27395,7 +27378,6 @@ class ResturantsDetailsComponent {
             this.currentPage = res.currentPage;
             this.perPage = res.perPage;
             this.totalItems = res.totalItems;
-            console.log('test pagination', this.resturants);
         });
     }
     navigate(id) {
@@ -28442,19 +28424,15 @@ class CollectedOrderComponent {
     }
     ngOnInit() {
         this.paramsSub = this.activatedRoute.params.subscribe((params) => {
-            // const collecter = params.collectedOrderId;
-            console.log(params);
             this.getCollectedOrder(params.orderId);
         });
     }
     getCollectedOrder(collectedOrderId) {
         this.getCollectedOrderSub = this.orderService.getCollectedOrder(collectedOrderId).subscribe(collectedOrder => {
             this.collectedOrder = collectedOrder;
-            console.log(this.collectedOrder);
             if (this.collectedOrder.status === 'DONE') {
                 this.router.navigate([`admin/orders/order-reciept/${collectedOrderId}`]);
             }
-            // this.getTodayOrders();
         });
     }
     generateReciept() {
@@ -28464,20 +28442,15 @@ class CollectedOrderComponent {
             this.updateCollectedOrderSub = this.orderService.updateCollectedOrder(this.collectedOrder._id, this.collectedOrder).subscribe((updatedCollectedOrder) => {
                 this.router.navigate([`/admin/orders/order-reciept/${updatedCollectedOrder.collectedOrder._id}`]);
                 this.getTodayOrdersSub = this.orderService.getTodayOrders(this.collectedOrder.resturantId._id).subscribe((todayOrders) => {
-                    console.log(this.collectedOrder.users.length);
                     todayOrders.orders.forEach((order) => {
-                        console.log('order when enter', order);
                         order.deliveryFees = this.collectedOrder.deliveryFees / this.collectedOrder.users.length;
                         order.taxFees = this.calculateValueFromPerc(this.collectedOrder.taxFees, order.totalOrderPrice);
                         order.discount = this.calculateValueFromPerc(this.collectedOrder.discount, order.totalOrderPrice);
                         order.grandTotal = order.totalOrderPrice + order.deliveryFees + order.taxFees - order.discount;
                         order.status = 'DONE';
-                        console.log('order before update', order);
                         this.updateTodayOrderSub = this.orderService.updateTodayOrder(order._id, order).subscribe((updatedOrder) => {
-                            console.log('updated Order', updatedOrder);
                             order.userId.wallet -= order.grandTotal;
                             this.updateUserSub = this.authService.updateUser(order.userId._id, order.userId).subscribe((updatedUser) => {
-                                console.log('updated User', updatedUser);
                             });
                         });
                     });
@@ -29513,13 +29486,6 @@ class HomeComponent {
             },
         };
     }
-    // events
-    // public chartClicked({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
-    //   console.log(event, active);
-    // }
-    // public chartHovered({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
-    //   console.log(event, active);
-    // }
     ngOnInit() {
         this.loggedUser = this.authService.getLoggedUser();
         this.userListnerSub = this.authService
@@ -46529,7 +46495,6 @@ class ResturantDetailsComponent {
         this.paramsSub = this.activatedRoute.params.subscribe((params) => {
             this.getResturantSub = this.resturantsService.getResturant(params.resturantId).subscribe(res => {
                 this.resturant = res;
-                console.log(res, this.resturant);
             });
         });
     }

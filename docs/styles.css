@@ -12523,6 +12523,9 @@ td {
   border: 1px solid var(--main-gray-500);
   color: var(--main-gray-600);
 }
+a {
+  cursor: pointer;
+}
 .loader {
   position: fixed;
   top: 0;

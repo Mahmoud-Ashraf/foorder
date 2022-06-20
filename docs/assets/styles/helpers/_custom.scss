@@ -12,6 +12,9 @@
 /* ==================== Generate btns texts bgs alerts coloring classes ==================== */
 @include coloring($colors);
 
+a {
+  cursor: pointer;
+}
 // loader
 .loader {
   position: fixed;

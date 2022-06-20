@@ -60,8 +60,6 @@ export class CollectedOrderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.paramsSub = this.activatedRoute.params.subscribe((params: Params) => {
-      // const collecter = params.collectedOrderId;
-      console.log(params);
       this.getCollectedOrder(params.orderId);
     });
   }
@@ -69,11 +67,9 @@ export class CollectedOrderComponent implements OnInit, OnDestroy {
   getCollectedOrder(collectedOrderId: string) {
     this.getCollectedOrderSub = this.orderService.getCollectedOrder(collectedOrderId).subscribe(collectedOrder => {
       this.collectedOrder = collectedOrder;
-      console.log(this.collectedOrder);
       if (this.collectedOrder.status === 'DONE') {
         this.router.navigate([`admin/orders/order-reciept/${collectedOrderId}`]);
       }
-      // this.getTodayOrders();
     })
   }
 
@@ -84,20 +80,15 @@ export class CollectedOrderComponent implements OnInit, OnDestroy {
       this.updateCollectedOrderSub = this.orderService.updateCollectedOrder(this.collectedOrder._id, this.collectedOrder).subscribe((updatedCollectedOrder: any) => {
         this.router.navigate([`/admin/orders/order-reciept/${updatedCollectedOrder.collectedOrder._id}`]);
         this.getTodayOrdersSub = this.orderService.getTodayOrders(this.collectedOrder.resturantId._id).subscribe((todayOrders: any) => {
-          console.log(this.collectedOrder.users.length);
           todayOrders.orders.forEach((order: any) => {
-            console.log('order when enter', order);
             order.deliveryFees = this.collectedOrder.deliveryFees / this.collectedOrder.users.length;
             order.taxFees = this.calculateValueFromPerc(this.collectedOrder.taxFees, order.totalOrderPrice);
             order.discount = this.calculateValueFromPerc(this.collectedOrder.discount, order.totalOrderPrice);
             order.grandTotal = order.totalOrderPrice + order.deliveryFees + order.taxFees - order.discount;
             order.status = 'DONE';
-            console.log('order before update', order);
             this.updateTodayOrderSub = this.orderService.updateTodayOrder(order._id, order).subscribe((updatedOrder) => {
-              console.log('updated Order', updatedOrder);
               order.userId.wallet -= order.grandTotal;
               this.updateUserSub = this.authService.updateUser(order.userId._id, order.userId).subscribe((updatedUser) => {
-                console.log('updated User', updatedUser);
               })
             })
           });

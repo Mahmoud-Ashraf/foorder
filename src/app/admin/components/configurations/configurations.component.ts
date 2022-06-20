@@ -23,7 +23,6 @@ export class ConfigurationsComponent implements OnInit, OnDestroy {
 
   submitConfig(form: any) {
     this.updateConfigSub = this.helperService.updateConfig(this.config).subscribe((updatedConfig: any) => {
-      console.log('updated Config', updatedConfig);
     });
   }
 

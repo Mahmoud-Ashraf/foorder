@@ -37,7 +37,6 @@ export class ResturantsDetailsComponent implements OnInit, OnDestroy {
       this.currentPage = res.currentPage;
       this.perPage = res.perPage;
       this.totalItems = res.totalItems;
-      console.log('test pagination', this.resturants);
     })
   }
   navigate(id: any) {

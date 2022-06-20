@@ -6,7 +6,6 @@ import { RequestsService } from './requests.service';
   providedIn: 'root'
 })
 export class ResturantsService {
-
   constructor(
     private requests: RequestsService
   ) {
@@ -49,7 +48,6 @@ export class ResturantsService {
   }
   // async getResturantsAsync() {
   //   const response = await this.requests.getApi('resturants').toPromise();
-  //   console.log(response);
   //   return response;
   // }
 

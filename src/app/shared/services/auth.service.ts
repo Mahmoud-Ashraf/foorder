@@ -34,11 +34,9 @@ export class AuthService {
         this.loggedUserListener.next(response.user);
         // this.isAdmin = response.user.isAdmin;
         const expirationDate = new Date(new Date().getTime() + expiresInDuration * 1000);
-        console.log(expirationDate);
         this.saveAuthData(token, expirationDate, loggedUserId);
         this.router.navigate(['/home']);
       }
-      // console.log('response Token', response.token);
       // localStorage.setItem('token', response.token);
     }
     )
@@ -63,25 +61,20 @@ export class AuthService {
         this.loggedUserListener.next(response.user);
         this.isAdmin = response.user.isAdmin;
         const expirationDate = new Date(new Date().getTime() + expiresInDuration * 1000);
-        console.log(expirationDate);
         this.saveAuthData(token, expirationDate, loggedUserId);
         this.router.navigate(['/home']);
       }
-      // console.log('response Token', response.token);
       // localStorage.setItem('token', response.token);
     }
     )
     // .pipe(tap((resData: any) => {
-    //   console.log('data from auth service', resData);
     //   // this.userObs.subscribe(myUser => {
-    //   //   console.log(myUser);
     //   // })
     //   const expirationDate = new Date(new Date().getTime() + + resData.expiresIn * 1000);
     //   const user = new User(resData.user.name, resData.user.email, resData.user._id, resData.token, expirationDate);
     //   this.user.next(user);
     //   // this.isAuthenticated = true;
     //   // this.userObs.subscribe(myUser => {
-    //   //   console.log(myUser);
     //   // })
     // }));
   }
@@ -172,7 +165,6 @@ export class AuthService {
   }
 
   private setAuthTimer(duration: number) {
-    // console.log('setting timer: ' + duration);
     this.tokenTimer = setTimeout(() => {
       this.logout();
     }, duration * 1000);

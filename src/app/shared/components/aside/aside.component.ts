@@ -34,7 +34,6 @@ export class AsideComponent implements OnInit, OnDestroy {
         this.adminOpen = event.url.includes('admin');
       }
     })
-    console.log('adminOpen', this.adminOpen);
     this.userIsAuthenticated = this.authService.getIsAuth();
     this.loggedUser = this.authService.getLoggedUser();
     this.authListenerSubs = this.authService

@@ -37,16 +37,13 @@ export class EditMeuItemComponent implements OnInit, OnDestroy {
   }
 
   updateMenuItem(form: any) {
-    console.log(form);
     this.updateMenuItemSub = this.menuService.updateMenuItem(this.menuItemId, this.menuItem).subscribe(
       res => {
         form.reset();
         this.helperService.goBack();
       },
       err => {
-        console.log(err);
         this.errors = err?.error?.errors;
-        console.log('faild response from component', this.errors);
       },
     );
   }

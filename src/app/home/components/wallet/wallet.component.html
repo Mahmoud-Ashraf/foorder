@@ -1,14 +1,16 @@
 <div class="row justify-content-center">
-    <div class="col-12">
-        <div class="alert text-center" [ngClass]="{'alert-danger': loggedUser?.wallet < 0}">
-            <p *ngIf="loggedUser?.wallet < 0">Adf3 Elly 3leeeeek</p>
-            <p *ngIf="loggedUser?.wallet >= 0">3aaaaaash</p>
-        </div>
-    </div>
     <div class="col-6">
-        <div class="today-order-card">
-            <h3>{{loggedUser?.name}}'s Wallet</h3>
-            <h4 class="h1 text-center" [ngClass]="{'text-danger': loggedUser?.wallet < 0, 'text-success': loggedUser?.wallet >= 0}">{{loggedUser?.wallet | number}}</h4>
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="card-title">{{loggedUser?.name}}'s Wallet</h5>
+            </div>
+            <div class="card-body">
+                <!-- <p class="card-text">{{order?.createdAt | date: 'dd/MM/yyyy | hh:mm'}}</p> -->
+                <p class="card-text text-center fs-1">{{loggedUser?.wallet | number}}</p>
+            </div>
+            <div class="card-footer text-center">
+                <p class="mb-0 fs-5 text-capitalize" [ngClass]="{'text-danger': loggedUser?.wallet < 0, 'text-success': loggedUser?.wallet >= 0}">{{loggedUser?.wallet < 0? 'Adf3 elly 3leeeek el awel': 'A7bk wenta btdf3 awel bawel'}}</p>
+            </div>
         </div>
     </div>
 </div>

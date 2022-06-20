@@ -82,15 +82,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     private resturantsService: ResturantsService
   ) { }
 
-  // events
-  // public chartClicked({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
-  //   console.log(event, active);
-  // }
-
-  // public chartHovered({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
-  //   console.log(event, active);
-  // }
-
   ngOnInit(): void {
     this.loggedUser = this.authService.getLoggedUser();
     this.userListnerSub = this.authService

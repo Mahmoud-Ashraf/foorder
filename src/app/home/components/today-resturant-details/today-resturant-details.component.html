@@ -1,8 +1,13 @@
 <div [ngStyle]="{'pointer-events':disableTodayResturant ? 'none' : 'auto' }">
-  <p class="today-resturant row">
+  <p class="today-resturant row justify-content-between">
     <span class="col-auto resturant-welcome">Restaurant of the Day</span>
-    <span class="col text-center resturant-brand">{{todayResturant?.name}}</span>
+    <span class="col-auto text-center resturant-brand">{{todayResturant?.name}}</span>
   </p>
+  <div class="row justify-content-end">
+    <div class="col-3">
+      <a class="btn btn-info w-100" [href]="todayResturant?.elmenusUrl" target="_blank"><i class="fas fa-external-link-alt"></i> Go To El Menus</a>
+    </div>
+  </div>
   <p class="poll-vote">Add your order to cart before</p>
   <app-count-down [endTime]="orderEndTime"></app-count-down>
 

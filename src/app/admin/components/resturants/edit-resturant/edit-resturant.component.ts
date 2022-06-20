@@ -31,7 +31,6 @@ export class EditResturantComponent implements OnInit, OnDestroy {
     this.paramsSub = this.activatedRoute.params.subscribe((params: Params) => {
       this.resturantId = params.resturantId;
       this.getResturantSub = this.resturantsService.getResturant(this.resturantId).subscribe(res => {
-        console.log(this.resturant);
         this.resturant = res;
       })
     });
@@ -42,16 +41,13 @@ export class EditResturantComponent implements OnInit, OnDestroy {
   }
 
   updateResturant(form: any) {
-    console.log(form);
     this.updateResturantSub = this.resturantsService.updateResturant(this.resturantId, this.resturant).subscribe(
       res => {
         form.reset();
         this.helperService.goBack();
       },
       err => {
-        // console.log('err', err);
         this.errors = err.error.errors;
-        // console.log('faild response from component', this.errors);
       }
     );
   }

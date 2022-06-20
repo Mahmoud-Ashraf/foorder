@@ -20,14 +20,12 @@ export class AddResturantComponent implements OnInit, OnDestroy {
   }
 
   addResturant(form: any) {
-    console.log(form);
     this.addResturantSub = this.resturantsService.addResturant(form.value).subscribe(
       res => {
         form.reset();
       },
       err => {
         this.errors = err.error.errors;
-        console.log('faild response from component', this.errors);
       },
     );
   }

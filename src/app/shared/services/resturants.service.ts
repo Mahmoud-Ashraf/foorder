@@ -48,7 +48,6 @@ export class ResturantsService {
   }
   // async getResturantsAsync() {
   //   const response = await this.requests.getApi('resturants').toPromise();
-  //   console.log(response);
   //   return response;
   // }
 

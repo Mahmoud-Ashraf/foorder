@@ -39,7 +39,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     const loggedUserId = localStorage.getItem('loggedUserId');
     if (loggedUserId) {
       this.getuserOrdersSub = this.orderService.getOrdersPerUser(loggedUserId).subscribe(userOrders => {
-        console.log(userOrders);
         this.orders = userOrders;
       });
     }
@@ -47,7 +46,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   getTodayResturantId() {
     this.getTodayResturantSub = this.resturantsService.getTodayResturant().subscribe(todayResturant => {
       this.todayResturant = todayResturant;
-      console.log(this.todayResturant);
     });
   }
 

@@ -23,16 +23,12 @@ export class AddMenuItemComponent implements OnInit, OnDestroy {
   }
 
   addMenuItem(form: any) {
-    console.log(form);
     this.addMenuSub = this.menuService.addMenuItem(form.value).subscribe(
       res => {
-        console.log(res);
         form.reset();
       },
       err => {
-        console.log(err);
         this.errors = err?.error?.errors;
-        console.log('faild response from component', this.errors);
       },
     );
   }

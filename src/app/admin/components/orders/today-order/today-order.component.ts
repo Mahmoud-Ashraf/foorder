@@ -74,7 +74,6 @@ export class TodayOrderComponent implements OnInit, OnDestroy {
   getTodayOrders() {
     if (this.resturant._id) {
       this.getTodayOrdersSub = this.orderService.getTodayOrders(this.resturant._id).subscribe((todayOrders: any) => {
-        console.log(todayOrders);
         this.orders = todayOrders;
         if (this.orders && this.orders.orders && this.orders.orders.length > 0) {
           this.getCollectedOrderPrice();
@@ -119,7 +118,6 @@ export class TodayOrderComponent implements OnInit, OnDestroy {
   addCollectedOrder() {
     this.collectOrderSub = this.orderService.collectOrder(this.collectedOrder).subscribe(
       (collectedOrder: any) => {
-        console.log(collectedOrder);
         this.router.navigate([`admin/orders/collected-order/${collectedOrder.collectedOrder._id}`]);
       },
       err => {

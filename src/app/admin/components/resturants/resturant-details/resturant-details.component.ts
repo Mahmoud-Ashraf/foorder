@@ -19,7 +19,6 @@ export class ResturantDetailsComponent implements OnInit, OnDestroy {
     this.paramsSub = this.activatedRoute.params.subscribe((params: Params) => {
       this.getResturantSub = this.resturantsService.getResturant(params.resturantId).subscribe(res => {
         this.resturant = res;
-        console.log(res, this.resturant)
       })
     });
   }

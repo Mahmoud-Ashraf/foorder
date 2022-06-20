@@ -30,7 +30,6 @@ export class RegisterComponent implements OnInit {
   }
 
   register(registerForm: NgForm) {
-    console.log(registerForm.value);
     this.authService.register(registerForm.value);
   }
 

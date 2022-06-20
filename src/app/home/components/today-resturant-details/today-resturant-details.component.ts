@@ -34,9 +34,7 @@ export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getTodayResturant();
-    // this.getConfig();
     this.homeService.getDisableResturantDetails().subscribe(disableOrdering => {
-      console.log(disableOrdering);
       this.disableTodayResturant = disableOrdering;
     })
   }

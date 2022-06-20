@@ -12,17 +12,10 @@ export class LoaderService {
   constructor() { }
 
   show(): void {
-    // this.loadersCount += 1;
-    // console.log('loader show', this.loadersCount);
     this.loadingSubject.next(true);
   }
 
   hide(): void {
-    // console.log('loader hide', this.loadersCount);
-    // this.loadersCount -= 1;
-    // console.log('loader hide2', this.loadersCount);
-    // if (this.loadersCount <= 0) {
     this.loadingSubject.next(false);
-    // }
   }
 }

@@ -58,14 +58,11 @@ export class CartComponent implements OnInit, OnDestroy {
     const itemsToAdd = this.order?.items?.map((item: any) => ({ item: { _id: item._id, name: item.name, price: item.price, resturantId: item.resturantId }, count: item.count }))
     let orderToAdd = { ...this.order };
     orderToAdd.items = itemsToAdd;
-    console.log(this.order);
     this.setUserAndResturantToOrder(orderToAdd)
   }
 
   addOrder(orderToAdd: any) {
-    console.log(orderToAdd);
     this.addOrderSub = this.orderService.addOrder(orderToAdd).subscribe(addedOrder => {
-      console.log(addedOrder);
       localStorage.removeItem('order');
       this.order.items = [];
       this.homeService.disableResturantDetails.next(true);
@@ -76,9 +73,7 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   setUserAndResturantToOrder(orderToAdd: any) {
-    console.log(orderToAdd);
     this.getTodayResturantSub = this.resturantsService.getTodayResturant().subscribe(todayResturant => {
-      console.log(todayResturant);
       orderToAdd.resturantId = todayResturant._id;
       this.authService.getLoggedUser();
       orderToAdd.userId = this.authService.getLoggedUser()._id;

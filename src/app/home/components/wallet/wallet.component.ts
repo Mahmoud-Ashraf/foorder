@@ -18,7 +18,6 @@ export class WalletComponent implements OnInit, OnDestroy {
     .getAuthUserListner()
     .subscribe((user: any) => {
       this.loggedUser = user;
-      // console.log('loggedUser: ', this.loggedUser);
     })
   }
 

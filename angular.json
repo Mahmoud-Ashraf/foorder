@@ -22,7 +22,7 @@
           "options": {
             "sourceMap": true,
             "optimization": false,
-            "outputPath": "dist/food-order",
+            "outputPath": "dist/foorder",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",

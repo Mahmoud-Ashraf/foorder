@@ -594,6 +594,7 @@ class AuthService {
                 this.loggedUser = response.user;
                 this.authStatusListener.next(true);
                 this.loggedUserListener.next(response.user);
+                console.log(response.user);
                 this.isAdmin = response.user.isAdmin;
                 const expirationDate = new Date(new Date().getTime() + expiresInDuration * 1000);
                 this.saveAuthData(token, expirationDate, loggedUserId);
@@ -695,6 +696,7 @@ class AuthService {
     setAuthUser(userId) {
         this.requests.getApi(`auth/user/${userId}`).subscribe((user) => {
             this.loggedUser = user;
+            console.log(user);
             this.loggedUserListener.next(user);
             this.isAdmin = user.isAdmin;
         });

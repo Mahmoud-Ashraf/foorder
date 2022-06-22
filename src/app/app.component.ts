@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, AfterContentInit {
-  title = 'food-order';
+  title = 'foorder';
   showAdminBtn = false;
   constructor(
     private authService: AuthService,

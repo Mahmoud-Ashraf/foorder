@@ -8,34 +8,107 @@
         <div class="user-welcome--avatar">
           <span class="user-first-name text-uppercase text-primary">{{generateUserAvatar(loggedUser?.name)}}</span>
         </div>
-        {{loggedUser?.name}}
+        <div class="user-welcome--name">
+          <span class="text-capitalize">{{loggedUser?.name}}</span>
+        </div>
       </a>
     </div>
-    <div class="links">
-      <ul class="links-list" *ngIf="!adminOpen">
-        <li><a (click)="navigate('/home')"><span><img src="assets/styles/images/icons/home.svg"></span>Home</a></li>
-        <li><a (click)="navigate('/home/cart')"><span><img src="assets/styles/images/icons/cart.svg"></span>Cart</a></li>
-        <li><a (click)="navigate('/home/wallet')"><span><img src="assets/styles/images/icons/wallet.svg"></span>Wallet</a></li>
-        <li *ngIf="loggedUser?.isAdmin"><a (click)="navigate('/admin')"><span><img src="assets/styles/images/icons/home.svg"></span>Admin</a></li>
+    <div class="aside-links">
+      <ul class="aside-links-list" *ngIf="!adminOpen">
+        <li class="aside-links-list-item">
+          <a class="aside-links-list-item-link" (click)="navigate('/home')">
+            <span class="aside-links-list-item-link-icon">
+              <img src="assets/styles/images/icons/home.svg">
+            </span>
+            <span class="aside-links-list-item-link-text">Home</span>
+          </a>
+        </li>
+        <li class="aside-links-list-item">
+          <a class="aside-links-list-item-link" (click)="navigate('/home/cart')">
+            <span class="aside-links-list-item-link-icon">
+              <img src="assets/styles/images/icons/cart.svg">
+            </span>
+            <span class="aside-links-list-item-link-text">Cart</span>
+          </a>
+        </li>
+        <li class="aside-links-list-item">
+          <a class="aside-links-list-item-link" (click)="navigate('/home/wallet')">
+            <span class="aside-links-list-item-link-icon">
+              <img src="assets/styles/images/icons/wallet.svg">
+            </span>
+            <span class="aside-links-list-item-link-text">Wallet</span>
+          </a>
+        </li>
+        <li *ngIf="loggedUser?.isAdmin">
+          <a class="aside-links-list-item-link" (click)="navigate('/admin')">
+            <span class="aside-links-list-item-link-icon">
+              <img src="assets/styles/images/icons/admin.svg">
+            </span>
+            <span class="aside-links-list-item-link-text">Admin</span>
+          </a>
+        </li>
       </ul>
-      <ul class="links-list" *ngIf="adminOpen">
-        <li><a (click)="navigate('/admin')"><span><img src="assets/styles/images/icons/home.svg"></span>Home</a></li>
-        <li><a (click)="navigate('/admin/orders')"><span><img src="assets/styles/images/icons/orders.svg"></span>Food
-            Orders</a></li>
-        <li><a (click)="navigate('/admin/resturants')"><span><img
-                src="assets/styles/images/icons/resturants.svg"></span>My
-            Resturants</a></li>
-        <li><a (click)="navigate('/admin/menu')"><span><img src="assets/styles/images/icons/resturants.svg"></span>My
-            Menus</a></li>
-        <li><a (click)="navigate('/admin/users')"><span><img
-                src="assets/styles/images/icons/users.svg"></span>Users</a></li>
-        <li><a (click)="navigate('/admin/config')"><span><img
-                src="assets/styles/images/icons/users.svg"></span>Configurations</a></li>
+      <ul class="aside-links-list" *ngIf="adminOpen">
+        <li class="aside-links-list-item">
+          <a class="aside-links-list-item-link" (click)="navigate('/admin')">
+            <span class="aside-links-list-item-link-icon">
+              <img src="assets/styles/images/icons/home.svg">
+            </span>
+            <span class="aside-links-list-item-link-text">Home</span>
+          </a>
+        </li>
+        <li class="aside-links-list-item">
+          <a class="aside-links-list-item-link" (click)="navigate('/admin/orders')">
+            <span class="aside-links-list-item-link-icon">
+              <img src="assets/styles/images/icons/orders.svg">
+            </span>
+            <span class="aside-links-list-item-link-text">Orders</span>
+          </a>
+        </li>
+        <li class="aside-links-list-item">
+          <a class="aside-links-list-item-link" (click)="navigate('/admin/resturants')">
+            <span class="aside-links-list-item-link-icon">
+              <img src="assets/styles/images/icons/resturants.svg">
+            </span>
+            <span class="aside-links-list-item-link-text">Resturants</span>
+          </a>
+        </li>
+        <li class="aside-links-list-item">
+          <a class="aside-links-list-item-link" (click)="navigate('/admin/menu')">
+            <span class="aside-links-list-item-link-icon">
+              <img src="assets/styles/images/icons/resturants.svg">
+            </span>
+            <span class="aside-links-list-item-link-text">Menus</span>
+          </a>
+        </li>
+        <li class="aside-links-list-item">
+          <a class="aside-links-list-item-link" (click)="navigate('/admin/users')">
+            <span class="aside-links-list-item-link-icon">
+              <img src="assets/styles/images/icons/users.svg">
+            </span>
+            <span class="aside-links-list-item-link-text">Users</span>
+          </a>
+        </li>
+        <li class="aside-links-list-item">
+          <a class="aside-links-list-item-link" (click)="navigate('/admin/config')">
+            <span class="aside-links-list-item-link-icon">
+              <img src="assets/styles/images/icons/config.svg">
+            </span>
+            <span class="aside-links-list-item-link-text">Config</span>
+          </a>
+        </li>
       </ul>
     </div>
-    <div class="links">
-      <ul class="links-list">
-        <li><a (click)="onLogout()"><span><img src="assets/styles/images/icons/logout.svg"></span>Logout</a></li>
+    <div class="aside-links">
+      <ul class="aside-links-list">
+        <li class="aside-links-list-item">
+          <a class="aside-links-list-item-link" (click)="onLogout()">
+            <span class="aside-links-list-item-link-icon">
+              <img src="assets/styles/images/icons/logout.svg">
+            </span>
+            <span class="aside-links-list-item-link-text">Logout</span>
+          </a>
+        </li>
       </ul>
     </div>
   </div>

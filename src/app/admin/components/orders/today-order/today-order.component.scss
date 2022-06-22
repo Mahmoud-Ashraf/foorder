@@ -4,24 +4,6 @@
     border-radius: .5rem;
 }
 
-.user-avatar {
-    background-color: #5D5FEF;
-    border-radius: 50%;
-    height: 150px;
-    width: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-self: center;
-}
-
-.user-avatar span {
-    text-align: center;
-    font-size: 4.1rem;
-    line-height: 1.1em;
-    color: #fff;
-}
-
 .orders-list {
     &-item {
         display: flex;

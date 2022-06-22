@@ -16,11 +16,11 @@
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Vote End Time</label>
                         <div class="col-sm-10">
-                            <div class="input-group mb-3">
+                            <div class="form-group mb-3">
                                 <input type="time" class="form-control" placeholder="Vote End Time" name="voteEndTime"
                                     aria-label="Vote End Time" required #voteEndTime [(ngModel)]="config.voteEndTime"
                                     aria-describedby="editVoteTimeBtn" step="10">
-                                <button class="btn btn-primary px-5" type="button" id="editVoteTimeBtn">Edit</button>
+                                <!-- <button class="btn btn-primary px-5" type="button" id="editVoteTimeBtn">Edit</button> -->
                                 <div class="has-error" *ngIf="errors && errors[getIndex(errors, voteEndTime)]">
                                     {{errors[getIndex(errors, voteEndTime)]?.msg}}
                                 </div>
@@ -28,20 +28,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-12">
-                    <div class="form-group">
-                        <select class="form-select" name="resturantId" placeholder="Select Resturant"
-                            aria-label="Default select example" #resturant ngModel required>
-                            <option value="" disabled selected hidden>Select a Resturant</option>
-                            <option *ngFor="let resturant of resturants" [value]="resturant._id">{{resturant.name}}
-                            </option>
-                        </select>
-                        <div class="has-error" *ngIf="errors && errors[getIndex(errors, resturant)]">
-                            {{errors[getIndex(errors, resturant)]?.msg}}
-                        </div>
-                    </div>
-                </div> -->
-
             </div>
         </div>
         <div class="col-12">
@@ -50,11 +36,11 @@
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Order End Time</label>
                         <div class="col-sm-10">
-                            <div class="input-group mb-3">
+                            <div class="form-group mb-3">
                                 <input type="time" class="form-control" placeholder="Order End Time" name="orderEndTime"
                                     aria-label="Order End Time" required #orderEndTime [(ngModel)]="config.orderEndTime"
                                     aria-describedby="editOrderTimeBtn" step="10">
-                                <button class="btn btn-primary px-5" type="button" id="editOrderTimeBtn">Edit</button>
+                                <!-- <button class="btn btn-primary px-5" type="button" id="editOrderTimeBtn">Edit</button> -->
                                 <div class="has-error" *ngIf="errors && errors[getIndex(errors, orderEndTime)]">
                                     {{errors[getIndex(errors, orderEndTime)]?.msg}}
                                 </div>
@@ -62,22 +48,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-12">
-                    <div class="input-group mb-3">
-                        <label class="form-label">Vote End Time</label>
-                        <input type="text" class="form-control" placeholder="Vote End Time" aria-label="Vote End Time"
-                            required #voteEndTime ngModel aria-describedby="editVoteTimeBtn">
-                        <button class="btn btn-primary px-5" type="button" id="editVoteTimeBtn">Edit</button>
-                        <div class="has-error" *ngIf="errors && errors[getIndex(errors, menuItemName)]">
-                            {{errors[getIndex(errors, menuItemName)]?.msg}}
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
-        <!-- <div class="col-12">
-        <button type="submit" [disabled]="addMenuItemForm.invalid">Add Menu Item</button>
-      </div> -->
     </div>
 
 

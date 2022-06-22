@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-    <div class="col-6">
+    <div class="col-sm-8 col-md-6">
         <div class="card h-100">
             <div class="card-header">
                 <h5 class="card-title">{{loggedUser?.name}}'s Wallet</h5>
@@ -10,6 +10,7 @@
             </div>
             <div class="card-footer text-center">
                 <p class="mb-0 fs-5 text-capitalize" [ngClass]="{'text-danger': loggedUser?.wallet < 0, 'text-success': loggedUser?.wallet >= 0}">{{loggedUser?.wallet < 0? 'Adf3 elly 3leeeek el awel': 'A7bk wenta btdf3 awel bawel'}}</p>
+                <p class="mb-0 fs-5 text-capitalize text-primary">3ayz tdf3? t3laaaaaaly :)</p>
             </div>
         </div>
     </div>

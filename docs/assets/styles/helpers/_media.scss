@@ -1,0 +1,168 @@
+@media screen and (max-width: 1200px) {
+
+    html,
+    body {
+        font-size: 14px;
+    }
+
+    .aside {
+        padding: 2rem;
+    }
+}
+
+@media screen and (max-width: 992px) {
+
+    html,
+    body {
+        font-size: 12px;
+    }
+
+    .user-avatar {
+        height: 120px;
+        width: 120px;
+
+        span {
+            font-size: 4.1rem;
+            line-height: 1.1em;
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+
+    html,
+    body {
+        font-size: 11px;
+    }
+
+    .aside {
+        height: 60px;
+        padding: 1rem;
+
+        .aside-container {
+            flex-direction: row;
+            align-items: center;
+
+            .user {
+                &-welcome {
+                    flex-direction: row;
+
+                    &--avatar {
+                        flex-direction: row;
+                        width: 1.8rem;
+                        height: 1.8rem;
+                        font-size: .8rem;
+                        margin-right: .6rem;
+                        margin-bottom: 0;
+                    }
+                }
+            }
+
+        }
+
+        &-links {
+            flex-direction: row;
+
+            &-list {
+                flex-direction: row;
+
+                &-item {
+                    margin-bottom: 0;
+                    margin-right: 1rem;
+
+                    &-link {
+                        &-icon {
+                            display: none;
+                        }
+                    }
+
+                    &:last-child {
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    app-root {
+        >app-aside {
+            display: block;
+        }
+
+        app-client,
+        app-admin {
+            app-aside {
+                display: none;
+            }
+        }
+    }
+
+    .right-form {
+        padding: 1rem;
+    }
+
+    .user-avatar {
+        height: 100px;
+        width: 100px;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .aside {
+        .aside-container {
+            .user {
+                &-welcome {
+                    &--name {
+                        display: none;
+                    }
+
+
+                }
+            }
+
+        }
+
+        &-links {
+            &-list {
+                &-item {
+                    &-link {
+                        &-icon {
+                            display: inline-flex;
+                            margin-right: 0;
+                        }
+
+                        &-text {
+                            display: none;
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+
+    .poll {
+        .poll {
+            &-timer {
+                width: 70px;
+            }
+
+            &-list {
+                li {
+                    padding: 1.3rem 3rem;
+                }
+            }
+        }
+    }
+
+    .user-avatar {
+        height: 80px;
+        width: 80px;
+
+        span {
+            font-size: 3rem;
+            line-height: 1.1em;
+        }
+    }
+}

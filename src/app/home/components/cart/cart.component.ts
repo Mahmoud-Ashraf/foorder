@@ -75,7 +75,7 @@ export class CartComponent implements OnInit, OnDestroy {
   setUserAndResturantToOrder(orderToAdd: any) {
     this.getTodayResturantSub = this.resturantsService.getTodayResturant().subscribe(todayResturant => {
       orderToAdd.resturantId = todayResturant._id;
-      this.authService.getLoggedUser();
+      // this.authService.getLoggedUser();
       orderToAdd.userId = this.authService.getLoggedUser()._id;
       this.addOrder(orderToAdd);
     });

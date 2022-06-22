@@ -1,4 +1,4 @@
-<div class="poll" [ngStyle]="{'pointer-events':disableTodayResturant ? 'none' : 'auto' }">
+<div class="poll" [ngStyle]="{'pointer-events':userOrdered ? 'none' : 'auto' }">
   <p class="today-resturant row justify-content-between">
     <span class="col-auto resturant-welcome">Restaurant of the Day</span>
     <span class="col-auto text-center resturant-brand">{{todayResturant?.name}}</span>
@@ -8,7 +8,8 @@
       <a class="btn btn-info w-100" [href]="todayResturant?.elmenusUrl" target="_blank"><i class="fas fa-external-link-alt"></i> Go To El Menus</a>
     </div>
   </div>
-  <p class="poll-vote">Add your order to cart before</p>
+  <p class="poll-vote text-capitalize" *ngIf="!userOrdered">Al72 Naf3na w Atlob El Order !!</p>
+  <p class="poll-vote text-capitalize" *ngIf="userOrdered">t3ala bokra b2a 3shan ttlob tany :)</p>
   <app-count-down [endTime]="orderEndTime"></app-count-down>
 
   <table class="menu-table">

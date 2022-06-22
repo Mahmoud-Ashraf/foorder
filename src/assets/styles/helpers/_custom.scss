@@ -15,6 +15,7 @@
 a {
   cursor: pointer;
 }
+
 // loader
 .loader {
   position: fixed;
@@ -47,7 +48,7 @@ a {
 }
 
 .right-form {
-  padding: 50px;
+  padding: 3.125rem;
   display: flex;
   align-items: center;
 
@@ -107,7 +108,7 @@ a {
   // justify-content: center;
   background-color: $main-color;
   // justify-content: space-between;
-  padding: 3rem;
+  padding: 2.5rem;
   // align-items: center;
   color: $light-color;
   position: sticky;
@@ -134,8 +135,8 @@ a {
           background-color: $light-color;
           border-radius: 50%;
           color: $main-color;
-          width: 200px;
-          height: 200px;
+          width: 10rem;
+          height: 10rem;
           font-size: 5.36rem;
           line-height: 1.1em;
           display: flex;
@@ -147,57 +148,53 @@ a {
       }
     }
 
-    .links {
+  }
+  &-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &-list {
+      list-style: none;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      align-items: flex-start;
+      margin: 0;
+      padding-left: 0;
 
-      &-list {
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        margin: 0;
-        padding-left: 0;
-
-        li {
+      &-item {
+        margin-bottom: 2rem;
+        &-link {
           // margin-inline-end: 1rem;
           cursor: pointer;
-          margin-bottom: 2rem;
           max-width: 12rem;
-
-          &:last-child {
-            margin-bottom: 0;
-          }
-
-          a {
-            font-size: 1.25rem;
-            line-height: 1em;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-          }
-
-          span {
+          font-size: 1.25rem;
+          line-height: 1em;
+          font-weight: 600;
+          display: inline-flex;
+          align-items: center;
+          color: #fff;
+          text-decoration: none;  
+          &-icon {
             display: inline-flex;
             width: 24px;
             height: 24px;
             align-items: center;
             justify-content: center;
             margin-right: 1rem;
-            // i,img {
-            //   display: inline-flex;
-            //   justify-content: center;
-            //   align-items: center;
-            // }
           }
         }
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
+    }
 
-      &:last-child {
-        .links-list {
-          li {
-            a {
+    &:last-child {
+      .links-list {
+        &-link {
+          &-item {
+            &-text {
               font-weight: 400;
             }
           }
@@ -209,70 +206,72 @@ a {
 
 // Poll
 .poll {
-  &-vote {
-    font-size: 2.57rem;
-    line-height: 3.35rem;
-    font-weight: 600;
-  }
-
-  &-timer {
-    background-color: rgba(242, 242, 242, 0.8);
-    border-radius: 8px;
-    padding: 0.5rem;
-    color: $main-color;
-    font-size: 2.57rem;
-    line-height: 3.35rem;
-    margin-inline-end: 1rem;
-    width: 100px;
-    display: inline-block;
-    border: 1px solid var(--main-500);
-    font-weight: 600;
-
-    &:last-child {
-      margin-inline-end: 0;
-    }
-  }
-
-  &-list {
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    padding: 0;
-
-    li {
-      padding: 1.3rem 7.85rem;
+  .poll {
+    &-vote {
       font-size: 2rem;
-      line-height: 3rem;
-      background-color: $light-gray;
-      border-radius: 0.5rem;
-      border: 1px solid darken($light-gray, 4);
-      margin-bottom: 0.7rem;
-      cursor: pointer;
-      color: $dark-color;
-      transition: all 0.3s ease-in-out;
-      display: flex;
-      justify-content: space-between;
+      line-height: 1.1em;
+      font-weight: 600;
+    }
+
+    &-timer {
+      background-color: rgba(242, 242, 242, 0.8);
+      border-radius: 8px;
+      padding: 0.5rem;
+      color: $main-color;
+      font-size: 2rem;
+      line-height: 1.1em;
+      margin-inline-end: 1rem;
+      width: 100px;
+      display: inline-block;
+      border: 1px solid var(--main-500);
+      font-weight: 600;
 
       &:last-child {
-        margin-bottom: 0;
-      }
-
-      &:hover {
-        background-color: lighten($light-gray, 1.5);
-        border-color: $main-color;
-      }
-
-      &.poll-selected {
-        background-color: $main-secondary-color;
-        // color: $light-color;
+        margin-inline-end: 0;
       }
     }
-  }
 
-  &-submit {
-    height: 80px;
-    font-size: 2rem;
-    line-height: 3rem;
+    &-list {
+      display: flex;
+      flex-direction: column;
+      list-style: none;
+      padding: 0;
+
+      li {
+        padding: 1.3rem 7.85rem;
+        font-size: 2rem;
+        line-height: 3rem;
+        background-color: $light-gray;
+        border-radius: 0.5rem;
+        border: 1px solid darken($light-gray, 4);
+        margin-bottom: 0.7rem;
+        cursor: pointer;
+        color: $dark-color;
+        transition: all 0.3s ease-in-out;
+        display: flex;
+        justify-content: space-between;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        &:hover {
+          background-color: lighten($light-gray, 1.5);
+          border-color: $main-color;
+        }
+
+        &.poll-selected {
+          background-color: $main-secondary-color;
+          // color: $light-color;
+        }
+      }
+    }
+
+    &-submit {
+      height: 3.5rem;
+      font-size: 1.5rem;
+      line-height: 1.1em;
+    }
   }
 }
 
@@ -337,7 +336,7 @@ a {
 }
 
 .wallet-amount {
-  font-size: 18px;
+  // font-size: 18px;
   font-weight: 600;
   color: #27AE60;
 }
@@ -372,4 +371,27 @@ li {
   padding: 33px 20px;
   border-radius: 5px;
   color: #fff;
+}
+
+app-root {
+  > app-aside {
+    display: none;
+  }
+}
+
+.user-avatar {
+  background-color: #5D5FEF;
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  span {
+    text-align: center;
+    font-size: 4.1rem;
+    line-height: 1.1em;
+    color: #fff;
+  }
 }

@@ -4,7 +4,7 @@
     </div>
 </div>
 <div class="row g-3" *ngIf="orders?.length > 0 else noOrdersFound">
-    <div class="col-4" *ngFor="let order of orders">
+    <div class="col-sm-6 col-md-4" *ngFor="let order of orders">
         <div class="card h-100">
             <div class="card-header">
                 <h5 class="card-title">{{order?.resturantId?.name}}</h5>

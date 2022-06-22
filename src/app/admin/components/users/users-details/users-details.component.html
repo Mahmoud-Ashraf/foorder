@@ -30,7 +30,7 @@
                             <td class="wallet-amount text-center" [class.wallet-amount-minus]="user?.wallet < 0">
                                 {{(user?.wallet? user?.wallet : 0) | number}} EGP</td>
                             <td class="text-center">
-                                <button class="btn btn-primary btn-pay me-2" (click)="openPayModal(adminPayModal)">
+                                <button class="btn btn-primary btn-sm btn-pay me-2" (click)="openPayModal(adminPayModal)">
                                     Pay
                                 </button>
                                 <ng-template #adminPayModal let-modal>
@@ -50,7 +50,7 @@
                                             (click)="modal.close(user)">Save</button>
                                     </div>
                                 </ng-template> 
-                                <button class="btn btn-outline-danger btn-remove-admin" (click)="removeFromAdmin(removeAdminModal)">
+                                <button class="btn btn-outline-danger btn-sm btn-remove-admin" (click)="removeFromAdmin(removeAdminModal)">
                                     Remove admin
                                 </button>
                                 <ng-template #removeAdminModal let-modal>
@@ -100,7 +100,7 @@
                             <td class="text-center wallet-amount" [class.wallet-amount-minus]="user?.wallet < 0">
                                 {{(user?.wallet? user?.wallet : 0) | number}} EGP</td>
                             <td class="text-center">
-                                <button class="btn btn-primary btn-pay me-2" (click)="openPayModal(userPayModal)">
+                                <button class="btn btn-primary btn-sm btn-pay me-2" (click)="openPayModal(userPayModal)">
                                     Pay
                                 </button>
                                 <ng-template #userPayModal let-modal>
@@ -120,7 +120,7 @@
                                             (click)="modal.close(user)">Save</button>
                                     </div>
                                 </ng-template> 
-                                <button class="btn btn-outline-info btn-make-admin" (click)="addToAdmin(addAdminModal)">
+                                <button class="btn btn-outline-info btn-sm btn-make-admin" (click)="addToAdmin(addAdminModal)">
                                     Make admin
                                 </button>
                                 <ng-template #addAdminModal let-modal>

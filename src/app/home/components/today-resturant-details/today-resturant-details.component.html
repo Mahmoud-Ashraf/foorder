@@ -1,10 +1,10 @@
-<div [ngStyle]="{'pointer-events':disableTodayResturant ? 'none' : 'auto' }">
+<div class="poll" [ngStyle]="{'pointer-events':disableTodayResturant ? 'none' : 'auto' }">
   <p class="today-resturant row justify-content-between">
     <span class="col-auto resturant-welcome">Restaurant of the Day</span>
     <span class="col-auto text-center resturant-brand">{{todayResturant?.name}}</span>
   </p>
-  <div class="row justify-content-end">
-    <div class="col-3">
+  <div class="row justify-content-end mb-3">
+    <div class="col-sm-4">
       <a class="btn btn-info w-100" [href]="todayResturant?.elmenusUrl" target="_blank"><i class="fas fa-external-link-alt"></i> Go To El Menus</a>
     </div>
   </div>
@@ -15,7 +15,7 @@
     <tr class="menu-table-head">
       <!-- <th>#</th> -->
       <th class="text-start">Product Name</th>
-      <th>Price</th>
+      <th style="min-width: 60px;">Price</th>
       <th>Add To Cart</th>
     </tr>
       <tr class="menu-table-items" *ngFor="let menuItem of todayResturantMenu; let i = index">

@@ -5,6 +5,7 @@ import { HomeService } from './../../services/home.service';
 import { MenuService } from './../../../shared/services/menu.service';
 import { ResturantsService } from 'src/app/shared/services/resturants.service';
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-today-resturant-details',
@@ -24,15 +25,20 @@ export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
   @Input() orderEndTime: string;
   getMenuSub: Subscription;
   getTodayResturantSub: Subscription;
+  getUserSub: Subscription;
+  currentUser: any;
+  userOrdered: boolean;
   constructor(
     private resturantsService: ResturantsService,
     private menuService: MenuService,
     private homeService: HomeService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
   ) {
   }
 
   ngOnInit(): void {
+    this.getUser();
     this.getTodayResturant();
     this.homeService.getDisableResturantDetails().subscribe(disableOrdering => {
       this.disableTodayResturant = disableOrdering;
@@ -100,5 +106,22 @@ export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
     this.getTodayOrder();
   }
 
+  getUser() {
+    this.currentUser = this.authService.getLoggedUser();
+    this.checkUserOrdered();
+    this.getUserSub = this.authService.getAuthUserListner().subscribe((user: any) => {
+      this.currentUser = user;
+      this.checkUserOrdered();
+    })
+  }
+
+  checkUserOrdered() {
+    this.userOrdered = this.currentUser.orders.some((order: any) => {
+      console.log('order', order);
+      console.log('order Created On', new Date(order.createdOn).getDate());
+      console.log('to day date', new Date().getDate());
+      return new Date(order.createdOn).getDate() === new Date().getDate();
+    });
+  }
 
 }

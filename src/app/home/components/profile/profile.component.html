@@ -16,7 +16,7 @@
             </div>
             <div class="card-footer">
                 <p class="badge border border-primary m-0 d-block fs-6 fw-normal py-2 text-primary">Total Order Price: {{order?.totalOrderPrice}}</p>
-                <button *ngIf="order?.resturantId?._id === todayResturant?._id"
+                <button *ngIf="(order?.resturantId?._id === todayResturant?._id) && checkForOrderingStart(pollEndTime) && !userOrdered"
                     class="btn btn-primary w-100 mt-2" (click)="reorder(order)">Reorder</button>
             </div>
         </div>

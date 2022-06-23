@@ -4,6 +4,8 @@ import { AuthService } from '../../../shared/services/auth.service';
 import { OrderService } from '../../../shared/services/order.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { HomeService } from '../../services/home.service';
+import { HelperService } from 'src/app/shared/services/helper.service';
 
 @Component({
   selector: 'app-profile',
@@ -17,11 +19,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private getTodayResturantSub: Subscription;
   loggedUser: any;
   todayResturant: any;
+  getConfigSub: Subscription;
+  pollEndTime: string;
+  userOrdered: boolean;
   constructor(
     private orderService: OrderService,
     private authService: AuthService,
     private resturantsService: ResturantsService,
-    private router: Router
+    private router: Router,
+    private homeService: HomeService,
+    private helperService: HelperService,
   ) { }
 
   ngOnInit(): void {
@@ -30,9 +37,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .getAuthUserListner()
       .subscribe((user: any) => {
         this.loggedUser = user;
+        console.log(user.orders);
       })
     this.getuserOrders();
     this.getTodayResturantId();
+    this.getConfig();
   }
 
   getuserOrders() {
@@ -40,6 +49,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     if (loggedUserId) {
       this.getuserOrdersSub = this.orderService.getOrdersPerUser(loggedUserId).subscribe(userOrders => {
         this.orders = userOrders;
+        console.log(this.orders);
       });
     }
   }
@@ -53,29 +63,48 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.userListnerSub?.unsubscribe();
     this.getuserOrdersSub?.unsubscribe();
     this.getTodayResturantSub?.unsubscribe();
+    this.getConfigSub?.unsubscribe();
   }
 
   reorder(order: any) {
-    delete order._id;
-    delete order.deliveryFees;
-    delete order.taxFees;
-    delete order.discount;
-    delete order.grandTotal;
-    delete order.status;
-    delete order.createdOn;
-    order.userId = '';
-    order.resturantId = '';
-    order.totalOrderPrice = 0;
-    const itemsToAdd = order?.items?.map((item: any) => ({
-      _id: item.item._id,
-      name: item.item.name,
-      price: item.item.price,
-      resturantId: item.item.resturantId,
-      count: item.count
-    }));
-    order.items = itemsToAdd;
-    localStorage.setItem('order', JSON.stringify(order));
-    this.router.navigate(['/home/cart']);
+    if(this.checkForOrderingStart(this.pollEndTime) && !this.userOrdered && order?.resturantId?._id === this.todayResturant?._id) {
+      delete order._id;
+      delete order.deliveryFees;
+      delete order.taxFees;
+      delete order.discount;
+      delete order.grandTotal;
+      delete order.status;
+      delete order.createdOn;
+      order.userId = '';
+      order.resturantId = '';
+      order.totalOrderPrice = 0;
+      const itemsToAdd = order?.items?.map((item: any) => ({
+        _id: item.item._id,
+        name: item.item.name,
+        price: item.item.price,
+        resturantId: item.item.resturantId,
+        count: item.count
+      }));
+      order.items = itemsToAdd;
+      localStorage.setItem('order', JSON.stringify(order));
+      this.router.navigate(['/home/cart']);
+    }
+  }
+
+  checkForOrderingStart(pollEndTime: string) {
+    return this.homeService.calcDateDiffInMs(pollEndTime) < 0;
+  }
+
+  getConfig() {
+    this.getConfigSub = this.helperService.getConfig().subscribe((config: any) => {
+      this.pollEndTime = config.config[0].voteEndTime;
+    })
+  }
+
+  checkUserOrdered() {
+    this.userOrdered = this.loggedUser.orders.some((order: any) => {
+      return new Date(order.createdOn).getDate() === new Date().getDate();
+    });
   }
 
 }

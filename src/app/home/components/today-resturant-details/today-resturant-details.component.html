@@ -1,4 +1,4 @@
-<div class="poll" [ngStyle]="{'pointer-events':userOrdered ? 'none' : 'auto' }">
+<div class="poll">
   <p class="today-resturant row justify-content-between">
     <span class="col-auto resturant-welcome">Restaurant of the Day</span>
     <span class="col-auto text-center resturant-brand">{{todayResturant?.name}}</span>
@@ -12,37 +12,39 @@
   <p class="poll-vote text-capitalize" *ngIf="userOrdered">t3ala bokra b2a 3shan ttlob tany :)</p>
   <app-count-down [endTime]="orderEndTime"></app-count-down>
 
-  <table class="menu-table">
-    <tr class="menu-table-head">
-      <!-- <th>#</th> -->
-      <th class="text-start">Product Name</th>
-      <th style="min-width: 60px;">Price</th>
-      <th>Add To Cart</th>
-    </tr>
-      <tr class="menu-table-items" *ngFor="let menuItem of todayResturantMenu; let i = index">
-        <!-- <td>{{i+1}}</td> -->
-        <td class="text-start"><span>{{menuItem?.name}}</span><br><span class="text-muted fs-6">{{menuItem?.ingredients}}</span></td>
-        <td class="menu-table-items-price">
-          {{menuItem?.price}}
-          <span class="menu-table-items-price-unit">EGP</span>
-        </td>
-        <td>
-          <button *ngIf="menuItem?.count > 1" class="btn btn-info btn-sm"
-            (click)="decreseOrderCount(menuItem)">-</button>
-          <i *ngIf="menuItem.count == 0" class="fas text-main fa-shopping-cart"
-            (click)="increaseOrderCount(menuItem)"></i>
-          <i *ngIf="menuItem.count == 1" class="fas text-main-danger fa-trash"
-            (click)="decreseOrderCount(menuItem)"></i>
-          <span *ngIf="menuItem?.count > 0" class="cart-count">{{menuItem?.count}}</span>
-          <button *ngIf="menuItem?.count > 0 && menuItem?.count < 4" class="btn btn-info btn-sm"
-            (click)="increaseOrderCount(menuItem)">+</button>
-        </td>
+  <div [ngStyle]="{'pointer-events':userOrdered ? 'none' : 'auto' }">
+    <table class="menu-table">
+      <tr class="menu-table-head">
+        <!-- <th>#</th> -->
+        <th class="text-start">Product Name</th>
+        <th style="min-width: 60px;">Price</th>
+        <th>Add To Cart</th>
       </tr>
-  </table>
-
-  <div class="row justify-content-end">
-    <div class="col-md-4">
-      <button class="btn btn-primary w-100" [disabled]="order.items.length <= 0" (click)="addOrderToCart()">Checkout</button>
+        <tr class="menu-table-items" *ngFor="let menuItem of todayResturantMenu; let i = index">
+          <!-- <td>{{i+1}}</td> -->
+          <td class="text-start"><span>{{menuItem?.name}}</span><br><span class="text-muted fs-6">{{menuItem?.ingredients}}</span></td>
+          <td class="menu-table-items-price">
+            {{menuItem?.price}}
+            <span class="menu-table-items-price-unit">EGP</span>
+          </td>
+          <td>
+            <button *ngIf="menuItem?.count > 1" class="btn btn-info btn-sm"
+              (click)="decreseOrderCount(menuItem)">-</button>
+            <i *ngIf="menuItem.count == 0" class="fas text-main fa-shopping-cart"
+              (click)="increaseOrderCount(menuItem)"></i>
+            <i *ngIf="menuItem.count == 1" class="fas text-main-danger fa-trash"
+              (click)="decreseOrderCount(menuItem)"></i>
+            <span *ngIf="menuItem?.count > 0" class="cart-count">{{menuItem?.count}}</span>
+            <button *ngIf="menuItem?.count > 0 && menuItem?.count < 4" class="btn btn-info btn-sm"
+              (click)="increaseOrderCount(menuItem)">+</button>
+          </td>
+        </tr>
+    </table>
+  
+    <div class="row justify-content-end">
+      <div class="col-md-4">
+        <button class="btn btn-primary w-100" [disabled]="order.items.length <= 0" (click)="addOrderToCart()">Checkout</button>
+      </div>
     </div>
   </div>
 </div>

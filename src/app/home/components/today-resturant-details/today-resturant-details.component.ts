@@ -116,7 +116,7 @@ export class TodayResturantDetailsComponent implements OnInit, OnDestroy {
   }
 
   checkUserOrdered() {
-    this.userOrdered = this.currentUser.orders.some((order: any) => {
+    this.userOrdered = this.currentUser?.orders.some((order: any) => {
       return new Date(order.createdOn).getDate() === new Date().getDate();
     });
   }

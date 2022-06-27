@@ -39,7 +39,7 @@
         </div>
     </div>
 
-    <div class="col-12" *ngFor="let order of ordersHistory;">
+    <div class="col-12" *ngFor="let order of ordersHistory?.reverse()">
         <div class="history-order-card my-2" [routerLink]="'/admin/orders/order-reciept/' + order._id">
             <div class="row">
                 <div class="col-6">

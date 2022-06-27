@@ -118,13 +118,14 @@ export class TodayOrderComponent implements OnInit, OnDestroy {
   addCollectedOrder() {
     this.collectOrderSub = this.orderService.collectOrder(this.collectedOrder).subscribe(
       (collectedOrder: any) => {
+        // this.uodateConfigSub = this.helperService.updateConfig(new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds()).subscribe()
         this.router.navigate([`admin/orders/collected-order/${collectedOrder.collectedOrder._id}`]);
       },
       err => {
         console.log(err);
       })
   }
-  generateUserAvatar(userName: string) {
+  generateUserAvatar(userName: string) { 
     return this.helperService.generateUserAvatar(userName);
   }
 

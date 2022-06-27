@@ -37,7 +37,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .getAuthUserListner()
       .subscribe((user: any) => {
         this.loggedUser = user;
-        console.log(user.orders);
       })
     this.getuserOrders();
     this.getTodayResturantId();
@@ -49,6 +48,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     if (loggedUserId) {
       this.getuserOrdersSub = this.orderService.getOrdersPerUser(loggedUserId).subscribe(userOrders => {
         this.orders = userOrders;
+        this.checkUserOrdered();
         console.log(this.orders);
       });
     }
@@ -102,9 +102,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   checkUserOrdered() {
-    this.userOrdered = this.loggedUser.orders.some((order: any) => {
+    this.userOrdered = this.orders.some((order: any) => {
       return new Date(order.createdOn).getDate() === new Date().getDate();
     });
+    console.log(this.userOrdered);
   }
 
 }

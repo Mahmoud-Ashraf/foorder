@@ -18,8 +18,10 @@ export class CollectedOrderComponent implements OnInit, OnDestroy {
   getCollectedOrderSub: Subscription
   updateCollectedOrderSub: Subscription
   getTodayOrdersSub: Subscription
-  updateTodayOrderSub: Subscription
-  updateUserSub: Subscription
+  getTodayOrdersGenerateSub: Subscription
+  // updateTodayOrderSub: Subscription
+  // updateTodayOrderGenerateSub: Subscription
+  // updateUserSub: Subscription
   updateCollectedOrderStatusSub: Subscription
   collectedOrder: {
     _id: string,
@@ -78,21 +80,23 @@ export class CollectedOrderComponent implements OnInit, OnDestroy {
       this.collectedOrder.status = 'DONE';
       this.collectedOrder.total = this.collectedOrder.subtotalOrderPrice + this.calculateValueFromPerc(this.collectedOrder.taxFees, this.collectedOrder.subtotalOrderPrice) + this.collectedOrder.deliveryFees - this.calculateValueFromPerc(this.collectedOrder.discount, this.collectedOrder.subtotalOrderPrice);
       this.updateCollectedOrderSub = this.orderService.updateCollectedOrder(this.collectedOrder._id, this.collectedOrder).subscribe((updatedCollectedOrder: any) => {
-        this.router.navigate([`/admin/orders/order-reciept/${updatedCollectedOrder.collectedOrder._id}`]);
-        this.getTodayOrdersSub = this.orderService.getTodayOrders(this.collectedOrder.resturantId._id).subscribe((todayOrders: any) => {
+        this.orderService.getTodayOrders(this.collectedOrder.resturantId._id).subscribe((todayOrders: any) => {
           todayOrders.orders.forEach((order: any) => {
             order.deliveryFees = this.collectedOrder.deliveryFees / this.collectedOrder.users.length;
             order.taxFees = this.calculateValueFromPerc(this.collectedOrder.taxFees, order.totalOrderPrice);
             order.discount = this.calculateValueFromPerc(this.collectedOrder.discount, order.totalOrderPrice);
             order.grandTotal = order.totalOrderPrice + order.deliveryFees + order.taxFees - order.discount;
             order.status = 'DONE';
-            this.updateTodayOrderSub = this.orderService.updateTodayOrder(order._id, order).subscribe((updatedOrder) => {
+            this.orderService.updateTodayOrder(order._id, order).subscribe((updatedOrder) => {
               order.userId.wallet -= order.grandTotal;
-              this.updateUserSub = this.authService.updateUser(order.userId._id, order.userId).subscribe((updatedUser) => {
+              this.authService.updateUser(order.userId._id, order.userId).subscribe((updatedUser) => {
               })
             })
           });
+        }, (err)=> {
+          console.log(err);
         })
+        this.router.navigate([`/admin/orders/order-reciept/${updatedCollectedOrder.collectedOrder._id}`]);
       });
     }
   }
@@ -100,6 +104,24 @@ export class CollectedOrderComponent implements OnInit, OnDestroy {
     this.collectedOrder.status = status;
     this.updateCollectedOrderStatusSub = this.orderService.updateCollectedOrder(this.collectedOrder._id, this.collectedOrder).subscribe((updatedOrder: any) => {
       console.log(updatedOrder);
+      this.orderService.getTodayOrders(this.collectedOrder.resturantId._id).subscribe((todayOrders: any) => {
+        todayOrders.orders.forEach((order: any) => {
+          // order.deliveryFees = this.collectedOrder.deliveryFees / this.collectedOrder.users.length;
+          // order.taxFees = this.calculateValueFromPerc(this.collectedOrder.taxFees, order.totalOrderPrice);
+          // order.discount = this.calculateValueFromPerc(this.collectedOrder.discount, order.totalOrderPrice);
+          // order.grandTotal = order.totalOrderPrice + order.deliveryFees + order.taxFees - order.discount;
+          order.status = 'ORDERED';
+          this.orderService.updateTodayOrder(order._id, order).subscribe((updatedOrder) => {
+            console.log('updated Orderrrr', updatedOrder);
+            // order.userId.wallet -= order.grandTotal;
+            // this.updateUserSub = this.authService.updateUser(order.userId._id, order.userId).subscribe((updatedUser) => {
+            // })
+          })
+        });
+      }, (err)=> {
+        console.log(err);
+      })
+      // this.updateUserOrderSub = this.orderService.updateOrder()
     });
   }
 
@@ -112,8 +134,10 @@ export class CollectedOrderComponent implements OnInit, OnDestroy {
     this.getCollectedOrderSub?.unsubscribe();
     this.updateCollectedOrderSub?.unsubscribe();
     this.getTodayOrdersSub?.unsubscribe();
-    this.updateTodayOrderSub?.unsubscribe();
-    this.updateUserSub?.unsubscribe();
+    this.getTodayOrdersGenerateSub?.unsubscribe();
+    // this.updateTodayOrderSub?.unsubscribe();
+    // this.updateTodayOrderGenerateSub?.unsubscribe();
+    // this.updateUserSub?.unsubscribe();
     this.updateCollectedOrderStatusSub?.unsubscribe();
   }
 }

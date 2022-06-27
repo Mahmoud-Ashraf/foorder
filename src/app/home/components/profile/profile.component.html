@@ -6,16 +6,19 @@
 <div class="row g-3" *ngIf="orders?.length > 0 else noOrdersFound">
     <div class="col-sm-6 col-md-4" *ngFor="let order of orders.reverse()">
         <div class="card h-100">
-            <div class="card-header">
-                <h5 class="card-title">{{order?.resturantId?.name}}</h5>
-                <h6 class="card-subtitle text-muted">{{order.createdOn | date: 'EEEE, d MMMM, y'}}</h6>
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="card-title">{{order?.resturantId?.name}}</h5>
+                    <h6 class="card-subtitle text-muted">{{order.createdOn | date: 'EEEE, d MMMM, y'}}</h6>
+                </div>
+                <h6 [ngClass]="{'text-main': order.status === 'DONE', 'text-success': order.status === 'ORDERED', 'text-warning': order.status === 'PENDING'}">{{order?.status}}</h6>
             </div>
             <div class="card-body">
                 <!-- <p class="card-text">{{order?.createdAt | date: 'dd/MM/yyyy | hh:mm'}}</p> -->
                 <p class="card-text" *ngFor="let item of order?.items">{{item?.count}}× {{item?.item?.name}}</p>
             </div>
             <div class="card-footer">
-                <p class="badge border border-primary m-0 d-block fs-6 fw-normal py-2 text-primary">Total Order Price: {{order?.totalOrderPrice}}</p>
+                <p class="badge border border-primary m-0 d-block fs-6 fw-normal py-2 text-primary">Total Order Price: {{order?.grandTotal}}</p>
                 <button *ngIf="(order?.resturantId?._id === todayResturant?._id) && checkForOrderingStart(pollEndTime) && !userOrdered"
                     class="btn btn-primary w-100 mt-2" (click)="reorder(order)">Reorder</button>
             </div>

@@ -41,11 +41,11 @@ class OrderService {
         // .catch(err => console.log(err));
     }
     getOrder(id) {
-        return this.requests.getApi(`resturant/${id}`);
+        return this.requests.getApi(`order/${id}`);
     }
-    // updateResturant(id: any, resturant: any) {
-    //   return this.requests.putApi(`resturant/${id}`, resturant);
-    // }
+    updateOrder(id, order) {
+        return this.requests.putApi(`order/${id}`, order);
+    }
     addOrder(order) {
         return this.requests.postApi('order', order);
     }

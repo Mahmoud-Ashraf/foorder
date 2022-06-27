@@ -494,10 +494,8 @@ class TodayResturantDetailsComponent {
         });
     }
     checkUserOrdered() {
-        this.userOrdered = this.currentUser.orders.some((order) => {
-            console.log('order', order);
-            console.log('order Created On', new Date(order.createdOn).getDate());
-            console.log('to day date', new Date().getDate());
+        var _a;
+        this.userOrdered = (_a = this.currentUser) === null || _a === void 0 ? void 0 : _a.orders.some((order) => {
             return new Date(order.createdOn).getDate() === new Date().getDate();
         });
     }
@@ -1008,8 +1006,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../shared/services/auth.service */ "IYfF");
 /* harmony import */ var _shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../../shared/services/resturants.service */ "/kEZ");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ "ofXK");
-/* harmony import */ var _shared_components_no_data_found_no_data_found_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../shared/components/no-data-found/no-data-found.component */ "E9u9");
+/* harmony import */ var _services_home_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/home.service */ "jfpu");
+/* harmony import */ var src_app_shared_services_helper_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/shared/services/helper.service */ "sIil");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _shared_components_no_data_found_no_data_found_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../shared/components/no-data-found/no-data-found.component */ "E9u9");
 
 
 
@@ -1017,8 +1017,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function ProfileComponent_div_4_div_1_p_9_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p", 16);
+
+
+function ProfileComponent_div_4_div_1_p_12_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p", 17);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
@@ -1026,53 +1028,63 @@ function ProfileComponent_div_4_div_1_p_9_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate2"]("", item_r7 == null ? null : item_r7.count, "\u00D7 ", item_r7 == null ? null : item_r7.item == null ? null : item_r7.item.name, "");
 } }
-function ProfileComponent_div_4_div_1_button_13_Template(rf, ctx) { if (rf & 1) {
+function ProfileComponent_div_4_div_1_button_16_Template(rf, ctx) { if (rf & 1) {
     const _r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 17);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ProfileComponent_div_4_div_1_button_13_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r10); const order_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit; const ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r8.reorder(order_r4); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 18);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ProfileComponent_div_4_div_1_button_16_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r10); const order_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit; const ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r8.reorder(order_r4); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Reorder");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
+const _c0 = function (a0, a1, a2) { return { "text-main": a0, "text-success": a1, "text-warning": a2 }; };
 function ProfileComponent_div_4_div_1_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 6);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 7);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 8);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "h5", 9);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "div");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "h5", 9);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "h6", 10);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](7, "date");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "h6", 10);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](7);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](8, "date");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "div", 11);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](9, ProfileComponent_div_4_div_1_p_9_Template, 2, 2, "p", 12);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "h6", 11);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](10);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "div", 13);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "p", 14);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](13, ProfileComponent_div_4_div_1_button_13_Template, 2, 0, "button", 15);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "div", 12);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](12, ProfileComponent_div_4_div_1_p_12_Template, 2, 2, "p", 13);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "div", 14);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "p", 15);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](15);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](16, ProfileComponent_div_4_div_1_button_16_Template, 2, 0, "button", 16);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const order_r4 = ctx.$implicit;
     const ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](order_r4 == null ? null : order_r4.resturantId == null ? null : order_r4.resturantId.name);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](7, 5, order_r4.createdOn, "EEEE, d MMMM, y"));
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](8, 7, order_r4.createdOn, "EEEE, d MMMM, y"));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction3"](10, _c0, order_r4.status === "DONE", order_r4.status === "ORDERED", order_r4.status === "PENDING"));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](order_r4 == null ? null : order_r4.status);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", order_r4 == null ? null : order_r4.items);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("Total Order Price: ", order_r4 == null ? null : order_r4.totalOrderPrice, "");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("Total Order Price: ", order_r4 == null ? null : order_r4.grandTotal, "");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (order_r4 == null ? null : order_r4.resturantId == null ? null : order_r4.resturantId._id) === (ctx_r3.todayResturant == null ? null : ctx_r3.todayResturant._id));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (order_r4 == null ? null : order_r4.resturantId == null ? null : order_r4.resturantId._id) === (ctx_r3.todayResturant == null ? null : ctx_r3.todayResturant._id) && ctx_r3.checkForOrderingStart(ctx_r3.pollEndTime) && !ctx_r3.userOrdered);
 } }
 function ProfileComponent_div_4_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, ProfileComponent_div_4_div_1_Template, 14, 8, "div", 5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, ProfileComponent_div_4_div_1_Template, 17, 14, "div", 5);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
@@ -1080,16 +1092,18 @@ function ProfileComponent_div_4_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r0.orders.reverse());
 } }
 function ProfileComponent_ng_template_5_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "app-no-data-found", 18);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "app-no-data-found", 19);
 } if (rf & 2) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("msg", "Sorry, No Orders Yet");
 } }
 class ProfileComponent {
-    constructor(orderService, authService, resturantsService, router) {
+    constructor(orderService, authService, resturantsService, router, homeService, helperService) {
         this.orderService = orderService;
         this.authService = authService;
         this.resturantsService = resturantsService;
         this.router = router;
+        this.homeService = homeService;
+        this.helperService = helperService;
     }
     ngOnInit() {
         this.loggedUser = this.authService.getLoggedUser();
@@ -1100,12 +1114,15 @@ class ProfileComponent {
         });
         this.getuserOrders();
         this.getTodayResturantId();
+        this.getConfig();
     }
     getuserOrders() {
         const loggedUserId = localStorage.getItem('loggedUserId');
         if (loggedUserId) {
             this.getuserOrdersSub = this.orderService.getOrdersPerUser(loggedUserId).subscribe(userOrders => {
                 this.orders = userOrders;
+                this.checkUserOrdered();
+                console.log(this.orders);
             });
         }
     }
@@ -1115,37 +1132,54 @@ class ProfileComponent {
         });
     }
     ngOnDestroy() {
-        var _a, _b, _c;
+        var _a, _b, _c, _d;
         (_a = this.userListnerSub) === null || _a === void 0 ? void 0 : _a.unsubscribe();
         (_b = this.getuserOrdersSub) === null || _b === void 0 ? void 0 : _b.unsubscribe();
         (_c = this.getTodayResturantSub) === null || _c === void 0 ? void 0 : _c.unsubscribe();
+        (_d = this.getConfigSub) === null || _d === void 0 ? void 0 : _d.unsubscribe();
     }
     reorder(order) {
-        var _a;
-        delete order._id;
-        delete order.deliveryFees;
-        delete order.taxFees;
-        delete order.discount;
-        delete order.grandTotal;
-        delete order.status;
-        delete order.createdOn;
-        order.userId = '';
-        order.resturantId = '';
-        order.totalOrderPrice = 0;
-        const itemsToAdd = (_a = order === null || order === void 0 ? void 0 : order.items) === null || _a === void 0 ? void 0 : _a.map((item) => ({
-            _id: item.item._id,
-            name: item.item.name,
-            price: item.item.price,
-            resturantId: item.item.resturantId,
-            count: item.count
-        }));
-        order.items = itemsToAdd;
-        localStorage.setItem('order', JSON.stringify(order));
-        this.router.navigate(['/home/cart']);
+        var _a, _b, _c;
+        if (this.checkForOrderingStart(this.pollEndTime) && !this.userOrdered && ((_a = order === null || order === void 0 ? void 0 : order.resturantId) === null || _a === void 0 ? void 0 : _a._id) === ((_b = this.todayResturant) === null || _b === void 0 ? void 0 : _b._id)) {
+            delete order._id;
+            delete order.deliveryFees;
+            delete order.taxFees;
+            delete order.discount;
+            delete order.grandTotal;
+            delete order.status;
+            delete order.createdOn;
+            order.userId = '';
+            order.resturantId = '';
+            order.totalOrderPrice = 0;
+            const itemsToAdd = (_c = order === null || order === void 0 ? void 0 : order.items) === null || _c === void 0 ? void 0 : _c.map((item) => ({
+                _id: item.item._id,
+                name: item.item.name,
+                price: item.item.price,
+                resturantId: item.item.resturantId,
+                count: item.count
+            }));
+            order.items = itemsToAdd;
+            localStorage.setItem('order', JSON.stringify(order));
+            this.router.navigate(['/home/cart']);
+        }
+    }
+    checkForOrderingStart(pollEndTime) {
+        return this.homeService.calcDateDiffInMs(pollEndTime) < 0;
+    }
+    getConfig() {
+        this.getConfigSub = this.helperService.getConfig().subscribe((config) => {
+            this.pollEndTime = config.config[0].voteEndTime;
+        });
+    }
+    checkUserOrdered() {
+        this.userOrdered = this.orders.some((order) => {
+            return new Date(order.createdOn).getDate() === new Date().getDate();
+        });
+        console.log(this.userOrdered);
     }
 }
-ProfileComponent.ɵfac = function ProfileComponent_Factory(t) { return new (t || ProfileComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_order_service__WEBPACK_IMPORTED_MODULE_1__["OrderService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_3__["ResturantsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"])); };
-ProfileComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ProfileComponent, selectors: [["app-profile"]], decls: 7, vars: 3, consts: [[1, "row"], [1, "col-12"], ["class", "row g-3", 4, "ngIf", "ngIfElse"], ["noOrdersFound", ""], [1, "row", "g-3"], ["class", "col-sm-6 col-md-4", 4, "ngFor", "ngForOf"], [1, "col-sm-6", "col-md-4"], [1, "card", "h-100"], [1, "card-header"], [1, "card-title"], [1, "card-subtitle", "text-muted"], [1, "card-body"], ["class", "card-text", 4, "ngFor", "ngForOf"], [1, "card-footer"], [1, "badge", "border", "border-primary", "m-0", "d-block", "fs-6", "fw-normal", "py-2", "text-primary"], ["class", "btn btn-primary w-100 mt-2", 3, "click", 4, "ngIf"], [1, "card-text"], [1, "btn", "btn-primary", "w-100", "mt-2", 3, "click"], [3, "msg"]], template: function ProfileComponent_Template(rf, ctx) { if (rf & 1) {
+ProfileComponent.ɵfac = function ProfileComponent_Factory(t) { return new (t || ProfileComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_order_service__WEBPACK_IMPORTED_MODULE_1__["OrderService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_resturants_service__WEBPACK_IMPORTED_MODULE_3__["ResturantsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_home_service__WEBPACK_IMPORTED_MODULE_5__["HomeService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_helper_service__WEBPACK_IMPORTED_MODULE_6__["HelperService"])); };
+ProfileComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ProfileComponent, selectors: [["app-profile"]], decls: 7, vars: 3, consts: [[1, "row"], [1, "col-12"], ["class", "row g-3", 4, "ngIf", "ngIfElse"], ["noOrdersFound", ""], [1, "row", "g-3"], ["class", "col-sm-6 col-md-4", 4, "ngFor", "ngForOf"], [1, "col-sm-6", "col-md-4"], [1, "card", "h-100"], [1, "card-header", "d-flex", "justify-content-between", "align-items-center"], [1, "card-title"], [1, "card-subtitle", "text-muted"], [3, "ngClass"], [1, "card-body"], ["class", "card-text", 4, "ngFor", "ngForOf"], [1, "card-footer"], [1, "badge", "border", "border-primary", "m-0", "d-block", "fs-6", "fw-normal", "py-2", "text-primary"], ["class", "btn btn-primary w-100 mt-2", 3, "click", 4, "ngIf"], [1, "card-text"], [1, "btn", "btn-primary", "w-100", "mt-2", 3, "click"], [3, "msg"]], template: function ProfileComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "h2");
@@ -1161,7 +1195,7 @@ ProfileComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineC
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("Welcome, ", ctx.loggedUser == null ? null : ctx.loggedUser.name, "");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (ctx.orders == null ? null : ctx.orders.length) > 0)("ngIfElse", _r1);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_5__["NgIf"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["NgForOf"], _shared_components_no_data_found_no_data_found_component__WEBPACK_IMPORTED_MODULE_6__["NoDataFoundComponent"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_5__["DatePipe"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJwcm9maWxlLmNvbXBvbmVudC5zY3NzIn0= */"] });
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_7__["NgIf"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["NgForOf"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["NgClass"], _shared_components_no_data_found_no_data_found_component__WEBPACK_IMPORTED_MODULE_8__["NoDataFoundComponent"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_7__["DatePipe"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJwcm9maWxlLmNvbXBvbmVudC5zY3NzIn0= */"] });
 
 
 /***/ }),

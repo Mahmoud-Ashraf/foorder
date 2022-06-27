@@ -12027,6 +12027,7 @@ class TodayOrderComponent {
     }
     addCollectedOrder() {
         this.collectOrderSub = this.orderService.collectOrder(this.collectedOrder).subscribe((collectedOrder) => {
+            // this.uodateConfigSub = this.helperService.updateConfig(new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds()).subscribe()
             this.router.navigate([`admin/orders/collected-order/${collectedOrder.collectedOrder._id}`]);
         }, err => {
             console.log(err);
@@ -15048,7 +15049,7 @@ FoodOrdersComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefi
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", "/admin/orders/today-order");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](8);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.ordersHistory);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.ordersHistory == null ? null : ctx.ordersHistory.reverse());
     } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterLink"], ngx_quicklink__WEBPACK_IMPORTED_MODULE_4__["ɵɵLinkDirective"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["NgForOf"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_5__["DatePipe"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["DecimalPipe"]], styles: [".history-order-card[_ngcontent-%COMP%] {\n  padding: 20px 35px;\n  box-shadow: rgba(93, 95, 239, 0.25) 0px 4px 4px;\n  border-radius: 10px;\n}\n\n.pricing-text[_ngcontent-%COMP%]   span[_ngcontent-%COMP%] {\n  margin-left: 15px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcLi5cXGZvb2Qtb3JkZXJzLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksa0JBQUE7RUFDQSwrQ0FBQTtFQUNBLG1CQUFBO0FBQ0o7O0FBRUE7RUFDSSxpQkFBQTtBQUNKIiwiZmlsZSI6ImZvb2Qtb3JkZXJzLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmhpc3Rvcnktb3JkZXItY2FyZCB7XHJcbiAgICBwYWRkaW5nOiAyMHB4IDM1cHg7XHJcbiAgICBib3gtc2hhZG93OiByZ2JhKDkzLCA5NSwgMjM5LCAwLjI1KSAwcHggNHB4IDRweDtcclxuICAgIGJvcmRlci1yYWRpdXM6IDEwcHg7XHJcbn1cclxuXHJcbi5wcmljaW5nLXRleHQgc3BhbiB7XHJcbiAgICBtYXJnaW4tbGVmdDogMTVweDtcclxufSJdfQ== */"] });
 
 
@@ -28438,21 +28439,23 @@ class CollectedOrderComponent {
             this.collectedOrder.status = 'DONE';
             this.collectedOrder.total = this.collectedOrder.subtotalOrderPrice + this.calculateValueFromPerc(this.collectedOrder.taxFees, this.collectedOrder.subtotalOrderPrice) + this.collectedOrder.deliveryFees - this.calculateValueFromPerc(this.collectedOrder.discount, this.collectedOrder.subtotalOrderPrice);
             this.updateCollectedOrderSub = this.orderService.updateCollectedOrder(this.collectedOrder._id, this.collectedOrder).subscribe((updatedCollectedOrder) => {
-                this.router.navigate([`/admin/orders/order-reciept/${updatedCollectedOrder.collectedOrder._id}`]);
-                this.getTodayOrdersSub = this.orderService.getTodayOrders(this.collectedOrder.resturantId._id).subscribe((todayOrders) => {
+                this.orderService.getTodayOrders(this.collectedOrder.resturantId._id).subscribe((todayOrders) => {
                     todayOrders.orders.forEach((order) => {
                         order.deliveryFees = this.collectedOrder.deliveryFees / this.collectedOrder.users.length;
                         order.taxFees = this.calculateValueFromPerc(this.collectedOrder.taxFees, order.totalOrderPrice);
                         order.discount = this.calculateValueFromPerc(this.collectedOrder.discount, order.totalOrderPrice);
                         order.grandTotal = order.totalOrderPrice + order.deliveryFees + order.taxFees - order.discount;
                         order.status = 'DONE';
-                        this.updateTodayOrderSub = this.orderService.updateTodayOrder(order._id, order).subscribe((updatedOrder) => {
+                        this.orderService.updateTodayOrder(order._id, order).subscribe((updatedOrder) => {
                             order.userId.wallet -= order.grandTotal;
-                            this.updateUserSub = this.authService.updateUser(order.userId._id, order.userId).subscribe((updatedUser) => {
+                            this.authService.updateUser(order.userId._id, order.userId).subscribe((updatedUser) => {
                             });
                         });
                     });
+                }, (err) => {
+                    console.log(err);
                 });
+                this.router.navigate([`/admin/orders/order-reciept/${updatedCollectedOrder.collectedOrder._id}`]);
             });
         }
     }
@@ -28460,20 +28463,40 @@ class CollectedOrderComponent {
         this.collectedOrder.status = status;
         this.updateCollectedOrderStatusSub = this.orderService.updateCollectedOrder(this.collectedOrder._id, this.collectedOrder).subscribe((updatedOrder) => {
             console.log(updatedOrder);
+            this.orderService.getTodayOrders(this.collectedOrder.resturantId._id).subscribe((todayOrders) => {
+                todayOrders.orders.forEach((order) => {
+                    // order.deliveryFees = this.collectedOrder.deliveryFees / this.collectedOrder.users.length;
+                    // order.taxFees = this.calculateValueFromPerc(this.collectedOrder.taxFees, order.totalOrderPrice);
+                    // order.discount = this.calculateValueFromPerc(this.collectedOrder.discount, order.totalOrderPrice);
+                    // order.grandTotal = order.totalOrderPrice + order.deliveryFees + order.taxFees - order.discount;
+                    order.status = 'ORDERED';
+                    this.orderService.updateTodayOrder(order._id, order).subscribe((updatedOrder) => {
+                        console.log('updated Orderrrr', updatedOrder);
+                        // order.userId.wallet -= order.grandTotal;
+                        // this.updateUserSub = this.authService.updateUser(order.userId._id, order.userId).subscribe((updatedUser) => {
+                        // })
+                    });
+                });
+            }, (err) => {
+                console.log(err);
+            });
+            // this.updateUserOrderSub = this.orderService.updateOrder()
         });
     }
     calculateValueFromPerc(perc, total) {
         return this.helperService.calculateValueFromPerc(perc, total);
     }
     ngOnDestroy() {
-        var _a, _b, _c, _d, _e, _f, _g;
+        var _a, _b, _c, _d, _e, _f;
         (_a = this.paramsSub) === null || _a === void 0 ? void 0 : _a.unsubscribe();
         (_b = this.getCollectedOrderSub) === null || _b === void 0 ? void 0 : _b.unsubscribe();
         (_c = this.updateCollectedOrderSub) === null || _c === void 0 ? void 0 : _c.unsubscribe();
         (_d = this.getTodayOrdersSub) === null || _d === void 0 ? void 0 : _d.unsubscribe();
-        (_e = this.updateTodayOrderSub) === null || _e === void 0 ? void 0 : _e.unsubscribe();
-        (_f = this.updateUserSub) === null || _f === void 0 ? void 0 : _f.unsubscribe();
-        (_g = this.updateCollectedOrderStatusSub) === null || _g === void 0 ? void 0 : _g.unsubscribe();
+        (_e = this.getTodayOrdersGenerateSub) === null || _e === void 0 ? void 0 : _e.unsubscribe();
+        // this.updateTodayOrderSub?.unsubscribe();
+        // this.updateTodayOrderGenerateSub?.unsubscribe();
+        // this.updateUserSub?.unsubscribe();
+        (_f = this.updateCollectedOrderStatusSub) === null || _f === void 0 ? void 0 : _f.unsubscribe();
     }
 }
 CollectedOrderComponent.ɵfac = function CollectedOrderComponent_Factory(t) { return new (t || CollectedOrderComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_services_order_service__WEBPACK_IMPORTED_MODULE_1__["OrderService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_helper_service__WEBPACK_IMPORTED_MODULE_4__["HelperService"])); };

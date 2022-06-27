@@ -83,6 +83,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         name: item.item.name,
         price: item.item.price,
         resturantId: item.item.resturantId,
+        ingredients: item.item.ingredients,
         count: item.count
       }));
       order.items = itemsToAdd;

@@ -1,5 +1,5 @@
-<div class="flash-message-main">
-  <p class="m-0">Thanks, Your order has submitted successfully</p>
+<div class="alert" [ngClass]="{'alert-danger': cartMsgType === 'ERROR', 'alert-success': cartMsgType === 'SUCCESS'}" *ngIf="cartMsg">
+  <p class="m-0">{{cartMsg}}</p>
 </div>
 <table class="menu-table">
   <tr class="menu-table-head">

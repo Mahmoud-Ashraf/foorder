@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="col-6">
-          <input type="text" class="form-control" name="type" placeholder="Resturant Content" #resturantType
+          <input type="text" class="form-control" name="type" placeholder="Resturant Type" #resturantType
             [(ngModel)]="resturant.type" required minlength="5">
           <div class="has-error" *ngIf="errors && errors[getIndex(errors, resturantType)]">
             {{errors[getIndex(errors, resturantType)]?.msg}}

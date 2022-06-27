@@ -13,7 +13,9 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class CartComponent implements OnInit, OnDestroy {
   order: any;
   addOrderSub: Subscription
-  getTodayResturantSub: Subscription
+  getTodayResturantSub: Subscription;
+  cartMsg: string;
+  cartMsgType: string;
   constructor(
     private orderService: OrderService,
     private resturantsService: ResturantsService,
@@ -62,13 +64,16 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   addOrder(orderToAdd: any) {
-    this.addOrderSub = this.orderService.addOrder(orderToAdd).subscribe(addedOrder => {
+    this.addOrderSub = this.orderService.addOrder(orderToAdd).subscribe((addedOrder: any) => {
       localStorage.removeItem('order');
       this.order.items = [];
       this.homeService.disableResturantDetails.next(true);
-      
+      this.cartMsg = addedOrder.message;
+      this.cartMsgType = 'SUCCESS';
     }, err => {
       console.log(err);
+      this.cartMsg = err.error.message;
+      this.cartMsgType = 'ERROR';
     });
   }
 

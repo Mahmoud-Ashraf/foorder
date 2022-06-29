@@ -335,7 +335,7 @@ function AsideComponent_aside_0_ul_16_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](20, "a", 16);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function AsideComponent_aside_0_ul_16_Template_a_click_20_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r11); const ctx_r14 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2); return ctx_r14.navigate("/admin/menu"); });
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](21, "span", 17);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](22, "img", 26);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](22, "img", 27);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](23, "span", 19);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](24, "Menus");
@@ -346,7 +346,7 @@ function AsideComponent_aside_0_ul_16_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](26, "a", 16);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function AsideComponent_aside_0_ul_16_Template_a_click_26_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r11); const ctx_r15 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2); return ctx_r15.navigate("/admin/users"); });
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](27, "span", 17);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](28, "img", 27);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](28, "img", 28);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](29, "span", 19);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](30, "Users");
@@ -357,7 +357,7 @@ function AsideComponent_aside_0_ul_16_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](32, "a", 16);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function AsideComponent_aside_0_ul_16_Template_a_click_32_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r11); const ctx_r16 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2); return ctx_r16.navigate("/admin/config"); });
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](33, "span", 17);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](34, "img", 28);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](34, "img", 29);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](35, "span", 19);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](36, "Config");
@@ -472,7 +472,7 @@ class AsideComponent {
     }
 }
 AsideComponent.ɵfac = function AsideComponent_Factory(t) { return new (t || AsideComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_0__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](src_app_shared_services_helper_service__WEBPACK_IMPORTED_MODULE_3__["HelperService"])); };
-AsideComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: AsideComponent, selectors: [["app-aside"]], decls: 1, vars: 1, consts: [["class", "aside", 4, "ngIf"], [1, "aside"], [1, "aside-container"], [1, "brand"], [1, "text-center"], [3, "click"], [1, "user"], [1, "user-welcome", "text-decoration-none", "text-white", 3, "click"], [1, "user-welcome--avatar"], [1, "user-first-name", "text-uppercase", "text-primary"], [1, "user-welcome--name"], [1, "text-capitalize"], [1, "aside-links"], ["class", "aside-links-list", 4, "ngIf"], [1, "aside-links-list"], [1, "aside-links-list-item"], [1, "aside-links-list-item-link", 3, "click"], [1, "aside-links-list-item-link-icon"], ["src", "assets/styles/images/icons/logout.svg"], [1, "aside-links-list-item-link-text"], ["src", "assets/styles/images/icons/home.svg"], ["src", "assets/styles/images/icons/cart.svg"], ["src", "assets/styles/images/icons/wallet.svg"], [4, "ngIf"], ["src", "assets/styles/images/icons/admin.svg"], ["src", "assets/styles/images/icons/orders.svg"], ["src", "assets/styles/images/icons/resturants.svg"], ["src", "assets/styles/images/icons/users.svg"], ["src", "assets/styles/images/icons/config.svg"]], template: function AsideComponent_Template(rf, ctx) { if (rf & 1) {
+AsideComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: AsideComponent, selectors: [["app-aside"]], decls: 1, vars: 1, consts: [["class", "aside", 4, "ngIf"], [1, "aside"], [1, "aside-container"], [1, "brand"], [1, "text-center"], [3, "click"], [1, "user"], [1, "user-welcome", "text-decoration-none", "text-white", 3, "click"], [1, "user-welcome--avatar"], [1, "user-first-name", "text-uppercase", "text-primary"], [1, "user-welcome--name"], [1, "text-capitalize"], [1, "aside-links"], ["class", "aside-links-list", 4, "ngIf"], [1, "aside-links-list"], [1, "aside-links-list-item"], [1, "aside-links-list-item-link", 3, "click"], [1, "aside-links-list-item-link-icon"], ["src", "assets/styles/images/icons/logout.svg"], [1, "aside-links-list-item-link-text"], ["src", "assets/styles/images/icons/home.svg"], ["src", "assets/styles/images/icons/cart.svg"], ["src", "assets/styles/images/icons/wallet.svg"], [4, "ngIf"], ["src", "assets/styles/images/icons/admin.svg"], ["src", "assets/styles/images/icons/orders.svg"], ["src", "assets/styles/images/icons/resturants.svg"], ["src", "assets/styles/images/icons/menus.svg"], ["src", "assets/styles/images/icons/users.svg"], ["src", "assets/styles/images/icons/config.svg"]], template: function AsideComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](0, AsideComponent_aside_0_Template, 25, 4, "aside", 0);
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.userIsAuthenticated);

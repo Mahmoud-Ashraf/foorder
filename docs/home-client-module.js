@@ -915,13 +915,18 @@ class CartComponent {
             localStorage.removeItem('order');
             this.order.items = [];
             this.homeService.disableResturantDetails.next(true);
-            this.cartMsg = addedOrder.message;
-            this.cartMsgType = 'SUCCESS';
+            this.setCartMsg(addedOrder.message, 'SUCCESS');
         }, err => {
-            console.log(err);
-            this.cartMsg = err.error.message;
-            this.cartMsgType = 'ERROR';
+            this.setCartMsg(err.error.message, 'ERROR');
         });
+    }
+    setCartMsg(msg, type) {
+        this.cartMsg = msg;
+        this.cartMsgType = type;
+        setTimeout(() => {
+            this.cartMsg = '';
+            this.cartMsgType = '';
+        }, 4000);
     }
     setUserAndResturantToOrder(orderToAdd) {
         this.getTodayResturantSub = this.resturantsService.getTodayResturant().subscribe(todayResturant => {

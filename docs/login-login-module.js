@@ -44,11 +44,20 @@ class SignInComponent {
         }
     }
     login(loginForm) {
-        this.authService.login(loginForm.value);
+        if (!loginForm.valid) {
+            this.authService.setAuthErrMsg('Please Enter Valid Data');
+        }
+        else {
+            this.authService.login(loginForm.value);
+            this.errorMessage = this.authService.getErrorMsg();
+            this.authService.getAuthErrorMsgListner().subscribe((msg) => {
+                this.errorMessage = msg;
+            });
+        }
     }
 }
 SignInComponent.ɵfac = function SignInComponent_Factory(t) { return new (t || SignInComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"])); };
-SignInComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: SignInComponent, selectors: [["app-sign-in"]], decls: 43, vars: 1, consts: [[1, "right-form"], [1, "row"], [1, "col-12"], [1, "logo"], [1, "welcome"], [1, "join"], [1, "row", "row-cols-1", 3, "ngSubmit"], ["signInForm", "ngForm"], [1, "col"], [1, "custom-form-group"], ["for", "email", 1, "custom-input-label"], [1, "custom-form-input-group"], [1, "custom-form-addon"], [1, "fas", "fa-envelope"], ["type", "email", "name", "email", "ngModel", "", "required", "", "autocomplete", "email", 1, "custom-form-input"], ["for", "password", 1, "custom-input-label"], [1, "fas", "fa-lock"], ["type", "password", "name", "password", "ngModel", "", "required", "", "autocomplete", "current-password", 1, "custom-form-input"], ["class", "alert alert-danger", 4, "ngIf"], ["type", "submit", 1, "btn", "btn-primary", "w-100"], [1, "text-right"], [1, "text-muted"], ["href", "#", "routerLink", "/auth/register", 1, "text-dark", "text-decoration-none"], [1, "alert", "alert-danger"]], template: function SignInComponent_Template(rf, ctx) { if (rf & 1) {
+SignInComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: SignInComponent, selectors: [["app-sign-in"]], decls: 43, vars: 2, consts: [[1, "right-form"], [1, "row"], [1, "col-12"], [1, "logo"], [1, "welcome"], [1, "join"], [1, "row", "row-cols-1", 3, "ngSubmit"], ["signInForm", "ngForm"], [1, "col"], [1, "custom-form-group"], ["for", "email", 1, "custom-input-label"], [1, "custom-form-input-group"], [1, "custom-form-addon"], [1, "fas", "fa-envelope"], ["type", "email", "name", "email", "ngModel", "", "required", "", "autocomplete", "email", 1, "custom-form-input"], ["for", "password", 1, "custom-input-label"], [1, "fas", "fa-lock"], ["type", "password", "name", "password", "ngModel", "", "required", "", "autocomplete", "current-password", 1, "custom-form-input"], ["class", "alert alert-danger text-capitalize", 4, "ngIf"], ["type", "submit", 1, "btn", "btn-primary", "w-100", 3, "disabled"], [1, "text-right"], [1, "text-muted"], ["href", "#", "routerLink", "/auth/register", 1, "text-dark", "text-decoration-none"], [1, "alert", "alert-danger", "text-capitalize"]], template: function SignInComponent_Template(rf, ctx) { if (rf & 1) {
         const _r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
@@ -123,8 +132,11 @@ SignInComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } if (rf & 2) {
+        const _r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](14);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](32);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.errorMessage);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", !_r0.valid);
     } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["ɵangular_packages_forms_forms_ba"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgForm"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgModel"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["RequiredValidator"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterLinkWithHref"], ngx_quicklink__WEBPACK_IMPORTED_MODULE_5__["ɵɵLinkDirective"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzaWduLWluLmNvbXBvbmVudC5zY3NzIn0= */"] });
 
 
@@ -165,7 +177,6 @@ class RegisterComponent {
     constructor(authService, router) {
         this.authService = authService;
         this.router = router;
-        // password: string;
         this.userIsAuthenticated = false;
     }
     ngOnInit() {
@@ -174,11 +185,20 @@ class RegisterComponent {
         }
     }
     register(registerForm) {
-        this.authService.register(registerForm.value);
+        if (!registerForm.valid) {
+            this.authService.setAuthErrMsg('Please Enter Valid Data');
+        }
+        else {
+            this.authService.register(registerForm.value);
+            this.errorMessage = this.authService.getErrorMsg();
+            this.authService.getAuthErrorMsgListner().subscribe((msg) => {
+                this.errorMessage = msg;
+            });
+        }
     }
 }
 RegisterComponent.ɵfac = function RegisterComponent_Factory(t) { return new (t || RegisterComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"])); };
-RegisterComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: RegisterComponent, selectors: [["app-register"]], decls: 51, vars: 2, consts: [[1, "right-form"], [1, "row"], [1, "col-12"], [1, "logo"], [1, "welcome"], [1, "join"], [1, "row", "row-cols-1", 3, "ngSubmit"], ["signUpForm", "ngForm"], [1, "col"], [1, "custom-form-group"], ["for", "name", 1, "custom-input-label"], [1, "custom-form-input-group"], [1, "custom-form-addon"], [1, "fas", "fa-user"], ["type", "text", "name", "name", "ngModel", "", "required", "", "autocomplete", "given-name", 1, "custom-form-input"], ["for", "email", 1, "custom-input-label"], [1, "fas", "fa-envelope"], ["type", "email", "name", "email", "ngModel", "", "required", "", "autocomplete", "email", "email", "", 1, "custom-form-input"], ["for", "password", 1, "custom-input-label"], [1, "fas", "fa-lock"], ["type", "password", "name", "password", "ngModel", "", "required", "", "autocomplete", "new-password", "minlength", "8", 1, "custom-form-input"], ["class", "alert alert-danger", 4, "ngIf"], ["type", "submit", 1, "btn", "btn-primary", "w-100", 3, "disabled"], [1, "text-right"], [1, "text-muted"], ["href", "#", "routerLink", "/auth/login", 1, "text-dark", "text-decoration-none"], [1, "alert", "alert-danger"]], template: function RegisterComponent_Template(rf, ctx) { if (rf & 1) {
+RegisterComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: RegisterComponent, selectors: [["app-register"]], decls: 51, vars: 2, consts: [[1, "right-form"], [1, "row"], [1, "col-12"], [1, "logo"], [1, "welcome"], [1, "join"], [1, "row", "row-cols-1", 3, "ngSubmit"], ["signUpForm", "ngForm"], [1, "col"], [1, "custom-form-group"], ["for", "name", 1, "custom-input-label"], [1, "custom-form-input-group"], [1, "custom-form-addon"], [1, "fas", "fa-user"], ["type", "text", "name", "name", "ngModel", "", "required", "", "autocomplete", "given-name", 1, "custom-form-input"], ["for", "email", 1, "custom-input-label"], [1, "fas", "fa-envelope"], ["type", "email", "name", "email", "ngModel", "", "required", "", "autocomplete", "email", "email", "", 1, "custom-form-input"], ["for", "password", 1, "custom-input-label"], [1, "fas", "fa-lock"], ["type", "password", "name", "password", "ngModel", "", "required", "", "autocomplete", "new-password", "minlength", "8", 1, "custom-form-input"], ["class", "alert alert-danger text-capitalize", 4, "ngIf"], ["type", "submit", 1, "btn", "btn-primary", "w-100", 3, "disabled"], [1, "text-right"], [1, "text-muted"], ["href", "#", "routerLink", "/auth/login", 1, "text-dark", "text-decoration-none"], [1, "alert", "alert-danger", "text-capitalize"]], template: function RegisterComponent_Template(rf, ctx) { if (rf & 1) {
         const _r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);

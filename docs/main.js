@@ -555,7 +555,9 @@ class AuthService {
         this.isAuthenticated = false;
         this.loggedUser = undefined;
         this.loggedUserListener = new rxjs__WEBPACK_IMPORTED_MODULE_0__["Subject"]();
+        this.authErrorMsgListner = new rxjs__WEBPACK_IMPORTED_MODULE_0__["Subject"]();
         this.isAdmin = false;
+        this.authErrorMsg = '';
     }
     register(user) {
         return this.requests.putApi('auth/signup', user).subscribe((response) => {
@@ -575,6 +577,13 @@ class AuthService {
                 this.router.navigate(['/home']);
             }
             // localStorage.setItem('token', response.token);
+        }, err => {
+            if (err.error.data.length > 1) {
+                this.setAuthErrMsg(err.error.message);
+            }
+            else {
+                this.setAuthErrMsg(err.error.data[0].msg);
+            }
         });
         // .pipe(tap((resData: any) => {
         //   const expirationDate = new Date(new Date().getTime() + + resData.expiresIn * 1000);
@@ -599,8 +608,11 @@ class AuthService {
                 const expirationDate = new Date(new Date().getTime() + expiresInDuration * 1000);
                 this.saveAuthData(token, expirationDate, loggedUserId);
                 this.router.navigate(['/home']);
+                this.setAuthErrMsg('');
             }
             // localStorage.setItem('token', response.token);
+        }, err => {
+            this.setAuthErrMsg(err.error.message);
         });
         // .pipe(tap((resData: any) => {
         //   // this.userObs.subscribe(myUser => {
@@ -612,6 +624,16 @@ class AuthService {
         //   // this.userObs.subscribe(myUser => {
         //   // })
         // }));
+    }
+    setAuthErrMsg(msg) {
+        this.authErrorMsg = msg;
+        this.authErrorMsgListner.next(msg);
+    }
+    getAuthErrorMsgListner() {
+        return this.authErrorMsgListner.asObservable();
+    }
+    getErrorMsg() {
+        return this.authErrorMsg;
     }
     getUsers({ page = 1, perPage = 0, filter = '' } = {}) {
         return this.requests.getApi(`auth/users?filter=${filter}&page=${page}&perPage=${perPage}`);

@@ -19,7 +19,8 @@ export class PollComponent implements OnInit, OnDestroy {
   resetResturantsVoteSub: Subscription;
   currentUser: any;
   @Input() pollEndTime: string;
-
+  pollMsg: string;
+  pollMsgType: string;
   constructor(
     private resturantsService: ResturantsService,
     private authService: AuthService,
@@ -75,11 +76,26 @@ export class PollComponent implements OnInit, OnDestroy {
 
   private updateResturant(resturantId: string | undefined, resturant: Resturant) {
     this.updateResturantSub = this.resturantsService.updateResturant(resturantId, resturant).subscribe(resturant => {
+      this.setPollMsg('Your Vote Submitted Successfully', 'SUCCESS');
+    }, err => {
+      this.setPollMsg('Somthing Went Wrong With Your Vote', 'ERROR');
     })
   }
   private updateUser(userId: string | undefined, user: any) {
     this.updateUserSub = this.authService.updateUser(userId, user).subscribe(user => {
+      this.setPollMsg('Your Vote Submitted Successfully', 'SUCCESS');
+    }, err => {
+      this.setPollMsg('Somthing Went Wrong With Your Vote', 'ERROR');
     })
+  }
+
+  setPollMsg(msg: string, type: string) {
+    this.pollMsg = msg;
+    this.pollMsgType = type;
+    setTimeout(() => {
+      this.pollMsg = '';
+      this.pollMsgType = ''
+    }, 4000);
   }
 
   getUser() {

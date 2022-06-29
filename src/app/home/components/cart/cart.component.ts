@@ -20,7 +20,7 @@ export class CartComponent implements OnInit, OnDestroy {
     private orderService: OrderService,
     private resturantsService: ResturantsService,
     private authService: AuthService,
-    private homeService: HomeService
+    private homeService: HomeService,
   ) { }
   ngOnInit(): void {
     this.getCurrentOrder();
@@ -68,13 +68,19 @@ export class CartComponent implements OnInit, OnDestroy {
       localStorage.removeItem('order');
       this.order.items = [];
       this.homeService.disableResturantDetails.next(true);
-      this.cartMsg = addedOrder.message;
-      this.cartMsgType = 'SUCCESS';
+      this.setCartMsg(addedOrder.message, 'SUCCESS');
     }, err => {
-      console.log(err);
-      this.cartMsg = err.error.message;
-      this.cartMsgType = 'ERROR';
+      this.setCartMsg(err.error.message, 'ERROR');
     });
+  }
+
+  setCartMsg(msg: string, type: string) {
+    this.cartMsg = msg;
+    this.cartMsgType = type;
+    setTimeout(() => {
+      this.cartMsg = '';
+      this.cartMsgType = '';
+    }, 4000);
   }
 
   setUserAndResturantToOrder(orderToAdd: any) {

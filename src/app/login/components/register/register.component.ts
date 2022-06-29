@@ -13,10 +13,9 @@ import { Subscription } from 'rxjs';
 })
 export class RegisterComponent implements OnInit {
   user: User;
-  // password: string;
   userIsAuthenticated = false;
-  private authListenerSubs: Subscription;
-  private userListnerSub: Subscription;
+  // private authListenerSubs: Subscription;
+  // private userListnerSub: Subscription;
   errorMessage: string;
   constructor(
     private authService: AuthService,
@@ -30,7 +29,15 @@ export class RegisterComponent implements OnInit {
   }
 
   register(registerForm: NgForm) {
-    this.authService.register(registerForm.value);
+    if (!registerForm.valid) {
+      this.authService.setAuthErrMsg('Please Enter Valid Data');
+    } else {
+      this.authService.register(registerForm.value);
+      this.errorMessage = this.authService.getErrorMsg();
+      this.authService.getAuthErrorMsgListner().subscribe((msg: string) => {
+        this.errorMessage = msg;
+      });
+    }
   }
 
 }

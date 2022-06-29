@@ -37,11 +37,11 @@
           </div>
         </div>
         <div class="col">
-          <div class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+          <div class="alert alert-danger text-capitalize" *ngIf="errorMessage">{{errorMessage}}</div>
         </div>
         <div class="col">
           <div class="custom-form-group">
-            <button type="submit" class="btn btn-primary w-100">Sign in</button>
+            <button type="submit" class="btn btn-primary w-100"  [disabled]="!signInForm.valid">Sign in</button>
           </div>
         </div>
         <div class="col">

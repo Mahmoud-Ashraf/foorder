@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { RequestsService } from './requests.service';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { Credintials } from 'src/app/login/models/credintials';
 
 
@@ -14,8 +14,10 @@ export class AuthService {
   private isAuthenticated = false;
   private loggedUser: any = undefined;
   private loggedUserListener = new Subject();
+  private authErrorMsgListner = new Subject<string>();
   private isAdmin = false;
   tokenTimer: any;
+  authErrorMsg: string = '';
   constructor(
     private requests: RequestsService,
     private router: Router,
@@ -38,6 +40,12 @@ export class AuthService {
         this.router.navigate(['/home']);
       }
       // localStorage.setItem('token', response.token);
+    }, err => {
+      if(err.error.data.length > 1) {
+        this.setAuthErrMsg(err.error.message);
+      } else {
+        this.setAuthErrMsg(err.error.data[0].msg);
+      }
     }
     )
     // .pipe(tap((resData: any) => {
@@ -64,8 +72,11 @@ export class AuthService {
         const expirationDate = new Date(new Date().getTime() + expiresInDuration * 1000);
         this.saveAuthData(token, expirationDate, loggedUserId);
         this.router.navigate(['/home']);
+        this.setAuthErrMsg('');
       }
       // localStorage.setItem('token', response.token);
+    }, err => {
+      this.setAuthErrMsg(err.error.message);
     }
     )
     // .pipe(tap((resData: any) => {
@@ -78,6 +89,19 @@ export class AuthService {
     //   // this.userObs.subscribe(myUser => {
     //   // })
     // }));
+  }
+
+  setAuthErrMsg(msg: string) {
+    this.authErrorMsg = msg;
+    this.authErrorMsgListner.next(msg);
+  }
+
+  getAuthErrorMsgListner() : Observable<string> {
+    return this.authErrorMsgListner.asObservable();
+  }
+
+  getErrorMsg() {
+    return this.authErrorMsg;
   }
 
   getUsers({page = 1, perPage = 0, filter = ''} = {}) {

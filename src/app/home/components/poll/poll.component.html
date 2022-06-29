@@ -1,5 +1,8 @@
 <div class="row justify-content-center poll">
   <div class="col-12">
+    <div class="alert" [ngClass]="{'alert-danger': pollMsgType === 'ERROR', 'alert-success': pollMsgType === 'SUCCESS'}" *ngIf="pollMsg">
+      <p class="m-0">{{pollMsg}}</p>
+    </div>
     <p class="poll-vote" *ngIf="currentUser?.voted">Thanks for your vote, wait the result in</p>
     <p class="poll-vote" *ngIf="!currentUser?.voted">Vote for one of this restaurants in</p>
     <app-count-down [endTime]="pollEndTime"></app-count-down>

@@ -29,7 +29,15 @@ export class SignInComponent implements OnInit {
   }
 
   login(loginForm: NgForm): void {
-    this.authService.login(loginForm.value);
+    if (!loginForm.valid) {
+      this.authService.setAuthErrMsg('Please Enter Valid Data');
+    } else {
+      this.authService.login(loginForm.value);
+      this.errorMessage = this.authService.getErrorMsg();
+      this.authService.getAuthErrorMsgListner().subscribe((msg: string) => {
+        this.errorMessage = msg;
+      });
+    }
   }
 
 }

@@ -1,3 +1,4 @@
+import { ResturantsService } from './../../../../shared/services/resturants.service';
 import { Subscription } from 'rxjs';
 import { HelperService } from './../../../../shared/services/helper.service';
 import { Resturant } from 'src/app/models/resturant';
@@ -13,6 +14,8 @@ import { ThisReceiver } from '@angular/compiler';
 export class OrderRecieptComponent implements OnInit, OnDestroy {
   paramsSub: Subscription;
   getCollectedOrderSub: Subscription;
+  getTodayOrdersSub: Subscription;
+  getTodayResturantSub: Subscription;
   collectedOrder: {
     items: any[],
     status: string,
@@ -37,14 +40,17 @@ export class OrderRecieptComponent implements OnInit, OnDestroy {
       usersCount: 0,
       subtotalOrderPrice: 0
     }
-
+    orders: any;
+    resturant: any;
   constructor(
     private orderService: OrderService,
     private activatedRoute: ActivatedRoute,
-    private helperService: HelperService
+    private helperService: HelperService,
+    private resturantsService: ResturantsService
   ) { }
 
   ngOnInit(): void {
+    this.getTodayResturant();
     this.paramsSub = this.activatedRoute.params.subscribe((params: Params) => {
       this.getCollectedOrder(params.orderId);
     });
@@ -62,5 +68,23 @@ export class OrderRecieptComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.paramsSub?.unsubscribe();
     this.getCollectedOrderSub?.unsubscribe();
+  }
+
+  getTodayResturant() {
+    this.getTodayResturantSub = this.resturantsService.getTodayResturant().subscribe(toDayResturant => {
+      this.resturant = toDayResturant;
+      this.getTodayOrders();
+    })
+  }
+
+  getTodayOrders() {
+    if (this.resturant._id) {
+      this.getTodayOrdersSub = this.orderService.getTodayOrders(this.resturant._id).subscribe((todayOrders: any) => {
+        this.orders = todayOrders;
+      });
+    }
+  }
+  generateUserAvatar(userName: string) { 
+    return this.helperService.generateUserAvatar(userName);
   }
 }

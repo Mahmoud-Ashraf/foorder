@@ -35,7 +35,7 @@
             <i *ngIf="menuItem.count == 1" class="fas text-main-danger fa-trash"
               (click)="decreseOrderCount(menuItem)"></i>
             <span *ngIf="menuItem?.count > 0" class="cart-count">{{menuItem?.count}}</span>
-            <button *ngIf="menuItem?.count > 0 && menuItem?.count < 4" class="btn btn-info btn-sm"
+            <button *ngIf="menuItem?.count > 0 && menuItem?.count < 2" class="btn btn-info btn-sm"
               (click)="increaseOrderCount(menuItem)">+</button>
           </td>
         </tr>

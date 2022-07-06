@@ -7,6 +7,34 @@
             </div>
         </div>
     </div>
+    <div class="col-12" *ngIf="orders && (orders?.orders) && orders?.orders?.length !== 0">
+        <div class="single-order-card my-3" *ngFor="let order of orders?.orders">
+            <div class="row justify-content-between">
+                <div class="col-md">
+                    <div class="row">
+                        <div class="col-auto">
+                            <div class="user-avatar">
+                                <span
+                                    class="user-first-name text-uppercase">{{generateUserAvatar(order?.userId?.name)}}</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h6 class="my-3">{{order?.userId?.name}}</h6>
+                            <ul class="p-0 orders-list">
+                                <li class="my-2 orders-list-item" *ngFor="let orderItem of order.items">
+                                    <span>{{orderItem.item.name}}</span> <span> x{{orderItem.count}}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-auto text-right align-self-end d-flex justify-content-end">
+                    <p class="text-bold">Total <span class="text-blue">{{order?.totalOrderPrice}}</span> <span
+                            class="text-muted"> EGP</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="col-12">
         <div class="row">
             <div class="col-12">
@@ -47,7 +75,8 @@
                             <span>Subtotal</span>
                         </div>
                         <div class="col-auto">
-                            <span><span class="fw-bold">{{collectedOrder?.subtotalOrderPrice}}</span><span class="text-muted"> EGP</span></span>
+                            <span><span class="fw-bold">{{collectedOrder?.subtotalOrderPrice}}</span><span
+                                    class="text-muted"> EGP</span></span>
                         </div>
                     </div>
                     <div class="row justify-content-between">
@@ -55,7 +84,8 @@
                             <span>Tax</span>
                         </div>
                         <div class="col-auto">
-                            <span><span class="fw-bold">{{calculateValueFromPerc(collectedOrder.taxFees) | number}} ({{collectedOrder?.taxFees}}%)</span><span class="text-muted"> EGP</span></span>
+                            <span><span class="fw-bold">{{calculateValueFromPerc(collectedOrder.taxFees) | number}}
+                                    ({{collectedOrder?.taxFees}}%)</span><span class="text-muted"> EGP</span></span>
                         </div>
                     </div>
                     <div class="row justify-content-between">
@@ -63,7 +93,8 @@
                             <span>Delivery Fees</span>
                         </div>
                         <div class="col-auto">
-                            <span><span class="fw-bold">{{collectedOrder?.deliveryFees}}</span><span class="text-muted"> EGP</span></span>
+                            <span><span class="fw-bold">{{collectedOrder?.deliveryFees}}</span><span class="text-muted">
+                                    EGP</span></span>
                         </div>
                     </div>
                     <div class="row justify-content-between">
@@ -71,7 +102,8 @@
                             <span>Discount</span>
                         </div>
                         <div class="col-auto">
-                            <span><span class="fw-bold">-{{calculateValueFromPerc(collectedOrder.discount) | number}} ({{collectedOrder?.discount}}%)</span><span class="text-muted"> EGP</span></span>
+                            <span><span class="fw-bold">-{{calculateValueFromPerc(collectedOrder.discount) | number}}
+                                    ({{collectedOrder?.discount}}%)</span><span class="text-muted"> EGP</span></span>
                         </div>
                     </div>
                     <hr>
@@ -80,7 +112,8 @@
                             <span>Total</span>
                         </div>
                         <div class="col-auto">
-                            <span><span class="fw-bold">{{collectedOrder?.total | number}}</span><span class="text-muted"> EGP</span></span>
+                            <span><span class="fw-bold">{{collectedOrder?.total | number}}</span><span
+                                    class="text-muted"> EGP</span></span>
                         </div>
                     </div>
 

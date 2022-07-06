@@ -437,7 +437,7 @@ function TodayResturantDetailsComponent_tr_23_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (menuItem_r3 == null ? null : menuItem_r3.count) > 0);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (menuItem_r3 == null ? null : menuItem_r3.count) > 0 && (menuItem_r3 == null ? null : menuItem_r3.count) < 4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (menuItem_r3 == null ? null : menuItem_r3.count) > 0 && (menuItem_r3 == null ? null : menuItem_r3.count) < 2);
 } }
 const _c0 = function (a0) { return { "pointer-events": a0 }; };
 class TodayResturantDetailsComponent {

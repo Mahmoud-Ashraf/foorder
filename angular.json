@@ -22,7 +22,7 @@
           "options": {
             "sourceMap": true,
             "optimization": false,
-            "outputPath": "dist/foorder",
+            "outputPath": "docs",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
